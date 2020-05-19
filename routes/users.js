@@ -82,7 +82,7 @@ router.route('/:userId')
             return res.status(error.statusCode).json(error);
           }
 
-          return res.status(200).json(response);
+          return res.status(200).json(response.deleted_doc._id);
         });
 
       });
