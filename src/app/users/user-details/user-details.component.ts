@@ -1,42 +1,52 @@
-import { Component, Input } from '@angular/core';
-import { User } from '../user';
-import { UserService } from '../user.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { User } from '../../services/user';
 
 @Component({
-  selector: 'user-details',
+  selector: 'app-user-details',
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css']
 })
+export class UserDetailsComponent implements OnInit {
 
-export class UserDetailsComponent {
-  @Input()
-  user: User;
+  user: User = {
+    _id: '',
+    type: 'user',
+    user: {
+      name: '',
+      email: ''
+    },
+    role: ''
+  };
+  isLoadingResults = true;
 
-  @Input()
-  createHandler: Function;
-  @Input()
-  updateHandler: Function;
-  @Input()
-  deleteHandler: Function;
+  constructor(private route: ActivatedRoute, private api: UserService, private router: Router) { }
 
-  constructor(private userService: UserService) { }
-
-  createUser(user: User) {
-    this.userService.createUser(user).then((newUser: User) => {
-      this.createHandler(newUser);
-    });
+  getUserDetails(id: string) {
+    this.api.getUserById(id)
+      .subscribe((data: any) => {
+        this.user = data;
+        console.log(this.user);
+        this.isLoadingResults = false;
+      });
   }
 
-  updateUser(user: User): void {
-    this.userService.updateUser(user).then((updatedUser: User) => {
-      this.updateHandler(updatedUser);
-    });
+  ngOnInit(): void {
+    this.getUserDetails(this.route.snapshot.params.id);
   }
 
-  deleteUser(userId: string): void {
-    this.userService.deleteUser(userId).then((deletedUserId: string) => {
-      this.deleteHandler(deletedUserId);
-    });
+  deleteUser(id: any) {
+    this.isLoadingResults = true;
+    this.api.deleteUser(id)
+      .subscribe(res => {
+          this.isLoadingResults = false;
+          this.router.navigate(['/users']);
+        }, (err) => {
+          console.log(err);
+          this.isLoadingResults = false;
+        }
+      );
   }
 
 }

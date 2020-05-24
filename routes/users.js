@@ -40,6 +40,19 @@ router.route('/')
     });
 
 router.route('/:userId')
+    .get((req, res) => {
+      const userId = req.params.userId;
+
+      return User.get(userId, (error, user) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        return res.status(200).json(user.doc);
+
+      });
+
+    })
     .put((req, res) => {
       const userId = req.params.userId;
       const updatedUser = req.body;

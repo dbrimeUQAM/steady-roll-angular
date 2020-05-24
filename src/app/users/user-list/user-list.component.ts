@@ -1,74 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user';
-import { UserService } from '../user.service';
-import { UserDetailsComponent } from '../user-details/user-details.component';
+import { UserService } from '../../services/user.service';
+import { User } from '../../services/user';
 
 @Component({
-  selector: 'user-list',
+  selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.sass'],
-  providers: [UserService]
+  styleUrls: ['./user-list.component.css']
 })
-
 export class UserListComponent implements OnInit {
 
-  users: User[];
-  selectedUser: User
+  users: User[] = [];
+  columnsToDisplay: string[] = ['name', 'email', 'role', 'actions'];
+  isLoadingResults = true;
 
   constructor(private userService: UserService) { }
 
-  ngOnInit() {
-    this.userService
-      .getUsers()
-      .then((users: User[]) => {
-        this.users = users;
-      });
-  }
+  ngOnInit(): void {
 
-  private getIndexOfUser = (userId: string) => {
-    return this.users.findIndex((user) => {
-      return user._id === userId;
+    this.userService.getAll()
+    .subscribe((res: any) => {
+      this.users = res;
+      console.log(this.users);
+      this.isLoadingResults = false;
+    }, err => {
+      console.log(err);
+      this.isLoadingResults = false;
     });
-  }
 
-  selectUser(user: User) {
-    this.selectedUser = user;
-  }
-
-  createNewUser() {
-    const user: User = {
-      type: 'user',
-      user: {
-        name: '',
-        email: ''
-      },
-      role: 'admin'
-    };
-    this.selectUser(user);
-  }
-
-  deleteUser = (userId: string) => {
-    const idx = this.getIndexOfUser(userId);
-    if (idx !== -1) {
-      this.users.splice(idx, 1);
-      this.selectUser(null);
-    }
-    return this.users;
-  }
-
-  addUser = (user: User) => {
-    this.users.push(user);
-    this.selectUser(user);
-    return this.users;
-  }
-
-  updateUser = (user: User) => {
-    const idx = this.getIndexOfUser(user._id);
-    if (idx !== -1) {
-      this.users[idx] = user;
-      this.selectUser(user);
-    }
-    return this.users;
   }
 
 }
