@@ -1,19 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 // Routers Express
+const auth = require('./routes/auth');
 const orders = require('./routes/orders');
 const users = require('./routes/users');
 
-const app = express();
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  next();
-});
-app.use(bodyParser.json());
+const app = express()
+  .use(cors())
+  .use(bodyParser.json());
 
 var distDir = __dirname + '/dist/';
 app.use(express.static(distDir));
@@ -24,6 +20,7 @@ const server = app.listen(process.env.PORT || 3000, () => {
 });
 
 // Initialiser les routes
+app.use('/api/auth', auth);
 app.use('/api/orders', orders);
 app.use('/api/users', users);
 app.use('/api/', (req, res) => {

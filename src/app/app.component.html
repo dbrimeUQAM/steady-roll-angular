@@ -5,9 +5,13 @@
     </button>
     <h1>SteadyRoll</h1>
     <span class="menu-spacer"></span>
-    <div>
-      <a mat-button [routerLink]="'/users'"> Users </a>
-      <a mat-button [routerLink]="'/user-create'"> Create User </a>
+    <div *ngIf="!isLoggedIn">
+      <a mat-button [routerLink]="'/register'"> S'inscrire </a>
+      <a mat-button [routerLink]="'/login'"> S'identifier </a>
+    </div>
+    <div *ngIf="isLoggedIn">
+      <a mat-button [routerLink]="'/profile'"> Profil </a>
+      <a mat-button (click)="logout()"> Se déconnecter </a>
     </div>
   </mat-toolbar-row>
 

@@ -9,6 +9,8 @@ const cloudant = require('@cloudant/cloudant');
 const username = process.env.cloudant_username;
 const password = process.env.cloudant_password;
 
+const secret = process.env.secret;
+
 function onCloudantReady(error) {
   if (error) {
     return console.error(`Cloudant n'a pas réussi à se connecter ${error}`);
@@ -18,5 +20,6 @@ function onCloudantReady(error) {
 }
 
 module.exports = {
-  cloudant: cloudant({account: username, password: password}, onCloudantReady)
+  cloudant: cloudant({account: username, password: password}, onCloudantReady),
+  secret
 };

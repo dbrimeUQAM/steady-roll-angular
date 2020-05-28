@@ -1,0 +1,8 @@
+.register-card {
+  max-width: 400px;
+}
+
+.register-header-image {
+  background-image: url('//ssl.gstatic.com/accounts/ui/avatar_2x.png');
+  background-size: cover;
+}

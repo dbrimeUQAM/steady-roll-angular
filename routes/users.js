@@ -1,12 +1,15 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
+const middleware = require('../middleware');
+const users = express.Router();
 
 // Modèles
 const User = require('../models/User');
 
-router.route('/')
+users.use(middleware.isAuthenticated);
+
+users.route('/')
     /* GET liste d'utilisateurs. */
     .get((req, res) => {
       return User.getAll((error, users) => {
@@ -39,7 +42,7 @@ router.route('/')
 
     });
 
-router.route('/:userId')
+  users.route('/:userId')
     .get((req, res) => {
       const userId = req.params.userId;
 
@@ -101,4 +104,4 @@ router.route('/:userId')
       });
     });
 
-module.exports = router;
+module.exports = users;

@@ -1,13 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
+
+import { authInterceptorProviders } from './helpers/auth.interceptor';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -32,10 +37,12 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
 import { UserUpdateComponent } from './users/user-update/user-update.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
     UserListComponent,
     UserCreateComponent,
     UserDetailsComponent,
@@ -65,7 +72,7 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
     MatButtonToggleModule,
     MatSelectModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

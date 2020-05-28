@@ -13,11 +13,15 @@ User.DATABASE_NAME = 'users';
 User.TYPE = 'user';
 User.MODEL_SCHEMA = {
   type: 'user',
-  user: {}
+  name: '',
+  email: '',
+  password: '',
+  role: ''
 };
 
 User.ROLES = Object.freeze({
-  ADMIN: 'admin'
+  ADMIN: 'admin',
+  USER: 'user'
 });
 
 module.exports = User;
