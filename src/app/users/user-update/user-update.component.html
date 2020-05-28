@@ -9,12 +9,12 @@
   </div>
   <mat-card class="example-card">
     <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
-      <mat-form-field class="example-full-width" formGroupName="user">
+      <mat-form-field class="example-full-width">
         <mat-label>Nom</mat-label>
         <input matInput placeholder="Nom" formControlName="name"
                 [errorStateMatcher]="matcher">
         <mat-error>
-          <span *ngIf="!userForm.get('user.name').valid && userForm.get('user.name').touched">Nom est requis</span>
+          <span *ngIf="!userForm.get('name').valid && userForm.get('name').touched">Nom est requis</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
@@ -28,12 +28,12 @@
           <span *ngIf="!userForm.get('role').valid && userForm.get('role').touched">Role est requis</span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width" formGroupName="user">
+      <mat-form-field class="example-full-width">
         <mat-label>Email</mat-label>
         <input matInput placeholder="Email" formControlName="email"
                 [errorStateMatcher]="matcher">
         <mat-error>
-          <span *ngIf="!userForm.get('user.email').valid && userForm.get('user.email').touched">Email est requis</span>
+          <span *ngIf="!userForm.get('email').valid && userForm.get('email').touched">Email est requis</span>
         </mat-error>
       </mat-form-field>
       <div class="button-row">

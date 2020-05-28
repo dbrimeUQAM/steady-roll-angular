@@ -18,7 +18,7 @@ function isAuthenticated(req, res, next)  {
 
   const tokenParts = token.split(' ');
 
-  if (tokenParts !== 2) {
+  if (tokenParts.length !== 2) {
     return res.status(403).send({
       message: 'Jeton invalide!'
     });

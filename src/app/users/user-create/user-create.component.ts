@@ -28,10 +28,8 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-      user: this.formBuilder.group({
-        name: [null, Validators.required],
-        email: [null, Validators.required],
-      }),
+      name: [null, Validators.required],
+      email: [null, Validators.required],
       role: [null, Validators.required]
     });
   }

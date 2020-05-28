@@ -13,10 +13,8 @@ export class UserDetailsComponent implements OnInit {
   user: User = {
     _id: '',
     type: 'user',
-    user: {
-      name: '',
-      email: ''
-    },
+    name: '',
+    email: '',
     role: ''
   };
   isLoadingResults = true;

@@ -10,6 +10,20 @@
       #f="ngForm"
       novalidate
     >
+    <div class="form-group">
+      <label for="name">Nom</label>
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        [(ngModel)]="form.name"
+        required
+        #name="ngModel"
+      />
+      <div class="alert-danger" *ngIf="f.submitted && name.invalid">
+        <div *ngIf="name.errors.required">Nom requis</div>
+      </div>
+    </div>
       <div class="form-group">
         <label for="email">Email</label>
         <input

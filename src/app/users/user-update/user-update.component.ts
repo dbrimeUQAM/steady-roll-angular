@@ -33,10 +33,8 @@ export class UserUpdateComponent implements OnInit {
       _id: '',
       _rev: '',
       type: 'user',
-      user: this.formBuilder.group({
-        name: [null, Validators.required],
-        email: [null, Validators.required],
-      }),
+      name: [null, Validators.required],
+      email: [null, Validators.required],
       role: [null, Validators.required]
     });
   }
@@ -47,10 +45,8 @@ export class UserUpdateComponent implements OnInit {
         _id: data._id,
         _rev: data._rev,
         type: data.type,
-        user: {
-          name: data.user.name,
-          email: data.user.email,
-        },
+        name: data.name,
+        email: data.email,
         role: data.role
       });
     });
