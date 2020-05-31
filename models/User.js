@@ -13,10 +13,12 @@ User.DATABASE_NAME = 'users';
 User.TYPE = 'user';
 User.MODEL_SCHEMA = {
   type: 'user',
-  name: '',
-  email: '',
+  name: '', //nom de la personne responsable
+  email: '', //login
   password: '',
-  role: ''
+  tel:'',
+  idHopital: '',
+  role: ''//admin ou utilisateur :hopital
 };
 
 User.ROLES = Object.freeze({
