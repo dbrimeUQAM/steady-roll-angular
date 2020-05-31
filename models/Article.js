@@ -9,26 +9,40 @@ class Article extends Model {
   }
 }
 
-Article.DATABASE_NAME = 'article';
+Article.DATABASE_NAME = 'articles';
 Article.TYPE = 'article';
 Article.MODEL_SCHEMA = {
-  type: 'article',
-  //la catégorie peut etre médicament, fourniture, équipement
-  categorie: '',
-  nom: '',
-  descriptif: '',
-  dateExpiration: '',
-  provenance: '',
-  etat: '',
-  echange: '', // à vendre ou à donner
-  quantite: '',
-  prix: ''
+  type: Article.TYPE,
+  //la catégorie peut être médicament, fourniture, équipement
+  articleType: '',
+  name: '',
+  description: '',
+  expirationDate: '',
+  hospitalId: '',
+  condition: '',
+  offerType: '', // à vendre ou à donner
+  quantity: null,
+  price: null
 };
 
-// Hopital.ROLES = Object.freeze({
-//   ADMIN: 'admin',
-//   USER: 'user'
-// });
+Article.ARTICLE_TYPES = Object.freeze({
+  PRESCRIPTION_DRUG: 'médicament',
+  SUPPLY: 'fourniture',
+  EQUIPMENT: 'équipement'
+});
+
+Article.OFFER_TYPES = Object.freeze({
+  FOR_SALE: 'à vendre',
+  TO_GIFT: 'à donner'
+});
+
+Article.CONDITIONS = Object.freeze({
+  NEW: 'nouveau',
+  VERY_GOOD: 'très bon état',
+  GOOD: 'bon',
+  FAIR: 'acceptable',
+  POOR: 'mauvais'
+});
 
 module.exports = Article;
- 
+
