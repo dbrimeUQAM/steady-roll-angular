@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "steady-roll-angular"
+  "defaultProject": "steady-roll-angular",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -4,7 +4,7 @@ const express = require('express');
 const middleware = require('../middleware');
 const users = express.Router();
 
-// Modèles
+// Models
 const User = require('../models/User');
 
 users.use(middleware.isAuthenticated);

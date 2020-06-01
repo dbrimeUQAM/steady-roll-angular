@@ -12,11 +12,13 @@ class User extends Model {
 User.DATABASE_NAME = 'users';
 User.TYPE = 'user';
 User.MODEL_SCHEMA = {
-  type: 'user',
-  name: '',
-  email: '',
+  type: User.TYPE,
+  name: '', //nom de la personne responsable
+  email: '', //login
   password: '',
-  role: ''
+  phoneNumber:'',
+  hospitalId: '',
+  role: ''//admin ou utilisateur hospital
 };
 
 User.ROLES = Object.freeze({

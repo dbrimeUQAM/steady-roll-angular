@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 <div class="example-container mat-elevation-z8">
   <h2>User Details</h2>
   <div class="example-loading-shade"
        *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+=======
+<div *ngIf="user" class="row">
+  <div class="col-md-12">
+    <h2 *ngIf="user._id">User Details New Title</h2>
+    <h2 *ngIf="!user._id">New User</h2>
+>>>>>>> c906380671689eeacf44f887368b38583108b965
   </div>
   <div class="button-row">
     <a mat-flat-button color="primary" [routerLink]="['/users']"><mat-icon>list</mat-icon></a>
