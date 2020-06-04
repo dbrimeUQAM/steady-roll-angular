@@ -36,6 +36,7 @@ import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
     UserListComponent,
     UserCreateComponent,
     UserDetailsComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    HomePageComponent
   ],
   imports: [
     RecaptchaModule,
