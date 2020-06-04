@@ -6,6 +6,7 @@ const cors = require('cors');
 const auth = require('./routes/auth');
 const orders = require('./routes/orders');
 const users = require('./routes/users');
+const articles = require('./routes/articles');
 
 const app = express()
   .use(cors())
@@ -23,6 +24,7 @@ const server = app.listen(process.env.PORT || 3000, () => {
 app.use('/api/auth', auth);
 app.use('/api/orders', orders);
 app.use('/api/users', users);
+app.use('/api/articles', articles);
 app.use('/api/', (req, res) => {
   res.status(404).send('Route non trouvée.');
 });

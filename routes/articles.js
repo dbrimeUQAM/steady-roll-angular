@@ -1,15 +1,15 @@
 'use strict';
 
 const express = require('express');
-const middleware = require('../middleware');
+//const middleware = require('../middleware');
 const articles = express.Router();
 
 // Models
-const User = require('../models/Article');
+const Article = require('../models/Article');
 
-articles.use(middleware.isAuthenticated);
+//articles.use(middleware.isAuthenticated);
 
-articles.route('/getAllArticles')
+articles.route('/')
     /* GET liste d'articles. */
     .get((req, res) => {
       return Article.getAll((error, articles) => {
