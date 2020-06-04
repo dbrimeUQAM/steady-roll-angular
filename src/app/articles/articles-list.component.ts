@@ -10,7 +10,7 @@ import { Article } from '../services/article';
 export class ArticlesListComponent implements OnInit {
 
   articles: Article[] = [];
-  columnsToDisplay: string[] = ['name', 'description'];
+  columnsToDisplay: string[] = ['name', 'description', 'hospitalId', 'articleType'];
   isLoadingResults = true;
 
   constructor(private articleService: ArticleService) { }
