@@ -7,9 +7,9 @@ const articles = express.Router();
 // Models
 const User = require('../models/Article');
 
-users.use(middleware.isAuthenticated);
+articles.use(middleware.isAuthenticated);
 
-users.route('/getAllArticles')
+articles.route('/getAllArticles')
     /* GET liste d'articles. */
     .get((req, res) => {
       return Article.getAll((error, articles) => {
