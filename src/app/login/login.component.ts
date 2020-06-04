@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.role = this.tokenStorage.getUser().role;
-        this.router.navigate(['/user-details']);
-        //this.reloadPage();
+        // /users va etre remplacer par homePage .. dans une autre branche
+        this.router.navigate(['/users']);
       },
       err => {
         this.errorMessage = err.error.message;
