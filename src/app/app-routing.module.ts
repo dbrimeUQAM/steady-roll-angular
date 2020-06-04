@@ -11,7 +11,7 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'users', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },

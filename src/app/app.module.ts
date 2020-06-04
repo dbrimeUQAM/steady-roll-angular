@@ -35,6 +35,7 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { UserUpdateComponent } from './users/user-update/user-update.component';
+import { RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
     UserUpdateComponent
   ],
   imports: [
+    RecaptchaModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -72,7 +74,13 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
     MatButtonToggleModule,
     MatSelectModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [
+    authInterceptorProviders
+   /*  , 
+    useValue:  { 
+      siteKey:'6LfESf8UAAAAAMPV7RYGcD4Tik_LuUCWdSyz5X4F' 
+    } as RecaptchaSettings */
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
