@@ -1,15 +1,19 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    
-  
-
   <span>Steady Roll</span>
     <span class="example-spacer"></span>
+    <mat-icon>account_circle</mat-icon>&nbsp;
     {{ name }}
-    <button (click)="onClick($event) " mat-icon-button aria-label="Example icon button with a open in new tab icon">
-      <mat-icon>open_in_new</mat-icon>
+    
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>arrow_drop_down</mat-icon>
     </button>
-<!--     <a class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</a>
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon> -->
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onClick($event) " >
+        
+        <span>Se déconnecter</span>
+      </button>
+    </mat-menu>
+
   </mat-toolbar-row>
 </mat-toolbar>

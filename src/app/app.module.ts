@@ -38,6 +38,8 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
+import {  MatMenuModule } from "@angular/material/menu";
+
 
 
 @NgModule({
@@ -54,6 +56,7 @@ import { HeaderComponent } from './header/header.component';
     HeaderComponent
   ],
   imports: [
+    MatMenuModule,
     RecaptchaModule,
     BrowserModule,
     BrowserAnimationsModule,
