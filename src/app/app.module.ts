@@ -40,6 +40,8 @@ import { RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { DialogElementsComponent } from './dialog-elements/dialog-elements.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
+import { ArticlesListComponent } from './articles/articles-list.component';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     UserCreateComponent,
     UserDetailsComponent,
     UserUpdateComponent,
-    DialogElementsComponent
+    DialogElementsComponent,
+    ArticlesListComponent
   ],
   imports: [
     RecaptchaModule,
