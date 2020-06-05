@@ -1,11 +1,7 @@
  <div class="main-div col-md-12 text-center">
   <div class="card card-container">
-    
-    
     <mat-card  layout="row" layout-align="center center">
-    
-            <img src="https://unitesoutiensrapqc.ca/wp-content/uploads/2017/08/MSSS-LOGO.jpg">
-      
+      <img src="https://unitesoutiensrapqc.ca/wp-content/uploads/2017/08/MSSS-LOGO.jpg"> 
     </mat-card>
     <br>
     <mat-divider></mat-divider>
@@ -13,8 +9,6 @@
     <div style="text-align:center;">
       <mat-card-title>Accéder à mon compte</mat-card-title>
     </div>
-    
- 
     <form
     #f="ngForm"
       *ngIf="!isLoggedIn"
@@ -69,45 +63,31 @@
           </div>
         </div> 
         <div style="text-align:center;">
-      <re-captcha   
+          <re-captcha   
       [(ngModel)]="form.captcha"
       #captcha="ngModel"
       name="captcha"
       required 
       (resolved)="resolved($event)" 
       siteKey="6LdFSv8UAAAAAPWFBt8XkkwuoJp6_h5hB9zy45lW">
-    </re-captcha>
-  </div>
+          </re-captcha>
+        </div>
    
-<div *ngIf="captchaDone" >
+      <div *ngIf="captchaDone" >
   <mat-card-actions align="center">
     
     <button mat-raised-button color="primary" (clic)="onSubmit()"> S'identifier</button>
   </mat-card-actions> 
-</div>
-<br>
+      </div>
+      <br>
     <mat-divider></mat-divider>
     <br>
     <div style="text-align:center;">
     <a mat-flat-button href="http://www.droitauteur.gouv.qc.ca/copyright.php" target="_blank">© Gouvernement du Québec, 2020</a>
   </div>
         
-
-
-      </div>
-      <div class="form-group">
-        <!-- <label for="password">Mot de passe</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-        /> -->
-        
-      </div>
+</div>
+    
       
       <div class="form-group">
         <div
