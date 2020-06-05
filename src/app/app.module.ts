@@ -35,6 +35,10 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { UserUpdateComponent } from './users/user-update/user-update.component';
+import { RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+
+import { DialogElementsComponent } from './dialog-elements/dialog-elements.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ArticlesListComponent } from './articles/articles-list.component';
 
@@ -49,9 +53,11 @@ import { ArticlesListComponent } from './articles/articles-list.component';
     UserCreateComponent,
     UserDetailsComponent,
     UserUpdateComponent,
+    DialogElementsComponent,
     ArticlesListComponent
   ],
   imports: [
+    RecaptchaModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -73,9 +79,19 @@ import { ArticlesListComponent } from './articles/articles-list.component';
     MatSliderModule,
     MatSlideToggleModule,
     MatButtonToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
-  providers: [authInterceptorProviders],
+  entryComponents: [
+    DialogElementsComponent
+  ],
+  providers: [
+    authInterceptorProviders
+   /*  , 
+    useValue:  { 
+      siteKey:'6LfESf8UAAAAAMPV7RYGcD4Tik_LuUCWdSyz5X4F' 
+    } as RecaptchaSettings */
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
