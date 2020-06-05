@@ -16,11 +16,11 @@ export class HeaderComponent implements OnInit {
     this.name = this.tokenStorage.getUser().name;
   }
   onClick($event) {
-    this.singOut()
-  }
-  singOut() {
     this.tokenStorage.signOut();
     this.router.navigate(['/login']);
+  }
+  home($event) {
+    this.router.navigate(['/home']);
   }
 
 }

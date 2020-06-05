@@ -1,6 +1,10 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-  <span>Steady Roll</span>
+    <button mat-icon-button (click)="home($event)" >
+      <mat-icon>home</mat-icon>
+    </button>
+    
+  <span>&nbsp;Steady Roll</span>
     <span class="example-spacer"></span>
     <mat-icon>account_circle</mat-icon>&nbsp;
     {{ name }}
@@ -9,7 +13,7 @@
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="onClick($event) " >
+      <button mat-menu-item (click)="onClick($event)" >
         
         <span>Se déconnecter</span>
       </button>
