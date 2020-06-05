@@ -42,6 +42,11 @@ import {  MatMenuModule } from "@angular/material/menu";
 import { AddArticleComponent } from './add-article/add-article.component';
 
 
+import { DialogElementsComponent } from './dialog-elements/dialog-elements.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { ArticlesListComponent } from './articles/articles-list.component';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +60,9 @@ import { AddArticleComponent } from './add-article/add-article.component';
     UserUpdateComponent,
     HomePageComponent,
     HeaderComponent,
-    AddArticleComponent
+    AddArticleComponent,
+    DialogElementsComponent,
+    ArticlesListComponent
   ],
   imports: [
     MatMenuModule,
@@ -81,7 +88,11 @@ import { AddArticleComponent } from './add-article/add-article.component';
     MatSliderModule,
     MatSlideToggleModule,
     MatButtonToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    DialogElementsComponent
   ],
   providers: [
     authInterceptorProviders
