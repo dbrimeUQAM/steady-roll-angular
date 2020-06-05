@@ -37,6 +37,9 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
 import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 
+import { DialogElementsComponent } from './dialog-elements/dialog-elements.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +50,8 @@ import { RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
     UserListComponent,
     UserCreateComponent,
     UserDetailsComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    DialogElementsComponent
   ],
   imports: [
     RecaptchaModule,
@@ -72,7 +76,11 @@ import { RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
     MatSliderModule,
     MatSlideToggleModule,
     MatButtonToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    DialogElementsComponent
   ],
   providers: [
     authInterceptorProviders

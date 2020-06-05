@@ -78,6 +78,16 @@
       siteKey="6LdFSv8UAAAAAPWFBt8XkkwuoJp6_h5hB9zy45lW">
     </re-captcha>
   </div>
+  <div class="form-group">
+    <div
+      class="alert alert-danger"
+      role="alert"
+      *ngIf="f.submitted && isLoginFailed"
+    >
+      Échec de la connexion: {{ errorMessage }}
+    </div>
+  </div>
+
    
 <div *ngIf="captchaDone" >
   <mat-card-actions align="center">
@@ -109,16 +119,7 @@
         
       </div>
       
-      <div class="form-group">
-        <div
-          class="alert alert-danger"
-          role="alert"
-          *ngIf="f.submitted && isLoginFailed"
-        >
-          Échec de la connexion: {{ errorMessage }}
-        </div>
-      </div>
-    
+      
   </form>
     <div class="alert alert-success" *ngIf="isLoggedIn">
       Connecté en tant que {{ role }}.

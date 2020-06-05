@@ -27,7 +27,7 @@
     "@angular/platform-browser-dynamic": "9.1.9",
     "@angular/router": "9.1.9",
     "@cloudant/cloudant": "4.2.4",
-    "angular2-recaptcha": "^1.1.0",
+    "angular2-recaptcha": "1.1.0",
     "async": "^3.2.0",
     "bcryptjs": "2.4.3",
     "body-parser": "1.19.0",
@@ -37,7 +37,7 @@
     "jsonwebtoken": "8.5.1",
     "lodash": "4.17.15",
     "moment": "^2.26.0",
-    "ng-recaptcha": "^5.0.0",
+    "ng-recaptcha": "5.0.0",
     "rxjs": "6.5.4",
     "tslib": "1.10.0",
     "zone.js": "0.10.2"
