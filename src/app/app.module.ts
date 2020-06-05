@@ -36,6 +36,8 @@ import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { UserUpdateComponent } from './users/user-update/user-update.component';
 
+import { ArticlesListComponent } from './articles/articles-list.component';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
     UserListComponent,
     UserCreateComponent,
     UserDetailsComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    ArticlesListComponent
   ],
   imports: [
     BrowserModule,
