@@ -18,7 +18,7 @@ Article.MODEL_SCHEMA = {
   name: '',
   description: '',
   expirationDate: '',
-  hospitalName: '',
+  hospitalId: '',
   condition: '',
   offerType: '', // à vendre ou à donner
   quantity: null,
