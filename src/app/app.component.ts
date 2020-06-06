@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from './services/token-storage.service';
+import { TokenStorageService } from './services/token-storage/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -33,5 +33,5 @@ export class AppComponent implements OnInit {
     window.location.reload();
   }
 
-  
+
 }
