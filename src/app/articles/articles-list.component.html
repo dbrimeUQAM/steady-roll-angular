@@ -1,7 +1,8 @@
 <div>
-  <h1>Articles</h1>
-  <button mat-raised-button color="accent" class="mat-raised-button" type="button" [routerLink]="'/articles'">Les articles</button>
-  <table mat-table [dataSource]="articles">
+ 
+
+<!--   <button mat-raised-button color="accent" class="mat-raised-button" type="button" [routerLink]="'/articles'">Les articles</button> -->
+ <!--  <table mat-table [dataSource]="articles">
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Nom </th>
@@ -19,10 +20,81 @@
 
     <ng-container matColumnDef="articleType">
       <th mat-header-cell *matHeaderCellDef> Type </th>
-      <td mat-cell *matCellDef="let article"> {{article.articleType}} </td>
+      <td mat-cell *matCellDef="let article"> {{article.articleType}} 
+        
+      </td>
     </ng-container>
+    
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let article; columns: columnsToDisplay"></tr>
-  </table>
+  </table> -->
+
+<!--   <table matSort (matSortChange)="sortData($event)">
+    <tr>
+      <th mat-sort-header="description" > Nom </th>
+      <th mat-sort-header="description">Description</th>
+      <th mat-sort-header="hospital">Hospital name</th>
+      
+      <th mat-sort-header="type">Type</th>
+      <th >&nbsp;&nbsp;</th>
+    </tr>
+  
+    <tr *ngFor="let article of this.articles">
+      <td mat-sort>{{ article.name}}</td>
+      <td mat-sort>{{ article.description}}</td>
+      <td mat-sort>{{article.hospitalName}}</td>
+      <td mat-sort>{{article.articleType}}</td>
+      <td mat-sort> 
+        <button mat-icon-button [routerLink]="'/article-detail'" >
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </table> -->
+
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia">
+  </mat-form-field>
+  
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="articles" matSort>
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+        <td mat-cell *matCellDef="let article"> {{article.name}} </td>
+      </ng-container>
+  
+      <!-- Progress Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <td mat-cell *matCellDef="let article"> {{article.description}} </td>
+      </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="hospitalName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Hospital name </th>
+        <td mat-cell *matCellDef="let article"> {{article.hospitalName}} </td>
+      </ng-container>
+  
+      <!-- Color Column -->
+      <ng-container matColumnDef="articleType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+        <td mat-cell *matCellDef="let article"> {{article.articleType}}  
+          <button mat-icon-button [routerLink]="'/article-detail'" >
+            <mat-icon>navigate_next</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+  
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;">
+      </tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  
 </div>

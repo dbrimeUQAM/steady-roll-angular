@@ -46,6 +46,7 @@ import { DialogElementsComponent } from './dialog-elements/dialog-elements.compo
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { ArticlesListComponent } from './articles/articles-list.component';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { ArticlesListComponent } from './articles/articles-list.component';
     HeaderComponent,
     AddArticleComponent,
     DialogElementsComponent,
-    ArticlesListComponent
+    ArticlesListComponent,
+    ArticleDetailComponent
   ],
   imports: [
     MatMenuModule,

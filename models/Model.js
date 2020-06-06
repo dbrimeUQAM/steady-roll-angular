@@ -2,6 +2,7 @@
 
 const cloudant = require('../config').cloudant;
 const merge = require('lodash/merge');
+const utils = require('../utils');
 
 /**
  * Classe de base pour tous les modèles de données.
@@ -172,6 +173,41 @@ class Model {
     });
   }
 
+   /**
+   * Bulk fetch of the database documents.
+   * Additional query string params can be specified, include_docs is always set to true.
+   *
+   * @static
+   * @param {string[]} docIds Array of document ids to look up
+   * @param {object} [options] Any additional options to pass to the request.
+   * @param {function} callback Callback executed with the result of the fetch.
+   * @memberof Model
+   */
+  static fetch(docIds, options, callback) {
+
+    var db = this.dbInstance();
+
+    if (typeof options === 'function') {
+      callback = options;
+      options = null;
+    }
+
+    db.fetch({ keys: docIds }, options, (error, data) => {
+
+      var filtered;
+
+      if (error) {
+        return callback(error);
+      }
+
+      filtered = data.rows.map(row => row.doc);
+
+      return callback(null, filtered);
+
+    });
+
+  }
+
   /**
    * Retourne une instance de la base de données Cloudant
    *
@@ -196,6 +232,27 @@ class Model {
     } else {
       doc.timeStampCreated = date;
     }
+  }
+
+  getDocValue(path, defaultValue) {
+    return utils.getPathValue(this, `doc.${path}`, defaultValue);
+  }
+
+  setDocValue(path, value) {
+    let newValue;
+
+    if (typeof value === 'function') {
+      newValue = value(this);
+    } else {
+      newValue = value;
+    }
+
+    return utils.applyChange(this, `doc.${path}`, newValue);
+
+  }
+
+  getHospitalId() {
+    return this.getDocValue('hospitalId');
   }
 
 }

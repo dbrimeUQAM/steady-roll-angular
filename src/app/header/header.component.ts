@@ -19,8 +19,6 @@ export class HeaderComponent implements OnInit {
     this.tokenStorage.signOut();
     this.router.navigate(['/login']);
   }
-  home($event) {
-    this.router.navigate(['/home']);
-  }
+  
 
 }

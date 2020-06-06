@@ -13,12 +13,15 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { AddArticleComponent } from './add-article/add-article.component';
 
 import { ArticlesListComponent } from './articles/articles-list.component';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'add-article', component: AddArticleComponent },
+  { path: 'article-detail', component: ArticleDetailComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'users', component: UserListComponent, data: { title: 'Liste de Utilisateurs'} },
