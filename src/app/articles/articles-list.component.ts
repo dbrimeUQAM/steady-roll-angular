@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ArticleService } from '../services/articles.service';
-import { Article } from '../services/article';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { Article } from '../services/article/article';
+import { ArticleService } from '../services/article/article.service';
 
 
 @Component({
