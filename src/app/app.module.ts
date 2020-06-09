@@ -38,16 +38,16 @@ import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
-import {  MatMenuModule } from "@angular/material/menu";
+import { MatMenuModule } from '@angular/material/menu';
 import { AddArticleComponent } from './add-article/add-article.component';
-
 
 import { DialogElementsComponent } from './dialog-elements/dialog-elements.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ArticlesListComponent } from './articles/articles-list.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
-
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -64,7 +64,7 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
     AddArticleComponent,
     DialogElementsComponent,
     ArticlesListComponent,
-    ArticleDetailComponent
+    ArticleDetailComponent,
   ],
   imports: [
     MatMenuModule,
@@ -91,18 +91,19 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
     MatSlideToggleModule,
     MatButtonToggleModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  entryComponents: [
-    DialogElementsComponent
-  ],
+  entryComponents: [DialogElementsComponent],
   providers: [
-    authInterceptorProviders
-   /*  , 
+    authInterceptorProviders,
+    /*  , 
     useValue:  { 
       siteKey:'6LfESf8UAAAAAMPV7RYGcD4Tik_LuUCWdSyz5X4F' 
     } as RecaptchaSettings */
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

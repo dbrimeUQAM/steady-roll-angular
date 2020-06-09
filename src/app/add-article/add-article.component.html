@@ -1,2 +1,84 @@
 <app-header></app-header>
-<p>add-article works! ... vas-y Sana :p</p>
+
+<!-- <div
+  ng-controller="AppCtrl"
+  ng-cloak
+  align="center"
+  layout="row"
+  style="height: 100px;"
+  layout-wrap
+> -->
+<form>
+  <div id="layoutContainer" ng-controller="layoutController as ctrl" ng-cloak>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Nom de l'article</mat-label>
+        <input name="articleName" required maxlength="20" matInput />
+        <mat-hint align="end">Taille max:20</mat-hint>
+      </mat-form-field>
+      <br />
+      <br />
+      <mat-form-field apparence="fill">
+        <mat-label> Quantité </mat-label>
+        <input
+          required
+          matInput
+          type="number"
+          value="1"
+          min="1"
+          class="example-right-align"
+        />
+      </mat-form-field>
+      <br />
+      <mat-form-field appearance="fill">
+        <mat-label>Type</mat-label>
+        <mat-select required>
+          <mat-option value="medicament">Médicament</mat-option>
+          <mat-option value="equipement">Equipement</mat-option>
+          <mat-option value="fourniture">Fourniture</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Date D'expiration</mat-label>
+        <input matInput [matDatepicker]="picker" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <br />
+      <mat-form-field apparence="fill">
+        <mat-label> Prix </mat-label>
+        <input
+          required
+          matInput
+          type="number"
+          value="0"
+          min="0"
+          class="example-right-align"
+        />
+        <span matPrefix> $ </span>
+        <span matSuffix> .00 </span>
+      </mat-form-field>
+      <br />
+      <mat-radio-group aria-label="Sélectionnez une option"
+        >Mode d'échange:
+        <br />
+        <mat-radio-button value="donner" checked> A donner </mat-radio-button>
+        <mat-radio-button value="vendre"> A vendre </mat-radio-button>
+      </mat-radio-group>
+      <br />
+      <br />
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <!-- < section ></section> -->
+      <button mat-button color="primary">Ajouter</button>
+      <!-- < button  mat-button  color = "primary " > Principal </ bouton >  -->
+    </div>
+  </div>
+</form>
