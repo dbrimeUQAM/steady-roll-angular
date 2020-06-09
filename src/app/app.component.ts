@@ -28,10 +28,10 @@ export class AppComponent implements OnInit {
     } */
   }
 
- /*  logout() {
+  logout() {
     this.tokenStorageService.signOut();
     window.location.reload();
-  } */
+  }
 
 
 }
