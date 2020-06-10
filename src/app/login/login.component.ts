@@ -39,8 +39,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.role = this.tokenStorage.getUser().role;
-        // /users va etre remplacer par homePage .. dans une autre branche
-        this.router.navigate(['/users']);
+        this.router.navigate(['/home']);
       },
       err => {
        // this.dialog.open(DialogElementsComponent);

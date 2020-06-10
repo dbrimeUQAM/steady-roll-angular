@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ArticleService } from '../services/article/article.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { Article } from '../services/article/article';
+import { ArticleService } from '../services/article/article.service';
+
 
 @Component({
   selector: 'app-article-list',
@@ -8,25 +12,38 @@ import { Article } from '../services/article/article';
   styleUrls: ['./articles-list.component.css']
 })
 export class ArticlesListComponent implements OnInit {
-
+  displayedColumns: string[] = ['name', 'hospitalName', 'description', 'type'];
+  dataSource: MatTableDataSource<Article>;
   articles: Article[] = [];
-  columnsToDisplay: string[] = ['name', 'description', 'hospitalName', 'articleType'];
-  isLoadingResults = true;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private articleService: ArticleService) { }
+  constructor(private articleService: ArticleService ) {}
 
-  ngOnInit(): void {
-
+  ngOnInit() {
     this.articleService.getAll()
     .subscribe((res: any) => {
       this.articles = res;
       console.log(this.articles);
-      this.isLoadingResults = false;
+      this.dataSource = new MatTableDataSource(this.articles);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }, err => {
       console.log(err);
-      this.isLoadingResults = false;
     });
-
+    
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  
+
 }
+

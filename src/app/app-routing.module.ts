@@ -9,12 +9,19 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { AddArticleComponent } from './add-article/add-article.component';
 
 import { ArticlesListComponent } from './articles/articles-list.component';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomePageComponent },
+  { path: 'add-article', component: AddArticleComponent },
+  { path: 'article-detail', component: ArticleDetailComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'users', component: UserListComponent, data: { title: 'Liste de Utilisateurs'} },

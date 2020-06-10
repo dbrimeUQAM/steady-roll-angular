@@ -36,11 +36,17 @@ import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { UserUpdateComponent } from './users/user-update/user-update.component';
 import { RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
+import { HomePageComponent } from './home-page/home-page.component';
+import { HeaderComponent } from './header/header.component';
+import {  MatMenuModule } from "@angular/material/menu";
+import { AddArticleComponent } from './add-article/add-article.component';
+
 
 import { DialogElementsComponent } from './dialog-elements/dialog-elements.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { ArticlesListComponent } from './articles/articles-list.component';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
 
 
 @NgModule({
@@ -53,10 +59,15 @@ import { ArticlesListComponent } from './articles/articles-list.component';
     UserCreateComponent,
     UserDetailsComponent,
     UserUpdateComponent,
+    HomePageComponent,
+    HeaderComponent,
+    AddArticleComponent,
     DialogElementsComponent,
-    ArticlesListComponent
+    ArticlesListComponent,
+    ArticleDetailComponent
   ],
   imports: [
+    MatMenuModule,
     RecaptchaModule,
     BrowserModule,
     BrowserAnimationsModule,
