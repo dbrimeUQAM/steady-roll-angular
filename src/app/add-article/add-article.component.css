@@ -1,4 +1,4 @@
-.inputdemoErrors .inputErrorsApp {
+/* .inputdemoErrors .inputErrorsApp {
   min-height: 48px;
 }
 
@@ -10,3 +10,14 @@
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
 }
+ */
+
+ .mat-form-field {
+  width: 60%;
+  padding-left: 30px;
+ }
+ .center {
+  margin: auto;
+  width: 80%;
+  padding: 10px;
+ }

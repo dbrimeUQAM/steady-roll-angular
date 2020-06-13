@@ -8,77 +8,90 @@
   style="height: 100px;"
   layout-wrap
 > -->
-<form>
-  <div id="layoutContainer" ng-controller="layoutController as ctrl" ng-cloak>
-    <div>
-      <mat-form-field appearance="fill">
-        <mat-label>Nom de l'article</mat-label>
-        <input name="articleName" required maxlength="20" matInput />
-        <mat-hint align="end">Taille max:20</mat-hint>
-      </mat-form-field>
-      <br />
-      <br />
-      <mat-form-field apparence="fill">
-        <mat-label> Quantité </mat-label>
-        <input
-          required
-          matInput
-          type="number"
-          value="1"
-          min="1"
-          class="example-right-align"
-        />
-      </mat-form-field>
-      <br />
-      <mat-form-field appearance="fill">
-        <mat-label>Type</mat-label>
-        <mat-select required>
-          <mat-option value="medicament">Médicament</mat-option>
-          <mat-option value="equipement">Equipement</mat-option>
-          <mat-option value="fourniture">Fourniture</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <br />
 
-      <mat-form-field>
-        <mat-label>Date D'expiration</mat-label>
-        <input matInput [matDatepicker]="picker" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <br />
-      <mat-form-field apparence="fill">
-        <mat-label> Prix </mat-label>
-        <input
-          required
-          matInput
-          type="number"
-          value="0"
-          min="0"
-          class="example-right-align"
-        />
-        <span matPrefix> $ </span>
-        <span matSuffix> .00 </span>
-      </mat-form-field>
-      <br />
-      <mat-radio-group aria-label="Sélectionnez une option"
-        >Mode d'échange:
-        <br />
-        <mat-radio-button value="donner" checked> A donner </mat-radio-button>
-        <mat-radio-button value="vendre"> A vendre </mat-radio-button>
-      </mat-radio-group>
-      <br />
-      <br />
-      <mat-form-field appearance="fill">
-        <mat-label>Description</mat-label>
-        <textarea matInput></textarea>
-      </mat-form-field>
-    </div>
+<!--  iciii  -->
 
-    <div>
-      <!-- < section ></section> -->
-      <button mat-button color="primary">Ajouter</button>
-      <!-- < button  mat-button  color = "primary " > Principal </ bouton >  -->
-    </div>
+<br>
+<br>
+<form [formGroup]="articleFrom" >
+<div class="center">
+  <!-- name -->
+  <div >
+    <mat-form-field appearance="outline">
+      <mat-label>Nom de l'article</mat-label>
+      <input formControlName="name" required maxlength="20" matInput />
+      <mat-hint align="end">Taille max:20</mat-hint>
+    </mat-form-field>
   </div>
+  <!-- type -->
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="articleType" required>
+        <mat-option value="medicament">Médicament</mat-option>
+        <mat-option value="equipement">Equipement</mat-option>
+        <mat-option value="fourniture">Fourniture</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- quantity  -->
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label> Quantité </mat-label>
+      <input formControlName="quantity" required matInput type="number" value="1" min="1"/>
+    </mat-form-field>
+  </div>
+  <!-- expirationDate  -->
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Date D'expiration</mat-label>
+      <input formControlName="expirationDate" matInput [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <!-- price  -->
+  <div>    
+    <mat-form-field appearance="outline">
+      <mat-label> Prix </mat-label>
+      <input formControlName="price" required matInput type="number" value="0" min="0"/>
+      <span matPrefix> $ &nbsp; </span>
+      <span matSuffix> .00 </span>
+    </mat-form-field>
+  </div>
+  <!-- hospitalName  -->
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Nom de l'hospitale</mat-label>
+      <input formControlName="hospitalName" required maxlength="20" matInput />
+      <mat-hint align="end">Taille max:20</mat-hint>
+    </mat-form-field>
+  </div>
+  <!--   description  -->
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea formControlName = "description" matInput></textarea>
+    </mat-form-field>
+  </div>
+  <!--   condition  -->
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Condition</mat-label>
+      <textarea formControlName="condition" matInput></textarea>
+    </mat-form-field>
+  </div>
+  <!-- offerType  -->
+  <div style=" margin-top: 20px;">
+    <mat-label style="padding-left: 30px;"> Mode d'échange: </mat-label>
+    <mat-radio-group formControlName="offerType">
+      <mat-radio-button value="donner" checked> A donner </mat-radio-button>
+      <mat-radio-button value="vendre"> A vendre </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  
+  <div style="padding: 30px;">      
+    <button style="width: 300px;" mat-raised-button color="primary" (click)="submit()" >Ajouter</button>
+  </div> 
+</div>
 </form>
