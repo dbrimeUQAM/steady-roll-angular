@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'add-article', component: AddArticleComponent },
-  { path: 'article-detail', component: ArticleDetailComponent },
+  { path: 'article-detail/:id', component: ArticleDetailComponent, data: { title: 'Article'} },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'users', component: UserListComponent, data: { title: 'Liste de Utilisateurs'} },
