@@ -78,32 +78,27 @@
       <mat-label class="label">Mode d'échange:&nbsp;</mat-label>
     </div>
     <div class="col-75">
-      <div *ngIf="article.offerType==='donner'">
+      <div *ngIf="article.offerType==='à donner'">
           {{ article.offerType}}
       </div>
-      <div *ngIf="article.offerType==='vendre'">
-        {{ article.offerType }} prix : {{ article.price}}
-        <span matPrefix> $ &nbsp; </span>
-      <span matSuffix> .00 </span>
+      <div *ngIf="article.offerType==='à vendre'">
+        {{ article.offerType }} 
+        
+      
       </div>
       
     </div>
   </div>
-  <!-- <div style=" margin-top: 20px;">
-    <mat-radio-group formControlName="offerType" >
-      <mat-radio-button value="donner" > A donner </mat-radio-button>
-      <mat-radio-button value="vendre"> A vendre </mat-radio-button>
-    </mat-radio-group>
-  </div> -->
-  <!-- price  -->
-  <div *ngIf = "article.offerType === 'vendre'">    
-    <mat-form-field appearance="outline">
-      <mat-label> Prix </mat-label>
-      <input formControlName="price" required matInput type="number" value="0" min="0"/>
-      
-    </mat-form-field>
+
+
+  <div *ngIf="article.offerType==='à vendre'" class="row">
+    <div class="col-25">
+      <mat-label class="label">prix:&nbsp;</mat-label>
+    </div>
+    <div class="col-75">
+      {{ article.price}}
+      <span matPrefix> $ &nbsp; </span>
+    </div>
   </div>
-  
-  
 </div>
 </form>
