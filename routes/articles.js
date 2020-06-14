@@ -25,15 +25,14 @@ articles.route('/')
           if (error) {
             return res.status(error.statusCode).json(error);
           }
-          
-          articles = articles.map(article => {
+         /*  articles = articles.map(article => {
             let hospital = hospitals.find(hospital => hospital._id === article.hospitalId);
 
             article.hospitalName = hospital.name;
 
             return article;
 
-          })
+          }) */
 
           return res.status(200).json(articles);
 

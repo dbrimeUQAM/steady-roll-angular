@@ -50,15 +50,7 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div>
-  <!-- price  -->
-  <div>    
-    <mat-form-field appearance="outline">
-      <mat-label> Prix </mat-label>
-      <input formControlName="price" required matInput type="number" value="0" min="0"/>
-      <span matPrefix> $ &nbsp; </span>
-      <span matSuffix> .00 </span>
-    </mat-form-field>
-  </div>
+  
   <!-- hospitalName  -->
   <div>
     <mat-form-field appearance="outline">
@@ -84,10 +76,19 @@
   <!-- offerType  -->
   <div style=" margin-top: 20px;">
     <mat-label style="padding-left: 30px;"> Mode d'échange: </mat-label>
-    <mat-radio-group formControlName="offerType">
-      <mat-radio-button value="donner" checked> A donner </mat-radio-button>
+    <mat-radio-group formControlName="offerType" [(ngModel)]="labelPosition">
+      <mat-radio-button value="donner" > A donner </mat-radio-button>
       <mat-radio-button value="vendre"> A vendre </mat-radio-button>
     </mat-radio-group>
+  </div>
+  <!-- price  -->
+  <div *ngIf = "article.offerType === 'vendre'">    
+    <mat-form-field appearance="outline">
+      <mat-label> Prix </mat-label>
+      <input formControlName="price" required matInput type="number" value="0" min="0"/>
+      <span matPrefix> $ &nbsp; </span>
+      <span matSuffix> .00 </span>
+    </mat-form-field>
   </div>
   
   <div style="padding: 30px;">      
