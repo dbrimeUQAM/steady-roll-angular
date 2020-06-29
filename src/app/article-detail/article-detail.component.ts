@@ -3,6 +3,8 @@ import { ArticleService } from '../services/article/article.service';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from '../services/article/article';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogContentComponent } from '../dialog-content/dialog-content.component';
 
 @Component({
   selector: 'app-article-detail',
@@ -14,7 +16,7 @@ export class ArticleDetailComponent implements OnInit {
   articleForm: FormGroup ;
   public detailForm: FormGroup;
   offer: string;
-  constructor(private route: ActivatedRoute, private articleService: ArticleService, private formBuilder: FormBuilder) { }
+  constructor(public dialog: MatDialog, private route: ActivatedRoute, private articleService: ArticleService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
    const articleId: string =  this.route.snapshot.params.id ;
@@ -70,4 +72,16 @@ export class ArticleDetailComponent implements OnInit {
     
   }
 
+  openDialog(nom: string, type:string) {
+    const dialog = this.dialog.open(DialogContentComponent, 
+      {data:{name: nom, articleType: type}});  
+  }
+
 }
+
+
+/* @Component({
+  selector: 'dialog-elements-example-dialog',
+  templateUrl: './dialog-content.component.html',
+})
+export class DialogContent {} */

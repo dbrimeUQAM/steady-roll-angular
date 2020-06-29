@@ -48,6 +48,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ArticlesListComponent } from './articles/articles-list.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DialogContentComponent } from './dialog-content/dialog-content.component';
+import { BagPageComponent } from './bag-page/bag-page.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     DialogElementsComponent,
     ArticlesListComponent,
     ArticleDetailComponent,
+    DialogContentComponent,
+    BagPageComponent,
   ],
   imports: [
     MatMenuModule,

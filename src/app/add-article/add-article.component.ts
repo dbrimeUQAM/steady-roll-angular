@@ -58,12 +58,15 @@ export class AddArticleComponent implements OnInit {
     this.articleFrom.get('price').valueChanges.subscribe(data => {
       this.article.price = data ;
     });
+    console.log('this.article', this.article)
     
   }
   submit(){
     
     this.articleService.addArticle(this.article).subscribe(data =>
       {
+        const id = data._id ; 
+        console.log('id', id) ;
         console.log('data', data)
         console.log('this.articleFrom.value', this.articleFrom.value);
         this.router.navigate(['/home']);

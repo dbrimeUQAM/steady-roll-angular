@@ -102,3 +102,10 @@
   </div>
 </div>
 </form>
+<!-- <button mat-button (click)="openDialog()" [routerLink]="'/add-article'">Launch dialog</button>
+ -->
+  <!-- ajouter -->
+  <mat-toolbar-row> 
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="primary" (click)="openDialog(article.name, article.articleType)" >Ajouter au panier</button>
+  </mat-toolbar-row>
