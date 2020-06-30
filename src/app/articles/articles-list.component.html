@@ -28,7 +28,7 @@
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> type </th>
       <td mat-cell *matCellDef="let row" > {{row.articleType}}
-        <button mat-icon-button [routerLink]="'/article-detail'" >	
+        <button mat-icon-button [routerLink]="['/article-detail', row._id]" >	
           <mat-icon>navigate_next</mat-icon>	
         </button> </td>
     </ng-container>

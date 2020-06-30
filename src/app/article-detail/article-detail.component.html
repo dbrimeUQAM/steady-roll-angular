@@ -1,3 +1,111 @@
 <app-header></app-header>
-<p>article-detail works!</p>
-ajouter les details .. bouton pour le panier ...
+<br>
+<h2 class="mat-h2">&nbsp; {{ article.name }} ( {{article.articleType}} )</h2>
+<mat-divider></mat-divider>
+
+
+<form [formGroup]="detailForm" >
+<div class="center">
+  <!-- name -->
+  <div class="row">
+    <div class="col-25">
+      <mat-label class="label">Nom de l'article:&nbsp; </mat-label>
+    </div>
+    <div class="col-75">
+      {{ article.name}}
+    </div>
+  </div>
+  <!-- type -->
+  <div class="row">
+    <div class="col-25">
+      <mat-label class="label">Type:&nbsp;</mat-label>
+    </div>
+    <div class="col-75">
+      {{ article.articleType}}
+    </div>
+  </div>
+  <!-- quantity  -->
+  <div class="row">
+    <div class="col-25">
+      <mat-label class="label">Quantité:&nbsp;</mat-label>
+    </div>
+    <div class="col-75">
+      {{ article.quantity}}
+    </div>
+  </div>
+  <!-- expirationDate  -->
+  <div class="row">
+    <div class="col-25">
+      <mat-label class="label">Date D'expiration:&nbsp;</mat-label>
+    </div>
+    <div class="col-75">
+      {{ article.expirationDate}}
+    </div>
+  </div>
+  
+  
+  <!-- hospitalName  -->
+  <div class="row">
+    <div class="col-25">
+      <mat-label class="label">Nom de l'hospitale:&nbsp;</mat-label>
+    </div>
+    <div class="col-75">
+      {{ article.hospitalName}}
+    </div>
+  </div>
+  <!--   description  -->
+  <div class="row">
+    <div class="col-25">
+      <mat-label class="label">Description:&nbsp;</mat-label>
+    </div>
+    <div class="col-75">
+      {{ article.description}}
+    </div>
+  </div>
+ 
+  <!--   condition  -->
+  <div class="row">
+    <div class="col-25">
+      <mat-label class="label">Condition:&nbsp;</mat-label>
+    </div>
+    <div class="col-75">
+      {{ article.condition}}
+    </div>
+  </div>
+  <!-- offerType  -->
+  <div class="row">
+    <div class="col-25">
+      <mat-label class="label">Mode d'échange:&nbsp;</mat-label>
+    </div>
+    <div class="col-75">
+      <div *ngIf="article.offerType==='à donner'">
+          {{ article.offerType}}
+      </div>
+      <div *ngIf="article.offerType==='à vendre'">
+        {{ article.offerType }} 
+        
+      
+      </div>
+      
+    </div>
+  </div>
+
+
+  <div *ngIf="article.offerType==='à vendre'" class="row">
+    <div class="col-25">
+      <mat-label class="label">prix:&nbsp;</mat-label>
+    </div>
+    <div class="col-75">
+      {{ article.price}}
+      <span matPrefix> $ &nbsp; </span>
+    </div>
+  </div>
+</div>
+</form>
+<!-- <button mat-button (click)="openDialog()" [routerLink]="'/add-article'">Launch dialog</button>
+ -->
+  <!-- ajouter -->
+  <mat-toolbar-row> 
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="primary" (click)="openDialog(article.name, article.articleType)" >Ajouter au panier</button>
+  </mat-toolbar-row>

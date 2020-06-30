@@ -1,0 +1,23 @@
+/* .inputdemoErrors .inputErrorsApp {
+  min-height: 48px;
+}
+
+.inputdemoErrors md-input-container > p {
+  font-size: 0.8em;
+  text-align: left;
+  width: 100%;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+ */
+
+ .mat-form-field {
+  width: 60%;
+  padding-left: 30px;
+ }
+ .center {
+  margin: auto;
+  width: 80%;
+  padding: 10px;
+ }

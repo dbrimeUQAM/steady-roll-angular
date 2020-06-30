@@ -25,7 +25,6 @@ articles.route('/')
           if (error) {
             return res.status(error.statusCode).json(error);
           }
-          
           articles = articles.map(article => {
             let hospital = hospitals.find(hospital => hospital._id === article.hospitalId);
 
@@ -33,7 +32,7 @@ articles.route('/')
 
             return article;
 
-          })
+          }) 
 
           return res.status(200).json(articles);
 
