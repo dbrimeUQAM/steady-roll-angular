@@ -55,8 +55,8 @@
   <div>
     <mat-form-field appearance="outline">
       <mat-label>Nom de l'hospitale</mat-label>
-      <input formControlName="hospitalName" required maxlength="20" matInput />
-      <mat-hint align="end">Taille max:20</mat-hint>
+      <input formControlName="hospitalName" required maxlength="100" matInput />
+      <mat-hint align="end">Taille max:100</mat-hint>
     </mat-form-field>
   </div>
   <!--   description  -->
@@ -70,7 +70,13 @@
   <div>
     <mat-form-field appearance="outline">
       <mat-label>Condition</mat-label>
-      <textarea formControlName="condition" matInput></textarea>
+      <mat-select formControlName="condition" required>
+        <mat-option value="medicament">nouveau</mat-option>
+        <mat-option value="equipement">très bon état</mat-option>
+        <mat-option value="fourniture">bon</mat-option>
+        <mat-option value="fourniture">acceptable</mat-option>
+        <mat-option value="fourniture">mauvais</mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
   <!-- offerType  -->
