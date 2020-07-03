@@ -50,7 +50,8 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { MatNativeDateModule } from '@angular/material/core';
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
 import { BagPageComponent } from './bag-page/bag-page.component';
-import { MatBadgeModule } from '@angular/material/badge'
+import { MatBadgeModule } from '@angular/material/badge';
+import { LineInputComponent } from './line-input/line-input.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { MatBadgeModule } from '@angular/material/badge'
     ArticleDetailComponent,
     DialogContentComponent,
     BagPageComponent,
+    LineInputComponent
   ],
   imports: [
     MatBadgeModule,
