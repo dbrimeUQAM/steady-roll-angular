@@ -12,14 +12,13 @@
     <p> &nbsp; &nbsp; | &nbsp;</p>
    
     <mat-icon>account_circle</mat-icon>&nbsp;
-    {{ name }}
+    {{ name }} ( {{ hospitalName }} )
     
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="onClick($event)" >
-        
         <span>Se déconnecter</span>
       </button>
     </mat-menu>
