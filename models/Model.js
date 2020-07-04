@@ -251,6 +251,10 @@ class Model {
 
   }
 
+  getId() {
+    return this.getDocValue('_id');
+  }
+
   getHospitalId() {
     return this.getDocValue('hospitalId');
   }
