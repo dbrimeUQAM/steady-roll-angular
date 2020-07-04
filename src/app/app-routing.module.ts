@@ -15,12 +15,14 @@ import { AddArticleComponent } from './add-article/add-article.component';
 import { ArticlesListComponent } from './articles/articles-list.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { BagPageComponent } from './bag-page/bag-page.component';
+import { AdministrationComponent } from './administration/administration.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomePageComponent },
+  { path: 'admin', component: AdministrationComponent },
   { path: 'bag', component: BagPageComponent },
   { path: 'add-article', component: AddArticleComponent },
   { path: 'article-detail/:id', component: ArticleDetailComponent, data: { title: 'Article'} },

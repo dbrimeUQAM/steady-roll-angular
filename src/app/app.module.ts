@@ -52,6 +52,7 @@ import { DialogContentComponent } from './dialog-content/dialog-content.componen
 import { BagPageComponent } from './bag-page/bag-page.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { LineInputComponent } from './line-input/line-input.component';
+import { AdministrationComponent } from './administration/administration.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { LineInputComponent } from './line-input/line-input.component';
     ArticleDetailComponent,
     DialogContentComponent,
     BagPageComponent,
-    LineInputComponent
+    LineInputComponent,
+    AdministrationComponent
   ],
   imports: [
     MatBadgeModule,
