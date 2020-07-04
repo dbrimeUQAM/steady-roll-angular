@@ -14,10 +14,14 @@ export class HeaderComponent implements OnInit {
   articleNum: Number = 0 ;
 
   name: String ;
+  hospitalId: String ;
   constructor(private articleService: ArticleService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+    console.log('user', this.tokenStorage.getUser());
     this.name = this.tokenStorage.getUser().name;
+    this.hospitalId = this.tokenStorage.getUser().hospitalId;
+
     this.articleService.getAll().subscribe(data => {
       this.articles= data ;
     }, err =>{

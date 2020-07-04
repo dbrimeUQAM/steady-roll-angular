@@ -13,17 +13,19 @@ import { TokenStorageService } from '../services/token-storage/token-storage.ser
 })
 export class AddArticleComponent implements OnInit {
   article: Article;
-  hospitalId: String;
+  hospitalId: string;
   public articleFrom: FormGroup;
   labelPosition: string;
   choix: string[] = ['donner', 'vendre'];
   constructor(private router: Router, private formBuilder: FormBuilder, private articleService: ArticleService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    //this.hospitalId = this.tokenStorage.getUser().hospitalId;
-    this.hospitalId = "98c1aaab290e9023c9c2e3f52716fbfc";
-    console.log(this.hospitalId);
     this.article = new Article;
+    this.hospitalId = this.tokenStorage.getUser().hospitalId;
+    console.log('ID', this.hospitalId)
+    //this.hospitalId = "98c1aaab290e9023c9c2e3f52716fbfc";
+    this.article.hospitalId = this.hospitalId ;
+    this.article.hospitalName = "" ,
     this.articleFrom = this.formBuilder.group({
       articleType: ['', Validators.required],
       name: ['', Validators.required],
@@ -65,6 +67,9 @@ export class AddArticleComponent implements OnInit {
     });
     console.log('this.article', this.article)
 
+  }
+  afficher() {
+    console.log('article', this.article)
   }
   submit() {
 
