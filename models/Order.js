@@ -17,6 +17,25 @@ class Order extends Model {
     //exemple de methode de classe
   }
 
+  static getInProgressByUserId(userId, callback) {
+
+    const options = {
+      key: userId,
+      include_docs: true
+    }
+
+    return Order.view('model', 'by-user-in-progress', options, (error, data) => {
+      if (error) {
+        return callback(error);
+      }
+
+      const filtered = data.rows.map(row => row.doc);
+
+      return callback(null, filtered);
+
+    });
+  }
+
 
 
 }

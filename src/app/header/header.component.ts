@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   constructor(private articleService: ArticleService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+    console.log('------>', this.tokenStorage.getUser() )
     this.name = this.tokenStorage.getUser().name;
     this.articleService.getAll().subscribe(data => {
       this.articles= data ;
