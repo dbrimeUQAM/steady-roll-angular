@@ -16,57 +16,44 @@ export class BagPageComponent implements OnInit {
 
   articleNum: Number = 0 ;
   public myFrom: FormGroup;
-  public total = 0 ;
   public count: number ;
+  public total: number = 0;
 
   dataSource: MatTableDataSource<Article>;
-  receivedChildMessage: number;
+  receivedChildMessage: number = 0;
 
 
   constructor(private articleService: ArticleService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-   
+    console.log('total avant', this.total)
+
     this.articleService.getAll()
     .subscribe((res: any) => {
       this.articles = res;
       this.dataSource = new MatTableDataSource(this.articles);
-      console.log(this.articles);
     }, err => {
       console.log(err);
     },() =>{
       this.articleNum = this.articles.length ;
-      this.articleService.getArticleById('a97de9be823399d1b7377d1a7abbf2e2').subscribe( data =>{
-        console.log('article:', data)
+     /*  this.articleService.getArticleById('a97de9be823399d1b7377d1a7abbf2e2').subscribe( data =>{
         this.article = data
       }, err =>{console.log(err);
       },() =>{
-        
-        this.myFrom = this.formBuilder.group ({
-          quantity: 1,
-          price: this.article.price,
-          total: [{ value: 0, disabled: true}] 
-        }) ;    
-        this.myFrom.get('quantity').valueChanges.subscribe(
-          data => {
-            console.log('data----------',data);
-          this.myFrom.get('total').setValue(data * this.article.price);
-          }
-        )
-      })
+          //
+      }) */
     }
     );
   }
   getMessage(message: number) {
-    this.receivedChildMessage = message;
+   /*  console.log('this.receivedChildMessage',this.receivedChildMessage)
+    console.log('message',message) */
+
+    this.receivedChildMessage = message ? this.receivedChildMessage + message: 0 ;
+    console.log('this.receivedChildMessage',this.receivedChildMessage)
   }
  
 getTotal(): number{
-  let total = 0 ;
-  console.log('total avant', total)
-  total = total + this.receivedChildMessage ;
-  console.log('total apres', total)
-
-  return total
+  return this.receivedChildMessage ;
 }
 }

@@ -12,10 +12,14 @@
 </mat-toolbar-row> 
 
 <mat-divider></mat-divider>
+<div style="margin-top: 10px;padding: 5px;" *ngFor="let article of articles; let i = index">
+  <app-line-input [line] = "article" (messageToEmit)="getMessage($event)" ></app-line-input>
+  
+</div>
 <div >
-  <mat-list style="width: 100%;">
-    <mat-list-item style="margin-top: 10px;padding: 5px;height: 30%;" *ngFor="let article of articles" >
-      <app-line-input [line] = "article" (messageToEmit)="getMessage($event)" ></app-line-input>
+  <mat-list >
+    <mat-list-item style="margin-top: 10px;padding: 5px;height: 30%;"  >
+      
     </mat-list-item>
   </mat-list>
 </div>

@@ -29,12 +29,14 @@ export class LineInputComponent implements OnInit {
     
     this.myFrom.get('quantity').valueChanges.subscribe(
       data => {
-        console.log('data----------',data);
        this.myFrom.get('total').setValue(data * this.line.price);
        this.messageToSendC = this.myFrom.get('total').value
        this.sendMessageToParent(this.messageToSendC)
       }
     )
+  }
+  getTotal(){
+    return this.messageToSendC
   }
   sendMessageToParent(message: number) {
     this.messageToEmit.emit(message)
