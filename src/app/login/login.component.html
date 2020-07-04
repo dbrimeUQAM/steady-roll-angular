@@ -1,7 +1,7 @@
  <div class="main-div col-md-12 text-center">
   <div class="card card-container">
     <mat-card  layout="row" layout-align="center center">
-      <img src="https://unitesoutiensrapqc.ca/wp-content/uploads/2017/08/MSSS-LOGO.jpg"> 
+      <img src="https://unitesoutiensrapqc.ca/wp-content/uploads/2017/08/MSSS-LOGO.jpg">
     </mat-card>
     <br>
     <mat-divider></mat-divider>
@@ -14,22 +14,22 @@
       *ngIf="!isLoggedIn"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
-      
+
       novalidate
     >
     <div >
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Email</mat-label>
-      <input 
-        matInput 
-        [(ngModel)]="form.email" 
+      <input
+        matInput
+        [(ngModel)]="form.email"
         #email="ngModel"
         placeholder="Enter your email"
         name="email"
         required>
       <mat-hint>Hint</mat-hint>
-      
-    </mat-form-field> 
+
+    </mat-form-field>
     <div
     class="alert alert-danger"
     role="alert"
@@ -39,9 +39,9 @@
   </div>
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Mote de passe</mat-label>
-      <input 
+      <input
         [(ngModel)]="form.password"
-        matInput [type]="hide ? 'password' : 'text'" 
+        matInput [type]="hide ? 'password' : 'text'"
         placeholder="Enter your password "
         minlength="6"
         name="password"
@@ -51,7 +51,7 @@
       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
       <mat-hint>Minimum 6 caractéres</mat-hint>
-    </mat-form-field> 
+    </mat-form-field>
     <div
           class="alert alert-danger"
           role="alert"
@@ -61,15 +61,15 @@
           <div *ngIf="password.errors.minlength">
             Le mot de passe doit être au moins de 6 caractères
           </div>
-        </div> 
+        </div>
         <div style="text-align:center;">
-          <re-captcha   
+          <re-captcha
       [(ngModel)]="form.captcha"
       #captcha="ngModel"
       name="captcha"
-      required 
-      (resolved)="resolved($event)" 
-      siteKey="6LdFSv8UAAAAAPWFBt8XkkwuoJp6_h5hB9zy45lW">
+      required
+      (resolved)="resolved($event)"
+      siteKey="6LfZQa0ZAAAAAC0G3COTfCA2L7cDvnmw6GqupfEQ">
     </re-captcha>
   </div>
   <div class="form-group">
@@ -82,12 +82,12 @@
     </div>
   </div>
 
-   
+
       <div *ngIf="captchaDone" >
   <mat-card-actions align="center">
-    
+
     <button mat-raised-button color="primary" (clic)="onSubmit()"> S'identifier</button>
-  </mat-card-actions> 
+  </mat-card-actions>
       </div>
       <br>
     <mat-divider></mat-divider>
@@ -95,11 +95,11 @@
     <div style="text-align:center;">
     <a mat-flat-button href="http://www.droitauteur.gouv.qc.ca/copyright.php" target="_blank">© Gouvernement du Québec, 2020</a>
   </div>
-        
+
 </div>
-    
-      
-      
+
+
+
   </form>
     <div class="alert alert-success" *ngIf="isLoggedIn">
       Connecté en tant que {{ role }}.

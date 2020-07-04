@@ -103,10 +103,6 @@ import { BagPageComponent } from './bag-page/bag-page.component';
   entryComponents: [DialogElementsComponent],
   providers: [
     authInterceptorProviders,
-    /*  , 
-    useValue:  { 
-      siteKey:'6LfESf8UAAAAAMPV7RYGcD4Tik_LuUCWdSyz5X4F' 
-    } as RecaptchaSettings */
   ],
   bootstrap: [AppComponent],
 })
