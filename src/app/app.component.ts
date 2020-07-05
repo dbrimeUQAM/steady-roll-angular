@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
    this.isLoggedIn = !!this.tokenStorageService.getToken();
 
-    if (this.isLoggedIn) {
+   if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.role = user.role;
 
