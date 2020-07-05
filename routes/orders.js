@@ -56,4 +56,36 @@ router.route('/:orderId/article/:articleId')
 
     });
 
+    router.route('/:userId/in-progress')
+        .get((req, res) => {
+          const userId = req.params.userId;
+
+          return Order.getInProgressByUserId(userId, (error, clientOrder) => {
+            if (error) {
+              return res.status(error.statusCode).json(error);
+            }
+            //console.log(clientOrder);
+
+            clientOrder= Array.isArray(clientOrder) ? clientOrder[0] : null;
+
+            if(clientOrder){
+              const orderArticles = clientOrder.articles;
+              const articleIds = orderArticles.map(article => article.articleId);
+              return Article.fetch(articleIds, (error, articles) => {
+                if (error) {
+                  return res.status(error.statusCode).json(error);
+                }
+                console.log(articles);
+
+                var i;
+                for (i = 0; i < articles.length; i++) {
+                  articles[i].qty = orderArticles[i].qty;
+                }
+
+                return res.status(200).json(articles);
+              });
+            }
+          });
+        });
 module.exports = router;
+

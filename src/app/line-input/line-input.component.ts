@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Article } from '../services/article/article';
+import { Article } from '../services/order/article';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
 
@@ -11,7 +11,7 @@ import { CurrencyPipe } from '@angular/common';
 export class LineInputComponent implements OnInit {
   sousTotal: number = 0;
   @Input() public line: Article ;
-  
+
   @Output() messageToEmit = new EventEmitter<number>();
   public myFrom: FormGroup;
   messageToSendC: number ;
@@ -22,11 +22,11 @@ export class LineInputComponent implements OnInit {
   ngOnInit(): void {
     console.log('======>', this.line)
     this.myFrom = this.formBuilder.group ({
-      quantity: 1,
-      price: [{ value: this.line.price, disabled: true}],
-      total: [{ value: 0, disabled: true}] 
-    }) ;    
-    
+      quantity: [{ value: this.line.qty, disabled: false}] ,
+      price: [{ value: this.line.price ? this.line.price : 0 , disabled: true}],
+      total: [{ value: 0, disabled: true}]
+    }) ;
+
     this.myFrom.get('quantity').valueChanges.subscribe(
       data => {
        this.myFrom.get('total').setValue(data * this.line.price);

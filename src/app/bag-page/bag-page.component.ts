@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/order/order.service';
-import { Article } from '../services/article/article';
+import { Article } from '../services/order/article';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TokenStorageService } from '../services/token-storage/token-storage.service';
 
 @Component({
   selector: 'app-bag-page',
@@ -23,10 +24,10 @@ export class BagPageComponent implements OnInit {
   receivedChildMessage: number = 0;
 
 
-  constructor(private orderService: OrderService, private formBuilder: FormBuilder) { }
+  constructor(private orderService: OrderService, private formBuilder: FormBuilder, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.orderService.getAll()
+    this.orderService.getAll(this.tokenStorage.getUser().id)
     .subscribe((res: any) => {
       this.articles = res;
       this.dataSource = new MatTableDataSource(this.articles);
