@@ -27,7 +27,7 @@ export class BagPageComponent implements OnInit {
   constructor(private orderService: OrderService, private formBuilder: FormBuilder, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.orderService.getAll(this.tokenStorage.getUser().id)
+    this.orderService.getCurrentOrder(this.tokenStorage.getUser().id)
     .subscribe((res: any) => {
       this.articles = res;
       this.dataSource = new MatTableDataSource(this.articles);
