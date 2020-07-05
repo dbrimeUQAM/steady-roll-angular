@@ -5,6 +5,7 @@ export class Article {
   description: string;
   expirationDate: string;
   hospitalName: string;
+  hospitalId: string;
   condition: string;
   offerType: string;
   quantity: number;

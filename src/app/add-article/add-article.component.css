@@ -1,23 +1,18 @@
-/* .inputdemoErrors .inputErrorsApp {
-  min-height: 48px;
-}
-
-.inputdemoErrors md-input-container > p {
-  font-size: 0.8em;
-  text-align: left;
-  width: 100%;
-}
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
-}
- */
-
  .mat-form-field {
-  width: 60%;
-  padding-left: 30px;
- }
- .center {
-  margin: auto;
-  width: 80%;
-  padding: 10px;
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  align-items: center;
+  }
+  .bouton {
+    width: 60%;
+    padding-left: 30%;
+    padding-right: 30%;
+    align-items: center;
+    padding-bottom: 5%;
+    }
+ 
+ .forme{
+   width: 90%;
+   align-content: center;
  }
