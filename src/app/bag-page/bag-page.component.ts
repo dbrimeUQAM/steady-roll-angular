@@ -26,8 +26,6 @@ export class BagPageComponent implements OnInit {
   constructor(private articleService: ArticleService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    console.log('total avant', this.total)
-
     this.articleService.getAll()
     .subscribe((res: any) => {
       this.articles = res;

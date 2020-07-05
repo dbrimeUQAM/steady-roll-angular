@@ -26,7 +26,6 @@ export class AddArticleComponent implements OnInit {
     this.hospitalName = this.tokenStorage.getUser().hospital.name;
     this.hospitalId = this.tokenStorage.getUser().hospital._id;
 
-    console.log('ID', this.hospitalName)
     this.article.hospitalName = this.hospitalName ;
     this.article.hospitalId = this.hospitalId ;
 
@@ -69,9 +68,6 @@ export class AddArticleComponent implements OnInit {
 
     this.articleService.addArticle(this.article).subscribe(data => {
       const id = data._id;
-      console.log('id', id);
-      console.log('data', data)
-      console.log('this.articleFrom.value', this.articleFrom.value);
       this.router.navigate(['/home']);
 
     })
