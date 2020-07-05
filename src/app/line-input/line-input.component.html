@@ -1,9 +1,9 @@
-    <mat-toolbar-row> 
+    <mat-toolbar-row>
       <mat-icon mat-list-icon>medical_services</mat-icon>
       <div>
         <div  mat-line style="color: darkseagreen;">{{line.name}}</div>
         <div mat-line> {{line.hospitalName}} </div>
-        <div mat-line> valide jusqu'à {{line.expirationDate | date}} </div>
+        <div mat-line *ngIf="line.expirationDate"> valide jusqu'à {{line.expirationDate | date}} </div>
       </div>
       <span class="example-spacer"></span>
 
@@ -23,9 +23,9 @@
             <mat-label>Sous-total</mat-label>
             <input style="color: black;" matInput formControlName="total" type="number" />
           </mat-form-field>
-          <button  mat-icon-button >	
-            <mat-icon style="color: #097D6C;">cancel</mat-icon>	
-          </button> 
+          <button  mat-icon-button >
+            <mat-icon style="color: #097D6C;">cancel</mat-icon>
+          </button>
         </form>
       </div>
 
