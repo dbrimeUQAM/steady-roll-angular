@@ -34,7 +34,7 @@
     </div>
   </div>
   <!-- expirationDate  -->
-  <div class="row">
+  <div *ngIf="article.expirationDate" class="row">
     <div class="col-25">
       <mat-label class="label">Date D'expiration:&nbsp;</mat-label>
     </div>
@@ -64,7 +64,7 @@
   </div>
  
   <!--   condition  -->
-  <div class="row">
+  <div *ngIf="article.condition" class="row">
     <div class="col-25">
       <mat-label class="label">Condition:&nbsp;</mat-label>
     </div>

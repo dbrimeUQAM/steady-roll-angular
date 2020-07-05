@@ -3,12 +3,15 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { parallel } = require('async');
 const secret = require('../config').secret;
 
 const auth = express.Router();
 
 // Models
 const User = require('../models/User');
+const Hospital = require('../models/Hospital');
+const Order = require('../models/Order');
 
 auth.route('/signup')
     .post((req, res) => {
@@ -68,16 +71,32 @@ auth.route('/signin')
           });
         }
 
-        const token = jwt.sign({ id: user.doc._id }, secret, {
-          expiresIn: 86400 // 24 hours
-        });
+        const tasks = {
+          hospital: (callback) => Hospital.get(user.getHospitalId(), callback),
+          order: (callback) => Order.getInProgressByUserId(user.getId(), callback)
+        };
 
-        return res.status(200).send({
-          id: user.doc._id,
-          role: user.doc.role,
-          email: user.doc.email,
-          name: user.doc.name,
-          accessToken: token
+        return parallel(tasks, (error, results) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          const { hospital, order } = results;
+
+          const token = jwt.sign({ id: user.doc._id }, secret, {
+            expiresIn: 86400 // 24 hours
+          });
+
+          return res.status(200).send({
+            id: user.doc._id,
+            role: user.doc.role,
+            email: user.doc.email,
+            name: user.doc.name,
+            accessToken: token,
+            hospital: hospital.doc,
+            order: Array.isArray(order) ? order[0] : null
+          });
+
         });
 
       });

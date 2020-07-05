@@ -1,13 +1,13 @@
     <mat-toolbar-row> 
       <mat-icon mat-list-icon>medical_services</mat-icon>
-      <div style="width: 30%;">
+      <div>
         <div  mat-line style="color: darkseagreen;">{{line.name}}</div>
         <div mat-line> {{line.hospitalName}} </div>
         <div mat-line> valide jusqu'à {{line.expirationDate | date}} </div>
       </div>
       <span class="example-spacer"></span>
 
-      <div style="width: 40%;">
+      <div >
         <form [formGroup]="myFrom" >
           <mat-form-field appearance="outline">
             <mat-label>Prix</mat-label>
@@ -28,5 +28,5 @@
           </button> 
         </form>
       </div>
-    </mat-toolbar-row> 
+
 
