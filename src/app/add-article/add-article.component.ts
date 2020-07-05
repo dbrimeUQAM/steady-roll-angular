@@ -17,7 +17,7 @@ export class AddArticleComponent implements OnInit {
   hospitalId: string;
 
   public articleFrom: FormGroup;
-  labelPosition: string;
+  labelPosition: string; 
   choix: string[] = ['donner', 'vendre'];
   constructor(private router: Router, private formBuilder: FormBuilder, private articleService: ArticleService, private tokenStorage: TokenStorageService) { }
 
@@ -25,19 +25,17 @@ export class AddArticleComponent implements OnInit {
     this.article = new Article;
     this.hospitalName = this.tokenStorage.getUser().hospital.name;
     this.hospitalId = this.tokenStorage.getUser().hospital._id;
-
-    this.article.hospitalName = this.hospitalName ;
     this.article.hospitalId = this.hospitalId ;
 
     this.articleFrom = this.formBuilder.group({
       articleType: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
-      expirationDate: ['', Validators.required],
+      expirationDate: '',
       condition: ['', Validators.required],
       offerType: ['', Validators.required],
-      quantity: [null, Validators.required],
-      price: [null, Validators.required],
+      quantity: [0, Validators.required],
+      price: 0 ,
     })
     this.articleFrom.get('name').valueChanges.subscribe(data => {
       this.article.name = data;
@@ -65,7 +63,6 @@ export class AddArticleComponent implements OnInit {
     });
   }
   submit() {
-
     this.articleService.addArticle(this.article).subscribe(data => {
       const id = data._id;
       this.router.navigate(['/home']);

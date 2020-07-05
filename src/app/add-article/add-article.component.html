@@ -7,7 +7,7 @@
     <div>
       <mat-form-field appearance="outline">
         <mat-label>Nom de l'article</mat-label>
-        <input formControlName="name" required maxlength="20" matInput />
+        <input formControlName="name" required minlength="4" maxlength="20" matInput />
         <mat-hint align="end">Taille max:20</mat-hint>
       </mat-form-field>
     </div>
@@ -78,7 +78,7 @@
       </mat-form-field>
     </div>
     <div class="bouton">
-      <button class="btn" style="background-color: #097D6C; color: white; width: 100%;" mat-raised-button
+      <button class="btn" [disabled]="!articleFrom.valid" style="background-color: #097D6C; color: white; width: 100%;" mat-raised-button
         color="primary" (click)="submit()">Ajouter</button>
     </div>
   </div>

@@ -10,11 +10,11 @@
       <mat-card-title>Accéder à mon compte</mat-card-title>
     </div>
     <form
-    #f="ngForm"
+      #f="ngForm"
       *ngIf="!isLoggedIn"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
-
+      
       novalidate
     >
     <div >
