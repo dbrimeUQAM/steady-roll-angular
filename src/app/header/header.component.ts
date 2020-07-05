@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../services/token-storage/token-storage.service';
-import { ArticleService } from '../services/article/article.service';
-import { Article } from '../services/article/article';
+import { OrderService } from '../services/order/order.service';
+import { Article } from '../services/order/article';
 
 @Component({
   selector: 'app-header',
@@ -16,14 +16,14 @@ export class HeaderComponent implements OnInit {
   name: string ;
   hospitalName: string ;
 
-  constructor(private articleService: ArticleService, private router: Router, private tokenStorage: TokenStorageService) { }
+  constructor(private orderService: OrderService, private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     console.log('------>', this.tokenStorage.getUser() )
     this.name = this.tokenStorage.getUser().name;
     this.hospitalName= this.tokenStorage.getUser().hospital.name;
-    
-    this.articleService.getAll().subscribe(data => {
+
+    this.orderService.getAll(this.tokenStorage.getUser().id).subscribe(data => {
       this.articles= data ;
     }, err =>{
       console.log(err);
@@ -36,6 +36,6 @@ export class HeaderComponent implements OnInit {
     this.tokenStorage.signOut();
     this.router.navigate(['/login']);
   }
-  
+
 
 }

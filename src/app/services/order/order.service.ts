@@ -29,6 +29,33 @@ export class OrderService {
   }
 
 
+//toDo
+  deleteAllArticles(id: string, article: Article): Observable<any> {
+    const url = `${apiUrl}/${id}`;
+    return this.httpClient.put(url, article, httpOptions).pipe(
+      tap(_ => console.log(`updated article id=${id}`)),
+      catchError(this.handleError<any>('updateArticle'))
+    );
+  }
+//toDo
+  //deleteArticleById(id: string): Observable<Article> {}
+
+//toDo
+  updateArticleById(id: string, article: Article): Observable<any> {
+    const url = `${apiUrl}/${id}`;
+    return this.httpClient.put(url, article, httpOptions).pipe(
+      tap(_ => console.log(`updated article id=${id}`)),
+      catchError(this.handleError<any>('updateArticle'))
+    );
+  }
+
+  addArticleToOrder(article: Article): Observable<Article> {
+    return this.httpClient.post<Article>(apiUrl, article, httpOptions).pipe(
+      tap((a: Article) => console.log(`added article w/ id=${a._id}`)),
+      catchError(this.handleError<Article>('addArticle'))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
