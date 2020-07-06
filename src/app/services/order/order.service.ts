@@ -22,9 +22,9 @@ export class OrderService {
   constructor(private httpClient: HttpClient) { }
 
 
-  getCurrentOrder(userId: string): Observable<Article[]> {
+  getCurrentOrder(userId: string) {
     const url = `${apiUrl}/${userId}/in-progress`;
-    return this.httpClient.get<Article[]>(url)
+    return this.httpClient.get(url)
     .pipe(
       catchError(this.handleError('getAll', []))
     );
