@@ -3,6 +3,7 @@
 const express = require('express');
 const middleware = require('../middleware');
 const users = express.Router();
+const utils = require('../utils');
 
 // Models
 const User = require('../models/User');
@@ -10,7 +11,7 @@ const User = require('../models/User');
 users.use(middleware.isAuthenticated);
 
 users.route('/')
-    /* GET liste d'utilisateurs. */
+    /* GET all users. */
     .get((req, res) => {
       return User.getAll((error, users) => {
         if (error) {
@@ -20,6 +21,7 @@ users.route('/')
         return res.status(200).json(users);
       });
     })
+    /* POST user. */
     .post((req, res) => {
       const postedUser = req.body;
 
@@ -43,6 +45,7 @@ users.route('/')
     });
 
   users.route('/:userId')
+    /* GET user by id. */
     .get((req, res) => {
       const userId = req.params.userId;
 
@@ -56,6 +59,7 @@ users.route('/')
       });
 
     })
+    /* PUT user by id. */
     .put((req, res) => {
       const userId = req.params.userId;
       const updatedUser = req.body;
@@ -72,7 +76,7 @@ users.route('/')
           return res.status(error.statusCode).json(error);
         }
 
-        user.doc = updatedUser;
+        user.doc = _.mergeWith(user.doc, updatedUser, utils.mergeArrays);
 
         return user.save((error, savedUser) => {
           if (error) {
@@ -85,6 +89,7 @@ users.route('/')
       });
 
     })
+    /* DELETE user by id. */
     .delete((req, res) => {
       const userId = req.params.userId;
 

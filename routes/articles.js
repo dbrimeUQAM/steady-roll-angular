@@ -11,13 +11,13 @@ const Article = require('../models/Article');
 const Hospital = require('../models/Hospital');
 
 articles.route('/')
-    /* GET liste d'articles. */
+    /* GET all articles. */
     .get((req, res) => {
       return Article.getAll((error, articles) => {
         if (error) {
           return res.status(error.statusCode).json(error);
         }
-        
+
         const hospitalIds = articles.map(article => article.hospitalId);
         const uniqueHospitalIds = [ ...new Set(hospitalIds) ];
 
@@ -32,7 +32,7 @@ articles.route('/')
 
             return article;
 
-          }) 
+          })
 
           return res.status(200).json(articles);
 
@@ -41,6 +41,7 @@ articles.route('/')
     });
 
 articles.route('/')
+    /* POST article. */
     .post((req, res) => {
       const postedArticle = req.body;
 
@@ -64,6 +65,7 @@ articles.route('/')
     });
 
 articles.route('/:articleId')
+    /* GET article by id. */
     .get((req, res) => {
       const articleId = req.params.articleId;
 
@@ -76,7 +78,7 @@ articles.route('/:articleId')
           if (error) {
             return res.status(error.statusCode).json(error);
           }
-          
+
           article.setDocValue('hospitalName', hospital.getName());
 
           return res.status(200).json(article.doc);
@@ -86,6 +88,7 @@ articles.route('/:articleId')
       });
 
     })
+    /* PUT article by id. */
     .put((req, res) => {
       const articleId = req.params.articleId;
       const updatedArticle = req.body;
@@ -114,6 +117,25 @@ articles.route('/:articleId')
 
       });
 
+    })
+    /* DELETE article by id. */
+    .delete((req, res) => {
+      const articleId = req.params.articleId;
+
+      return Hospital.get(articleId, (error, article) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        return article.delete((error, response) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          return res.status(200).json(response.deleted_doc._id);
+        });
+
+      });
     });
 
 module.exports = articles;

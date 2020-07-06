@@ -1,15 +1,16 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
+const orders = express.Router();
 const async = require('async');
+const utils = require('../utils');
 
 // Modèles
 const Order = require('../models/Order');
 const Article = require('../models/Article');
 
-/* GET liste de commandes. */
-router.route('/')
+orders.route('/')
+    /* GET all orders. */
     .get((req, res) => {
       return Order.getAll((error, orders) => {
         if (error) {
@@ -18,11 +19,100 @@ router.route('/')
 
         return res.status(200).json(orders);
       });
+    })
+    /* POST order. */
+    .post((req, res) => {
+      const postedOrder = req.body;
+
+      // More validations maybe?
+
+      if (!postedOrder) {
+        return res.status(400).json({
+          reason: `Document d'hôpital prévu dans POST body, obtenu: ${postedOrder}`,
+          statusCode: 400
+        });
+      }
+
+      const newOrder = new Order(postedOrder);
+
+      return newOrder.save((error, savedOrder) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        return res.status(200).json(savedOrder.doc);
+      });
+
     });
 
-router.route('/:orderId/article/:articleId')
-    .post((req, res) => {
+orders.route('/:orderId')
+    /* GET order by id. */
+    .get((req, res) => {
+      const orderId = req.params.orderId;
 
+      return Order.get(orderId, (error, order) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        return res.status(200).json(order.doc);
+
+      });
+
+    })
+    /* PUT order by id. */
+    .put((req, res) => {
+      const orderId = req.params.orderId;
+      const updatedOrder = req.body;
+
+      if (!updatedOrder) {
+        return res.status(400).json({
+          reason: `Document d'hôpital prévu dans PUT body, obtenu: ${updatedOrder}`,
+          statusCode: 400
+        });
+      }
+
+      return Order.get(orderId, (error, order) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        order.doc = _.mergeWith(order.doc, updatedOrder, utils.mergeArrays);
+
+        return order.save((error, savedOrder) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          return res.status(200).json(savedOrder.doc);
+        });
+
+      });
+
+    })
+    /* DELETE order by id. */
+    .delete((req, res) => {
+      const orderId = req.params.orderId;
+
+      return Order.get(orderId, (error, order) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        return order.delete((error, response) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          return res.status(200).json(response.deleted_doc._id);
+        });
+
+      });
+    });
+
+orders.route('/:orderId/article/:articleId')
+    /* POST article into order by id. */
+    .post((req, res) => {
       const orderId = req.params.orderId;
       const articleId = req.params.articleId;
       const quantity = req.body.quantity;
@@ -56,4 +146,4 @@ router.route('/:orderId/article/:articleId')
 
     });
 
-module.exports = router;
+module.exports = orders;
