@@ -28,6 +28,7 @@ import { ArticlesListComponent } from './articles/articles-list.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
 import { BagPageComponent } from './bag-page/bag-page.component';
+import { LineInputComponent } from './line-input/line-input.component';
 
 // Admin
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
@@ -55,8 +56,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     BagPageComponent,
     AdminHomeComponent,
     SidenavComponent,
-  ],
-  imports: [
+    LineInputComponent,
     RecaptchaModule,
     BrowserModule,
     BrowserAnimationsModule,

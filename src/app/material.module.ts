@@ -23,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatBadgeModule } from '@angular/material/badge';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDialogModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatBadgeModule
   ],
   exports: [
     MatMenuModule,
@@ -72,7 +74,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDialogModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatBadgeModule
   ]
 })
 

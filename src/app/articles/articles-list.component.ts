@@ -12,7 +12,7 @@ import { ArticleService } from '../services/article/article.service';
   styleUrls: ['./articles-list.component.css']
 })
 export class ArticlesListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'hospitalName', 'description', 'type'];
+  displayedColumns: string[] = ['name', 'hospitalName', 'description', 'type', 'next'];
   dataSource: MatTableDataSource<Article>;
   articles: Article[] = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -24,7 +24,6 @@ export class ArticlesListComponent implements OnInit {
     this.articleService.getAll()
     .subscribe((res: any) => {
       this.articles = res;
-      console.log(this.articles);
       this.dataSource = new MatTableDataSource(this.articles);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

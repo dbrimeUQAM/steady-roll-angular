@@ -7,6 +7,22 @@ table {
   width: 100%;
 }
 
-td, th {
-  width: 25%;
+.mat-column-name {
+  width: 10% !important;
+}
+
+
+
+.mat-column-hospitalName {
+  padding-left: 10px;
+  width: 30% !important;
+}
+.mat-column-description {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 45% !important;
+}
+.mat-column-type {
+  padding-left: 10px;
+  width: 15% !important; 
 }
