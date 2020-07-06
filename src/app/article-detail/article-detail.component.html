@@ -2,11 +2,54 @@
 <br>
 <h2 class="mat-h2">&nbsp; {{ article.name }} ( {{article.articleType}} )</h2>
 <mat-divider></mat-divider>
-
-
-<form [formGroup]="detailForm" >
 <div class="center">
-  <!-- name -->
+<form [formGroup]="detailForm" >
+  <mat-form-field appearance="outline"  >
+    <mat-label>Nom de l'article</mat-label>
+    <input style="color: black;" matInput formControlName="name" disabled   type="text" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Type</mat-label>
+    <input style="color: black;" matInput formControlName="articleType" disabled   type="text" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Nom de l'article</mat-label>
+    <input style="color: black;" matInput formControlName="description" disabled  type="text" />
+  </mat-form-field>
+  <div *ngIf="article.expirationDate">
+  <mat-form-field appearance="outline">
+    <mat-label>Date d'exipration</mat-label>
+    <input style="color: black;" matInput formControlName="expirationDate" disabled   type="date" />
+  </mat-form-field>
+  </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Nom de l'hospitale</mat-label>
+    <input style="color: black;" matInput formControlName="hospitalName" disabled   type="text" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Condition</mat-label>
+    <input style="color: black;" matInput formControlName="condition" disabled   type="text" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Mode d'échange:</mat-label>
+    <input style="color: black;" matInput formControlName="offerType" disabled   type="text" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Quantité</mat-label>
+    <input style="color: black;" matInput formControlName="quantity" disabled   type="number" />
+  </mat-form-field>
+  <div *ngIf="article.offerType==='à vendre'">
+  <mat-form-field appearance="outline">
+    <mat-label>Prix</mat-label>
+    <input style="color: black;" matInput formControlName="price" disabled   type="number" />
+    <span matPrefix> $ &nbsp; </span>
+        <span matSuffix> .00 </span>
+  </mat-form-field>
+</div>
+</form>
+</div>
+<!-- <form [formGroup]="detailForm" >
+<div class="center">
   <div class="row">
     <div class="col-25">
       <mat-label class="label">Nom de l'article:&nbsp; </mat-label>
@@ -15,7 +58,6 @@
       {{ article.name}}
     </div>
   </div>
-  <!-- type -->
   <div class="row">
     <div class="col-25">
       <mat-label class="label">Type:&nbsp;</mat-label>
@@ -24,7 +66,6 @@
       {{ article.articleType}}
     </div>
   </div>
-  <!-- quantity  -->
   <div class="row">
     <div class="col-25">
       <mat-label class="label">Quantité:&nbsp;</mat-label>
@@ -33,7 +74,6 @@
       {{ article.quantity}}
     </div>
   </div>
-  <!-- expirationDate  -->
   <div *ngIf="article.expirationDate" class="row">
     <div class="col-25">
       <mat-label class="label">Date D'expiration:&nbsp;</mat-label>
@@ -44,7 +84,6 @@
   </div>
   
   
-  <!-- hospitalName  -->
   <div class="row">
     <div class="col-25">
       <mat-label class="label">Nom de l'hospitale:&nbsp;</mat-label>
@@ -53,7 +92,6 @@
       {{ article.hospitalName}}
     </div>
   </div>
-  <!--   description  -->
   <div class="row">
     <div class="col-25">
       <mat-label class="label">Description:&nbsp;</mat-label>
@@ -63,7 +101,6 @@
     </div>
   </div>
  
-  <!--   condition  -->
   <div *ngIf="article.condition" class="row">
     <div class="col-25">
       <mat-label class="label">Condition:&nbsp;</mat-label>
@@ -72,7 +109,6 @@
       {{ article.condition}}
     </div>
   </div>
-  <!-- offerType  -->
   <div class="row">
     <div class="col-25">
       <mat-label class="label">Mode d'échange:&nbsp;</mat-label>
@@ -101,7 +137,7 @@
     </div>
   </div>
 </div>
-</form>
+</form> -->
 <!-- <button mat-button (click)="openDialog()" [routerLink]="'/add-article'">Launch dialog</button>
  -->
   <!-- ajouter -->

@@ -26,12 +26,17 @@ export class LineInputComponent implements OnInit {
       price: [{ value: this.line.price ? this.line.price : 0 , disabled: true}],
       total: [{ value: 0, disabled: true}]
     }) ;
+    
 
     this.myFrom.get('quantity').valueChanges.subscribe(
       data => {
-       this.myFrom.get('total').setValue(data * this.line.price);
-       this.messageToSendC = this.myFrom.get('total').value
-       this.sendMessageToParent(this.messageToSendC)
+        if(data > this.line.quantity){
+          this.myFrom.get('quantity').setValue(this.line.quantity);
+          this.myFrom.get('total').setValue(data * this.line.price);
+          this.messageToSendC = this.myFrom.get('total').value
+          this.sendMessageToParent(this.messageToSendC)
+        }
+       
       }
     )
   }

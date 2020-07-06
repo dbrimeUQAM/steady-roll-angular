@@ -5,6 +5,7 @@ import { Article } from '../services/article/article';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogContentComponent } from '../dialog-content/dialog-content.component';
+import { OrderService } from '../services/order/order.service';
 
 @Component({
   selector: 'app-article-detail',
@@ -16,7 +17,7 @@ export class ArticleDetailComponent implements OnInit {
   articleForm: FormGroup ;
   public detailForm: FormGroup;
   offer: string;
-  constructor(public dialog: MatDialog, private route: ActivatedRoute, private articleService: ArticleService, private formBuilder: FormBuilder) { }
+  constructor( public orderService: OrderService,public dialog: MatDialog, private route: ActivatedRoute, private articleService: ArticleService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
    const articleId: string =  this.route.snapshot.params.id ;
@@ -36,10 +37,10 @@ export class ArticleDetailComponent implements OnInit {
             value: this.article.name, 
             disabled: true}],
           description: [{ 
-            value: this.article.description, 
+            value: this.article.description , 
             disabled: true}],
           expirationDate: [{ 
-            value: this.article.expirationDate, 
+            value: this.article.expirationDate , 
             disabled: true}],
           hospitalName: [{ 
             value: this.article.hospitalName, 
@@ -54,28 +55,19 @@ export class ArticleDetailComponent implements OnInit {
             value: this.article.quantity, 
             disabled: true}],
           price: [{ 
-            value: this.article.price, 
+            value: [this.article.price ], 
             disabled: true}],
-        })
-
-
-
-        this.articleForm = this.formBuilder.group ( {
-          hospitalName : [{
-            value : this.article.hospitalName,
-            disabled: true
-          }]
         })
       }
     ) 
     
   }
-
+  // quand on click sur le bouton ajouter au panier
   openDialog(nom: string, type:string) {
-    /* this.bagService.addArticle(this.article).subscribe(data =>
+     /* this.orderService.addArticleToOrder(this.article).subscribe(data =>
       {
         const id = data._id ; 
-      } ); */
+      } ); */ 
     const dialog = this.dialog.open(DialogContentComponent, 
       {data:{name: nom, articleType: type}});  
   }
