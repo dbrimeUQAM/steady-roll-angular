@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../services/token-storage/token-storage.service';
-import { ArticleService } from '../services/article/article.service';
-import { Article } from '../services/article/article';
 
 @Component({
   selector: 'app-header',
@@ -10,32 +8,25 @@ import { Article } from '../services/article/article';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  articles: Article[] = [];
   articleNum: Number = 0 ;
 
   name: string ;
   hospitalName: string ;
 
-  constructor(private articleService: ArticleService, private router: Router, private tokenStorage: TokenStorageService) { }
+  constructor(private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    console.log('------>', this.tokenStorage.getUser() )
+    //console.log('------>', this.tokenStorage.getUser() )
     this.name = this.tokenStorage.getUser().name;
     this.hospitalName= this.tokenStorage.getUser().hospital.name;
-    
-    this.articleService.getAll().subscribe(data => {
-      this.articles= data ;
-    }, err =>{
-      console.log(err);
-    },()=> {
-      this.articleNum = this.articles.length ;
-    }
-    )
+    this.articleNum = this.tokenStorage.getUser().order && this.tokenStorage.getUser().order.articles ?
+                      this.tokenStorage.getUser().order.articles.length : 0 ;
   }
+
   onClick($event) {
     this.tokenStorage.signOut();
     this.router.navigate(['/login']);
   }
-  
+
 
 }
