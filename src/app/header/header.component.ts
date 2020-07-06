@@ -16,11 +16,13 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    console.log('------>', this.tokenStorage.getUser() )
+    //console.log('------>', this.tokenStorage.getUser() )
     this.name = this.tokenStorage.getUser().name;
     this.hospitalName= this.tokenStorage.getUser().hospital.name;
-    this.articleNum = this.tokenStorage.getUser().order.articles.length ;
+    this.articleNum = this.tokenStorage.getUser().order && this.tokenStorage.getUser().order.articles ?
+                      this.tokenStorage.getUser().order.articles.length : 0 ;
   }
+
   onClick($event) {
     this.tokenStorage.signOut();
     this.router.navigate(['/login']);

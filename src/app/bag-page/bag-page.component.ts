@@ -31,8 +31,6 @@ export class BagPageComponent implements OnInit {
     .subscribe((res: any) => {
       this.articles = res;
       this.dataSource = new MatTableDataSource(this.articles);
-      console.log("orderService . get all");
-      console.log(this.articles);
     }, err => {
       console.log(err);
     },() =>{
