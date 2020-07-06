@@ -12,6 +12,8 @@
           <mat-form-field appearance="outline">
             <mat-label>Prix</mat-label>
             <input style="color: black;" matInput formControlName="price" disabled [value]="line.price"  type="number" />
+            <span matPrefix> $ &nbsp; </span>
+            <!-- <span matSuffix> .00 </span> -->
           </mat-form-field>
           &nbsp;
           <mat-form-field appearance="outline">
@@ -22,9 +24,11 @@
           <mat-form-field appearance="outline">
             <mat-label>Sous-total</mat-label>
             <input style="color: black;" matInput formControlName="total" type="number" />
+            <span matPrefix> $ &nbsp; </span>
+          <span matSuffix> .00 </span>
           </mat-form-field>
           <button  mat-icon-button >
-            <mat-icon style="color: #097D6C;">cancel</mat-icon>
+            <mat-icon style="color: #097D6C;" (click)="removeArticle()">cancel</mat-icon>
           </button>
         </form>
       </div>

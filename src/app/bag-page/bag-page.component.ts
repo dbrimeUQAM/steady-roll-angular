@@ -29,6 +29,7 @@ export class BagPageComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.getCurrentOrder(this.tokenStorage.getUser().id)
     .subscribe((res: any) => {
+      console.log('my order', res)
       this.articles = res.articles;
       this.dataSource = new MatTableDataSource(this.articles);
     }, err => {
@@ -37,16 +38,19 @@ export class BagPageComponent implements OnInit {
       this.articleNum = this.articles.length ;
     }
     );
+
   }
   getMessage(message: number) {
    /*  console.log('this.receivedChildMessage',this.receivedChildMessage)
     console.log('message',message) */
-
-    this.receivedChildMessage = message ? this.receivedChildMessage + message : 0 ;
-    console.log('this.receivedChildMessage', this.receivedChildMessage);
+    this.receivedChildMessage = message ;
   }
 
   getTotal(): number{
-    return this.receivedChildMessage ;
+    let total = 0 ;
+    for (let article of this.articles){
+      total = total + (article.qty * article.price )
+    }
+    return total ;
   }
 }

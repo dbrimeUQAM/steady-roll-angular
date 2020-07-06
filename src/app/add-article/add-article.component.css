@@ -1,18 +1,22 @@
  .mat-form-field {
-  width: 100%;
-  padding-left: 10%;
-  padding-right: 10%;
-  align-items: center;
+  width: 80%;
   }
   .bouton {
-    width: 60%;
-    padding-left: 30%;
-    padding-right: 30%;
+    width: 40%;
     align-items: center;
+    margin-left: 20%;
+    margin-right: 20%;
     padding-bottom: 5%;
+   
     }
+    .center {
+      margin: auto;
+      width: 70%;
+      padding: 10px;
+     }
  
- .forme{
-   width: 90%;
-   align-content: center;
- }
+ .row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

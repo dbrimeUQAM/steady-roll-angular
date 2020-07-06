@@ -3,7 +3,7 @@
 <h2 class="mat-h2">&nbsp; {{ article.name }} ( {{article.articleType}} )</h2>
 <mat-divider></mat-divider>
 <div class="center">
-<form [formGroup]="detailForm" >
+<form [formGroup]="detailForm" class="forme" >
   <mat-form-field appearance="outline"  >
     <mat-label>Nom de l'article</mat-label>
     <input style="color: black;" matInput formControlName="name" disabled   type="text" />
@@ -45,6 +45,9 @@
     <span matPrefix> $ &nbsp; </span>
         <span matSuffix> .00 </span>
   </mat-form-field>
+</div>
+<div class="bouton">
+  <button class="btn" mat-raised-button style="background-color: #097D6C; color: white; width: 100%;" (click)="openDialog(article.name, article.articleType)" >Ajouter au panier</button>
 </div>
 </form>
 </div>
@@ -141,7 +144,3 @@
 <!-- <button mat-button (click)="openDialog()" [routerLink]="'/add-article'">Launch dialog</button>
  -->
   <!-- ajouter -->
-  <mat-toolbar-row> 
-    <span class="example-spacer"></span>
-    <button mat-raised-button style="background-color: #097D6C; color: white;" (click)="openDialog(article.name, article.articleType)" >Ajouter au panier</button>
-  </mat-toolbar-row>
