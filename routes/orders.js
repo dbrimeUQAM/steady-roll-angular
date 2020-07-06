@@ -65,9 +65,9 @@ router.route('/:orderId/article/:articleId')
               return res.status(error.statusCode).json(error);
             }
 
-            clientOrder= Array.isArray(clientOrder) ? clientOrder[0] : null;
+            clientOrder = Array.isArray(clientOrder) ? clientOrder[0] : null;
 
-            if(clientOrder){
+            if (clientOrder) {
               const articleIds = clientOrder.articles.map(article => article.articleId);
 
               return Article.fetch(articleIds, (error, articles) => {
@@ -83,7 +83,7 @@ router.route('/:orderId/article/:articleId')
                     return article;
                 });
 
-                return res.status(200).json(clientOrder.articles);
+                return res.status(200).json(clientOrder);
               });
             }
           });

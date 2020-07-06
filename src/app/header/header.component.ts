@@ -8,19 +8,18 @@ import { TokenStorageService } from '../services/token-storage/token-storage.ser
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  articleNum: Number = 0 ;
+  articleNum = 0;
 
-  name: string ;
-  hospitalName: string ;
+  name: string;
+  hospitalName: string;
 
   constructor(private router: Router, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    //console.log('------>', this.tokenStorage.getUser() )
-    this.name = this.tokenStorage.getUser().name;
-    this.hospitalName= this.tokenStorage.getUser().hospital.name;
-    this.articleNum = this.tokenStorage.getUser().order && this.tokenStorage.getUser().order.articles ?
-                      this.tokenStorage.getUser().order.articles.length : 0 ;
+    const user = this.tokenStorage.getUser();
+    this.name = user.name;
+    this.hospitalName = user.hospital ? user.hospital.name : '';
+    this.articleNum = user.order ? user.order.articles.length : 0 ;
   }
 
   onClick($event) {

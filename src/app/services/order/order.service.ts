@@ -4,7 +4,6 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { throwError, Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
-import { Article } from './article';
 import { Order } from './order';
 
 import { environment } from '../../../environments/environment';
@@ -21,15 +20,17 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) { }
 
-
-  getCurrentOrder(userId: string) {
+  getCurrentOrder(userId: string): Observable<Order> {
     const url = `${apiUrl}/${userId}/in-progress`;
-    return this.httpClient.get(url)
-    .pipe(
-      catchError(this.handleError('getAll', []))
+    return this.httpClient.get<Order>(url).pipe(
+      tap(_ => console.log(`fetched order by userId=${userId}`)),
+      catchError(this.handleError<Order>(`getCurrentOrder userId=${userId}`))
     );
   }
 
+/*
+
+// All article actions happen in the article service.
 
   deleteAllArticles(userId: string): Observable<Order> {
     const url = `${apiUrl}/${userId}/delete-all`;
@@ -61,7 +62,7 @@ export class OrderService {
       tap((a: Article) => console.log(`added article w/ id=${a._id}`)),
       catchError(this.handleError<Article>('addArticle'))
     );
-  }
+  }*/
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
