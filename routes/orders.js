@@ -64,28 +64,30 @@ router.route('/:orderId/article/:articleId')
             if (error) {
               return res.status(error.statusCode).json(error);
             }
-            //console.log(clientOrder);
 
             clientOrder= Array.isArray(clientOrder) ? clientOrder[0] : null;
 
             if(clientOrder){
-              const orderArticles = clientOrder.articles;
-              const articleIds = orderArticles.map(article => article.articleId);
+              const articleIds = clientOrder.articles.map(article => article.articleId);
+
               return Article.fetch(articleIds, (error, articles) => {
                 if (error) {
                   return res.status(error.statusCode).json(error);
                 }
-                console.log(articles);
 
-                var i;
-                for (i = 0; i < articles.length; i++) {
-                  articles[i].qty = orderArticles[i].qty;
-                }
+                clientOrder.articles = clientOrder.articles.map(article => {
+                   let articleDoc = articles.find(item => item._id === article.articleId);
+                    if (articleDoc) {
+                      return { ...articleDoc, ...article };
+                    }
+                    return article;
+                });
 
-                return res.status(200).json(articles);
+                return res.status(200).json(clientOrder.articles);
               });
             }
           });
         });
+
 module.exports = router;
 

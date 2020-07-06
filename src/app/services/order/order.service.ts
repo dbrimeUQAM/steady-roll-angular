@@ -5,6 +5,7 @@ import { throwError, Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
 import { Article } from './article';
+import { Order } from './order';
 
 import { environment } from '../../../environments/environment';
 
@@ -20,6 +21,7 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) { }
 
+
   getCurrentOrder(userId: string): Observable<Article[]> {
     const url = `${apiUrl}/${userId}/in-progress`;
     return this.httpClient.get<Article[]>(url)
@@ -29,16 +31,21 @@ export class OrderService {
   }
 
 
-//toDo
-  deleteAllArticles(id: string, article: Article): Observable<any> {
-    const url = `${apiUrl}/${id}`;
-    return this.httpClient.put(url, article, httpOptions).pipe(
-      tap(_ => console.log(`updated article id=${id}`)),
+  deleteAllArticles(userId: string): Observable<Order> {
+    const url = `${apiUrl}/${userId}/delete-all`;
+    return this.httpClient.put(url, userId, httpOptions).pipe(
+      tap(_ => console.log(`updated order for user=Iid=${userId}`)),
       catchError(this.handleError<any>('updateArticle'))
     );
   }
-//toDo
-  //deleteArticleById(id: string): Observable<Article> {}
+
+  deleteArticle(userId: string, articleId: string): Observable<Order> {
+    const url = `${apiUrl}/${userId}/delete-article/${articleId}`;
+    return this.httpClient.put(url, httpOptions).pipe(
+      tap(_ => console.log(`updated order for user=Iid=${userId}`)),
+      catchError(this.handleError<any>('updateArticle'))
+    );
+  }
 
 //toDo
   updateArticleById(id: string, article: Article): Observable<any> {
