@@ -2,22 +2,22 @@
 
 const express = require('express');
 const middleware = require('../middleware');
-const users = express.Router();
+const hospitals = express.Router();
 
 // Models
 const Hospital = require('../models/Hospital');
+// à voir équivallent users = hospitals
+hospitals.use(middleware.isAuthenticated);
 
-users.use(middleware.isAuthenticated);
-
-users.route('/')
+hospitals.route('/')
     /* GET liste des hopitaux. */
     .get((req, res) => {
-        return Hospital.getAll((error, users) => {
+        return Hospital.getAll((error, hospitals) => {
             if (error) {
                 return res.status(error.statusCode).json(error);
             }
 
-            return res.status(200).json(users);
+            return res.status(200).json(hospitals);
         });
     })
     .post((req, res) => {
@@ -42,7 +42,7 @@ users.route('/')
 
     });
 
-users.route('/:userId')
+hospitals.route('/:userId')
     .get((req, res) => {
         const userId = req.params.userId;
 
@@ -104,4 +104,4 @@ users.route('/:userId')
         });
     });
 
-module.exports = users;
+module.exports = hospitals;
