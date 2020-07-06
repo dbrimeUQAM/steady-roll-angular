@@ -16,7 +16,7 @@
           &nbsp;
           <mat-form-field appearance="outline">
             <mat-label> Quantité </mat-label>
-            <input  matInput formControlName="quantity" type="number" min="1"/>
+            <input  matInput formControlName="quantity" type="number" min="1" max="{{line.quantity}}"/>
           </mat-form-field>
           &nbsp;
           <mat-form-field appearance="outline">
