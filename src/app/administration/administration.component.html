@@ -1,2 +1,61 @@
 <app-header></app-header>
-<p>administration works! ..............</p>
+
+<br>
+<br>
+<form class="forme">
+    <div class="forme">
+        <!-- name -->
+        <div>
+            <mat-form-field appearance="outline" class="adresse">
+                <mat-label>Nom de l'hopital</mat-label>
+                <input formControlName="name" required maxlength="100" matInput />
+                <mat-hint align="end">Taille max:100</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <!-- tel -->
+        <div>
+            <mat-form-field appearance="outline" class="contact">
+                <mat-label>Téléphone</mat-label>
+                <span matPrefix>+1 &nbsp;</span>
+                <input formControlName="tel" required type="tel" matInput placeholder="555-555-1234" maxlength="12"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+            </mat-form-field>
+        </div>
+        <!-- Adresse -->
+        <div>
+            <mat-form-field appearance="outline" class="adresse">
+                <mat-label>Adresse</mat-label>
+                <input formControlName="rue" required type="text" matInput maxlength="200">
+            </mat-form-field>
+        </div>
+        <div>
+
+            <mat-form-field appearance="outline" class="contact">
+                <mat-label>Ville</mat-label>
+
+                <input formControlName="ville" required type="text" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="outline" class="contact">
+                <mat-label>Province</mat-label>
+                <input formControlName="provence" required type="text" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="outline" class="contact">
+                <mat-label>codePostal</mat-label>
+                <input formControlName="codePostal" required type="text" matInput>
+            </mat-form-field>
+
+        </div>
+        <div class="bouton">
+            <button class="btn" style="background-color: #097D6C; color: white; width: 100%;" mat-raised-button
+                color="primary">Ajouter</button>
+        </div>
+
+    </div>
+
+
+</form>

@@ -1,0 +1,38 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 80%;
+  }
+  
+  td {
+    padding-right: 1px;
+  }
+  .mat-form-field {
+    width: 90%;
+    padding-left: 10%;
+    padding-right: 10%;
+    align-items: center;
+    }
+    .forme{
+        width: 90%;
+        align-content: center;
+      }
+    .contact{
+        width: 20%;
+        align-content: center;
+    }
+    .adresse{
+        width: 80%;
+        align-content: center;
+    }
+    .bouton {
+      width: 50%;
+      padding-left: 30%;
+      padding-right: 30%;
+      align-items: center;
+      padding-bottom: 5%;
+      }
