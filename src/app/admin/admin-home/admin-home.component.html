@@ -1,15 +1,25 @@
-<app-header></app-header>
-<div class="grid-container">
-  <h1 class="mat-h1"><mat-icon class="example-tab-icon">settings</mat-icon>Admin</h1>
-<nav mat-tab-nav-bar>
-  <a mat-tab-link
-  *ngFor="let link of navLinks"
-  [routerLink]="link.link"
-  routerLinkActive #rla="routerLinkActive"
-  [active]="rla.isActive">
-  <mat-icon class="example-tab-icon">{{link.icon}}</mat-icon> {{link.label}}
+<app-header [inputSideNav]="sideNav"></app-header>
+<mat-sidenav-container>
+  <mat-sidenav #sideNav (click)="sideNav.toggle()" mode="side">
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
 
-</a>
-</nav>
-<router-outlet></router-outlet>
-</div>
+  <mat-sidenav-content>
+    <div class="grid-container">
+      <h1 class="mat-h1"><mat-icon class="example-tab-icon">settings</mat-icon>Admin</h1>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link
+      *ngFor="let link of navLinks"
+      [routerLink]="link.link"
+      routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
+      <mat-icon class="example-tab-icon">{{link.icon}}</mat-icon> {{link.label}}
+
+    </a>
+    </nav>
+    <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

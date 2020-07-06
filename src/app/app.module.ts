@@ -33,6 +33,7 @@ import { BagPageComponent } from './bag-page/bag-page.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 import { MaterialModule } from './material.module';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MaterialModule } from './material.module';
     DialogContentComponent,
     BagPageComponent,
     AdminHomeComponent,
+    SidenavComponent,
   ],
   imports: [
     RecaptchaModule,
@@ -66,7 +68,7 @@ import { MaterialModule } from './material.module';
   ],
   entryComponents: [DialogElementsComponent],
   providers: [
-    authInterceptorProviders,
+    authInterceptorProviders
   ],
   bootstrap: [AppComponent],
 })
