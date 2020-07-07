@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Article } from '../services/order/article';
+import { Article } from '../services/article/article';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
 

@@ -10,4 +10,5 @@ export class Article {
   offerType: string;
   quantity: number;
   price: number;
+  qty: number;
 }

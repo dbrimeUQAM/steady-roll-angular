@@ -13,9 +13,14 @@ const Hospital = require('../models/Hospital');
 articles.route('/')
     /* GET all articles. */
     .get((req, res) => {
+      const filter = req.query.filter;
       return Article.getAll((error, articles) => {
         if (error) {
           return res.status(error.statusCode).json(error);
+        }
+
+        if (filter) {
+          articles = articles.filter(article => article.articleType === filter);
         }
 
         const hospitalIds = articles.map(article => article.hospitalId);

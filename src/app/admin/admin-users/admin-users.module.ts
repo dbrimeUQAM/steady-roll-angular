@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { HttpClientModule } from '@angular/common/http';
 
 import { AdminUsersRoutingModule } from './admin-users-routing.module';
 
@@ -19,7 +21,9 @@ import { AdminUsersAddComponent } from './admin-users-add/admin-users-add.compon
     CommonModule,
     FormsModule,
     MaterialModule,
-    AdminUsersRoutingModule
+    AdminUsersRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [
     AdminUsersComponent,

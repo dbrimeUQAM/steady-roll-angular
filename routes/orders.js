@@ -174,7 +174,7 @@ orders.route('/:userId/in-progress')
               return article;
             });
 
-            return res.status(200).json(clientOrder.articles);
+            return res.status(200).json(clientOrder);
           });
         }
       });

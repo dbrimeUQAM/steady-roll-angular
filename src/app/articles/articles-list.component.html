@@ -1,9 +1,4 @@
-<app-header [inputSideNav]="sideNav"></app-header>
-<mat-sidenav-container>
-  <mat-sidenav #sideNav (click)="sideNav.toggle()" mode="side">
-    <app-sidenav></app-sidenav>
-  </mat-sidenav>
-  <mat-sidenav-content>
+<div class="grid-container">
     <mat-form-field style="margin-left: 4px;" color="basic">
       <mat-label>
         <mat-icon>search</mat-icon>
@@ -54,5 +49,4 @@
 
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+</div>

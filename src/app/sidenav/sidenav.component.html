@@ -11,10 +11,8 @@
          [routerLink]="[item.link]"
          routerLinkActive="list-item-active">
         <mat-icon matListIcon class="nav-list-icon"> {{ item.icon }} </mat-icon>
-        {{item.label}}
+        <span class="nav-list-label">{{item.label}}</span>
       </a>
-
-      <!-- <mat-divider></mat-divider> -->
 
     </ng-container>
 
@@ -29,7 +27,7 @@
          [routerLink]="[item.link]"
          routerLinkActive="list-item-active">
         <mat-icon matListIcon class="nav-list-icon"> {{ item.icon }} </mat-icon>
-        {{item.label}}
+        <span class="nav-list-label">{{item.label}}</span>
       </a>
 
     </ng-container>
@@ -40,7 +38,7 @@
          mat-list-item
          (click)="logout()">
         <mat-icon matListIcon class="nav-list-icon"> power_settings_new </mat-icon>
-        Se déconnecter
+        <span class="nav-list-label">Se déconnecter</span>
       </a>
 
 <!--

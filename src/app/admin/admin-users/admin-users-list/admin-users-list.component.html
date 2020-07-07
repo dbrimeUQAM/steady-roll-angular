@@ -9,6 +9,10 @@
       <th mat-header-cell *matHeaderCellDef> Courriel </th>
       <td mat-cell *matCellDef="let user"> {{user.email}} </td>
     </ng-container>
+    <ng-container matColumnDef="hospital">
+      <th mat-header-cell *matHeaderCellDef> Hospital </th>
+      <td mat-cell *matCellDef="let user"> {{user.hospitalName}} </td>
+    </ng-container>
     <ng-container matColumnDef="role">
       <th mat-header-cell *matHeaderCellDef> Role </th>
       <td mat-cell *matCellDef="let user"> {{user.role}} </td>
@@ -17,8 +21,12 @@
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let user">
         <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" [routerLink]="['/admin/admin-users/detail', user._id]">
-        <mat-icon role="img" class="mat-icon">edit</mat-icon>
-      </button> </td>
+          <mat-icon role="img" class="mat-icon">edit</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" [routerLink]="['/admin/admin-users/delete', user._id]">
+          <mat-icon role="img" class="mat-icon">delete</mat-icon>
+        </button>
+      </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let user; columns: columnsToDisplay"></tr>

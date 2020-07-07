@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/order/order.service';
-import { Article } from '../services/order/article';
+import { Article } from '../services/article/article';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TokenStorageService } from '../services/token-storage/token-storage.service';
@@ -15,13 +15,13 @@ export class BagPageComponent implements OnInit {
   articles: Article[] = [];
   article: Article;
 
-  articleNum: Number = 0 ;
+  articleNum = 0 ;
   public myFrom: FormGroup;
   public count: number ;
-  public total: number = 0;
+  public total = 0;
 
   dataSource: MatTableDataSource<Article>;
-  receivedChildMessage: number = 0;
+  receivedChildMessage = 0;
 
 
   constructor(private orderService: OrderService, private formBuilder: FormBuilder, private tokenStorage: TokenStorageService) { }
@@ -33,7 +33,7 @@ export class BagPageComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.articles);
     }, err => {
       console.log(err);
-    },() =>{
+    }, () => {
       this.articleNum = this.articles.length ;
     }
     );
@@ -42,8 +42,8 @@ export class BagPageComponent implements OnInit {
    /*  console.log('this.receivedChildMessage',this.receivedChildMessage)
     console.log('message',message) */
 
-    this.receivedChildMessage = message ? this.receivedChildMessage + message: 0 ;
-    console.log('this.receivedChildMessage',this.receivedChildMessage)
+    this.receivedChildMessage = message ? this.receivedChildMessage + message : 0 ;
+    console.log('this.receivedChildMessage', this.receivedChildMessage);
   }
 
 getTotal(): number{

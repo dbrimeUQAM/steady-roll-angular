@@ -1,4 +1,10 @@
-export class Article {
+export class Order {
+  _id: string;
+hospitalId: string;
+userId: string;
+orderDate: string;
+status: string;
+articles: [{
   _id: string;
   articleType: string;
   name: string;
@@ -11,4 +17,5 @@ export class Article {
   quantity: number;
   price: number;
   qty: number;
+  }];
 }

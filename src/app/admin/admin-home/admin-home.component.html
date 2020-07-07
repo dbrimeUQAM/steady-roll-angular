@@ -1,12 +1,12 @@
 <app-header [inputSideNav]="sideNav"></app-header>
-<mat-sidenav-container>
-  <mat-sidenav #sideNav (click)="sideNav.toggle()" mode="side">
+<mat-sidenav-container id="sidenav-container" fullscreen>
+  <mat-sidenav #sideNav mode="side">
     <app-sidenav></app-sidenav>
   </mat-sidenav>
 
   <mat-sidenav-content>
     <div class="grid-container">
-      <h1 class="mat-h1"><mat-icon class="example-tab-icon">settings</mat-icon>Admin</h1>
+
     <nav mat-tab-nav-bar>
       <a mat-tab-link
       *ngFor="let link of navLinks"

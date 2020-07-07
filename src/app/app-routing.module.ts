@@ -12,9 +12,15 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
 import { HomePageComponent } from './home-page/home-page.component';
 import { AddArticleComponent } from './add-article/add-article.component';
 
-import { ArticlesListComponent } from './articles/articles-list.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { BagPageComponent } from './bag-page/bag-page.component';
+
+import { ArticlesListContainerComponent } from './articles/articles-list-container/articles-list-container.component';
+
+import { MyOrdersComponent } from './orders/my-orders/my-orders.component';
+import { MyInvoicesComponent } from './invoices/my-invoices/my-invoices.component';
+
+import { ContactComponent } from './contact/contact.component';
 
 // Admin
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
@@ -34,7 +40,13 @@ const routes: Routes = [
   { path: 'user-create', component: UserCreateComponent, data: { title: 'Nouveau Utilisateur' } },
   { path: 'user-update/:id', component: UserUpdateComponent, data: { title: 'Modifier Utilisateur' } },
   { path: 'user-details/:id', component: UserDetailsComponent, data: { title: 'Utilisateur' } },
-  { path: 'articles', component: ArticlesListComponent, data: { title: 'Liste des Articles'} },
+  { path: 'articles/all', component: HomePageComponent, data: { title: 'Liste des Articles'} },
+  { path: 'articles/drugs', component: ArticlesListContainerComponent, data: { filter: 'medicament'} },
+  { path: 'articles/supplies', component: ArticlesListContainerComponent, data: { filter: 'fourniture'} },
+  { path: 'articles/equipments', component: ArticlesListContainerComponent, data: { filter: 'equipement'} },
+  { path: 'my-orders', component: MyOrdersComponent },
+  { path: 'my-invoices', component: MyInvoicesComponent },
+  { path: 'contact', component: ContactComponent },
   {
     path: 'admin-users',
     loadChildren: () => import('./admin/admin-users/admin-users.module').then(m => m.AdminUsersModule)

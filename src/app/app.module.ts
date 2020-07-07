@@ -24,17 +24,26 @@ import { HeaderComponent } from './header/header.component';
 import { AddArticleComponent } from './add-article/add-article.component';
 
 import { DialogElementsComponent } from './dialog-elements/dialog-elements.component';
-import { ArticlesListComponent } from './articles/articles-list.component';
-import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
 import { BagPageComponent } from './bag-page/bag-page.component';
 import { LineInputComponent } from './line-input/line-input.component';
+
+import { ArticlesListComponent } from './articles/articles-list.component';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
+import { ArticlesListContainerComponent } from './articles/articles-list-container/articles-list-container.component';
+
+import { MyOrdersComponent } from './orders/my-orders/my-orders.component';
+import { MyInvoicesComponent } from './invoices/my-invoices/my-invoices.component';
+
+import { ContactComponent } from './contact/contact.component';
+
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 // Admin
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 import { MaterialModule } from './material.module';
-import { SidenavComponent } from './sidenav/sidenav.component';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +66,12 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     AdminHomeComponent,
     SidenavComponent,
     LineInputComponent,
+    ArticlesListContainerComponent,
+    MyOrdersComponent,
+    MyInvoicesComponent,
+    ContactComponent
+  ],
+  imports: [
     RecaptchaModule,
     BrowserModule,
     BrowserAnimationsModule,

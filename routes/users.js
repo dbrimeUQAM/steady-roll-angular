@@ -7,6 +7,7 @@ const utils = require('../utils');
 
 // Models
 const User = require('../models/User');
+const Hospital = require('../models/Hospital');
 
 users.use(middleware.isAuthenticated);
 
@@ -18,7 +19,27 @@ users.route('/')
           return res.status(error.statusCode).json(error);
         }
 
-        return res.status(200).json(users);
+        const hospitalIds = users.map(user => user.hospitalId).filter(item => !!item);
+        const uniqueHospitalIds = [ ...new Set(hospitalIds) ];
+
+        return Hospital.fetch(uniqueHospitalIds, (error, hospitals) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+          users = users.map(user => {
+            let hospital = hospitals.find(hospital => hospital._id === user.hospitalId);
+
+            if (hospital) {
+              user.hospitalName = hospital.name;
+            }
+
+            return user;
+
+          })
+
+          return res.status(200).json(users);
+
+        });
       });
     })
     /* POST user. */

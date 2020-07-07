@@ -14,7 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class AdminUsersListComponent implements OnInit {
 
   users: User[] = [];
-  columnsToDisplay: string[] = ['name', 'email', 'role', 'actions'];
+  columnsToDisplay: string[] = ['name', 'email', 'role', 'hospital', 'actions'];
   dataSource: MatTableDataSource<User>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

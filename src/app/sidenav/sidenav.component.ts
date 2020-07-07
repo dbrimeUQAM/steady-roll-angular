@@ -18,28 +18,35 @@ export class SidenavComponent implements OnInit {
           label: 'Accueil',
           link: '/home',
           icon: 'home'
-      },
-      {
-          label: 'Utilisateurs',
-          link: '/admin/admin-users',
-          icon: 'account_circle'
       }, {
-          label: 'Hôpitaux',
-          link: '/admin/admin-hospitals',
-          icon: 'medical_services'
+          label: 'Magasiner',
+          link: '/articles/all',
+          icon: 'storefront'
       }, {
-          label: 'Articles',
-          link: '/articles',
-          icon: 'content_copy'
+          label: 'Médicaments',
+          link: '/articles/drugs',
+          icon: 'local_pharmacy'
+      }, {
+          label: 'Fournitures',
+          link: '/articles/supplies',
+          icon: 'healing'
+      }, {
+          label: 'Équipements',
+          link: '/articles/equipments',
+          icon: 'biotech'
       }, {
           label: 'Commandes',
-          link: '/admin/admin-orders',
+          link: '/my-orders',
           icon: 'shopping_cart'
       }, {
           label: 'Factures',
-          link: '/admin/admin-invoices',
-          icon: 'monetization_on'
-      },
+          link: '/my-invoices',
+          icon: 'attach_money'
+      }, {
+          label: 'Contactez-nous',
+          link: '/contact',
+          icon: 'support_agent'
+      }
     ];
 
 
@@ -48,7 +55,7 @@ export class SidenavComponent implements OnInit {
       this.navAdminLinks = [
         {
             label: 'Dashboard',
-            link: '/admin',
+            link: '/admin/admin-users',
             icon: 'settings'
         },
       ];
