@@ -24,10 +24,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
   imports: [
+    MatSnackBarModule,
     MatMenuModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -53,6 +55,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatBadgeModule
   ],
   exports: [
+    MatSnackBarModule,
     MatMenuModule,
     MatToolbarModule,
     MatSidenavModule,

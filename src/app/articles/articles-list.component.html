@@ -37,8 +37,8 @@
         <ng-container  matColumnDef="next">
           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let row" align="end">
-            <button  mat-icon-button [routerLink]="['/article-detail', row._id]" >
-              <mat-icon style="justify-content: right;">navigate_next</mat-icon>
+            <button  mat-stroked-button (click)="openSnackBar()" >
+              <mat-icon style="justify-content: right;">add_shopping_cart</mat-icon>
             </button> </td>
         </ng-container>
 
