@@ -30,7 +30,6 @@ export class OrderService {
 
 /*
 
-// All article actions happen in the article service.
 
   deleteAllArticles(userId: string): Observable<Order> {
     const url = `${apiUrl}/${userId}/delete-all`;
@@ -62,8 +61,8 @@ export class OrderService {
       tap((a: Article) => console.log(`added article w/ id=${a._id}`)),
       catchError(this.handleError<Article>('addArticle'))
     );
-  }*/
-
+  }
+*/
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

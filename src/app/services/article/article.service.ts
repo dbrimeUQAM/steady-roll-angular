@@ -20,8 +20,12 @@ export class ArticleService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAll(): Observable<Article[]> {
-    return this.httpClient.get<Article[]>(apiUrl)
+  getAll(filter: string): Observable<Article[]> {
+    let url = apiUrl;
+    if (filter) {
+      url += `?filter=${filter}`;
+    }
+    return this.httpClient.get<Article[]>(url)
     .pipe(
       catchError(this.handleError('getAll', []))
     );

@@ -1,0 +1,14 @@
+.list-item-active {
+  font-weight: bold;
+  color: #097D6C !important;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.nav-list-icon {
+  margin: 0 12px 0 12px;
+}
+
+.nav-list-label {
+  margin: 0 12px 0 0;
+}
+

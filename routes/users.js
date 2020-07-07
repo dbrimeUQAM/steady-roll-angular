@@ -3,23 +3,46 @@
 const express = require('express');
 const middleware = require('../middleware');
 const users = express.Router();
+const utils = require('../utils');
 
 // Models
 const User = require('../models/User');
+const Hospital = require('../models/Hospital');
 
 users.use(middleware.isAuthenticated);
 
 users.route('/')
-    /* GET liste d'utilisateurs. */
+    /* GET all users. */
     .get((req, res) => {
       return User.getAll((error, users) => {
         if (error) {
           return res.status(error.statusCode).json(error);
         }
 
-        return res.status(200).json(users);
+        const hospitalIds = users.map(user => user.hospitalId).filter(item => !!item);
+        const uniqueHospitalIds = [ ...new Set(hospitalIds) ];
+
+        return Hospital.fetch(uniqueHospitalIds, (error, hospitals) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+          users = users.map(user => {
+            let hospital = hospitals.find(hospital => hospital._id === user.hospitalId);
+
+            if (hospital) {
+              user.hospitalName = hospital.name;
+            }
+
+            return user;
+
+          })
+
+          return res.status(200).json(users);
+
+        });
       });
     })
+    /* POST user. */
     .post((req, res) => {
       const postedUser = req.body;
 
@@ -43,6 +66,7 @@ users.route('/')
     });
 
   users.route('/:userId')
+    /* GET user by id. */
     .get((req, res) => {
       const userId = req.params.userId;
 
@@ -56,6 +80,7 @@ users.route('/')
       });
 
     })
+    /* PUT user by id. */
     .put((req, res) => {
       const userId = req.params.userId;
       const updatedUser = req.body;
@@ -72,7 +97,7 @@ users.route('/')
           return res.status(error.statusCode).json(error);
         }
 
-        user.doc = updatedUser;
+        user.doc = _.mergeWith(user.doc, updatedUser, utils.mergeArrays);
 
         return user.save((error, savedUser) => {
           if (error) {
@@ -85,6 +110,7 @@ users.route('/')
       });
 
     })
+    /* DELETE user by id. */
     .delete((req, res) => {
       const userId = req.params.userId;
 

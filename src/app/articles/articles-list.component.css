@@ -24,5 +24,9 @@ table {
 }
 .mat-column-type {
   padding-left: 10px;
-  width: 15% !important; 
+  width: 15% !important;
+}
+
+.grid-container {
+  margin: 20px;
 }

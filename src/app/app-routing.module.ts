@@ -12,15 +12,25 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
 import { HomePageComponent } from './home-page/home-page.component';
 import { AddArticleComponent } from './add-article/add-article.component';
 
-import { ArticlesListComponent } from './articles/articles-list.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
 import { BagPageComponent } from './bag-page/bag-page.component';
+
+import { ArticlesListContainerComponent } from './articles/articles-list-container/articles-list-container.component';
+
+import { MyOrdersComponent } from './orders/my-orders/my-orders.component';
+import { MyInvoicesComponent } from './invoices/my-invoices/my-invoices.component';
+
+import { ContactComponent } from './contact/contact.component';
+
+// Admin
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomePageComponent },
+  { path: 'admin', component: AdminHomeComponent },
   { path: 'bag', component: BagPageComponent },
   { path: 'add-article', component: AddArticleComponent },
   { path: 'article-detail/:id', component: ArticleDetailComponent, data: { title: 'Article'} },
@@ -30,7 +40,43 @@ const routes: Routes = [
   { path: 'user-create', component: UserCreateComponent, data: { title: 'Nouveau Utilisateur' } },
   { path: 'user-update/:id', component: UserUpdateComponent, data: { title: 'Modifier Utilisateur' } },
   { path: 'user-details/:id', component: UserDetailsComponent, data: { title: 'Utilisateur' } },
-  { path: 'articles', component: ArticlesListComponent, data: { title: 'Liste des Articles'} }
+  { path: 'articles/all', component: HomePageComponent, data: { title: 'Liste des Articles'} },
+  { path: 'articles/drugs', component: ArticlesListContainerComponent, data: { filter: 'medicament'} },
+  { path: 'articles/supplies', component: ArticlesListContainerComponent, data: { filter: 'fourniture'} },
+  { path: 'articles/equipments', component: ArticlesListContainerComponent, data: { filter: 'equipement'} },
+  { path: 'my-orders', component: MyOrdersComponent },
+  { path: 'my-invoices', component: MyInvoicesComponent },
+  { path: 'contact', component: ContactComponent },
+  {
+    path: 'admin-users',
+    loadChildren: () => import('./admin/admin-users/admin-users.module').then(m => m.AdminUsersModule)
+  },
+  {
+    path: 'admin',
+    component: AdminHomeComponent,
+    children: [
+      {
+        path: 'admin-users',
+        loadChildren: () => import('./admin/admin-users/admin-users.module').then(m => m.AdminUsersModule)
+      },
+      {
+        path: 'admin-hospitals',
+        loadChildren: () => import('./admin/admin-hospitals/admin-hospitals.module').then(m => m.AdminHospitalsModule)
+      },
+      {
+        path: 'admin-articles',
+        loadChildren: () => import('./admin/admin-articles/admin-articles.module').then(m => m.AdminArticlesModule)
+      },
+      {
+        path: 'admin-orders',
+        loadChildren: () => import('./admin/admin-orders/admin-orders.module').then(m => m.AdminOrdersModule)
+      },
+      {
+        path: 'admin-invoices',
+        loadChildren: () => import('./admin/admin-invoices/admin-invoices.module').then(m => m.AdminInvoicesModule)
+      }
+    ]
+  }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

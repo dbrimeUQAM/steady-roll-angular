@@ -7,6 +7,11 @@ class Article extends Model {
     super(Article.DATABASE_NAME, doc, Article.MODEL_SCHEMA);
     this.doc.type = Article.TYPE;
   }
+
+  getArticleType() {
+    return this.getDocValue('articleType');
+  }
+
 }
 
 Article.DATABASE_NAME = 'articles';

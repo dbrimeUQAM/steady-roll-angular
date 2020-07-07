@@ -8,12 +8,10 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent implements OnInit {
 
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-  }
-  onClick($event) {
-    this.router.navigate(['/add-article']);
   }
 
 }
