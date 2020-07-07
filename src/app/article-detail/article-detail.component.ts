@@ -24,7 +24,6 @@ export class ArticleDetailComponent implements OnInit {
     this.articleService.getArticleById(articleId).subscribe(
       data => {
         this.article = data ;
-        console.log(this.article) ;
       }, err => { 
         console.log(err)
       },
@@ -73,6 +72,10 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   openDialog(nom: string, type:string) {
+    /* this.bagService.addArticle(this.article).subscribe(data =>
+      {
+        const id = data._id ; 
+      } ); */
     const dialog = this.dialog.open(DialogContentComponent, 
       {data:{name: nom, articleType: type}});  
   }

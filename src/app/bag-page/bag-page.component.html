@@ -1,2 +1,33 @@
 <app-header></app-header>
-<p>bag-page works!</p>
+<br>
+<!--    -->
+<mat-toolbar-row>
+  <h2 class="mat-h2">&nbsp;Panier &nbsp;&nbsp;</h2>
+  <div class="mat-h5" *ngIf="articles.length > 1">
+    {{articleNum }} items
+  </div>
+  <div *ngIf="articles.length <= 1">
+    {{articleNum }} item
+  </div>
+</mat-toolbar-row>
+
+<mat-divider></mat-divider>
+<div style="margin-top: 10px;padding: 5px;" *ngFor="let article of articles; let i = index">
+  <app-line-input [line] = "article" (messageToEmit)="getMessage($event)" ></app-line-input>
+  
+</div>
+<div >
+  <mat-list >
+    <mat-list-item style="margin-top: 10px;padding: 5px;height: 30%;"  >
+      
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<mat-divider></mat-divider>
+
+<mat-toolbar-row>
+  <div mat-subheader>Total</div>
+    <span class="example-spacer"></span>
+  <div >{{ getTotal() | currency}} </div>
+</mat-toolbar-row>

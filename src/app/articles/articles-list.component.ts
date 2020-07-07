@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Article } from '../services/article/article';
 import { ArticleService } from '../services/article/article.service';
-
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-article-list',
@@ -12,26 +12,30 @@ import { ArticleService } from '../services/article/article.service';
   styleUrls: ['./articles-list.component.css']
 })
 export class ArticlesListComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'hospitalName', 'description', 'type'];
+  displayedColumns: string[] = ['name', 'hospitalName', 'description', 'type', 'next'];
   dataSource: MatTableDataSource<Article>;
   articles: Article[] = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  filter;
 
-  constructor(private articleService: ArticleService ) {}
+  constructor(private articleService: ArticleService, route: ActivatedRoute ) {
+    this.filter = route.snapshot.data.filter;
+  }
 
   ngOnInit() {
-    this.articleService.getAll()
+
+    console.log(this.filter);
+    this.articleService.getAll(this.filter)
     .subscribe((res: any) => {
       this.articles = res;
-      console.log(this.articles);
       this.dataSource = new MatTableDataSource(this.articles);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }, err => {
       console.log(err);
     });
-    
+
   }
 
   applyFilter(event: Event) {
@@ -43,7 +47,7 @@ export class ArticlesListComponent implements OnInit {
     }
   }
 
-  
+
 
 }
 
