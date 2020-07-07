@@ -1,5 +1,10 @@
-<app-header></app-header>
-<br>
+<app-header [inputSideNav]="sideNav"></app-header>
+<mat-sidenav-container id="sidenav-container" fullscreen>
+  <mat-sidenav #sideNav mode="side">
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
 <!--    -->
 <mat-toolbar-row>
   <h2 class="mat-h2">&nbsp;Panier &nbsp;&nbsp;</h2>
@@ -14,7 +19,6 @@
 <mat-divider></mat-divider>
 <div style="margin-top: 10px;padding: 5px;" *ngFor="let article of articles; let i = index">
   <app-line-input [line] = "article" (messageToEmit)="getMessage($event)" ></app-line-input>
-   message {{ getTotal() }}
 </div>
 
 
@@ -25,3 +29,7 @@
     <span class="example-spacer"></span>
   <div >{{ getTotal() | currency}} </div>
 </mat-toolbar-row>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

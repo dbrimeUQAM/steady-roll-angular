@@ -1,85 +1,100 @@
-<app-header></app-header>
-<br>
-<br>
-<div class="center">
-<form [formGroup]="articleFrom" class="forme">
-    <!-- name -->
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>Nom de l'article</mat-label>
-        <input type="text" formControlName="name" required minlength="4" maxlength="20" matInput />
-        <mat-hint align="end">Taille max:20</mat-hint>
-      </mat-form-field>
-    </div>
-    <!-- type -->
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>Type</mat-label>
-        <mat-select formControlName="articleType" required >
-          <mat-option value="medicament">Médicament</mat-option>
-          <mat-option value="equipement">Equipement</mat-option>
-          <mat-option value="fourniture">Fourniture</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <!-- quantity  -->
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label> Quantité </mat-label>
-        <input formControlName="quantity" required matInput type="number" value="1" min="1" />
-      </mat-form-field>
-    </div>
-    <!-- expirationDate  -->
-    <div *ngIf="article.articleType === 'medicament'">
-      <mat-form-field appearance="outline" >
-        <mat-label>Date D'expiration</mat-label>
-        <input formControlName="expirationDate" matInput [matDatepicker]="picker" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <!--   description  -->
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>Description</mat-label>
-        <textarea formControlName="description" matInput></textarea>
-      </mat-form-field>
-    </div>
-    <!--   condition  -->
-    <div *ngIf="article.articleType !== 'medicament' ">
-      <mat-form-field appearance="outline" >
-        <mat-label>Condition</mat-label>
-        <mat-select formControlName="condition" required>
-          <mat-option value="nouveau">nouveau</mat-option>
-          <mat-option value="tresBonEtat">très bon état</mat-option>
-          <mat-option value="bon">bon</mat-option>
-          <mat-option value="acceptable">acceptable</mat-option>
-          <mat-option value="mauvais">mauvais</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <!-- offerType  -->
-    <div>
-      <mat-form-field appearance="outline">
-        <mat-label>Mode d'échange</mat-label>
-        <mat-select formControlName="offerType" required>
-          <mat-option value="donner">À donner</mat-option>
-          <mat-option value="vendre">À vendre</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <!-- price  -->
-    <div *ngIf="article.offerType === 'vendre'">
-      <mat-form-field appearance="outline">
-        <mat-label> Prix </mat-label>
-        <input formControlName="price" required matInput type="number" value="0" min="0" />
-        <span matPrefix> $ &nbsp; </span>
-        <span matSuffix> .00 </span>
-      </mat-form-field>
-    </div>
-    <div class="bouton">
-      <button class="btn" [disabled]="!articleFrom.valid" style="background-color: #097D6C; color: white; width: 100%;" mat-raised-button
-        color="primary" (click)="submit()">Ajouter</button>
-    </div>
-</form>
-</div>
+
+<app-header [inputSideNav]="sideNav"></app-header>
+<mat-sidenav-container id="sidenav-container" fullscreen>
+  <mat-sidenav #sideNav mode="side">
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <form [formGroup]="articleFrom" class="forme">
+      <div class="forme">
+        <!-- name -->
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Nom de l'article</mat-label>
+            <input formControlName="name" required minlength="4" maxlength="20" matInput />
+            <mat-hint align="end">Taille max:20</mat-hint>
+          </mat-form-field>
+        </div>
+        <!-- type -->
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="articleType" required >
+              <mat-option value="medicament">Médicament</mat-option>
+              <mat-option value="equipement">Equipement</mat-option>
+              <mat-option value="fourniture">Fourniture</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- quantity  -->
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label> Quantité </mat-label>
+            <input formControlName="quantity" required matInput type="number" value="1" min="1" />
+          </mat-form-field>
+        </div>
+        <!-- expirationDate  -->
+        <div *ngIf="article.articleType === 'medicament'">
+          <mat-form-field appearance="outline" >
+            <mat-label>Date D'expiration</mat-label>
+            <input formControlName="expirationDate" matInput [matDatepicker]="picker" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <!--   description  -->
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea formControlName="description" matInput></textarea>
+          </mat-form-field>
+        </div>
+        <!--   condition  -->
+        <div *ngIf="article.articleType !== 'medicament' ">
+          <mat-form-field appearance="outline" >
+            <mat-label>Condition</mat-label>
+            <mat-select formControlName="condition" required>
+              <mat-option value="nouveau">nouveau</mat-option>
+              <mat-option value="tresBonEtat">très bon état</mat-option>
+              <mat-option value="bon">bon</mat-option>
+              <mat-option value="acceptable">acceptable</mat-option>
+              <mat-option value="mauvais">mauvais</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- offerType  -->
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Mode d'échange</mat-label>
+            <mat-select formControlName="offerType" required>
+              <mat-option value="donner">À donner</mat-option>
+              <mat-option value="vendre">À vendre</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <!-- price  -->
+        <div *ngIf="article.offerType === 'vendre'">
+          <mat-form-field appearance="outline">
+            <mat-label> Prix </mat-label>
+            <input formControlName="price" required matInput type="number" value="0" min="0" />
+            <span matPrefix> $ &nbsp; </span>
+            <span matSuffix> .00 </span>
+          </mat-form-field>
+        </div>
+        <div class="bouton">
+          <button class="btn" [disabled]="!articleFrom.valid" style="background-color: #097D6C; color: white; width: 100%;" mat-raised-button
+            color="primary" (click)="submit()">Ajouter</button>
+        </div>
+      </div>
+    
+    </form>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+
+
+

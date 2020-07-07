@@ -1,3 +1,18 @@
+.grid-container {
+  margin: 20px;
+}
+
+
+
+#sidenav-container {
+  top: 64px !important;
+}
+
+@media(max-width: 599px) {
+  #sidenav-container {
+    top: 56px !important;
+  }
+}
 
   .mat-form-field{
     width: 80%;

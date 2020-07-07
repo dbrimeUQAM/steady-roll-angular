@@ -46,7 +46,11 @@ export class SidenavComponent implements OnInit {
           label: 'Contactez-nous',
           link: '/contact',
           icon: 'support_agent'
-      }
+      }, {
+        label: 'Ajouter un article',
+        link: '/add-article',
+        icon: 'add_circle'
+    }
     ];
 
 
