@@ -19,6 +19,14 @@ export class AddArticleComponent implements OnInit {
   public articleFrom: FormGroup;
   labelPosition: string; 
   choix: string[] = ['donner', 'vendre'];
+  name: boolean;
+  type: boolean;
+  description: boolean;
+  condition: boolean;
+  mode: boolean;
+  qty: boolean;
+
+
   constructor(private router: Router, private formBuilder: FormBuilder, private articleService: ArticleService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
@@ -63,6 +71,25 @@ export class AddArticleComponent implements OnInit {
     });
   }
   submit() {
+    if(this.articleFrom.get('name').invalid){
+      this.name = true ;
+    }
+    if(this.articleFrom.get('articleType').invalid){
+      this.type = true ;
+    }
+    if(this.articleFrom.get('description').invalid){
+      this.description = true ;
+    }
+    if(this.articleFrom.get('condition').invalid){
+      this.condition = true ;
+    }
+    if(this.articleFrom.get('quantity').invalid){
+      this.qty = true ;
+    }
+    if(this.articleFrom.get('offerType').invalid){
+      this.mode = true ;
+    }
+    
     if(this.articleFrom.valid) {
       this.articleService.addArticle(this.article).subscribe(data => {
         const id = data._id;
