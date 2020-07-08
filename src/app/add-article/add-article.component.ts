@@ -63,11 +63,14 @@ export class AddArticleComponent implements OnInit {
     });
   }
   submit() {
-    this.articleService.addArticle(this.article).subscribe(data => {
-      const id = data._id;
-      this.router.navigate(['/home']);
-
-    })
+    if(this.articleFrom.valid) {
+      this.articleService.addArticle(this.article).subscribe(data => {
+        const id = data._id;
+        this.router.navigate(['/home']);
+  
+      })
+    }
+   
   }
 }
 export class DatepickerCustomIconExample { }
