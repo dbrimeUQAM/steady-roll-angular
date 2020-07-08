@@ -44,7 +44,7 @@ class Order extends Model {
 {
   // articleId: '',
   // qty: '',
-  // price: ''
+
 }
 */
 Order.DATABASE_NAME = 'orders';
