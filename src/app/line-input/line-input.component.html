@@ -1,5 +1,5 @@
-    <mat-toolbar-row>
-      <mat-icon mat-list-icon>medical_services</mat-icon>
+<mat-toolbar-row>
+      <mat-icon mat-list-icon>medical_services</mat-icon>&nbsp;
       <div>
         <div  mat-line style="color: darkseagreen;">{{line.name}}</div>
         <div mat-line> {{line.hospitalName}} </div>
@@ -8,29 +8,30 @@
       <span class="example-spacer"></span>
 
       <div >
-        <form [formGroup]="myFrom" >
-          <mat-form-field appearance="outline">
+        <form align="right" [formGroup]="myFrom" >
+          <mat-form-field style="width: 15%;" appearance="outline">
             <mat-label>Prix</mat-label>
             <input style="color: black;" matInput formControlName="price" disabled [value]="line.price"  type="number" />
             <span matPrefix> $ &nbsp; </span>
             <!-- <span matSuffix> .00 </span> -->
           </mat-form-field>
           &nbsp;
-          <mat-form-field appearance="outline">
+          <mat-form-field style="width: 15%;" appearance="outline">
             <mat-label> Quantité </mat-label>
             <input  matInput formControlName="quantity" type="number" min="1" max="{{line.quantity}}"/>
           </mat-form-field>
           &nbsp;
-          <mat-form-field appearance="outline">
+          <mat-form-field style="width: 15%;" appearance="outline">
             <mat-label>Sous-total</mat-label>
-            <input style="color: black;" matInput formControlName="total" type="number" />
+            <input style="color: black" matInput formControlName="total" type="number" />
             <span matPrefix> $ &nbsp; </span>
-          <span matSuffix> .00 </span>
+           <!-- <span matSuffix> .00 </span> -->
           </mat-form-field>
           <button  mat-icon-button >
             <mat-icon style="color: #097D6C;" (click)="removeArticle()">cancel</mat-icon>
           </button>
         </form>
       </div>
+    </mat-toolbar-row>
 
 
