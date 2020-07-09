@@ -14,6 +14,11 @@
   <div *ngIf="articles.length <= 1">
     {{articleNum }} item
   </div>
+  <span class="example-spacer"></span>
+
+  <div class="bouton">
+    <button class="btn" mat-raised-button (click)="clear()" >Vider le panier</button>
+  </div>
 </mat-toolbar-row>
 
 <mat-divider></mat-divider>
@@ -24,12 +29,58 @@
 
 <mat-divider></mat-divider>
 
-<mat-toolbar-row>
+<!-- <mat-toolbar-row>
   <div mat-subheader>Total</div>
     <span class="example-spacer"></span>
   <div >{{ getTotal() | currency}} </div>
+</mat-toolbar-row> -->
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<mat-toolbar-row>
+  <div></div>
+<span class="example-spacer"></span>
+<div>
+<div  class="sommaire">
+  <h2 class="mat-h2">&nbsp;Sommaire de la commande &nbsp;&nbsp;</h2>
+  <mat-divider></mat-divider>
+  <mat-toolbar-row>
+    <div mat-subheader>Sous-total</div>
+      <span class="example-spacer"></span>
+    <div >{{ getTotal() | currency}} </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <div mat-subheader>Livraisons</div>
+      <span class="example-spacer"></span>
+    <div >{{ 15 | currency}} </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <div mat-subheader>TPS/TVH</div>
+      <span class="example-spacer"></span>
+    <div >{{ getTotal()* (0.05) | currency}} </div>
+  </mat-toolbar-row>
+  
+  <mat-toolbar-row>
+    <div mat-subheader>TVQ</div>
+      <span class="example-spacer"></span>
+    <div >{{ getTotal()* (0.09975) | currency}} </div>
+  </mat-toolbar-row>
+  <mat-divider></mat-divider>
+  <mat-toolbar-row>
+    <div mat-subheader>Total</div>
+      <span class="example-spacer"></span>
+    <div >{{ getTotal() + 15 + (getTotal()* (0.05)) +  (getTotal()* (0.09975)) | currency}} </div>
+  </mat-toolbar-row>
+  
+</div>
+<br>
+<div align="right" class="bouton">
+  <button class="btn" mat-raised-button  >Enregistrer et continuer</button>
+</div>
+<br>
+</div>
 </mat-toolbar-row>
-
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+
 
