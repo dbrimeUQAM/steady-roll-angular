@@ -4,6 +4,71 @@
     <app-sidenav></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <p>my-invoices works!</p>
+    <div>
+      <br>
+    <h2 align="center" class="mat-h2">&nbsp; Votre commande a été effectuer avec succé </h2>
+    <mat-divider></mat-divider>
+    <br><br>
+    <div align="center" >
+    <form [formGroup]="invoiceForm" class="form">
+    <mat-toolbar-row>
+      <mat-form-field appearance="outline"  >
+        <mat-label>Nom </mat-label>
+        <input style="color: black;" matInput formControlName="name" disabled   type="text" />
+      </mat-form-field> 
+      <mat-form-field appearance="outline">
+        <mat-label>Nom de l'hospitale</mat-label>
+        <input style="color: black;" matInput formControlName="hospitalName" disabled   type="text" />
+      </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+     
+      <mat-form-field appearance="outline">
+        <mat-label>Adresse courriel</mat-label>
+        <input style="color: black;" matInput formControlName="id" disabled  type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Numéro de téléphone</mat-label>
+        <input style="color: black;" matInput formControlName="telNumber" disabled  type="text" />
+      </mat-form-field>
+    </mat-toolbar-row>
+  <mat-toolbar-row>
+      <mat-form-field appearance="outline">
+        <mat-label>Adress</mat-label>
+        <input style="color: black;" matInput formControlName="street" disabled  type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Ville</mat-label>
+        <input style="color: black;" matInput formControlName="city" disabled   type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Province</mat-label>
+        <input style="color: black;" matInput formControlName="province" disabled   type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Code Postal</mat-label>
+        <input style="color: black;" matInput formControlName="postalCode" disabled   type="text" />
+      </mat-form-field>
+
+    </mat-toolbar-row>
+    <mat-divider></mat-divider>
+    
+    </form>
+    </div>
+    <div *ngFor="let article of articles " style="margin-left: 20px;margin-top: 5px;" >
+    <mat-toolbar-row>
+      <mat-icon mat-list-icon>medical_services</mat-icon>&nbsp;
+      <div>
+      <div  mat-line style="color: darkseagreen;">{{article.name}}</div>
+      <div mat-line> {{article.hospitalName}} </div>
+      <div mat-line *ngIf="article.expirationDate"> quantité {{article.qty }} prix {{ article.price? article.price: 0 | currency}} </div>
+    </div>
+    </mat-toolbar-row>
+    </div>
+    <div align="center">
+      <button  class="btn" mat-raised-button style=" width: 30%;" (click)="print()">Imprimer </button>
+    </div>
+    <br>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

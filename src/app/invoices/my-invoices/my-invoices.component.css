@@ -1,3 +1,9 @@
+.grid-container {
+  margin: 20px;
+}
+
+
+
 #sidenav-container {
   top: 64px !important;
 }
@@ -6,4 +12,23 @@
   #sidenav-container {
     top: 56px !important;
   }
+}
+.form {
+  width: 90%;
+}
+  .mat-form-field{
+    margin: 4px;
+    margin-top: 10px;
+    width: 100%;
+  }
+ 
+
+ .example-spacer {
+  flex: 1 1 auto;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
