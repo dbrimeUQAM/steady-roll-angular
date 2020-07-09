@@ -13,7 +13,7 @@
             <mat-form-field appearance="outline">
               <mat-label>Nom de l'article</mat-label>
               <input formControlName="name" required minlength="4" maxlength="100" matInput />
-              <mat-error *ngIf="name"> name requis </mat-error>
+              <mat-error *ngIf="name"> Nom requis </mat-error>
             </mat-form-field>
           </div>
           <!-- type -->
@@ -25,7 +25,7 @@
                 <mat-option value="equipement">Equipement</mat-option>
                 <mat-option value="fourniture">Fourniture</mat-option>
               </mat-select>
-              <mat-error *ngIf="type"> name requis </mat-error>
+              <mat-error *ngIf="type"> Type de l'article requis </mat-error>
 
             </mat-form-field>
           </div>
@@ -33,8 +33,8 @@
           <div>
             <mat-form-field appearance="outline">
               <mat-label> Quantité </mat-label>
-              <input formControlName="quantity" required matInput type="number" value="1" min="1" max="1000" />
-              <mat-error *ngIf="qty"> name requis </mat-error>
+              <input formControlName="quantity" required matInput type="number" value="1" min="1" max="900" />
+              <mat-error *ngIf="qty"> Quantité requise </mat-error>
             </mat-form-field>
           </div>
           <!-- expirationDate  -->
@@ -51,7 +51,7 @@
             <mat-form-field appearance="outline">
               <mat-label>Description</mat-label>
               <textarea formControlName="description" matInput></textarea>
-              <mat-error *ngIf="description"> name requis </mat-error>
+              <mat-error *ngIf="description"> Description requise </mat-error>
 
             </mat-form-field>
           </div>
@@ -66,7 +66,7 @@
                 <mat-option value="acceptable">acceptable</mat-option>
                 <mat-option value="mauvais">mauvais</mat-option>
               </mat-select>
-              <mat-error *ngIf="condition"> name requis </mat-error>
+              <mat-error *ngIf="condition"> Condition requise </mat-error>
 
             </mat-form-field>
           </div>
@@ -78,7 +78,7 @@
                 <mat-option value="donner">À donner</mat-option>
                 <mat-option value="vendre">À vendre</mat-option>
               </mat-select>
-              <mat-error *ngIf="mode"> name requis </mat-error>
+              <mat-error *ngIf="mode"> Mode d'échange requis </mat-error>
 
             </mat-form-field>
           </div>
@@ -92,9 +92,8 @@
             </mat-form-field>
           </div>
           <div class="bouton">
-            <button class="btn"
-              style="background-color: #097D6C; color: white; width: 100%;" mat-raised-button color="primary"
-              (click)="submit()">Ajouter</button>
+            <button class="btn" style="background-color: #097D6C; color: white; width: 100%;" mat-raised-button
+              color="primary" (click)="submit()">Ajouter</button>
           </div>
         </div>
 
