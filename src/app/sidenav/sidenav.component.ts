@@ -36,7 +36,7 @@ export class SidenavComponent implements OnInit {
           icon: 'biotech'
       }, {
           label: 'Commandes',
-          link: '/my-orders',
+          link: '/bag',
           icon: 'shopping_cart'
       }, {
           label: 'Factures',
