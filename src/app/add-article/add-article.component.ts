@@ -47,8 +47,8 @@ export class AddArticleComponent implements OnInit {
       expirationDate: '',
       condition: ['', Validators.required],
       offerType: ['', Validators.required],
-      quantity: [0, [Validators.required, Validators.max(900)]],
-      price: [0, [Validators.required, Validators.max(900)]],
+      quantity: [0, [Validators.required, Validators.max(999)]],
+      price: [0, [Validators.required, Validators.max(999)]],
     })
     this.articleFrom.get('name').valueChanges.subscribe(data => {
       this.article.name = data;
