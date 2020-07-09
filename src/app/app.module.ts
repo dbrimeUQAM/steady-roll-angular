@@ -26,7 +26,6 @@ import { AddArticleComponent } from './add-article/add-article.component';
 import { DialogElementsComponent } from './dialog-elements/dialog-elements.component';
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
 import { BagPageComponent } from './bag-page/bag-page.component';
-import { LineInputComponent } from './line-input/line-input.component';
 
 import { ArticlesListComponent } from './articles/articles-list.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
@@ -43,6 +42,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 import { MaterialModule } from './material.module';
+import { PaymentPageComponent } from './payment-page/payment-page.component';
+import { LineInputComponent } from './line-input/line-input.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { MaterialModule } from './material.module';
     ArticlesListContainerComponent,
     MyOrdersComponent,
     MyInvoicesComponent,
-    ContactComponent
+    ContactComponent,
+    PaymentPageComponent
   ],
   imports: [
     RecaptchaModule,
