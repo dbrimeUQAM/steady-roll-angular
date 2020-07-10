@@ -156,28 +156,54 @@ orders.route('/:userId/in-progress')
           return res.status(error.statusCode).json(error);
         }
 
-        clientOrder= Array.isArray(clientOrder) ? clientOrder[0] : null;
+        const articleIds = clientOrder.getArticles().map(article => article.articleId);
 
-        if(clientOrder){
-          const articleIds = clientOrder.articles.map(article => article.articleId);
+        return Article.fetch(articleIds, (error, articles) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
 
-          return Article.fetch(articleIds, (error, articles) => {
-            if (error) {
-              return res.status(error.statusCode).json(error);
+          const updatedArticles = clientOrder.getArticles().map(article => {
+            let articleDoc = articles.find(item => item._id === article.articleId);
+            if (articleDoc) {
+              return { ...articleDoc, ...article };
             }
-
-            clientOrder.articles = clientOrder.articles.map(article => {
-              let articleDoc = articles.find(item => item._id === article.articleId);
-              if (articleDoc) {
-                return { ...articleDoc, ...article };
-              }
-              return article;
-            });
-
-            return res.status(200).json(clientOrder);
+            return article;
           });
-        }
+
+          clientOrder.setDocValue('articles', updatedArticles);
+
+          return res.status(200).json(clientOrder.doc);
+
+        });
       });
+    });
+
+
+orders.route('/user/:userId/add-article')
+    /* POST article to order. */
+    .post((req, res) => {
+      const userId = req.params.userId;
+      const { articleId, qty } = req.body;
+
+      return Order.getInProgressByUserId(userId, (error, order) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        order.addArticle(articleId, qty);
+
+        return order.save((error, savedOrder) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          return res.status(200).json(savedOrder.doc);
+        });
+
+
+      });
+
     });
 
 module.exports = orders;

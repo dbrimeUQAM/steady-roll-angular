@@ -92,9 +92,10 @@ auth.route('/signin')
             role: user.doc.role,
             email: user.doc.email,
             name: user.doc.name,
+            phone: user.doc.phone,
             accessToken: token,
             hospital: hospital.doc,
-            order: Array.isArray(order) ? order[0] : null
+            order: order.doc
           });
 
         });
