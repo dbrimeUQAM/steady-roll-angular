@@ -24,6 +24,7 @@ import { ContactComponent } from './contact/contact.component';
 
 // Admin
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { PaymentPageComponent } from './payment-page/payment-page.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,8 @@ const routes: Routes = [
   { path: 'my-orders', component: MyOrdersComponent },
   { path: 'my-invoices', component: MyInvoicesComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'payement', component: PaymentPageComponent },
+
   {
     path: 'admin-users',
     loadChildren: () => import('./admin/admin-users/admin-users.module').then(m => m.AdminUsersModule)

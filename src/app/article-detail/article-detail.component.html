@@ -1,146 +1,62 @@
-<app-header></app-header>
-<br>
-<h2 class="mat-h2">&nbsp; {{ article.name }} ( {{article.articleType}} )</h2>
-<mat-divider></mat-divider>
-<div class="center">
-<form [formGroup]="detailForm" class="forme" >
-  <mat-form-field appearance="outline"  >
-    <mat-label>Nom de l'article</mat-label>
-    <input style="color: black;" matInput formControlName="name" disabled   type="text" />
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Type</mat-label>
-    <input style="color: black;" matInput formControlName="articleType" disabled   type="text" />
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Nom de l'article</mat-label>
-    <input style="color: black;" matInput formControlName="description" disabled  type="text" />
-  </mat-form-field>
-  <div *ngIf="article.expirationDate">
-  <mat-form-field appearance="outline">
-    <mat-label>Date d'exipration</mat-label>
-    <input style="color: black;" matInput formControlName="expirationDate" disabled   type="date" />
-  </mat-form-field>
-  </div>
-  <mat-form-field appearance="outline">
-    <mat-label>Nom de l'hospitale</mat-label>
-    <input style="color: black;" matInput formControlName="hospitalName" disabled   type="text" />
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Condition</mat-label>
-    <input style="color: black;" matInput formControlName="condition" disabled   type="text" />
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Mode d'échange:</mat-label>
-    <input style="color: black;" matInput formControlName="offerType" disabled   type="text" />
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Quantité</mat-label>
-    <input style="color: black;" matInput formControlName="quantity" disabled   type="number" />
-  </mat-form-field>
-  <div *ngIf="article.offerType==='à vendre'">
-  <mat-form-field appearance="outline">
-    <mat-label>Prix</mat-label>
-    <input style="color: black;" matInput formControlName="price" disabled   type="number" />
-    <span matPrefix> $ &nbsp; </span>
-        <span matSuffix> .00 </span>
-  </mat-form-field>
-</div>
-<div class="bouton">
-  <button class="btn" mat-raised-button style="background-color: #097D6C; color: white; width: 100%;" (click)="openDialog(article.name, article.articleType)" >Ajouter au panier</button>
-</div>
-</form>
-</div>
-<!-- <form [formGroup]="detailForm" >
-<div class="center">
-  <div class="row">
-    <div class="col-25">
-      <mat-label class="label">Nom de l'article:&nbsp; </mat-label>
-    </div>
-    <div class="col-75">
-      {{ article.name}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <mat-label class="label">Type:&nbsp;</mat-label>
-    </div>
-    <div class="col-75">
-      {{ article.articleType}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <mat-label class="label">Quantité:&nbsp;</mat-label>
-    </div>
-    <div class="col-75">
-      {{ article.quantity}}
-    </div>
-  </div>
-  <div *ngIf="article.expirationDate" class="row">
-    <div class="col-25">
-      <mat-label class="label">Date D'expiration:&nbsp;</mat-label>
-    </div>
-    <div class="col-75">
-      {{ article.expirationDate}}
-    </div>
-  </div>
-  
-  
-  <div class="row">
-    <div class="col-25">
-      <mat-label class="label">Nom de l'hospitale:&nbsp;</mat-label>
-    </div>
-    <div class="col-75">
-      {{ article.hospitalName}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <mat-label class="label">Description:&nbsp;</mat-label>
-    </div>
-    <div class="col-75">
-      {{ article.description}}
-    </div>
-  </div>
- 
-  <div *ngIf="article.condition" class="row">
-    <div class="col-25">
-      <mat-label class="label">Condition:&nbsp;</mat-label>
-    </div>
-    <div class="col-75">
-      {{ article.condition}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <mat-label class="label">Mode d'échange:&nbsp;</mat-label>
-    </div>
-    <div class="col-75">
-      <div *ngIf="article.offerType==='à donner'">
-          {{ article.offerType}}
+<app-header [inputSideNav]="sideNav"></app-header>
+<mat-sidenav-container id="sidenav-container" fullscreen>
+  <mat-sidenav #sideNav mode="side">
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <br>
+    <h2 class="mat-h2">&nbsp; {{ article.name }} ( {{article.articleType}} )</h2>
+    <mat-divider></mat-divider>
+    <div class="center">
+    <form [formGroup]="detailForm" class="forme" >
+      <mat-form-field appearance="outline"  >
+        <mat-label>Nom de l'article</mat-label>
+        <input style="color: black;" matInput formControlName="name" disabled   type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <input style="color: black;" matInput formControlName="articleType" disabled   type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Nom de l'article</mat-label>
+        <input style="color: black;" matInput formControlName="description" disabled  type="text" />
+      </mat-form-field>
+      <div *ngIf="article.expirationDate">
+      <mat-form-field appearance="outline">
+        <mat-label>Date d'exipration</mat-label>
+        <input style="color: black;" matInput formControlName="expirationDate" disabled   type="date" />
+      </mat-form-field>
       </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Nom de l'hospitale</mat-label>
+        <input style="color: black;" matInput formControlName="hospitalName" disabled   type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Condition</mat-label>
+        <input style="color: black;" matInput formControlName="condition" disabled   type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Mode d'échange:</mat-label>
+        <input style="color: black;" matInput formControlName="offerType" disabled   type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Quantité</mat-label>
+        <input style="color: black;" matInput formControlName="quantity" disabled   type="number" />
+      </mat-form-field>
       <div *ngIf="article.offerType==='à vendre'">
-        {{ article.offerType }} 
-        
-      
-      </div>
-      
+      <mat-form-field appearance="outline">
+        <mat-label>Prix</mat-label>
+        <input style="color: black;" matInput formControlName="price" disabled   type="number" />
+        <span matPrefix> $ &nbsp; </span>
+            <span matSuffix> .00 </span>
+      </mat-form-field>
     </div>
-  </div>
+    <div class="bouton">
+      <button class="btn" mat-raised-button style="background-color: #097D6C; color: white; width: 100%;" (click)="openDialog(article.name, article.articleType)" >Ajouter au panier</button>
+    </div>
+    </form>
+    </div>
 
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
-  <div *ngIf="article.offerType==='à vendre'" class="row">
-    <div class="col-25">
-      <mat-label class="label">prix:&nbsp;</mat-label>
-    </div>
-    <div class="col-75">
-      {{ article.price}}
-      <span matPrefix> $ &nbsp; </span>
-    </div>
-  </div>
-</div>
-</form> -->
-<!-- <button mat-button (click)="openDialog()" [routerLink]="'/add-article'">Launch dialog</button>
- -->
-  <!-- ajouter -->

@@ -1,7 +1,16 @@
-table {
+.tab1 {
   width: 100%;
 }
-
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-row{
+  cursor: pointer
+}
+.mat-row:hover {
+  background-color: #48a597;
+ font-style: bold;
+}
 .mat-form-field {
   font-size: 14px;
   width: 100%;

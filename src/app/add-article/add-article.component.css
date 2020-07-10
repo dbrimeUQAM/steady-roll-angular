@@ -1,21 +1,39 @@
- .mat-form-field {
-  width: 80%;
+.grid-container {
+  margin: 20px;
+}
+
+
+#sidenav-container {
+  top: 64px !important;
+}
+
+@media(max-width: 599px) {
+  #sidenav-container {
+    top: 56px !important;
   }
-  .bouton {
-    width: 40%;
-    align-items: center;
-    margin-left: 20%;
-    margin-right: 20%;
-    padding-bottom: 5%;
-   
-    }
-    .center {
-      margin: auto;
-      width: 70%;
-      padding: 10px;
-     }
- 
- .row:after {
+}
+
+  .mat-form-field{
+    width: 80%;
+  }
+  .center {
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+ }
+ .bouton {
+  width: 40%;
+  align-items: center;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-bottom: 5%;
+  }
+
+ .example-spacer {
+  flex: 1 1 auto;
+}
+
+.row:after {
   content: "";
   display: table;
   clear: both;
