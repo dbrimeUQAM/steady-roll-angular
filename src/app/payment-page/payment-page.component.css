@@ -22,3 +22,20 @@
     top: 56px !important;
   }
 }
+.center {
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+ }
+ .mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.img{
+  width: 30%;
+ border-bottom: 3mm;
+}
+.carte{
+  padding-left: 5mm;
+  padding-top: 2mm;
+  padding-bottom: 5mm;
+}

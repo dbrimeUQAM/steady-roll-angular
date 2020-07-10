@@ -5,11 +5,56 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
+    <!-- ##### -->
+    <div class="center">
+      <!-- type de la carte de payement-->
+      <div clase="img">
+        <img src="../../assets/images/carte.png" width="100px" />
+        <br>
+        <hr>
+        <label> Votre carte: </label>
+        <br>
+        <div class="carte">
+          <mat-radio-group aria-label="Select an option" appearance="outline">
+            <mat-radio-button value="visa">Visa</mat-radio-button>
+            <mat-radio-button value="mastercard">Mastercard</mat-radio-button>
+          </mat-radio-group>
+          <br>
+        </div>
+        <mat-form-field appearance="outline">
 
+          <mat-label>Titulaire de la carte</mat-label>
+          <input formControlName="name" required maxlength="200" matInput />
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+          <mat-label>Numéro de la carte</mat-label>
+          <input formControlName="num" type="text" required matInput />
+        </mat-form-field>
+        <br>
 
+        <mat-form-field appearance="outline">
+          <mat-label>Date d'expiration</mat-label>
+          <input formControlName="date" type="month" required matInput />
 
-    <p>payment-page works!</p>
+        </mat-form-field>
+        <br>
 
+        <mat-form-field appearance="outline">
+          <mat-label>Cryptogramme</mat-label>
+          <input formControlName="crypto" type="text" required matInput />
 
+        </mat-form-field>
+
+      </div>
+      <div>
+        <button style="background-color: #097D6C; color: white; width: 12%; " mat-raised-button
+          color="primary">Payer</button>
+
+        <button style="background-color: #e24e5a; color: white; width: 12%;" mat-raised-button
+          color="primary">Annuler</button>
+      </div>
+    </div>
+    <!-- ####### -->
   </mat-sidenav-content>
 </mat-sidenav-container>

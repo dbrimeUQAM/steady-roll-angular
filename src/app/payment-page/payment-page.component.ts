@@ -13,3 +13,7 @@ export class PaymentPageComponent implements OnInit {
   }
 
 }
+export class RadioOverviewExample {
+
+}
+
