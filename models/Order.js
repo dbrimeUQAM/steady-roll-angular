@@ -1,6 +1,7 @@
 'use strict';
 
 const Model = require('./Model');
+const User = require('./User');
 
 class Order extends Model {
   constructor(doc) {
@@ -13,8 +14,24 @@ class Order extends Model {
    * @param {string} - articleId
    * @returns {Order}
    */
-  static addArticle(articleId, callback) {
-    //exemple de methode de classe
+  addArticle(articleId, qty, callback) {
+    const articles = this.getArticles();
+    const foundIndex = articles.findIndex(article => article.articleId === articleId);
+    if (foundIndex !== -1) {
+      articles[foundIndex].qty += qty;
+    } else {
+      articles.push({
+        articleId,
+        qty
+      });
+    }
+
+    return this;
+
+  }
+
+  getArticles() {
+    return this.getDocValue('articles', []);
   }
 
   static getInProgressByUserId(userId, callback) {
@@ -31,7 +48,28 @@ class Order extends Model {
 
       const filtered = data.rows.map(row => row.doc);
 
-      return callback(null, filtered);
+      if (filtered.length > 0) {
+        return callback(null, new Order(filtered[0]));
+      } else {
+
+        return User.get(userId, (error, user) => {
+          if (error) {
+            return callback(error);
+          }
+
+          const newOrder = new Order({
+            userId,
+            type: Order.TYPE,
+            status: Order.STATUS.IN_PROGRESS,
+            hospitalId: user.getHospitalId(),
+            orderDate: new Date()
+          });
+
+          return newOrder.save(callback);
+
+        });
+
+      }
 
     });
   }

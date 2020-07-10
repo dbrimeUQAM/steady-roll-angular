@@ -28,6 +28,15 @@ export class OrderService {
     );
   }
 
+  addArticleToOrder(userId: string, articleId: string, qty: number): Observable<any> {
+    const url = `${apiUrl}/user/${userId}/add-article`;
+    return this.httpClient.post(url, { articleId, qty }, httpOptions).pipe(
+      tap(_ => console.log(`added article to order for user id=${userId}`)),
+      catchError(this.handleError<any>('addArticleToOrder'))
+    );
+  }
+
+
 /*
 
 
@@ -56,12 +65,7 @@ export class OrderService {
     );
   }
 
-  addArticleToOrder(article: Article): Observable<Article> {
-    return this.httpClient.post<Article>(apiUrl, article, httpOptions).pipe(
-      tap((a: Article) => console.log(`added article w/ id=${a._id}`)),
-      catchError(this.handleError<Article>('addArticle'))
-    );
-  }
+
 */
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

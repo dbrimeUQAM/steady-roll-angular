@@ -11,3 +11,20 @@
     top: 56px !important;
   }
 }
+
+.grid-container {
+  margin: 20px;
+  text-align: center;
+}
+
+.mat-flat-button.mat-accent, .mat-raised-button.mat-accent, .mat-fab.mat-accent, .mat-mini-fab.mat-accent {
+  background-color: #097D6C;
+}
+
+#text-home {
+  margin: 20px;
+  max-width: 600px;
+  text-align: center;
+  display: inline-block;
+}
+

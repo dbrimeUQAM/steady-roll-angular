@@ -7,10 +7,12 @@
 .mat-row{
   cursor: pointer
 }
-.mat-row:hover {
-  background-color: #48a597;
- font-style: bold;
+tr.mat-row:hover {
+  background-color:whitesmoke;
+  font-style: bold;
+  color: white;
 }
+
 .mat-form-field {
   font-size: 14px;
   width: 100%;

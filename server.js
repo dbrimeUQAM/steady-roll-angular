@@ -3,10 +3,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // Routers Express
+const articles = require('./routes/articles');
 const auth = require('./routes/auth');
+const contacts = require('./routes/contacts');
+const hospitals = require('./routes/hospitals');
+const invoices = require('./routes/invoices');
 const orders = require('./routes/orders');
 const users = require('./routes/users');
-const articles = require('./routes/articles');
 
 const app = express()
   .use(cors())
@@ -21,10 +24,13 @@ const server = app.listen(process.env.PORT || 3000, () => {
 });
 
 // Initialiser les routes
+app.use('/api/articles', articles);
 app.use('/api/auth', auth);
+app.use('/api/contacts', contacts);
+app.use('/api/hospitals', hospitals);
+app.use('/api/invoices', invoices);
 app.use('/api/orders', orders);
 app.use('/api/users', users);
-app.use('/api/articles', articles);
 app.use('/api/', (req, res) => {
   res.status(404).send('Route non trouvée.');
 });
