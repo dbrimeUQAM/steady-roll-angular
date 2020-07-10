@@ -9,6 +9,7 @@ const articles = express.Router();
 // Models
 const Article = require('../models/Article');
 const Hospital = require('../models/Hospital');
+const Order = require('../models/Order');
 
 articles.route('/')
     /* GET all articles. */
@@ -142,5 +143,7 @@ articles.route('/:articleId')
 
       });
     });
+
+
 
 module.exports = articles;

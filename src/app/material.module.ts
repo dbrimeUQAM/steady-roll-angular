@@ -26,6 +26,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { MatCarouselModule } from '@ngmodule/material-carousel';
+
+
 
 @NgModule({
   imports: [
@@ -52,7 +55,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatCarouselModule
   ],
   exports: [
     MatSnackBarModule,
@@ -78,7 +82,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatCarouselModule
   ]
 })
 

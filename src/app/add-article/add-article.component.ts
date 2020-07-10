@@ -28,14 +28,17 @@ export class AddArticleComponent implements OnInit {
   qty: boolean;
 
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private articleService: ArticleService, private tokenStorage: TokenStorageService) { }
+  constructor(private router: Router,
+              private formBuilder: FormBuilder,
+              private articleService: ArticleService,
+              private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     const currentMonth = new Date().getMonth();
     const currentYear = new Date().getFullYear();
     const currentDay = new Date().getDay();
     this.minDate = new Date(currentYear, currentMonth + 1, currentDay + 5);
-    this.article = new Article;
+    this.article = new Article();
     this.hospitalName = this.tokenStorage.getUser().hospital.name;
     this.hospitalId = this.tokenStorage.getUser().hospital._id;
     this.article.hospitalId = this.hospitalId;
@@ -49,7 +52,7 @@ export class AddArticleComponent implements OnInit {
       offerType: ['', Validators.required],
       quantity: [0, [Validators.required, Validators.max(999)]],
       price: [0, [Validators.required, Validators.max(999)]],
-    })
+    });
     this.articleFrom.get('name').valueChanges.subscribe(data => {
       this.article.name = data;
     });
@@ -100,7 +103,7 @@ export class AddArticleComponent implements OnInit {
         const id = data._id;
         this.router.navigate(['/home']);
 
-      })
+      });
     }
 
   }

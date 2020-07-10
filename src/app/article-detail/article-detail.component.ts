@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../services/article/article.service';
+import { OrderService } from '../services/order/order.service';
+import { TokenStorageService } from '../services/token-storage/token-storage.service';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from '../services/article/article';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogContentComponent } from '../dialog-content/dialog-content.component';
-import { OrderService } from '../services/order/order.service';
 
 @Component({
   selector: 'app-article-detail',
@@ -13,63 +14,66 @@ import { OrderService } from '../services/order/order.service';
   styleUrls: ['./article-detail.component.css']
 })
 export class ArticleDetailComponent implements OnInit {
-  article : Article ;
+  article: Article ;
   articleForm: FormGroup ;
   public detailForm: FormGroup;
   offer: string;
-  constructor( public orderService: OrderService,public dialog: MatDialog, private route: ActivatedRoute, private articleService: ArticleService, private formBuilder: FormBuilder) { }
+  constructor( public dialog: MatDialog,
+               private route: ActivatedRoute,
+               private tokenStorage: TokenStorageService,
+               private articleService: ArticleService,
+               private orderService: OrderService,
+               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
    const articleId: string =  this.route.snapshot.params.id ;
-   
-    this.articleService.getArticleById(articleId).subscribe(
+
+   this.articleService.getArticleById(articleId).subscribe(
       data => {
         this.article = data ;
-      }, err => { 
-        console.log(err)
+      }, err => {
+        console.log(err);
       },
       () => {
         this.detailForm = this.formBuilder.group ({
-          articleType: [{ 
-            value: this.article.articleType, 
+          articleType: [{
+            value: this.article.articleType,
             disabled: true}],
-          name: [{ 
-            value: this.article.name, 
+          name: [{
+            value: this.article.name,
             disabled: true}],
-          description: [{ 
-            value: this.article.description , 
+          description: [{
+            value: this.article.description ,
             disabled: true}],
-          expirationDate: [{ 
-            value: this.article.expirationDate , 
+          expirationDate: [{
+            value: this.article.expirationDate ,
             disabled: true}],
-          hospitalName: [{ 
-            value: this.article.hospitalName, 
+          hospitalName: [{
+            value: this.article.hospitalName,
             disabled: true}],
-          condition: [{ 
-            value: this.article.condition, 
+          condition: [{
+            value: this.article.condition,
             disabled: true}],
-          offerType: [{ 
-            value: this.article.offerType, 
+          offerType: [{
+            value: this.article.offerType,
             disabled: true}],
-          quantity:[{ 
-            value: this.article.quantity, 
+          quantity: [{
+            value: this.article.quantity,
             disabled: true}],
-          price: [{ 
-            value: [this.article.price ], 
+          price: [{
+            value: [this.article.price ],
             disabled: true}],
-        })
+        });
       }
-    ) 
-    
+    );
+
   }
   // quand on click sur le bouton ajouter au panier
-  openDialog(nom: string, type:string) {
-     /* this.orderService.addArticleToOrder(this.article).subscribe(data =>
-      {
-        const id = data._id ; 
-      } ); */ 
-    const dialog = this.dialog.open(DialogContentComponent, 
-      {data:{name: nom, articleType: type}});  
+  openDialog(nom: string, type: string) {
+    this.orderService.addArticleToOrder(this.tokenStorage.getUser().id, this.article._id, 1).subscribe(data => {
+      const dialog = this.dialog.open(DialogContentComponent,
+        {data: {name: nom, articleType: type}});
+    });
   }
 
 }

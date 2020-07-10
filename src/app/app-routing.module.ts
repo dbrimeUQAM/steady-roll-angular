@@ -41,7 +41,7 @@ const routes: Routes = [
   { path: 'user-create', component: UserCreateComponent, data: { title: 'Nouveau Utilisateur' } },
   { path: 'user-update/:id', component: UserUpdateComponent, data: { title: 'Modifier Utilisateur' } },
   { path: 'user-details/:id', component: UserDetailsComponent, data: { title: 'Utilisateur' } },
-  { path: 'articles/all', component: HomePageComponent, data: { title: 'Liste des Articles'} },
+  { path: 'articles/all', component: ArticlesListContainerComponent, data: { title: 'Liste des Articles'} },
   { path: 'articles/drugs', component: ArticlesListContainerComponent, data: { filter: 'medicament'} },
   { path: 'articles/supplies', component: ArticlesListContainerComponent, data: { filter: 'fourniture'} },
   { path: 'articles/equipments', component: ArticlesListContainerComponent, data: { filter: 'equipement'} },

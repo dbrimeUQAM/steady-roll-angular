@@ -18,7 +18,10 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   role = '';
 
-  constructor(public dialog: MatDialog, private router: Router,private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(public dialog: MatDialog,
+              private router: Router,
+              private authService: AuthService,
+              private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {

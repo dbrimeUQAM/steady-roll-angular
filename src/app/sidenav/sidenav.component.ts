@@ -19,6 +19,10 @@ export class SidenavComponent implements OnInit {
           link: '/home',
           icon: 'home'
       }, {
+          label: 'Ajouter un article',
+          link: '/add-article',
+          icon: 'add_circle'
+      }, {
           label: 'Magasiner',
           link: '/articles/all',
           icon: 'storefront'
@@ -46,11 +50,7 @@ export class SidenavComponent implements OnInit {
           label: 'Contactez-nous',
           link: '/contact',
           icon: 'support_agent'
-      }, {
-        label: 'Ajouter un article',
-        link: '/add-article',
-        icon: 'add_circle'
-    }
+      }
     ];
 
 

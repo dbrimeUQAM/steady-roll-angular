@@ -4,18 +4,20 @@
       <mat-icon>menu</mat-icon>
     </button>
 
-  
+
   <a mat-button [routerLink]="'/home'" ><h1>Steady Roll</h1></a>
 
-  
+
     <span class="example-spacer"></span>
     <button mat-icon-button [routerLink]="'/bag'" >
       <mat-icon [matBadge]="articleNum" matBadgeColor="warn">shopping_bag </mat-icon>
     </button>
-    <p> &nbsp; &nbsp; | &nbsp;</p>
-
-    <mat-icon>account_circle</mat-icon>&nbsp;
-    {{ name }} ( {{ hospitalName }} )
+    <span class="icon-divider">|</span>
+    <mat-icon>account_circle</mat-icon>
+    <div class="user-header">
+      <h2>{{ name }}</h2>
+      <!-- <h4>{{ hospitalName }}</h4> -->
+    </div>
 
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>arrow_drop_down</mat-icon>
