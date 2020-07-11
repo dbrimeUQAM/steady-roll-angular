@@ -17,7 +17,7 @@
   <span class="example-spacer"></span>
 
   <div class="bouton">
-    <button class="btn" mat-raised-button (click)="clear()" >Vider le panier</button>
+    <button *ngIf="articles.length > 0" class="btn" mat-raised-button (click)="clear()" >Vider le panier</button>
   </div>
 </mat-toolbar-row>
 
@@ -58,7 +58,7 @@
       <span class="example-spacer"></span>
     <div >{{ getTotal()* (0.05) | currency}} </div>
   </mat-toolbar-row>
-  
+
   <mat-toolbar-row>
     <div mat-subheader>TVQ</div>
       <span class="example-spacer"></span>
@@ -70,7 +70,7 @@
       <span class="example-spacer"></span>
     <div >{{ getTotal() + 15 + (getTotal()* (0.05)) +  (getTotal()* (0.09975)) | currency}} </div>
   </mat-toolbar-row>
-  
+
 </div>
 <br>
 <div align="right" class="bouton">
