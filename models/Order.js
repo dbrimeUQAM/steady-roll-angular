@@ -36,7 +36,7 @@ class Order extends Model {
    */
   deleteArticles(articleId, qty, callback) {
       var articles = this.getArticles() ;
-      articles= [];
+      articles.splice(0, articles.length);
       return this;
 
   }

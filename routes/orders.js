@@ -207,7 +207,7 @@ orders.route('/user/:userId/add-article')
     });
 
 
-    orders.route('/user/:userId/delete-articles')
+orders.route('/user/:userId/delete-articles')
       .put((req, res) => {
         const userId = req.params.userId;
 
@@ -215,10 +215,8 @@ orders.route('/user/:userId/add-article')
           if (error) {
             return res.status(error.statusCode).json(error);
           }
-          console.log("before:",order);
 
           order.deleteArticles();
-          console.log("after:",order);
 
           return order.save((error, savedOrder) => {
               if (error) {
