@@ -46,6 +46,7 @@ export class BagPageComponent implements OnInit {
       console.log('my order', res)
       this.articles = res.articles;
       this.dataSource = new MatTableDataSource(this.articles);
+      window.location.reload();
     }, err => {
       console.log(err);
     }, () => {
