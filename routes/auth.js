@@ -31,7 +31,9 @@ auth.route('/signup')
           email: req.body.email,
           name: req.body.name,
           password: bcrypt.hashSync(req.body.password, 8),
-          role: User.ROLES.USER
+          role: User.ROLES.USER,
+          phoneNumber: req.body.phoneNumber,
+          hospitalId: req.body.hospitalId
         };
 
         const newUser = new User(postedUser);

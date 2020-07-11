@@ -26,6 +26,10 @@ users.route('/')
           if (error) {
             return res.status(error.statusCode).json(error);
           }
+
+          // Filter out any undefined values
+          hospitals = hospitals.filter(item => !!item);
+
           users = users.map(user => {
             let hospital = hospitals.find(hospital => hospital._id === user.hospitalId);
 

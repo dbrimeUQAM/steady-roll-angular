@@ -1,4 +1,4 @@
-<mat-toolbar style="background-color: #097D6C; color: white;">
+<mat-toolbar color="primary">
   <mat-toolbar-row>
     <button mat-icon-button (click)="inputSideNav.toggle()">
       <mat-icon>menu</mat-icon>
@@ -16,7 +16,6 @@
     <mat-icon>account_circle</mat-icon>
     <div class="user-header">
       <h2>{{ name }}</h2>
-      <!-- <h4>{{ hospitalName }}</h4> -->
     </div>
 
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
+import { TokenStorageService } from '../services/token-storage/token-storage.service';
+import { HospitalService } from '../services/hospital/hospital.service';
+import { Router } from '@angular/router';
+import { Hospital } from '../services/hospital/hospital';
 
 @Component({
   selector: 'app-register',
@@ -11,10 +15,34 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
+  hospitals: Hospital[];
+  isLoadingResults = true;
 
-  constructor(private authService: AuthService) { }
+  isLoggedIn = false;
+  isLoginFailed = false;
+  role = '';
+
+  constructor(private router: Router,
+              private hospitalService: HospitalService,
+              private authService: AuthService,
+              private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.role = this.tokenStorage.getUser().role;
+      this.router.navigate(['/home']);
+    }
+
+    this.hospitalService.getAll(null)
+    .subscribe((res: any) => {
+      this.hospitals = res;
+      this.isLoadingResults = false;
+    }, err => {
+      console.log(err);
+      this.isLoadingResults = false;
+    });
+
   }
 
   onSubmit() {
@@ -23,6 +51,7 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.router.navigate(['/login']);
       },
       err => {
         this.errorMessage = err.error.message;

@@ -8,8 +8,6 @@ const utils = require('../utils');
 // Models
 const Hospital = require('../models/Hospital');
 
-hospitals.use(middleware.isAuthenticated);
-
 hospitals.route('/')
     /* GET all hospitals. */
     .get((req, res) => {
@@ -22,7 +20,7 @@ hospitals.route('/')
       });
     })
     /* POST hospital. */
-    .post((req, res) => {
+    .post(middleware.isAuthenticated, (req, res) => {
       const postedHospital = req.body;
 
       // More validations maybe?
@@ -48,7 +46,7 @@ hospitals.route('/')
 
   hospitals.route('/:hospitalId')
     /* GET hospital by id. */
-    .get((req, res) => {
+    .get(middleware.isAuthenticated, (req, res) => {
       const hospitalId = req.params.hospitalId;
 
       return Hospital.get(hospitalId, (error, hospital) => {
@@ -62,7 +60,7 @@ hospitals.route('/')
 
     })
     /* PUT hospital by id. */
-    .put((req, res) => {
+    .put(middleware.isAuthenticated, (req, res) => {
       const hospitalId = req.params.hospitalId;
       const updatedHospital = req.body;
 
@@ -92,7 +90,7 @@ hospitals.route('/')
 
     })
     /* DELETE hospital by id. */
-    .delete((req, res) => {
+    .delete(middleware.isAuthenticated, (req, res) => {
       const hospitalId = req.params.hospitalId;
 
       return Hospital.get(hospitalId, (error, hospital) => {
