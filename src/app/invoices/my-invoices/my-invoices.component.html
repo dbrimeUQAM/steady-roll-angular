@@ -4,7 +4,6 @@
     <app-sidenav></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div>
       <br>
     <h2 align="center" class="mat-h2">&nbsp; Votre commande a été effectuer avec succé </h2>
     <mat-divider></mat-divider>
@@ -55,20 +54,65 @@
     
     </form>
     </div>
-    <div *ngFor="let article of articles " style="margin-left: 20px;margin-top: 5px;" >
+
+    <br>
+
+    <div class="right">
+    <div class="left" *ngFor="let article of articles ">
     <mat-toolbar-row>
       <mat-icon mat-list-icon>medical_services</mat-icon>&nbsp;
       <div>
       <div  mat-line style="color: darkseagreen;">{{article.name}}</div>
       <div mat-line> {{article.hospitalName}} </div>
-      <div mat-line *ngIf="article.expirationDate"> quantité {{article.qty }} prix {{ article.price? article.price: 0 | currency}} </div>
+      <div mat-line *ngIf="article.expirationDate">  {{article.qty }} X {{ article.price? article.price: 0 | currency}} </div>
     </div>
+    <span class="example-spacer"></span>
     </mat-toolbar-row>
+     <mat-divider></mat-divider>
+     <mat-divider></mat-divider>
+     <mat-divider></mat-divider>
     </div>
+    <div class="left">
+      <mat-toolbar-row>
+        <div mat-subheader>Sous-total</div>
+          <span class="example-spacer"></span>
+        <div >{{ total | currency}} </div>
+      </mat-toolbar-row>
+      <mat-divider></mat-divider>
+      <mat-toolbar-row>
+        <div mat-subheader>TPS/TVH</div>
+          <span class="example-spacer"></span>
+        <div >{{ total * (0.05) | currency}} </div>
+      </mat-toolbar-row>
+      <mat-divider></mat-divider>
+      <mat-toolbar-row>
+        <div mat-subheader>TVQ</div>
+          <span class="example-spacer"></span>
+        <div >{{ total * (0.09975) | currency}} </div>
+      </mat-toolbar-row>
+      <mat-divider></mat-divider>
+      <mat-toolbar-row>
+        <div mat-subheader>Livraisons</div>
+          <span class="example-spacer"></span>
+        <div >{{ 15 | currency}} </div>
+      </mat-toolbar-row>
+      <mat-divider></mat-divider>
+      <mat-toolbar-row>
+        <div mat-subheader>Total</div>
+          <span class="example-spacer"></span>
+        <div >{{ total + 15 + (total* (0.05)) +  (total* (0.09975)) | currency}} </div>
+      </mat-toolbar-row>
+     
+    </div>
+  </div>
+    <br>
+
+  
+
+
     <div align="center">
       <button  class="btn" mat-raised-button style=" width: 30%;" (click)="print()">Imprimer </button>
     </div>
     <br>
-    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

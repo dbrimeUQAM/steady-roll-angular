@@ -12,7 +12,7 @@ import { Article } from 'src/app/services/article/article';
 export class MyInvoicesComponent implements OnInit {
   invoiceForm: FormGroup ;
   articles: Article[] = [];
-
+  total:number = 0 ;
   constructor(private orderService: OrderService, private tokenStorageService: TokenStorageService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -25,6 +25,9 @@ export class MyInvoicesComponent implements OnInit {
     }, err => {
       console.log(err);
     }, () => {
+      for(let article of this.articles){
+        this.total = this.total + (article.qty * article.price)
+      }
       //this.articleNum = this.articles.length ;
     });
     this.invoiceForm = this.formBuilder.group ({
@@ -62,6 +65,7 @@ export class MyInvoicesComponent implements OnInit {
       }],
     })
   }
+  
   print(){
     window.print();
   }
