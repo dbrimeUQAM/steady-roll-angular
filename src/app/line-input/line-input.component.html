@@ -4,6 +4,7 @@
         <div  mat-line style="color: darkseagreen;">{{line.name}}</div>
         <div mat-line> {{line.hospitalName}} </div>
         <div mat-line *ngIf="line.expirationDate"> valide jusqu'à {{line.expirationDate | date}} </div>
+        <div style="color:red;" mat-line *ngIf="line.quantity == 0">  Cet item n'est plus disponible </div>
       </div>
       <span class="example-spacer"></span>
 
