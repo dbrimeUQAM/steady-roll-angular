@@ -206,5 +206,81 @@ orders.route('/user/:userId/add-article')
 
     });
 
+
+    orders.route('/user/:userId/delete-articles')
+      .put((req, res) => {
+        const userId = req.params.userId;
+
+        return Order.getInProgressByUserId(userId, (error, order) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+          console.log("before:",order);
+
+          order.deleteArticles();
+          console.log("after:",order);
+
+          return order.save((error, savedOrder) => {
+              if (error) {
+                return res.status(error.statusCode).json(error);
+              }
+
+              return res.status(200).json(savedOrder.doc);
+            });
+        });
+
+      });
+
+      orders.route('/user/:userId/delete-article/:articleId')
+        /* delete article from order. */
+        .put((req, res) => {
+          const userId = req.params.userId;
+          const articleId = req.params.articleId;
+
+          return Order.getInProgressByUserId(userId, (error, order) => {
+            if (error) {
+              return res.status(error.statusCode).json(error);
+            }
+
+            order.deleteArticle(articleId);
+
+            return order.save((error, savedOrder) => {
+              if (error) {
+                return res.status(error.statusCode).json(error);
+              }
+
+              return res.status(200).json(savedOrder.doc);
+            });
+
+
+          });
+
+        });
+
+
+
+        orders.route('/user/:userId/update-article/:articleId')
+          .put((req, res) => {
+            const userId = req.params.userId;
+            const { articleId, qty } = req.body;
+
+            return Order.getInProgressByUserId(userId, (error, order) => {
+              if (error) {
+                return res.status(error.statusCode).json(error);
+              }
+
+              order.updateArticle(articleId, qty);
+
+              return order.save((error, savedOrder) => {
+                  if (error) {
+                    return res.status(error.statusCode).json(error);
+                  }
+
+                  return res.status(200).json(savedOrder.doc);
+                });
+            });
+
+          });
+
 module.exports = orders;
 

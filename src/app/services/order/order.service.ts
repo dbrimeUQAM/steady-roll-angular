@@ -37,36 +37,36 @@ export class OrderService {
   }
 
 
-/*
+
 
 
   deleteAllArticles(userId: string): Observable<Order> {
-    const url = `${apiUrl}/${userId}/delete-all`;
-    return this.httpClient.put(url, userId, httpOptions).pipe(
-      tap(_ => console.log(`updated order for user=Iid=${userId}`)),
+    const url = `${apiUrl}/user/${userId}/delete-articles`;
+    return this.httpClient.put(url, httpOptions).pipe(
+      tap(_ => console.log(`delete articles in order for user id=${userId}`)),
       catchError(this.handleError<any>('updateArticle'))
     );
   }
 
+
   deleteArticle(userId: string, articleId: string): Observable<Order> {
-    const url = `${apiUrl}/${userId}/delete-article/${articleId}`;
+    const url = `${apiUrl}/user/${userId}/delete-article/${articleId}`;
     return this.httpClient.put(url, httpOptions).pipe(
       tap(_ => console.log(`updated order for user=Iid=${userId}`)),
       catchError(this.handleError<any>('updateArticle'))
     );
   }
 
-//toDo
-  updateArticleById(id: string, article: Article): Observable<any> {
-    const url = `${apiUrl}/${id}`;
-    return this.httpClient.put(url, article, httpOptions).pipe(
-      tap(_ => console.log(`updated article id=${id}`)),
+  updateArticleById(userId: string, articleId: string, qty :number): Observable<any> {
+    console.log("qtyyyyyy:",qty);
+
+    const url = `${apiUrl}/user/${userId}/update-article/${articleId}`;
+    return this.httpClient.put(url, { articleId, qty }, httpOptions).pipe(
+      tap(_ => console.log(`updated article id=${articleId}`)),
       catchError(this.handleError<any>('updateArticle'))
     );
   }
 
-
-*/
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

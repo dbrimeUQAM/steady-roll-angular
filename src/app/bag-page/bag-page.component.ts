@@ -41,7 +41,7 @@ export class BagPageComponent implements OnInit {
 
   }
   clear(){
-    /* this.orderService.deleteAllArticles(this.tokenStorage.getUser().id)
+    this.orderService.deleteAllArticles(this.tokenStorage.getUser().id)
     .subscribe((res: any) => {
       console.log('my order', res)
       this.articles = res.articles;
@@ -51,7 +51,7 @@ export class BagPageComponent implements OnInit {
     }, () => {
       this.articleNum = this.articles.length ;
     }
-    ); */
+    );
   }
   getMessage(message: number) {
     this.receivedChildMessage = message ;

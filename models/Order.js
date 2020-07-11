@@ -30,6 +30,44 @@ class Order extends Model {
 
   }
 
+  /**
+   * vider la commande
+   * @returns {Order}
+   */
+  deleteArticles(articleId, qty, callback) {
+      var articles = this.getArticles() ;
+      articles= [];
+      return this;
+
+  }
+
+  deleteArticle(articleId, callback) {
+      const articles = this.getArticles();
+      const foundIndex = articles.findIndex(article => article.articleId === articleId);
+      //it should be
+      if (foundIndex !== -1) {
+        articles.splice(foundIndex,1);
+      }
+
+      return this;
+  }
+
+  /**
+     * Ajoute un article à la commande
+     * @param {string} - articleId
+     * @returns {Order}
+     */
+    updateArticle(articleId, qty, callback) {
+      const articles = this.getArticles();
+      const foundIndex = articles.findIndex(article => article.articleId === articleId);
+      if (foundIndex !== -1) {
+        articles[foundIndex].qty = qty;
+      }
+
+      return this;
+
+    }
+
   getArticles() {
     return this.getDocValue('articles', []);
   }
