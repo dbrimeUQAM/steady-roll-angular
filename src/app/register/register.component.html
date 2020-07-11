@@ -1,4 +1,5 @@
-<mat-card class="register-card">
+<!--
+  <mat-card class="register-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
   </mat-card-header>
@@ -73,3 +74,87 @@
     Votre inscription a réussi!
   </mat-card-content>
 </mat-card>
+-->
+<div class="main-div col-md-12 text-center">
+  <div class="card card-container">
+    <mat-card  layout="row" layout-align="center center">
+      <img src="https://unitesoutiensrapqc.ca/wp-content/uploads/2017/08/MSSS-LOGO.jpg">
+    </mat-card>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div class="title">
+      <mat-card-title>Ouvrir un compte</mat-card-title>
+    </div>
+    <form #f="ngForm" name="form" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td colspan="2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Hôpital</mat-label>
+              <!--<input matInput [(ngModel)]="form.hospital" #hospital="ngModel" name="hospital" required>-->
+              <mat-select [(ngModel)]="form.hospital" #hospital="ngModel" name="hospital" required>
+                <mat-option *ngFor="let hospital of hospitals" [value]="hospital._id">
+                  {{hospital.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Nom</mat-label>
+              <input matInput [(ngModel)]="form.name" #name="ngModel" placeholder="Nom Complet" name="name" required>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Téléphone</mat-label>
+              <input matInput [(ngModel)]="form.phoneNumber" #phoneNumber="ngModel" placeholder="phoneNumber Complet" name="phoneNumber" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]="form.email" #email="ngModel" placeholder="Email" name="email" required>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Mote de passe</mat-label>
+              <input [(ngModel)]="form.password" matInput type="password" placeholder="Mot de passe"
+              minlength="6" name="password" #password="ngModel" required>
+              <mat-hint>Minimum 6 caractères</mat-hint>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <div class="form-group">
+        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+          Échec de la connexion: {{ errorMessage }}
+        </div>
+      </div>
+
+      <div class="title">
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (clic)="onSubmit()"> S'inscrire</button>
+        </mat-card-actions>
+      </div>
+      <mat-error *ngIf="f.submitted && isSignUpFailed">
+        L'ouverture du compte a échoué!: {{ errorMessage }}
+      </mat-error>
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+      <div class="title">
+        <a mat-flat-button href="http://www.droitauteur.gouv.qc.ca/copyright.php" target="_blank">© Gouvernement du Québec, 2020</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+
