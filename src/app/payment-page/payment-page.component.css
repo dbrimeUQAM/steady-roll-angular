@@ -2,10 +2,6 @@
   flex: 1 1 auto;
 }
 
-.grid-container {
-  margin: 20px;
-  height: 100%;
-}
 
 #sidenav-container {
   top: 64px !important;
@@ -38,4 +34,12 @@
   padding-left: 5mm;
   padding-top: 2mm;
   padding-bottom: 5mm;
+}
+.form {
+  width: 90%;
+}
+.mat-form-field {
+  margin: 4px;
+  margin-top: 10px;
+  width: 100%;
 }

@@ -5,9 +5,50 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <!-- ##### -->
-    <div class="center">
-      <!-- type de la carte de payement-->
+
+    <br>
+    <h2 align="center" class="mat-h2">&nbsp; Payement</h2>
+    <mat-divider></mat-divider>
+    <br><br>
+    <div align="center" >
+      <form  [formGroup]="payementForm" class="form">
+        <mat-form-field appearance="outline"  >
+          <mat-label>Nom sur la carte</mat-label>
+          <input required maxlength="30" style="color: black;" matInput type="text" />
+        </mat-form-field> 
+       
+      <mat-toolbar-row>
+       
+        <mat-form-field appearance="outline" style="width: 50%;">
+          <mat-label>Numéro de la carte de crédit</mat-label>
+          <input formControlName="name" required maxlength="30" style="color: black;" matInput type="text" />
+          <div *ngIf="isVisa">
+            <img matSuffix width="50px"  src="data:image/png;base64,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" />
+          <!-- <mat-icon matSuffix>payment</mat-icon> -->
+        </div>
+        <div *ngIf="isMasterCard">
+          <img matSuffix width="50px"  src="data:image/png;base64,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" />
+        <!-- <mat-icon matSuffix>payment</mat-icon> -->
+      </div>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 30%;" >
+          <mat-label>Date d"expiration</mat-label>
+          <input  type="month" required style="color: black;" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 20%;">
+          <mat-label>CODE CVV</mat-label>
+          <input required maxlength="30" style="color: black;" matInput   type="text" />
+        </mat-form-field>
+      </mat-toolbar-row>
+   
+    </form>
+    <br><br>
+    <div align="right" class="bouton" style="margin-right: 20px;">
+      <button class="btn" mat-raised-button [routerLink]="'/my-invoices'" >Enregistrer et continuer</button>
+    </div>
+      </div> 
+
+ <!--   <div class="center">
       <div clase="img">
         <img src="../../assets/images/carte.png" width="100px" />
         <br>
@@ -24,25 +65,25 @@
         <mat-form-field appearance="outline">
 
           <mat-label>Titulaire de la carte</mat-label>
-          <input formControlName="name" required maxlength="200" matInput />
+          <input  required maxlength="200" matInput />
         </mat-form-field>
         <br>
         <mat-form-field appearance="outline">
           <mat-label>Numéro de la carte</mat-label>
-          <input formControlName="num" type="text" required matInput />
+          <input  type="text" required matInput />
         </mat-form-field>
         <br>
 
         <mat-form-field appearance="outline">
           <mat-label>Date d'expiration</mat-label>
-          <input formControlName="date" type="month" required matInput />
+          <input  type="month" required matInput />
 
         </mat-form-field>
         <br>
 
         <mat-form-field appearance="outline">
           <mat-label>Cryptogramme</mat-label>
-          <input formControlName="crypto" type="text" required matInput />
+          <input  type="text" required matInput />
 
         </mat-form-field>
 
@@ -54,7 +95,6 @@
         <button style="background-color: #e24e5a; color: white; width: 12%;" mat-raised-button
           color="primary">Annuler</button>
       </div>
-    </div>
-    <!-- ####### -->
+    </div> -->
   </mat-sidenav-content>
 </mat-sidenav-container>
