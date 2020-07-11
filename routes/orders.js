@@ -163,6 +163,9 @@ orders.route('/:userId/in-progress')
             return res.status(error.statusCode).json(error);
           }
 
+          // Filter out any undefined values
+          articles = articles.filter(item => !!item);
+
           const updatedArticles = clientOrder.getArticles().map(article => {
             let articleDoc = articles.find(item => item._id === article.articleId);
             if (articleDoc) {
