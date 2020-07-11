@@ -36,9 +36,10 @@ export class LineInputComponent implements OnInit {
           this.myFrom.get('quantity').setValue(this.line.quantity);
         }
         this.myFrom.get('total').setValue(data * this.line.price);
-        //update
+        //update DB
         this.orderService.updateArticleById(this.tokenStorage.getUser().id, this.line._id , data).subscribe(data =>{
           this.line = data ;
+          window.location.reload();
         }) ;
 
         this.messageToSendC = this.myFrom.get('total').value
