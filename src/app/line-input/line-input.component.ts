@@ -3,6 +3,7 @@ import { Article } from '../services/article/article';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
 import { OrderService } from '../services/order/order.service';
+import { TokenStorageService } from '../services/token-storage/token-storage.service';
 
 @Component({
   selector: 'app-line-input',
@@ -18,7 +19,7 @@ export class LineInputComponent implements OnInit {
   messageToSendC: number ;
 
 
-  constructor(private formBuilder: FormBuilder,private orderService:OrderService) { }
+  constructor(private formBuilder: FormBuilder,private orderService:OrderService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
     console.log('======>', this.line)
@@ -27,7 +28,7 @@ export class LineInputComponent implements OnInit {
       price: [{ value: this.line.price ? this.line.price : 0 , disabled: true}],
       total: [{ value: this.line.price * this.line.qty , disabled: true}]
     }) ;
-    
+
 
     this.myFrom.get('quantity').valueChanges.subscribe(
       data => {
@@ -35,28 +36,33 @@ export class LineInputComponent implements OnInit {
           this.myFrom.get('quantity').setValue(this.line.quantity);
         }
         this.myFrom.get('total').setValue(data * this.line.price);
-        //update
-      /*   this.orderService.updateArticleById(this.id, this.line).subscribe(data =>{
+        //update DB
+        this.orderService.updateArticleById(this.tokenStorage.getUser().id, this.line._id , data).subscribe(data =>{
           this.line = data ;
-        }) ; */
-        
+          window.location.reload();
+        }) ;
+
         this.messageToSendC = this.myFrom.get('total').value
         this.sendMessageToParent(this.messageToSendC)
       }
     )
   }
-  removeArticle(){
-      //delet
-     /*  this.orderService.deleteArticle(userId, articleId).subscribe(data =>{
-        this.line = data ;
-      }) ; */
+
+  removeArticle(articleId: string){
+    this.orderService.deleteArticle(this.tokenStorage.getUser().id, articleId).subscribe(data => {
+      this.line = null ;
+      window.location.reload();
+      }, err =>{
+        console.log(err);
+      }
+    )
   }
+
   getTotal(){
     return this.messageToSendC
   }
   sendMessageToParent(message: number) {
     this.messageToEmit.emit(message)
   }
-
 
 }

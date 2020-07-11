@@ -4,7 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Article } from '../services/article/article';
 import { ArticleService } from '../services/article/article.service';
+import { OrderService } from '../services/order/order.service';
 import {ActivatedRoute} from '@angular/router';
+import { TokenStorageService } from '../services/token-storage/token-storage.service';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 
 @Component({
@@ -22,7 +24,7 @@ export class ArticlesListComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   filter;
 
-  constructor(private _snackBar: MatSnackBar, private articleService: ArticleService, route: ActivatedRoute ) {
+  constructor(private _snackBar: MatSnackBar, private articleService: ArticleService, private orderService: OrderService, route: ActivatedRoute, private tokenStorage: TokenStorageService ) {
     this.filter = route.snapshot.data.filter;
   }
 
@@ -40,11 +42,13 @@ export class ArticlesListComponent implements OnInit {
     });
 
   }
-  openSnackBar() {
-    /* this.orderService.addArticleToOrder(this.article).subscribe(data =>
+  openSnackBar(articleId: string) {
+    var user = this.tokenStorage.getUser();
+    this.orderService.addArticleToOrder(user.id, articleId, 1).subscribe(data =>
       {
-        const id = data._id ; 
-      } ); */ 
+        const id = data._id ;
+      } );
+
     this._snackBar.openFromComponent(PizzaPartyComponent, {
       duration: 4 * 1000,
       horizontalPosition: 'center' ,
