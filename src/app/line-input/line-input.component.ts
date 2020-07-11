@@ -50,6 +50,7 @@ export class LineInputComponent implements OnInit {
   removeArticle(articleId: string){
     this.orderService.deleteArticle(this.tokenStorage.getUser().id, articleId).subscribe(data => {
       this.line = null ;
+      window.location.reload();
       }, err =>{
         console.log(err);
       }
