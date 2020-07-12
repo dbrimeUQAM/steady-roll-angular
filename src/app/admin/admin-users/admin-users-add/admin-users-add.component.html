@@ -1,6 +1,6 @@
-<form [formGroup]="userForm">
+<!--<form [formGroup]="userForm">
   <div>
-    <!-- name -->
+
     <div>
       <mat-form-field appearance="outline">
         <mat-label>Nom</mat-label>
@@ -14,4 +14,89 @@
     </div>
   </div>
 
-</form>
+</form>-->
+
+<div class="grid-container">
+  <div class="card card-container">
+
+    <div class="title">
+      <mat-card-title>Nouveau Utilisateur</mat-card-title>
+    </div>
+    <form #f="ngForm" name="form" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td colspan="2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Hôpital</mat-label>
+              <mat-select [(ngModel)]="form.hospitalId" #hospitalId="ngModel" name="hospitalId" required>
+                <mat-option *ngFor="let hospital of hospitals" [value]="hospital._id">
+                  {{hospital.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Nom</mat-label>
+              <input matInput [(ngModel)]="form.name" #name="ngModel" placeholder="Nom Complet" name="name" required>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Téléphone</mat-label>
+              <input matInput [(ngModel)]="form.phoneNumber" #phoneNumber="ngModel" placeholder="+1 (514) 456-8517" name="phoneNumber" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]="form.email" #email="ngModel" placeholder="Email" name="email" required>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Mote de passe</mat-label>
+              <input [(ngModel)]="form.password" matInput type="password" placeholder="Mot de passe"
+              minlength="6" name="password" #password="ngModel" required>
+              <mat-hint>Minimum 6 caractères</mat-hint>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Role</mat-label>
+              <mat-select [(ngModel)]="form.role" #hospital="ngModel" name="role" required>
+                <mat-option *ngFor="let role of roles" [value]="role">
+                  {{role}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-slide-toggle [(ngModel)]="form.active" #active="ngModel" name="active">Active</mat-slide-toggle>
+          </td>
+        </tr>
+      </table>
+
+      <div class="text-right-aligned">
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (clic)="onSubmit()">
+            <mat-icon>save</mat-icon> Sauvegarder</button>
+          <button mat-raised-button color="primary" [routerLink]="['/admin/admin-users']">
+            <mat-icon>cancel</mat-icon> Annuler</button>
+        </mat-card-actions>
+      </div>
+      <mat-error *ngIf="f.submitted && isSaveFailed">
+        Erreur en sauvegardant!: {{ errorMessage }}
+      </mat-error>
+
+    </form>
+  </div>
+</div>
+
+

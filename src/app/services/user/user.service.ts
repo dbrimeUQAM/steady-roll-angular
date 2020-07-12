@@ -36,10 +36,11 @@ export class UserService {
   }
 
   addUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(apiUrl, user, httpOptions).pipe(
+    return this.httpClient.post<User>(apiUrl, user, httpOptions);
+    /*.pipe(
       tap((u: User) => console.log(`added user w/ id=${u._id}`)),
       catchError(this.handleError<User>('addUser'))
-    );
+    );*/
   }
 
   updateUser(id: string, user: User): Observable<any> {
@@ -55,6 +56,14 @@ export class UserService {
     return this.httpClient.delete<User>(url, httpOptions).pipe(
       tap(_ => console.log(`deleted user id=${id}`)),
       catchError(this.handleError<User>('deleteUser'))
+    );
+  }
+
+  activateUser(id: string): Observable<any> {
+    const url = `${apiUrl}/${id}/activate`;
+    return this.httpClient.put(url, httpOptions).pipe(
+      tap(_ => console.log(`activated user id=${id}`)),
+      catchError(this.handleError<User>(`activated user id=${id}`))
     );
   }
 

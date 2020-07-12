@@ -4,6 +4,7 @@ const express = require('express');
 const middleware = require('../middleware');
 const users = express.Router();
 const utils = require('../utils');
+const bcrypt = require('bcryptjs');
 
 // Models
 const User = require('../models/User');
@@ -57,16 +58,37 @@ users.route('/')
         });
       }
 
-      const newUser = new User(postedUser);
-
-      return newUser.save((error, savedUser) => {
-        if (error) {
+      return User.get(postedUser.email, (error, user) => {
+        if (error && error.statusCode !== 404) {
           return res.status(error.statusCode).json(error);
         }
 
-        return res.status(200).json(savedUser.doc);
-      });
+        if (user) {
+          return res.status(409).send({message: 'L\'utilisateur existe déjà!'});
+        }
 
+        const newUserObj = {
+          _id: postedUser.email,
+          type: User.TYPE,
+          email: postedUser.email,
+          name: postedUser.name,
+          password: bcrypt.hashSync(postedUser.password, 8),
+          role: postedUser.role,
+          phoneNumber: postedUser.phoneNumber,
+          hospitalId: postedUser.hospitalId,
+          active: postedUser.active || false
+        };
+
+        const newUser = new User(newUserObj);
+
+        return newUser.save((error, savedUser) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          return res.status(200).json(savedUser.doc);
+        });
+      });
     });
 
   users.route('/:userId')
@@ -132,6 +154,30 @@ users.route('/')
         });
 
       });
+    });
+
+    users.route('/:userId/activate')
+    /* Activate user by id. */
+    .put((req, res) => {
+      const userId = req.params.userId;
+
+      return User.get(userId, (error, user) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        user.setActive();
+
+        return user.save((error, savedUser) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          return res.status(200).json(savedUser.doc);
+        });
+
+      });
+
     });
 
 module.exports = users;

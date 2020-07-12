@@ -1,80 +1,3 @@
-<!--
-  <mat-card class="register-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-  </mat-card-header>
-  <mat-card-content *ngIf="!isSuccessful">
-    <form
-      *ngIf="!isSuccessful"
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-    <div class="form-group">
-      <label for="name">Nom</label>
-      <input
-        type="text"
-        class="form-control"
-        name="name"
-        [(ngModel)]="form.name"
-        required
-        #name="ngModel"
-      />
-      <div class="alert-danger" *ngIf="f.submitted && name.invalid">
-        <div *ngIf="name.errors.required">Nom requis</div>
-      </div>
-    </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          name="email"
-          [(ngModel)]="form.email"
-          required
-          email
-          #email="ngModel"
-        />
-        <div class="alert-danger" *ngIf="f.submitted && email.invalid">
-          <div *ngIf="email.errors.required">Email requis</div>
-          <div *ngIf="email.errors.email">
-            L'email doit être une adresse email valide
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password">Mot de passe</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-        />
-        <div class="alert-danger" *ngIf="f.submitted && password.invalid">
-          <div *ngIf="password.errors.required">Mot de passe requis</div>
-          <div *ngIf="password.errors.minlength">
-            Le mot de passe doit être au moins de 6 caractères
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <button style="background-color: #097D6C; color: white;" class="btn btn-primary btn-block">S'inscrire</button>
-      </div>
-
-      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-        L'inscription a échoué!<br />{{ errorMessage }}
-      </div>
-    </form>
-  </mat-card-content>
-  <mat-card-content *ngIf="isSuccessful">
-    Votre inscription a réussi!
-  </mat-card-content>
-</mat-card>
--->
 <div class="main-div col-md-12 text-center">
   <div class="card card-container">
     <mat-card  layout="row" layout-align="center center">
@@ -132,12 +55,6 @@
           </td>
         </tr>
       </table>
-
-      <div class="form-group">
-        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
-          Échec de la connexion: {{ errorMessage }}
-        </div>
-      </div>
 
       <div class="title">
         <mat-card-actions>

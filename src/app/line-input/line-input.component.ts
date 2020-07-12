@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
 import { OrderService } from '../services/order/order.service';
 import { TokenStorageService } from '../services/token-storage/token-storage.service';
+import { HeaderService } from '../services/header/header.service';
 
 @Component({
   selector: 'app-line-input',
@@ -11,7 +12,7 @@ import { TokenStorageService } from '../services/token-storage/token-storage.ser
   styleUrls: ['./line-input.component.css']
 })
 export class LineInputComponent implements OnInit {
-  sousTotal: number = 0;
+  sousTotal = 0;
   @Input() public line: Article ;
 
   @Output() messageToEmit = new EventEmitter<number>();
@@ -19,10 +20,13 @@ export class LineInputComponent implements OnInit {
   messageToSendC: number ;
 
 
-  constructor(private formBuilder: FormBuilder,private orderService:OrderService, private tokenStorage: TokenStorageService) { }
+  constructor(private formBuilder: FormBuilder,
+              private orderService: OrderService,
+              private tokenStorage: TokenStorageService,
+              private headerService: HeaderService ) { }
 
   ngOnInit(): void {
-    console.log('======>', this.line)
+    console.log('======>', this.line);
     this.myFrom = this.formBuilder.group ({
       quantity: [{ value: this.line.qty, disabled: false}] ,
       price: [{ value: this.line.price ? this.line.price : 0 , disabled: true}],
@@ -32,37 +36,38 @@ export class LineInputComponent implements OnInit {
 
     this.myFrom.get('quantity').valueChanges.subscribe(
       data => {
-        if(data > this.line.quantity){
+        if (data > this.line.quantity){
           this.myFrom.get('quantity').setValue(this.line.quantity);
         }
         this.myFrom.get('total').setValue(data * this.line.price);
-        //update DB
-        this.orderService.updateArticleById(this.tokenStorage.getUser().id, this.line._id , data).subscribe(data =>{
+        // update DB
+        this.orderService.updateArticleById(this.tokenStorage.getUser().id, this.line._id , data).subscribe(data => {
           this.line = data ;
           window.location.reload();
         }) ;
 
-        this.messageToSendC = this.myFrom.get('total').value
-        this.sendMessageToParent(this.messageToSendC)
+        this.messageToSendC = this.myFrom.get('total').value;
+        this.sendMessageToParent(this.messageToSendC);
       }
-    )
+    );
   }
 
   removeArticle(articleId: string){
     this.orderService.deleteArticle(this.tokenStorage.getUser().id, articleId).subscribe(data => {
+      this.headerService.setCartQty(data.articles.length);
       this.line = null ;
       window.location.reload();
-      }, err =>{
+      }, err => {
         console.log(err);
       }
-    )
+    );
   }
 
   getTotal(){
-    return this.messageToSendC
+    return this.messageToSendC;
   }
   sendMessageToParent(message: number) {
-    this.messageToEmit.emit(message)
+    this.messageToEmit.emit(message);
   }
 
 }

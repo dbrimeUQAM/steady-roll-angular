@@ -7,6 +7,11 @@ class User extends Model {
     super(User.DATABASE_NAME, doc, User.MODEL_SCHEMA);
     this.doc.type = User.TYPE;
   }
+
+  setActive() {
+    this.setDocValue('active', true);
+  }
+
 }
 
 User.DATABASE_NAME = 'users';
@@ -18,7 +23,8 @@ User.MODEL_SCHEMA = {
   password: '',
   phoneNumber:'',
   hospitalId: '',
-  role: ''//admin ou utilisateur hospital
+  role: '',
+  active: false
 };
 
 User.ROLES = Object.freeze({

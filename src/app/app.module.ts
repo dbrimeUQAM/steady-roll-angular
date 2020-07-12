@@ -47,6 +47,7 @@ import { MaterialModule } from './material.module';
 import { PaymentPageComponent } from './payment-page/payment-page.component';
 import { LineInputComponent } from './line-input/line-input.component';
 
+import { HeaderService } from './services/header/header.service';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { LineInputComponent } from './line-input/line-input.component';
   entryComponents: [DialogElementsComponent],
   providers: [
     authInterceptorProviders,
+    HeaderService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent],

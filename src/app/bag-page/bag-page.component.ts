@@ -4,6 +4,7 @@ import { Article } from '../services/article/article';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TokenStorageService } from '../services/token-storage/token-storage.service';
+import { HeaderService } from '../services/header/header.service';
 
 @Component({
   selector: 'app-bag-page',
@@ -24,12 +25,15 @@ export class BagPageComponent implements OnInit {
   receivedChildMessage = 0;
 
 
-  constructor(private orderService: OrderService, private formBuilder: FormBuilder, private tokenStorage: TokenStorageService) { }
+  constructor(private orderService: OrderService,
+              private formBuilder: FormBuilder,
+              private tokenStorage: TokenStorageService,
+              private headerService: HeaderService ) { }
 
   ngOnInit(): void {
     this.orderService.getCurrentOrder(this.tokenStorage.getUser().id)
     .subscribe((res: any) => {
-      console.log('my order', res)
+      console.log('my order', res);
       this.articles = res.articles;
       this.dataSource = new MatTableDataSource(this.articles);
     }, err => {
@@ -43,10 +47,10 @@ export class BagPageComponent implements OnInit {
   clear(){
     this.orderService.deleteAllArticles(this.tokenStorage.getUser().id)
     .subscribe((res: any) => {
-      console.log('my order', res)
+      this.headerService.setCartQty(0);
       this.articles = res.articles;
       this.dataSource = new MatTableDataSource(this.articles);
-      window.location.reload();
+      this.ngOnInit();
     }, err => {
       console.log(err);
     }, () => {
@@ -60,8 +64,8 @@ export class BagPageComponent implements OnInit {
 
   getTotal(): number{
     let total = 0 ;
-    for (let article of this.articles){
-      total = total + (article.qty * article.price )
+    for (const article of this.articles){
+      total = total + (article.qty * article.price );
     }
     return total ;
   }

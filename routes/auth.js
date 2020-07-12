@@ -33,7 +33,8 @@ auth.route('/signup')
           password: bcrypt.hashSync(req.body.password, 8),
           role: User.ROLES.USER,
           phoneNumber: req.body.phoneNumber,
-          hospitalId: req.body.hospitalId
+          hospitalId: req.body.hospitalId,
+          active: false
         };
 
         const newUser = new User(postedUser);

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TokenStorageService } from '../services/token-storage/token-storage.service';
 
 import { MatSidenav } from '@angular/material/sidenav';
+import { HeaderService } from '../services/header/header.service';
 
 @Component({
   selector: 'app-header',
@@ -13,17 +14,21 @@ export class HeaderComponent implements OnInit {
 
   @Input() inputSideNav: MatSidenav;
   name: string;
-  articleNum = 0;
+  articleNum;
   hospitalName: string;
 
-  constructor( private router: Router, private tokenStorage: TokenStorageService ) { }
+  constructor( private router: Router,
+               private tokenStorage: TokenStorageService,
+               private headerService: HeaderService ) {
+                 this.headerService.cartQty$.subscribe( (qty) => this.articleNum = qty );
+  }
 
   ngOnInit(): void {
     this.inputSideNav.open();
     const user = this.tokenStorage.getUser();
     this.name = user.name;
     this.hospitalName = user.hospital ? user.hospital.name : '';
-    this.articleNum = user.order ? user.order.articles.length : 0 ;
+    this.articleNum = this.tokenStorage.getCartQty();
   }
 
   onClick($event) {
