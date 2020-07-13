@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { UserService } from '../../../services/user/user.service';
 import { User } from '../../../services/user/user';
-import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-users-list',
@@ -12,22 +12,24 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./admin-users-list.component.css']
 })
 export class AdminUsersListComponent implements OnInit {
-
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   users: User[] = [];
-  columnsToDisplay: string[] = ['name', 'email', 'role', 'hospital', 'actions'];
+  columnsToDisplay: string[] = ['name', 'email', 'hospital', 'role', 'actions'];
   dataSource: MatTableDataSource<User>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   isLoadingResults = true;
+  durationInSeconds = 5;
 
-  constructor(private userService: UserService) { }
+  constructor(private snackBar: MatSnackBar,
+              private userService: UserService) { }
 
   ngOnInit(): void {
 
     this.userService.getAll()
     .subscribe((res: any) => {
       this.users = res;
-      console.log(this.users);
       this.isLoadingResults = false;
       this.dataSource = new MatTableDataSource(this.users);
       this.dataSource.paginator = this.paginator;
@@ -39,4 +41,47 @@ export class AdminUsersListComponent implements OnInit {
 
   }
 
+  activateUser(userId: string) {
+    this.userService.activateUser(userId).subscribe(data => {
+      this.snackBar.openFromComponent(PizzaPartyActivateUserComponent, {
+        duration: this.durationInSeconds * 1000,
+        horizontalPosition: 'center' ,
+        verticalPosition: 'top',
+      });
+      this.ngOnInit();
+    });
+  }
+
+  deleteUser(userId: string) {
+    this.userService.deleteUser(userId).subscribe(data => {
+      this.snackBar.openFromComponent(PizzaPartyDeleteUserComponent, {
+        duration: this.durationInSeconds * 1000,
+        horizontalPosition: 'center' ,
+        verticalPosition: 'top',
+      });
+      this.ngOnInit();
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
 }
+
+@Component({
+  selector: 'app-snack-bar-activate-user',
+  templateUrl: '../../../snack-bar-messages/snack-bar-activated.html',
+})
+export class PizzaPartyActivateUserComponent {}
+
+@Component({
+  selector: 'app-snack-bar-delete-user',
+  templateUrl: '../../../snack-bar-messages/snack-bar-deleted.html',
+})
+export class PizzaPartyDeleteUserComponent {}

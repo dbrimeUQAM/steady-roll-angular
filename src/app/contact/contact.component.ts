@@ -22,7 +22,7 @@ export class ContactComponent implements OnInit {
               private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-
+    console.log(this.tokenStorage.getUser());
     this.contact = new Contact();
 
     this.contactForm = this.formBuilder.group({

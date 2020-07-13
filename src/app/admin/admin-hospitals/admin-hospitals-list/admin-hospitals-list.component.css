@@ -1,0 +1,54 @@
+.mat-table {
+  width: 100%;
+}
+
+.mat-raised-button {
+  margin: 10px;
+}
+
+.mat-mini-fab {
+  margin: 0 10px 0 0;
+}
+
+.tab1 {
+  width: 100%;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-row{
+  cursor: pointer
+}
+tr.mat-row:hover {
+  background-color:whitesmoke;
+  font-style: bold;
+  color: white;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-column-name {
+  width: 20% !important;
+}
+
+.mat-column-email {
+  width: 25% !important;
+}
+.mat-column-hospital {
+  width: 30% !important;
+}
+.mat-column-role {
+  width: 7% !important;
+}
+.mat-column-actions {
+  width: 18% !important;
+}
+
+.grid-container {
+  margin: 20px;
+}
+
+

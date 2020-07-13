@@ -1,13 +1,17 @@
 'use strict';
 
+const _ = require('lodash');
 const express = require('express');
 const middleware = require('../middleware');
 const users = express.Router();
 const utils = require('../utils');
+const bcrypt = require('bcryptjs');
 
 // Models
 const User = require('../models/User');
 const Hospital = require('../models/Hospital');
+
+const DUMMY_PWD = 'dummy_password';
 
 users.use(middleware.isAuthenticated);
 
@@ -57,16 +61,37 @@ users.route('/')
         });
       }
 
-      const newUser = new User(postedUser);
-
-      return newUser.save((error, savedUser) => {
-        if (error) {
+      return User.get(postedUser.email, (error, user) => {
+        if (error && error.statusCode !== 404) {
           return res.status(error.statusCode).json(error);
         }
 
-        return res.status(200).json(savedUser.doc);
-      });
+        if (user) {
+          return res.status(409).send({message: 'L\'utilisateur existe déjà!'});
+        }
 
+        const newUserObj = {
+          _id: postedUser.email,
+          type: User.TYPE,
+          email: postedUser.email,
+          name: postedUser.name,
+          password: bcrypt.hashSync(postedUser.password, 8),
+          role: postedUser.role,
+          phone: postedUser.phone,
+          hospitalId: postedUser.hospitalId,
+          active: postedUser.active || false
+        };
+
+        const newUser = new User(newUserObj);
+
+        return newUser.save((error, savedUser) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          return res.status(200).json(savedUser.doc);
+        });
+      });
     });
 
   users.route('/:userId')
@@ -78,6 +103,8 @@ users.route('/')
         if (error) {
           return res.status(error.statusCode).json(error);
         }
+
+        user.doc.password = DUMMY_PWD;
 
         return res.status(200).json(user.doc);
 
@@ -99,6 +126,16 @@ users.route('/')
       return User.get(userId, (error, user) => {
         if (error) {
           return res.status(error.statusCode).json(error);
+        }
+
+        delete updatedUser._rev;
+
+        if (updatedUser.password === DUMMY_PWD) {
+          // Password did not change, skip password update.
+          delete updatedUser.password;
+        } else {
+          // Password changed, let's hash it.
+          updatedUser.password = bcrypt.hashSync(updatedUser.password, 8);
         }
 
         user.doc = _.mergeWith(user.doc, updatedUser, utils.mergeArrays);
@@ -132,6 +169,30 @@ users.route('/')
         });
 
       });
+    });
+
+    users.route('/:userId/activate')
+    /* Activate user by id. */
+    .put((req, res) => {
+      const userId = req.params.userId;
+
+      return User.get(userId, (error, user) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        user.setActive();
+
+        return user.save((error, savedUser) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          return res.status(200).json(savedUser.doc);
+        });
+
+      });
+
     });
 
 module.exports = users;

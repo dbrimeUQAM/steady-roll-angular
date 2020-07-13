@@ -44,6 +44,7 @@
 
       <mat-hint>Minimum 6 caractères</mat-hint>
     </mat-form-field>
+
     <div>
         <re-captcha
           name="captcha"
@@ -62,8 +63,7 @@
 
       <div>
   <mat-card-actions class="title">
-
-    <button mat-raised-button color="primary" (clic)="onSubmit()"> S'identifier</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()"> S'identifier</button>
     <button mat-raised-button color="primary" [routerLink]="['/register']"> Ouvrir un compte</button>
   </mat-card-actions>
       </div>
