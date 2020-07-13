@@ -43,7 +43,18 @@ export class AdminUsersListComponent implements OnInit {
 
   activateUser(userId: string) {
     this.userService.activateUser(userId).subscribe(data => {
-      this.snackBar.openFromComponent(PizzaPartyComponent, {
+      this.snackBar.openFromComponent(PizzaPartyActivateUserComponent, {
+        duration: this.durationInSeconds * 1000,
+        horizontalPosition: 'center' ,
+        verticalPosition: 'top',
+      });
+      this.ngOnInit();
+    });
+  }
+
+  deleteUser(userId: string) {
+    this.userService.deleteUser(userId).subscribe(data => {
+      this.snackBar.openFromComponent(PizzaPartyDeleteUserComponent, {
         duration: this.durationInSeconds * 1000,
         horizontalPosition: 'center' ,
         verticalPosition: 'top',
@@ -64,7 +75,13 @@ export class AdminUsersListComponent implements OnInit {
 }
 
 @Component({
-  selector: 'app-snack-bar-delete-user',
-  templateUrl: 'snack-bar-delete-user.html',
+  selector: 'app-snack-bar-activate-user',
+  templateUrl: '../../../snack-bar-messages/snack-bar-activated.html',
 })
-export class PizzaPartyComponent {}
+export class PizzaPartyActivateUserComponent {}
+
+@Component({
+  selector: 'app-snack-bar-delete-user',
+  templateUrl: '../../../snack-bar-messages/snack-bar-deleted.html',
+})
+export class PizzaPartyDeleteUserComponent {}

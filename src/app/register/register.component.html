@@ -34,7 +34,7 @@
           <td>
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Téléphone</mat-label>
-              <input matInput [(ngModel)]="form.phoneNumber" #phoneNumber="ngModel" placeholder="phoneNumber Complet" name="phoneNumber" required>
+              <input matInput [(ngModel)]="form.phone" #phone="ngModel" placeholder="phone Complet" name="phone" required>
             </mat-form-field>
           </td>
         </tr>
@@ -58,7 +58,7 @@
 
       <div class="title">
         <mat-card-actions>
-          <button mat-raised-button color="primary" (clic)="onSubmit()"> S'inscrire</button>
+          <button mat-raised-button color="primary" (click)="onSubmit()"> S'inscrire</button>
         </mat-card-actions>
       </div>
       <mat-error *ngIf="f.submitted && isSignUpFailed">

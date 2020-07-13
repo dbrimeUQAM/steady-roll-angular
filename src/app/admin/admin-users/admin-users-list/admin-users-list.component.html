@@ -1,5 +1,7 @@
 <div class="grid-container">
-  <button mat-raised-button color="primary" class="mat-raised-button" type="button" [routerLink]="'/admin/admin-users/add'">Nouveau Utilisateur</button>
+  <button mat-raised-button color="primary" class="mat-raised-button" type="button" [routerLink]="'/admin/admin-users/detail/new'">
+    <mat-icon class="icon-spacing">account_circle</mat-icon> Nouveau Utilisateur
+  </button>
   <mat-form-field style="margin-left: 4px;" color="basic">
     <mat-label>
       <mat-icon>search</mat-icon>
@@ -30,7 +32,7 @@
         <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" [routerLink]="['/admin/admin-users/detail', user._id]">
           <mat-icon role="img" class="mat-icon">edit</mat-icon>
         </button>
-        <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" [routerLink]="['/admin/admin-users/delete', user._id]">
+        <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" (click)="deleteUser(user._id)">
           <mat-icon role="img" class="mat-icon">delete</mat-icon>
         </button>
         <button *ngIf="!user.active" mat-mini-fab color="primary" class="mat-mini-fab" type="button" (click)="activateUser(user._id)">

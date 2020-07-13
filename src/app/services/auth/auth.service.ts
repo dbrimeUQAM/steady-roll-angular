@@ -29,7 +29,7 @@ export class AuthService {
       name: user.name,
       email: user.email,
       password: user.password,
-      phoneNumber: user.phoneNumber,
+      phone: user.phone,
       hospitalId: user.hospital
     }, httpOptions);
   }

@@ -1,5 +1,6 @@
 'use strict';
 
+const _ = require('lodash');
 const express = require('express');
 const middleware = require('../middleware');
 const users = express.Router();
@@ -9,6 +10,8 @@ const bcrypt = require('bcryptjs');
 // Models
 const User = require('../models/User');
 const Hospital = require('../models/Hospital');
+
+const DUMMY_PWD = 'dummy_password';
 
 users.use(middleware.isAuthenticated);
 
@@ -74,7 +77,7 @@ users.route('/')
           name: postedUser.name,
           password: bcrypt.hashSync(postedUser.password, 8),
           role: postedUser.role,
-          phoneNumber: postedUser.phoneNumber,
+          phone: postedUser.phone,
           hospitalId: postedUser.hospitalId,
           active: postedUser.active || false
         };
@@ -101,6 +104,8 @@ users.route('/')
           return res.status(error.statusCode).json(error);
         }
 
+        user.doc.password = DUMMY_PWD;
+
         return res.status(200).json(user.doc);
 
       });
@@ -121,6 +126,16 @@ users.route('/')
       return User.get(userId, (error, user) => {
         if (error) {
           return res.status(error.statusCode).json(error);
+        }
+
+        delete updatedUser._rev;
+
+        if (updatedUser.password === DUMMY_PWD) {
+          // Password did not change, skip password update.
+          delete updatedUser.password;
+        } else {
+          // Password changed, let's hash it.
+          updatedUser.password = bcrypt.hashSync(updatedUser.password, 8);
         }
 
         user.doc = _.mergeWith(user.doc, updatedUser, utils.mergeArrays);

@@ -6,15 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AdminUsersRoutingModule } from './admin-users-routing.module';
 
-import { AdminUsersComponent } from './admin-users.component';
-
 import { AdminUsersListComponent } from './admin-users-list/admin-users-list.component';
-import { AdminUsersDeleteComponent } from './admin-users-delete/admin-users-delete.component';
 import { AdminUsersDetailComponent } from './admin-users-detail/admin-users-detail.component';
-import { AdminUsersEditComponent } from './admin-users-edit/admin-users-edit.component';
 
 import { MaterialModule } from '../../material.module';
-import { AdminUsersAddComponent } from './admin-users-add/admin-users-add.component';
+
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   imports: [
@@ -23,15 +20,12 @@ import { AdminUsersAddComponent } from './admin-users-add/admin-users-add.compon
     MaterialModule,
     AdminUsersRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaskModule.forRoot()
   ],
   declarations: [
-    AdminUsersComponent,
-    AdminUsersDeleteComponent,
     AdminUsersDetailComponent,
-    AdminUsersEditComponent,
-    AdminUsersListComponent,
-    AdminUsersAddComponent
+    AdminUsersListComponent
   ],
   exports: [
     AdminUsersRoutingModule

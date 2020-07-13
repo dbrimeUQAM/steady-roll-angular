@@ -32,7 +32,7 @@ auth.route('/signup')
           name: req.body.name,
           password: bcrypt.hashSync(req.body.password, 8),
           role: User.ROLES.USER,
-          phoneNumber: req.body.phoneNumber,
+          phone: req.body.phone,
           hospitalId: req.body.hospitalId,
           active: false
         };
@@ -60,6 +60,10 @@ auth.route('/signin')
             return res.status(401).send({message: 'Utilisateur et/ou mot de passe invalide!'});
           }
           return res.status(error.statusCode).json(error);
+        }
+
+        if (!user.isActive()) {
+          return res.status(403).send({message: 'Votre compte n\'est pas encore active!'});
         }
 
         const passwordIsValid = bcrypt.compareSync(

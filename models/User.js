@@ -12,6 +12,10 @@ class User extends Model {
     this.setDocValue('active', true);
   }
 
+  isActive() {
+    return this.getDocValue('active', false) === true;
+  }
+
 }
 
 User.DATABASE_NAME = 'users';
@@ -21,7 +25,7 @@ User.MODEL_SCHEMA = {
   name: '', //nom de la personne responsable
   email: '', //login
   password: '',
-  phoneNumber:'',
+  phone:'',
   hospitalId: '',
   role: '',
   active: false

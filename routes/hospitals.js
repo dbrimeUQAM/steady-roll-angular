@@ -1,5 +1,6 @@
 'use strict';
 
+const _ = require('lodash');
 const express = require('express');
 const middleware = require('../middleware');
 const hospitals = express.Router();

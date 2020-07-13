@@ -48,6 +48,8 @@ import { PaymentPageComponent } from './payment-page/payment-page.component';
 import { LineInputComponent } from './line-input/line-input.component';
 
 import { HeaderService } from './services/header/header.service';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 @NgModule({
   declarations: [
@@ -85,6 +87,7 @@ import { HeaderService } from './services/header/header.service';
     HttpClientModule,
     AppRoutingModule,
     MaterialModule,
+    NgxMaskModule.forRoot()
   ],
   entryComponents: [DialogElementsComponent],
   providers: [

@@ -37,14 +37,13 @@ export class LoginComponent implements OnInit {
     if (this.captchaDone) {
       this.authService.login(this.form).subscribe(
         data => {
-          const user = this.tokenStorage.getUser();
           this.tokenStorage.saveToken(data.accessToken);
           this.tokenStorage.saveUser(data);
-          this.tokenStorage.saveCartQty(user.order.articles.length);
+          this.tokenStorage.saveCartQty(data.order.articles.length);
 
           this.isLoginFailed = false;
           this.isLoggedIn = true;
-          this.role = user.role;
+          this.role = data.role;
           this.router.navigate(['/home']);
         },
         err => {

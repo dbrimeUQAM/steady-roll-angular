@@ -29,18 +29,11 @@ export class UserService {
 
   getUserById(id: string): Observable<User> {
     const url = `${apiUrl}/${id}`;
-    return this.httpClient.get<User>(url).pipe(
-      tap(_ => console.log(`fetched user id=${id}`)),
-      catchError(this.handleError<User>(`getUserById id=${id}`))
-    );
+    return this.httpClient.get<User>(url);
   }
 
   addUser(user: User): Observable<User> {
     return this.httpClient.post<User>(apiUrl, user, httpOptions);
-    /*.pipe(
-      tap((u: User) => console.log(`added user w/ id=${u._id}`)),
-      catchError(this.handleError<User>('addUser'))
-    );*/
   }
 
   updateUser(id: string, user: User): Observable<any> {

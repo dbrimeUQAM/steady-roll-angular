@@ -1,1 +1,46 @@
-<p>admin-hospitals-list works!</p>
+<div class="grid-container">
+  <button mat-raised-button color="primary" class="mat-raised-button" type="button" [routerLink]="'/admin/admin-hospitals/detail/new'">
+    <mat-icon class="icon-spacing">medical_services</mat-icon> Nouveau Hôpital
+  </button>
+  <mat-form-field style="margin-left: 4px;" color="basic">
+    <mat-label>
+      <mat-icon>search</mat-icon>
+      Recherche </mat-label>
+    <input matInput (keyup)="applyFilter($event)">
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+      <td mat-cell *matCellDef="let hospital"> {{hospital.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Téléphone </th>
+      <td mat-cell *matCellDef="let hospital"> {{hospital.phone}} </td>
+    </ng-container>
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ville </th>
+      <td mat-cell *matCellDef="let hospital"> {{hospital.city}} </td>
+    </ng-container>
+    <ng-container matColumnDef="province">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Province </th>
+      <td mat-cell *matCellDef="let hospital"> {{hospital.province}} </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let hospital" (click)="$event.stopPropagation()">
+        <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" [routerLink]="['/admin/admin-hospitals/detail', hospital._id]">
+          <mat-icon role="img" class="mat-icon">edit</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" (click)="deleteHospital(hospital._id)">
+          <mat-icon role="img" class="mat-icon">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row [routerLink]="['/admin/admin-hospitals/detail', hospital._id]" *matRowDef="let hospital; columns: columnsToDisplay"></tr>
+  </table>
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

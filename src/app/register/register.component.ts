@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/home']);
     }
 
-    this.hospitalService.getAll(null)
+    this.hospitalService.getAll()
     .subscribe((res: any) => {
       this.hospitals = res;
       this.isLoadingResults = false;
