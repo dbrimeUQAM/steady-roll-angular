@@ -4,13 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AdminOrdersRoutingModule } from './admin-orders-routing.module';
 
-import { AdminOrdersComponent } from './admin-orders.component';
-
 import { AdminOrdersListComponent } from './admin-orders-list/admin-orders-list.component';
-import { AdminOrdersDeleteComponent } from './admin-orders-delete/admin-orders-delete.component';
 import { AdminOrdersDetailComponent } from './admin-orders-detail/admin-orders-detail.component';
-import { AdminOrdersEditComponent } from './admin-orders-edit/admin-orders-edit.component';
-import { AdminOrdersAddComponent } from './admin-orders-add/admin-orders-add.component';
 
 import { MaterialModule } from '../../material.module';
 
@@ -22,12 +17,8 @@ import { MaterialModule } from '../../material.module';
     AdminOrdersRoutingModule
   ],
   declarations: [
-    AdminOrdersComponent,
-    AdminOrdersDeleteComponent,
     AdminOrdersDetailComponent,
-    AdminOrdersEditComponent,
-    AdminOrdersListComponent,
-    AdminOrdersAddComponent
+    AdminOrdersListComponent
   ],
   exports: [
     AdminOrdersRoutingModule
