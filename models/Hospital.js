@@ -20,13 +20,11 @@ Hospital.TYPE = 'hospital';
 Hospital.MODEL_SCHEMA = {
   type: Hospital.TYPE,
   name: '',
-  address:  {
-    street: '',
-    city: '',
-    province: '',
-    postalCode: ''
-  },
-  phoneNumber: ''
+  street: '',
+  city: '',
+  province: '',
+  postalCode: '',
+  phone: ''
 };
 
 

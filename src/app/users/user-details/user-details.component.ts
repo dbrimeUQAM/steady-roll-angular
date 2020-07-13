@@ -10,13 +10,7 @@ import { User } from '../../services/user/user';
 })
 export class UserDetailsComponent implements OnInit {
 
-  user: User = {
-    _id: '',
-    type: 'user',
-    name: '',
-    email: '',
-    role: ''
-  };
+  user: User;
   isLoadingResults = true;
 
   constructor(private route: ActivatedRoute, private api: UserService, private router: Router) { }

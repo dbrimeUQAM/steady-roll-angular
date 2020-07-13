@@ -1,1 +1,79 @@
-<p>admin-hospitals-detail works!</p>
+<div class="grid-container">
+  <div class="card card-container">
+
+    <div class="form-title">
+      <mat-card-title *ngIf="hospital._id">Hôpital</mat-card-title>
+      <mat-card-title *ngIf="!hospital._id">Nouveau Hôpital</mat-card-title>
+    </div>
+    <form (ngSubmit)="onSubmit()" #hospitalForm="ngForm">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Nom</mat-label>
+              <input matInput [(ngModel)]="hospital.name" #name="ngModel" placeholder="Nom Complet" name="name" required>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Téléphone</mat-label>
+              <input matInput [(ngModel)]="hospital.phone" #phone="ngModel" placeholder="(514) 456-8517" name="phone"
+              mask="(000) 000-0000" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Rue</mat-label>
+              <input matInput [(ngModel)]="hospital.street" #street="ngModel" placeholder="Rue" name="street"
+              required>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Ville</mat-label>
+              <input matInput [(ngModel)]="hospital.city" #city="ngModel" placeholder="Ville" name="city"
+              required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Code Postal</mat-label>
+              <input matInput [(ngModel)]="hospital.postalCode" #postalCode="ngModel"
+              placeholder="H2P 3P4" name="postalCode"
+              mask="S0S 0S0" required>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Province</mat-label>
+              <mat-select [(ngModel)]="hospital.province" #province="ngModel" name="province" required>
+                <mat-option *ngFor="let province of provinces" [value]="province">
+                  {{province}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <div class="text-right-aligned">
+        <mat-card-actions>
+          <button mat-raised-button color="primary" [disabled]="!hospitalForm.form.valid">
+            <mat-icon class="icon-spacing">save</mat-icon> Sauvegarder</button>
+          <button mat-raised-button color="primary" [routerLink]="['/admin/admin-hospitals']" type="button">
+            <mat-icon class="icon-spacing">cancel</mat-icon> Annuler</button>
+          <button *ngIf="hospital._id" mat-raised-button color="primary" (click)="deleteHospital()" type="button">
+            <mat-icon class="icon-spacing">delete</mat-icon> Supprimer</button>
+        </mat-card-actions>
+      </div>
+      <mat-error *ngIf="hospitalForm.submitted && isSaveFailed">
+        Erreur en sauvegardant!: {{ errorMessage }}
+      </mat-error>
+
+    </form>
+  </div>
+</div>

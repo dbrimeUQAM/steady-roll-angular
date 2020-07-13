@@ -20,11 +20,8 @@ export class HospitalService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAll(filter: string): Observable<Hospital[]> {
-    let url = apiUrl;
-    if (filter) {
-      url += `?filter=${filter}`;
-    }
+  getAll(): Observable<Hospital[]> {
+    const url = apiUrl;
     return this.httpClient.get<Hospital[]>(url)
     .pipe(
       catchError(this.handleError('getAll', []))
@@ -51,6 +48,14 @@ export class HospitalService {
     return this.httpClient.put(url, hospital, httpOptions).pipe(
       tap(_ => console.log(`updated hospital id=${id}`)),
       catchError(this.handleError<any>('updateHospital'))
+    );
+  }
+
+  deleteHospital(id: string): Observable<Hospital> {
+    const url = `${apiUrl}/${id}`;
+    return this.httpClient.delete<Hospital>(url, httpOptions).pipe(
+      tap(_ => console.log(`deleted hospital id=${id}`)),
+      catchError(this.handleError<Hospital>('deleteHospital'))
     );
   }
 

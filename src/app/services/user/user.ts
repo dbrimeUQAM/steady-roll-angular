@@ -4,4 +4,8 @@ export class User {
   name: string;
   email: string;
   role: string;
+  active: boolean;
+  hospitalId: string;
+  password: string;
+  phone: string;
 }

@@ -5,9 +5,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Article } from '../services/article/article';
 import { ArticleService } from '../services/article/article.service';
 import { OrderService } from '../services/order/order.service';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from '../services/token-storage/token-storage.service';
-import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { HeaderService } from '../services/header/header.service';
 
 @Component({
   selector: 'app-article-list',
@@ -23,14 +24,19 @@ export class ArticlesListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   filter;
+  durationInSeconds = 5;
 
-  constructor(private _snackBar: MatSnackBar, private articleService: ArticleService, private orderService: OrderService, route: ActivatedRoute, private tokenStorage: TokenStorageService ) {
+  constructor(private snackBar: MatSnackBar,
+              private articleService: ArticleService,
+              private orderService: OrderService,
+              route: ActivatedRoute,
+              private tokenStorage: TokenStorageService,
+              private headerService: HeaderService ) {
     this.filter = route.snapshot.data.filter;
   }
 
   ngOnInit() {
 
-    console.log(this.filter);
     this.articleService.getAll(this.filter)
     .subscribe((res: any) => {
       this.articles = res;
@@ -42,17 +48,16 @@ export class ArticlesListComponent implements OnInit {
     });
 
   }
-  openSnackBar(articleId: string) {
-    var user = this.tokenStorage.getUser();
-    this.orderService.addArticleToOrder(user.id, articleId, 1).subscribe(data =>
-      {
-        const id = data._id ;
-      } );
 
-    this._snackBar.openFromComponent(PizzaPartyComponent, {
-      duration: 4 * 1000,
-      horizontalPosition: 'center' ,
-      verticalPosition: 'top',
+  openSnackBar(articleId: string) {
+    const user = this.tokenStorage.getUser();
+    this.orderService.addArticleToOrder(user.id, articleId, 1).subscribe(data => {
+      this.headerService.setCartQty(data.articles.length);
+      this.snackBar.openFromComponent(PizzaPartyComponent, {
+        duration: this.durationInSeconds * 1000,
+        horizontalPosition: 'center' ,
+        verticalPosition: 'top',
+      });
     });
   }
 
@@ -64,19 +69,10 @@ export class ArticlesListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-
-
 }
 
-
 @Component({
-  selector: 'snack-bar-component-example-snack',
-  templateUrl: 'snack-bar-component-example-snack.html',
-  styles: [`
-    .example-pizza-party {
-      color: hotpink;
-    }
-  `],
+  selector: 'app-snack-bar-add-to-cart',
+  templateUrl: 'snack-bar-add-to-cart.html',
 })
 export class PizzaPartyComponent {}

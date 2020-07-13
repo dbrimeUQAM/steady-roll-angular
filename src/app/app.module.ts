@@ -47,6 +47,9 @@ import { MaterialModule } from './material.module';
 import { PaymentPageComponent } from './payment-page/payment-page.component';
 import { LineInputComponent } from './line-input/line-input.component';
 
+import { HeaderService } from './services/header/header.service';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 @NgModule({
   declarations: [
@@ -84,10 +87,12 @@ import { LineInputComponent } from './line-input/line-input.component';
     HttpClientModule,
     AppRoutingModule,
     MaterialModule,
+    NgxMaskModule.forRoot()
   ],
   entryComponents: [DialogElementsComponent],
   providers: [
     authInterceptorProviders,
+    HeaderService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent],
