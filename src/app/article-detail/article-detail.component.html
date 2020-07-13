@@ -5,7 +5,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <br>
-    <h2 class="mat-h2">&nbsp; {{ article.name }} ( {{article.articleType}} )</h2>
+    <h2 class="mat-h2">&nbsp; {{ article ? article.name :'' }} ( {{ article? article.articleType: ''}} )</h2>
     <mat-divider></mat-divider>
     <br><br>
     <div align="center">
@@ -30,7 +30,7 @@
     </mat-toolbar-row>
     <mat-toolbar-row>
       <mat-form-field appearance="outline">
-        <mat-label>Nom de l'hospitale</mat-label>
+        <mat-label>Nom de l'hôpital</mat-label>
         <input style="color: black;" matInput formControlName="hospitalName" disabled   type="text" />
       </mat-form-field>
     </mat-toolbar-row>

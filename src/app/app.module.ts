@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -93,6 +93,7 @@ import { NgxMaskModule } from 'ngx-mask';
   providers: [
     authInterceptorProviders,
     HeaderService,
+    DatePipe,
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent],

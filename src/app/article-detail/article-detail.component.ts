@@ -7,6 +7,7 @@ import { Article } from '../services/article/article';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogContentComponent } from '../dialog-content/dialog-content.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-article-detail',
@@ -23,7 +24,8 @@ export class ArticleDetailComponent implements OnInit {
                private tokenStorage: TokenStorageService,
                private articleService: ArticleService,
                private orderService: OrderService,
-               private formBuilder: FormBuilder) { }
+               private formBuilder: FormBuilder,
+               private datePipe: DatePipe) { }
 
   ngOnInit(): void {
    const articleId: string =  this.route.snapshot.params.id ;
@@ -46,7 +48,7 @@ export class ArticleDetailComponent implements OnInit {
             value: this.article.description ,
             disabled: true}],
           expirationDate: [{
-            value: this.article.expirationDate ,
+            value: this.datePipe.transform(this.article.expirationDate,"dd-MM-yyyy") ,
             disabled: true}],
           hospitalName: [{
             value: this.article.hospitalName,
