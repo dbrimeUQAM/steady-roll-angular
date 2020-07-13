@@ -4,6 +4,116 @@
     <app-sidenav></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <p>my-invoices works!</p>
+      <br>
+    <h2 align="center" class="mat-h2">&nbsp; Votre commande a été effectuer avec succé </h2>
+    <mat-divider></mat-divider>
+    <br><br>
+    <div align="center" >
+    <form [formGroup]="invoiceForm" class="form">
+    <mat-toolbar-row>
+      <mat-form-field appearance="outline"  >
+        <mat-label>Nom </mat-label>
+        <input style="color: black;" matInput formControlName="name" disabled   type="text" />
+      </mat-form-field> 
+      <mat-form-field appearance="outline">
+        <mat-label>Nom de l'hospitale</mat-label>
+        <input style="color: black;" matInput formControlName="hospitalName" disabled   type="text" />
+      </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+     
+      <mat-form-field appearance="outline">
+        <mat-label>Adresse courriel</mat-label>
+        <input style="color: black;" matInput formControlName="id" disabled  type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Numéro de téléphone</mat-label>
+        <input style="color: black;" matInput formControlName="telNumber" disabled  type="text" />
+      </mat-form-field>
+    </mat-toolbar-row>
+  <mat-toolbar-row>
+      <mat-form-field appearance="outline">
+        <mat-label>Adress</mat-label>
+        <input style="color: black;" matInput formControlName="street" disabled  type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Ville</mat-label>
+        <input style="color: black;" matInput formControlName="city" disabled   type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Province</mat-label>
+        <input style="color: black;" matInput formControlName="province" disabled   type="text" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Code Postal</mat-label>
+        <input style="color: black;" matInput formControlName="postalCode" disabled   type="text" />
+      </mat-form-field>
+
+    </mat-toolbar-row>
+    <mat-divider></mat-divider>
+    
+    </form>
+    </div>
+
+    <br>
+
+    <div class="right">
+    <div class="left" *ngFor="let article of articles ">
+    <mat-toolbar-row>
+      <mat-icon mat-list-icon>medical_services</mat-icon>&nbsp;
+      <div>
+      <div  mat-line style="color: darkseagreen;">{{article.name}}</div>
+      <div mat-line> {{article.hospitalName}} </div>
+      <div mat-line *ngIf="article.expirationDate">  {{article.qty }} X {{ article.price? article.price: 0 | currency}} </div>
+    </div>
+    <span class="example-spacer"></span>
+    </mat-toolbar-row>
+    <mat-divider></mat-divider>
+    </div>
+    
+    <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+    <div class="left">
+      <mat-toolbar-row>
+        <div mat-subheader>Sous-total</div>
+          <span class="example-spacer"></span>
+        <div >{{ total | currency}} </div>
+      </mat-toolbar-row>
+      <mat-divider></mat-divider>
+      <mat-toolbar-row>
+        <div mat-subheader>TPS/TVH</div>
+          <span class="example-spacer"></span>
+        <div >{{ total * (0.05) | currency}} </div>
+      </mat-toolbar-row>
+      <mat-divider></mat-divider>
+      <mat-toolbar-row>
+        <div mat-subheader>TVQ</div>
+          <span class="example-spacer"></span>
+        <div >{{ total * (0.09975) | currency}} </div>
+      </mat-toolbar-row>
+      <mat-divider></mat-divider>
+      <mat-toolbar-row>
+        <div mat-subheader>Livraisons</div>
+          <span class="example-spacer"></span>
+        <div >{{ 15 | currency}} </div>
+      </mat-toolbar-row>
+      <mat-divider></mat-divider>
+      <mat-toolbar-row>
+        <div mat-subheader>Total</div>
+          <span class="example-spacer"></span>
+        <div >{{ total + 15 + (total* (0.05)) +  (total* (0.09975)) | currency}} </div>
+      </mat-toolbar-row>
+     
+    </div>
+  </div>
+    <br>
+
+  
+
+
+    <div align="center">
+      <button  class="btn" mat-raised-button style=" width: 30%;" (click)="print()">Imprimer </button>
+    </div>
+    <br>
   </mat-sidenav-content>
 </mat-sidenav-container>

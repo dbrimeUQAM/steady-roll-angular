@@ -2,10 +2,6 @@
   flex: 1 1 auto;
 }
 
-.grid-container {
-  margin: 20px;
-  height: 100%;
-}
 
 #sidenav-container {
   top: 64px !important;
@@ -21,4 +17,29 @@
   #sidenav-container {
     top: 56px !important;
   }
+}
+.center {
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+ }
+ .mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.img{
+  width: 30%;
+ border-bottom: 3mm;
+}
+.carte{
+  padding-left: 5mm;
+  padding-top: 2mm;
+  padding-bottom: 5mm;
+}
+.form {
+  width: 90%;
+}
+.mat-form-field {
+  margin: 4px;
+  margin-top: 10px;
+  width: 100%;
 }
