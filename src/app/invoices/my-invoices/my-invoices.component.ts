@@ -3,6 +3,7 @@ import { TokenStorageService } from 'src/app/services/token-storage/token-storag
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { OrderService } from 'src/app/services/order/order.service';
 import { Article } from 'src/app/services/article/article';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-invoices',
@@ -13,7 +14,7 @@ export class MyInvoicesComponent implements OnInit {
   invoiceForm: FormGroup ;
   articles: Article[] = [];
   total:number = 0 ;
-  constructor(private orderService: OrderService, private tokenStorageService: TokenStorageService, private formBuilder: FormBuilder) { }
+  constructor(private router: Router,private orderService: OrderService, private tokenStorageService: TokenStorageService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     const user = this.tokenStorageService.getUser();
@@ -48,25 +49,29 @@ export class MyInvoicesComponent implements OnInit {
         disabled: true,
       }],
       street: [{
-        value: user.hospital.address.street , 
+        value: user.hospital.street , 
         disabled: true,
       }],
       city: [{
-        value:user.hospital.address.city ,
+        value:user.hospital.city ,
         disabled: true,
       }],
       province: [{
-        value: user.hospital.address.province ,
+        value: user.hospital.province ,
         disabled: true,
       }],
       postalCode: [{
-        value: user.hospital.address.postalCode,
+        value: user.hospital.postalCode,
         disabled: true,
       }],
     })
   }
   
   print(){
+   // const user = this.tokenStorageService.getUser();
+    //user.status = '' ;
     window.print();
+    this.router.navigate(['/home']);
+
   }
 }

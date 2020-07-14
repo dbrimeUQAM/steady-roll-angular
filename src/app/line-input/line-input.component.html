@@ -17,11 +17,23 @@
             <!-- <span matSuffix> .00 </span> -->
           </mat-form-field>
           &nbsp;
-          <mat-form-field style="width: 15%;" appearance="outline">
+          <mat-form-field *ngIf="!isChanged" style="width: 15%;" appearance="outline">
             <mat-label> Quantité </mat-label>
             <input  matInput formControlName="quantity" type="number" min="1" max="{{line.quantity}}"/>
           </mat-form-field>
+          <mat-form-field *ngIf="isChanged" style="width: 20%;" appearance="outline">
+            <mat-label> Quantité </mat-label>
+            <mat-toolbar-row style="height: 15px;">
+            <input  matInput formControlName="quantity" type="number" min="1" max="{{line.quantity}}"/>
+            <button mat-icon-button (click)="submit()"  *ngIf="isChanged">
+              <mat-icon style="color: #097D6C;;">done</mat-icon>
+            </button>
+          
+          </mat-toolbar-row>
+          </mat-form-field>
           &nbsp;
+          
+
           <mat-form-field style="width: 15%;" appearance="outline">
             <mat-label>Sous-total</mat-label>
             <input  step ="0.01" style="color: black" matInput formControlName="total" type="number" />
