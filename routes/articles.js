@@ -128,7 +128,7 @@ articles.route('/:articleId')
     .delete((req, res) => {
       const articleId = req.params.articleId;
 
-      return Hospital.get(articleId, (error, article) => {
+      return Article.get(articleId, (error, article) => {
         if (error) {
           return res.status(error.statusCode).json(error);
         }

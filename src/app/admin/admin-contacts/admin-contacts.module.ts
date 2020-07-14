@@ -4,10 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { AdminArticlesRoutingModule } from './admin-articles-routing.module';
+import { AdminContactsRoutingModule } from './admin-contacts-routing.module';
 
-import { AdminArticlesListComponent } from './admin-articles-list/admin-articles-list.component';
-import { AdminArticlesDetailComponent } from './admin-articles-detail/admin-articles-detail.component';
+import { AdminContactsListComponent } from './admin-contacts-list/admin-contacts-list.component';
+import { AdminContactsDetailComponent } from './admin-contacts-detail/admin-contacts-detail.component';
 
 import { MaterialModule } from '../../material.module';
 
@@ -18,17 +18,17 @@ import { NgxMaskModule } from 'ngx-mask';
     CommonModule,
     FormsModule,
     MaterialModule,
-    AdminArticlesRoutingModule,
+    AdminContactsRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     NgxMaskModule.forRoot()
   ],
   declarations: [
-    AdminArticlesDetailComponent,
-    AdminArticlesListComponent
+    AdminContactsDetailComponent,
+    AdminContactsListComponent
   ],
   exports: [
-    AdminArticlesRoutingModule
+    AdminContactsRoutingModule
   ]
 })
-export class AdminArticlesModule { }
+export class AdminContactsModule { }

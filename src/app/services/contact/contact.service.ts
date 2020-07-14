@@ -20,11 +20,8 @@ export class ContactService {
 
     constructor(private httpClient: HttpClient) { }
 
-    getAll(filter: string): Observable<Contact[]> {
-      let url = apiUrl;
-      if (filter) {
-        url += `?filter=${filter}`;
-      }
+    getAll(): Observable<Contact[]> {
+      const url = apiUrl;
       return this.httpClient.get<Contact[]>(url)
       .pipe(
         catchError(this.handleError('getAll', []))
@@ -46,7 +43,28 @@ export class ContactService {
       );
     }
 
-    private handleError<T> (operation = 'operation', result?: T) {
+    getContactById(id: string): Observable<Contact> {
+      const url = `${apiUrl}/${id}`;
+      return this.httpClient.get<Contact>(url);
+    }
+
+    markAsReadContact(id: string): Observable<any> {
+      const url = `${apiUrl}/${id}/mark-as-read`;
+      return this.httpClient.put(url, httpOptions).pipe(
+        tap(_ => console.log(`updated contact as read id=${id}`)),
+        catchError(this.handleError<any>('markAsReadContact'))
+      );
+    }
+
+    deleteContact(id: string): Observable<Contact> {
+      const url = `${apiUrl}/${id}`;
+      return this.httpClient.delete<Contact>(url, httpOptions).pipe(
+        tap(_ => console.log(`deleted contact id=${id}`)),
+        catchError(this.handleError<Contact>('deleteContact'))
+      );
+    }
+
+    private handleError<T>(operation = 'operation', result?: T) {
       return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

@@ -48,6 +48,8 @@ export class ContactComponent implements OnInit {
       this.contact.name = this.contactForm.get('name').value;
       this.contact.email = this.contactForm.get('email').value;
       this.contact.phone = this.contactForm.get('phone').value;
+      this.contact.hospitalId = this.tokenStorage.getUser().hospital._id;
+      this.contact.read = false;
       this.contactService.addContact(this.contact).subscribe(data => {
         this.router.navigate(['/home']);
       });

@@ -30,25 +30,21 @@ tr.mat-row:hover {
   width: 100%;
 }
 
-.mat-column-articleType {
-  width: 10% !important;
-}
-
 .mat-column-name {
-  width: 15% !important;
-}
-
-.mat-column-hospitalName {
   width: 20% !important;
 }
 
-.mat-column-quantity {
-  width: 5% !important;
-  text-align: right;
-  padding-right: 35px;
+.mat-column-email {
+  width: 25% !important;
+}
+.mat-column-hospital {
+  width: 30% !important;
+}
+.mat-column-role {
+  width: 7% !important;
 }
 .mat-column-actions {
-  width: 15% !important;
+  width: 18% !important;
 }
 
 .grid-container {
