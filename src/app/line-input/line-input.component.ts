@@ -18,6 +18,7 @@ export class LineInputComponent implements OnInit {
   @Output() messageToEmit = new EventEmitter<number>();
   public myFrom: FormGroup;
   messageToSendC: number ;
+  isChanged: boolean;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -40,18 +41,21 @@ export class LineInputComponent implements OnInit {
           this.myFrom.get('quantity').setValue(this.line.quantity);
         }
         this.myFrom.get('total').setValue(data * this.line.price);
-        // update DB
-        this.orderService.updateArticleById(this.tokenStorage.getUser().id, this.line._id , data).subscribe(data => {
-          this.line = data ;
-          window.location.reload();
-        }) ;
-
+        this.isChanged = true ;
+        this.line.qty = data
         this.messageToSendC = this.myFrom.get('total').value;
         this.sendMessageToParent(this.messageToSendC);
       }
     );
   }
-
+  submit() {
+     // update DB
+     this.orderService.updateArticleById(this.tokenStorage.getUser().id, this.line._id , this.line.qty).subscribe(data => {
+      this.line = data ;
+      this.isChanged = false ;
+      window.location.reload();
+    }) ;
+  }
   removeArticle(articleId: string){
     this.orderService.deleteArticle(this.tokenStorage.getUser().id, articleId).subscribe(data => {
       this.headerService.setCartQty(data.articles.length);
