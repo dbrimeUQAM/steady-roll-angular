@@ -1,26 +1,14 @@
 .grid-container {
   margin: 20px;
 }
-
-
 #sidenav-container {
   top: 64px !important;
 }
-
 @media(max-width: 599px) {
   #sidenav-container {
     top: 56px !important;
   }
 }
-
-  .mat-form-field{
-    width: 80%;
-  }
-  .center {
-  margin: auto;
-  width: 70%;
-  padding: 10px;
- }
  .bouton {
   width: 40%;
   align-items: center;
@@ -38,3 +26,15 @@
   display: table;
   clear: both;
 }
+.forme {
+  width: 80%;
+}
+  .mat-form-field{
+    margin:2px;
+    margin-top:10px;
+    margin-bottom: 20px;
+    width:100%;
+  }
+  .mat-toolbar-row{
+    margin-bottom: 15px;
+  }

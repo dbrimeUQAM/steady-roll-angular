@@ -26,6 +26,7 @@ export class AddArticleComponent implements OnInit {
   condition: boolean;
   mode: boolean;
   qty: boolean;
+  expirationDate: boolean;
 
 
   constructor(private router: Router,
@@ -42,15 +43,25 @@ export class AddArticleComponent implements OnInit {
     this.hospitalName = this.tokenStorage.getUser().hospital.name;
     this.hospitalId = this.tokenStorage.getUser().hospital._id;
     this.article.hospitalId = this.hospitalId;
+    this.article.name='';
+    this.article.description='',
+    this.article.condition='',
+    this.article.expirationDate= '',
+    this.article.offerType='',
+    this.article.price = 0 , 
+    this.article.quantity = 0 ,
 
     this.articleFrom = this.formBuilder.group({
       articleType: ['', Validators.required],
       name: ['', Validators.required],
+      hospitalName:[{
+        value: this.hospitalName,
+        disabled: true}],
       description: ['', Validators.required],
-      expirationDate: '',
-      condition: ['', Validators.required],
+      expirationDate: new Date() ,
+      condition: '',
       offerType: ['', Validators.required],
-      quantity: [0, [Validators.required, Validators.max(999)]],
+      quantity: [1, [Validators.required, Validators.max(999)]],
       price: [0, [Validators.required, Validators.max(999)]],
     });
     this.articleFrom.get('name').valueChanges.subscribe(data => {
@@ -63,19 +74,19 @@ export class AddArticleComponent implements OnInit {
       this.article.description = data;
     });
     this.articleFrom.get('condition').valueChanges.subscribe(data => {
-      this.article.condition = data;
+      this.article.condition = data ? data : '' ;
     });
     this.articleFrom.get('quantity').valueChanges.subscribe(data => {
       this.article.quantity = data;
     });
     this.articleFrom.get('expirationDate').valueChanges.subscribe(data => {
-      this.article.expirationDate = data;
+      this.article.expirationDate =  data ? data: '';
     });
     this.articleFrom.get('offerType').valueChanges.subscribe(data => {
       this.article.offerType = data;
     });
     this.articleFrom.get('price').valueChanges.subscribe(data => {
-      this.article.price = data;
+      this.article.price =  data ? data: 0;
     });
   }
   submit() {
@@ -94,6 +105,9 @@ export class AddArticleComponent implements OnInit {
     if (this.articleFrom.get('quantity').invalid) {
       this.qty = true;
     }
+    if (this.articleFrom.get('expirationDate').invalid) {
+      this.expirationDate = true;
+    }
     if (this.articleFrom.get('offerType').invalid) {
       this.mode = true;
     }
@@ -102,7 +116,8 @@ export class AddArticleComponent implements OnInit {
       this.articleService.addArticle(this.article).subscribe(data => {
         const id = data._id;
         this.router.navigate(['/home']);
-
+      }, err =>{
+        console.log(err);
       });
     }
 

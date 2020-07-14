@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment-page',
@@ -11,18 +12,23 @@ export class PaymentPageComponent implements OnInit {
   isMasterCard: boolean = false ;
   isVisa: boolean = false ;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.payementForm = this.formBuilder.group ({
-      name: ''
+      name: ['', Validators.required],
+      number: ['', Validators.required],
+      code: ['', Validators.required],
+      date: ['', Validators.required],
     })
-    this.payementForm.get('name').valueChanges.subscribe(
+    this.payementForm.get('number').valueChanges.subscribe(
       data => {
         console.log('dataa changed', data)
-        if(data === '5' ){
+        if(data.substr(0, 1) === '5' ){
+          console.log('ici master')
           this.isMasterCard = true;
-        }else if (data === '4') {
+        }else if (data.substr(0, 1) === '4') {
+          console.log('ici visa')
           this.isVisa= true ;
         }else{
           this.isVisa= false ;
@@ -33,7 +39,15 @@ export class PaymentPageComponent implements OnInit {
       console.log(err)
     }
   }
+submit(){
+  if (this.payementForm.valid){
+    //this.router.navigate(['/my-invoices']);
+    console.log('valid')
 
+  }else{
+    console.log('invalid')
+  }
+}
 }
 export class RadioOverviewExample {
 
