@@ -6,4 +6,5 @@ export class Contact {
   message: string;
   read: boolean;
   hospitalId: string;
+  hospitalName: string;
 }
