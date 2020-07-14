@@ -1,0 +1,58 @@
+<div class="grid-container">
+  <div class="card card-container">
+
+    <div class="form-title">
+      <mat-card-title>Contact</mat-card-title>
+    </div>
+    <form #contactForm="ngForm">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Hôpital</mat-label>
+              <input matInput [(ngModel)]="contact.hospitalName" #hospitalName="ngModel" name="hospitalName" disabled>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Nom</mat-label>
+              <input matInput [(ngModel)]="contact.name" #name="ngModel" name="name" disabled>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]="contact.email" #email="ngModel" name="email" disabled>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Téléphone</mat-label>
+              <input matInput [(ngModel)]="contact.phone" #phone="ngModel" name="phone" disabled>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Message</mat-label>
+              <textarea rows="5" matInput [(ngModel)]="contact.message" #message="ngModel" name="message" disabled></textarea>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <div class="text-right-aligned">
+        <mat-card-actions>
+          <button mat-raised-button color="primary" [routerLink]="['/admin/admin-contacts']" type="button">
+            <mat-icon class="icon-spacing">cancel</mat-icon> Fermer</button>
+          <button mat-raised-button *ngIf="contact._id" color="primary" (click)="deleteContact()" type="button">
+            <mat-icon class="icon-spacing">delete</mat-icon> Supprimer</button>
+        </mat-card-actions>
+      </div>
+
+    </form>
+  </div>
+</div>

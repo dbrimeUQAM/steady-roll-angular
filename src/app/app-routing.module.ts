@@ -77,6 +77,10 @@ const routes: Routes = [
       {
         path: 'admin-invoices',
         loadChildren: () => import('./admin/admin-invoices/admin-invoices.module').then(m => m.AdminInvoicesModule)
+      },
+      {
+        path: 'admin-contacts',
+        loadChildren: () => import('./admin/admin-contacts/admin-contacts.module').then(m => m.AdminContactsModule)
       }
     ]
   }

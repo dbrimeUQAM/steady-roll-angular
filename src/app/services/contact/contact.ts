@@ -4,5 +4,6 @@ export class Contact {
   email: string;
   phone: string;
   message: string;
-  status: string;
+  read: boolean;
+  hospitalId: string;
 }

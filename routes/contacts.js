@@ -7,6 +7,7 @@ const utils = require('../utils');
 
 // Models
 const Contact = require('../models/Contact');
+const Hospital = require('../models/Hospital');
 
 contacts.use(middleware.isAuthenticated);
 
@@ -18,7 +19,31 @@ contacts.route('/')
           return res.status(error.statusCode).json(error);
         }
 
-        return res.status(200).json(contacts);
+        const hospitalIds = contacts.map(contact => contact.hospitalId).filter(item => !!item);
+        const uniqueHospitalIds = [ ...new Set(hospitalIds) ];
+
+        return Hospital.fetch(uniqueHospitalIds, (error, hospitals) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          // Filter out any undefined values
+          hospitals = hospitals.filter(item => !!item);
+
+          contacts = contacts.map(contact => {
+            let hospital = hospitals.find(hospital => hospital._id === contact.hospitalId);
+
+            if (hospital) {
+              contact.hospitalName = hospital.name;
+            }
+
+            return contact;
+
+          })
+
+          return res.status(200).json(contacts);
+
+        });
       });
     })
     /* POST contact. */
@@ -56,7 +81,20 @@ contacts.route('/')
           return res.status(error.statusCode).json(error);
         }
 
-        return res.status(200).json(contact.doc);
+        const hospitalId = contact.getHospitalId() || '-1';
+
+        return Hospital.get(hospitalId, (error, hospital) => {
+          if (error && error.statusCode !== 404) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          if (hospital) {
+            contact.setDocValue('hospitalName', hospital.getDocValue('name'));
+          }
+
+          return res.status(200).json(contact.doc);
+
+        });
 
       });
 
@@ -110,5 +148,29 @@ contacts.route('/')
 
       });
     });
+
+contacts.route('/:contactId/mark-as-read')
+    /* PUT contact by id. */
+    .put((req, res) => {
+      const contactId = req.params.contactId;
+
+      return Contact.get(contactId, (error, contact) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        contact.markAsRead();
+
+        return contact.save((error, savedContact) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          return res.status(200).json(savedContact.doc);
+        });
+
+      });
+
+    })
 
 module.exports = contacts;

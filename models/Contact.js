@@ -9,6 +9,10 @@ class Contact extends Model {
     this.doc.status = Contact.STATUS.NEW;
   }
 
+  markAsRead() {
+    this.setDocValue('read', true);
+  }
+
 }
 
 Contact.DATABASE_NAME = 'contacts';

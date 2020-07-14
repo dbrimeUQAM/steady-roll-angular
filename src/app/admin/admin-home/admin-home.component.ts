@@ -31,7 +31,11 @@ export class AdminHomeComponent {
             label: 'Factures',
             link: '/admin/admin-invoices',
             icon: 'monetization_on'
-        },
+        }, {
+          label: 'Contacts',
+          link: '/admin/admin-contacts',
+          icon: 'support_agent'
+      }
     ];
   }
 
