@@ -9,7 +9,6 @@ const routes: Routes = [
   { path: 'list', component: AdminArticlesListComponent },
   { path: 'detail/:id', component: AdminArticlesDetailComponent }
 ];
-
 @NgModule({
   imports: [
     RouterModule.forChild(routes)

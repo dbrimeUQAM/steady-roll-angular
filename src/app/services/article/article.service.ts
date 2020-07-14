@@ -56,6 +56,14 @@ export class ArticleService {
     );
   }
 
+  deleteArticle(id: string): Observable<Article> {
+    const url = `${apiUrl}/${id}`;
+    return this.httpClient.delete<Article>(url, httpOptions).pipe(
+      tap(_ => console.log(`deleted article id=${id}`)),
+      catchError(this.handleError<Article>('deleteArticle'))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

@@ -76,7 +76,7 @@
             <mat-icon class="icon-spacing">save</mat-icon> Sauvegarder</button>
           <button mat-raised-button color="primary" [routerLink]="['/admin/admin-users']" type="button">
             <mat-icon class="icon-spacing">cancel</mat-icon> Annuler</button>
-          <button *ngIf="user._id" mat-raised-button color="primary" (click)="deleteUser()" type="button">
+          <button mat-raised-button *ngIf="user._id" color="primary" (click)="deleteUser()" type="button">
             <mat-icon class="icon-spacing">delete</mat-icon> Supprimer</button>
         </mat-card-actions>
       </div>

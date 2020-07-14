@@ -1,1 +1,111 @@
-<p>admin-articles-detail works!</p>
+<div class="grid-container">
+  <div class="card card-container">
+
+    <div class="form-title">
+      <mat-card-title *ngIf="article._id">Article</mat-card-title>
+      <mat-card-title *ngIf="!article._id">Nouveau Article</mat-card-title>
+    </div>
+    <form (ngSubmit)="onSubmit()" #articleForm="ngForm">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td colspan="2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Hôpital</mat-label>
+              <mat-select [(ngModel)]="article.hospitalId" #hospitalId="ngModel" name="hospitalId" required>
+                <mat-option *ngFor="let hospital of hospitals" [value]="hospital._id">
+                  {{hospital.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Type</mat-label>
+              <mat-select [(ngModel)]="article.articleType" #articleType="ngModel" name="articleType" required>
+                <mat-option *ngFor="let type of articleTypes" [value]="type">
+                  {{type}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Nom</mat-label>
+              <input matInput [(ngModel)]="article.name" #name="ngModel" placeholder="Nom Complet" name="name" required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea rows="5" matInput [(ngModel)]="article.description" #description="ngModel" placeholder="Description" name="description" required></textarea>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Quantité</mat-label>
+              <input matInput [(ngModel)]="article.quantity" #quantity="ngModel" name="quantity" required>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Prix</mat-label>
+              <input matInput [(ngModel)]="article.price" #price="ngModel" name="price"
+               required>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Mode d'échange</mat-label>
+              <mat-select [(ngModel)]="article.offerType" #offerType="ngModel" name="offerType" required>
+                <mat-option *ngFor="let offer of offerTypes" [value]="offer">
+                  {{offer}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Condition</mat-label>
+              <mat-select [(ngModel)]="article.condition" #condition="ngModel" name="condition" required>
+                <mat-option *ngFor="let item of articleConditions" [value]="item">
+                  {{item}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Date d'expiration</mat-label>
+              <input matInput [(ngModel)]="article.expirationDate" #expirationDate="ngModel" name="expirationDate"
+              mask="DD/MM/YYYY" required>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <div class="text-right-aligned">
+        <mat-card-actions>
+          <button mat-raised-button color="primary" [disabled]="!articleForm.form.valid">
+            <mat-icon class="icon-spacing">save</mat-icon> Sauvegarder</button>
+          <button mat-raised-button color="primary" [routerLink]="['/admin/admin-articles']" type="button">
+            <mat-icon class="icon-spacing">cancel</mat-icon> Annuler</button>
+          <button mat-raised-button *ngIf="article._id" color="primary" (click)="deleteArticle()" type="button">
+            <mat-icon class="icon-spacing">delete</mat-icon> Supprimer</button>
+        </mat-card-actions>
+      </div>
+      <mat-error *ngIf="articleForm.submitted && isSaveFailed">
+        Erreur en sauvegardant!: {{ errorMessage }}
+      </mat-error>
+    </form>
+  </div>
+</div>
