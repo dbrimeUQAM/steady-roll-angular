@@ -21,8 +21,8 @@
             <mat-form-field appearance="outline">
               <mat-label>Type</mat-label>
               <mat-select formControlName="articleType" >
-                <mat-option value="medicament">Médicament</mat-option>
-                <mat-option value="equipement">Equipement</mat-option>
+                <mat-option value="médicament">Médicament</mat-option>
+                <mat-option value="équipement">Équipement</mat-option>
                 <mat-option value="fourniture">Fourniture</mat-option>
               </mat-select>
               <mat-error *ngIf="type"> Type de l'article requis </mat-error>
@@ -48,7 +48,7 @@
       </mat-toolbar-row>
       <mat-toolbar-row>
            <!--   condition  -->
-            <mat-form-field appearance="outline" *ngIf="article.articleType !== 'medicament' ">
+            <mat-form-field appearance="outline" *ngIf="article.articleType !== 'médicament' ">
               <mat-label>Condition</mat-label>
               <mat-select formControlName="condition" >
                 <mat-option value="nouveau">nouveau</mat-option>
@@ -59,10 +59,10 @@
               </mat-select>
               <mat-error *ngIf="condition"> Condition requise </mat-error>
             </mat-form-field>
-            
+
 
           <!-- expirationDate  -->
-            <mat-form-field style="padding-bottom: 15px;" appearance="outline" *ngIf="article.articleType === 'medicament'">
+            <mat-form-field style="padding-bottom: 15px;" appearance="outline" *ngIf="article.articleType === 'médicament'">
               <mat-label>Date D'expiration</mat-label>
               <input formControlName="expirationDate" matInput [matDatepicker]="picker" [min]="minDate" />
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -101,10 +101,10 @@
             </mat-form-field>
           </div>
           </mat-toolbar-row>
-          
-         
-         
-         
+
+
+
+
           <div class="bouton">
             <button class="btn" style="background-color: #097D6C; color: white; width: 100%;" mat-raised-button
               color="primary" (click)="submit()">Ajouter</button>

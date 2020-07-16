@@ -31,9 +31,9 @@ export class ArticleDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.hospitalName = this.tokenStorage.getUser().hospital.name ;
-   const articleId: string =  this.route.snapshot.params.id ;
+    const articleId: string =  this.route.snapshot.params.id ;
 
-   this.articleService.getArticleById(articleId).subscribe(
+    this.articleService.getArticleById(articleId).subscribe(
       data => {
         this.article = data ;
       }, err => {
@@ -70,17 +70,17 @@ export class ArticleDetailComponent implements OnInit {
             value: [this.article.price ],
             disabled: this.isReadOnly}],
 
-            
+
         });
         this.detailForm.get('name').valueChanges.subscribe(data => {
           this.article.name = data;
         });
         this.detailForm.get('articleType').valueChanges.subscribe(data => {
           this.article.articleType = data;
-          if(data === 'equipement' || data === 'fourniture') {
+          if (data === 'équipement' || data === 'fourniture') {
             this.article.expirationDate = '';
-          }else if (data === 'medicament'){
-            this.article.condition = ''
+          }else if (data === 'médicament'){
+            this.article.condition = '';
           }
         });
         this.detailForm.get('description').valueChanges.subscribe(data => {
@@ -93,7 +93,7 @@ export class ArticleDetailComponent implements OnInit {
           this.article.quantity = data;
         });
         this.detailForm.get('expirationDate').valueChanges.subscribe(data => {
-          this.article.expirationDate =  data ? data: '';
+          this.article.expirationDate =  data ? data : '';
         });
         this.detailForm.get('offerType').valueChanges.subscribe(data => {
           this.article.offerType = data;
@@ -102,7 +102,7 @@ export class ArticleDetailComponent implements OnInit {
           }
         });
         this.detailForm.get('price').valueChanges.subscribe(data => {
-          this.article.price =  data ? data: 0;
+          this.article.price =  data ? data : 0;
         });
       }
     );
@@ -113,7 +113,7 @@ export class ArticleDetailComponent implements OnInit {
       // update DB
       this.articleService.updateArticle(this.article._id, this.article).subscribe(data => {
         this.article = data ;
-        console.log('update article', data)
+        console.log('update article', data);
         window.location.reload();
       }) ;
   }
@@ -121,10 +121,10 @@ export class ArticleDetailComponent implements OnInit {
     // update DB
     this.articleService.deleteArticle(this.article._id).subscribe(data => {
       this.article = null ;
-      console.log('delet article', this.article)
+      console.log('delet article', this.article);
       window.location.reload();
     }) ;
-    this.router.navigate(['/articles/all'])
+    this.router.navigate(['/articles/all']);
   }
   // quand on click sur le bouton ajouter au panier
   openDialog(nom: string, type: string) {

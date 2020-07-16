@@ -9,7 +9,7 @@
     <mat-divider></mat-divider>
     <br><br>
     <div align="center">
-      
+
 
     <form [formGroup]="detailForm" class="forme" >
       <div>
@@ -24,8 +24,8 @@
           <mat-form-field appearance="outline">
             <mat-label>Type</mat-label>
             <mat-select  formControlName="articleType" >
-              <mat-option value="medicament">Médicament</mat-option>
-              <mat-option value="equipement">Equipement</mat-option>
+              <mat-option value="médicament">Médicament</mat-option>
+              <mat-option value="équipement">Équipement</mat-option>
               <mat-option value="fourniture">Fourniture</mat-option>
             </mat-select>
 
@@ -48,7 +48,7 @@
     </mat-toolbar-row>
     <mat-toolbar-row>
          <!--   condition  -->
-          <mat-form-field appearance="outline" *ngIf="article.articleType !== 'medicament' ">
+          <mat-form-field appearance="outline" *ngIf="article.articleType !== 'médicament' ">
             <mat-label>Condition</mat-label>
             <mat-select formControlName="condition" >
               <mat-option value="nouveau">nouveau</mat-option>
@@ -58,10 +58,10 @@
               <mat-option value="mauvais">mauvais</mat-option>
             </mat-select>
           </mat-form-field>
-          
+
 
         <!-- expirationDate  -->
-          <mat-form-field style="padding-bottom: 15px;" appearance="outline" *ngIf="article.articleType === 'medicament'">
+          <mat-form-field style="padding-bottom: 15px;" appearance="outline" *ngIf="article.articleType === 'médicament'">
             <mat-label>Date D'expiration</mat-label>
             <input style="color: black;" formControlName="expirationDate" matInput [matDatepicker]="picker" />
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -95,9 +95,9 @@
           </mat-form-field>
         </div>
         </mat-toolbar-row>
-        
-       
-       
+
+
+
         <div *ngIf="!isReadOnly">
           <mat-card-actions>
             <button mat-raised-button class="btn" color="primary" >

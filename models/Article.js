@@ -14,6 +14,7 @@ class Article extends Model {
   }
 
   setIcon() {
+    console.log(this.getArticleType());
     switch (this.getArticleType()) {
       case Article.ARTICLE_TYPES.PRESCRIPTION_DRUG:
         this.setDocValue('icon', 'local_pharmacy');
