@@ -25,18 +25,23 @@ export class ArticlesListComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   filter;
   durationInSeconds = 5;
+  hospitalName: string;
+  filterName: string;
 
   constructor(private snackBar: MatSnackBar,
               private articleService: ArticleService,
               private orderService: OrderService,
-              route: ActivatedRoute,
+              private route: ActivatedRoute,
               private tokenStorage: TokenStorageService,
               private headerService: HeaderService ) {
     this.filter = route.snapshot.data.filter;
   }
 
   ngOnInit() {
+    console.log('filter ==== ', this.filter)
 
+     this.hospitalName= this.tokenStorage.getUser().hospital.name ;
+     console.log('iciiii nom de l hopitale', this.hospitalName );
     this.articleService.getAll(this.filter)
     .subscribe((res: any) => {
       this.articles = res;

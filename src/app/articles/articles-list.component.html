@@ -37,8 +37,11 @@
         <ng-container  matColumnDef="next">
           <th mat-header-cell *matHeaderCellDef ></th>
           <td mat-cell *matCellDef="let row" (click)="$event.stopPropagation()">
-            <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" (click)="openSnackBar(row._id)" >
+            <button *ngIf="hospitalName !== row.hospitalName" mat-mini-fab color="primary" class="mat-mini-fab" type="button" (click)="openSnackBar(row._id)" >
               <mat-icon role="img" class="mat-icon">add_shopping_cart</mat-icon>
+            </button>
+            <button *ngIf="hospitalName === row.hospitalName" mat-mini-fab color="primary" class="mat-mini-fab" type="button"  >
+              <mat-icon role="img" class="mat-icon">edit</mat-icon>
             </button>
           </td>
         </ng-container>
