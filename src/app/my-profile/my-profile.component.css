@@ -18,10 +18,6 @@
   width: 100%;
 }
 
-.half-width {
-  width: 50%;
-}
-
 .centered-text {
   text-align: center;
 }
@@ -38,9 +34,7 @@
   margin-right: 15px;
 }
 
-.date_container {
-  float: left;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.table-container {
+  margin: 20px 0 20px 0;
+  width: 100%;
 }

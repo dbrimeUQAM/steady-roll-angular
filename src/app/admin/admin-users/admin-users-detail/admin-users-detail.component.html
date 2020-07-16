@@ -8,6 +8,23 @@
     <form (ngSubmit)="onSubmit()" #userForm="ngForm">
       <table class="example-full-width" cellspacing="0">
         <tr>
+          <td class="left-field">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Role</mat-label>
+              <mat-select [(ngModel)]="user.role" #hospital="ngModel" name="role" required>
+                <mat-option *ngFor="let role of roles" [value]="role">
+                  {{role}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-slide-toggle color="primary" [(ngModel)]="user.active" #active="ngModel" name="active" labelPosition="before">
+              Active
+            </mat-slide-toggle>
+          </td>
+        </tr>
+        <tr *ngIf="user.role === 'user'">
           <td colspan="2">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Hôpital</mat-label>
@@ -49,23 +66,6 @@
               minlength="6" name="password" #password="ngModel" required>
               <mat-hint>Minimum 6 caractères</mat-hint>
             </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td class="left-field">
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Role</mat-label>
-              <mat-select [(ngModel)]="user.role" #hospital="ngModel" name="role" required>
-                <mat-option *ngFor="let role of roles" [value]="role">
-                  {{role}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-slide-toggle color="primary" [(ngModel)]="user.active" #active="ngModel" name="active" labelPosition="before">
-              Active
-            </mat-slide-toggle>
           </td>
         </tr>
       </table>

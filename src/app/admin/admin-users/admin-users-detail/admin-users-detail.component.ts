@@ -41,7 +41,7 @@ export class AdminUsersDetailComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     } else {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/login']);
     }
 
     if (this.route.snapshot.params.id === 'new') {

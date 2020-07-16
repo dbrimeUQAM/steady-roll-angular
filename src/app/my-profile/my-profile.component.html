@@ -1,0 +1,65 @@
+<app-header [inputSideNav]="sideNav"></app-header>
+<mat-sidenav-container id="sidenav-container" fullscreen>
+  <mat-sidenav #sideNav mode="side">
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="grid-container">
+      <div class="card card-container">
+
+        <div class="form-title">
+          <mat-card-title>Mon Profil</mat-card-title>
+        </div>
+        <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+          <table class="table-container" cellspacing="0">
+            <tr>
+              <td class="left-field">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Nom</mat-label>
+                  <input matInput [(ngModel)]="user.name" #name="ngModel" placeholder="Nom Complet" name="name" required>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Téléphone</mat-label>
+                  <input matInput [(ngModel)]="user.phone" #phone="ngModel" placeholder="(514) 456-8517" name="phone"
+                  mask="(000) 000-0000" required>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <td class="left-field">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input matInput [(ngModel)]="user.email" #email="ngModel" placeholder="Email" name="email"
+                  email disabled>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Mote de passe</mat-label>
+                  <input [(ngModel)]="user.password" matInput type="password" placeholder="Mot de passe"
+                  minlength="6" name="password" #password="ngModel" required>
+                  <mat-hint>Minimum 6 caractères</mat-hint>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+
+          <div class="text-right-aligned">
+            <mat-card-actions>
+              <button mat-raised-button color="primary" [disabled]="!userForm.form.valid">
+                <mat-icon class="icon-spacing">save</mat-icon> Sauvegarder</button>
+              <button mat-raised-button color="primary" [routerLink]="['/admin/admin-users']" type="button">
+                <mat-icon class="icon-spacing">cancel</mat-icon> Annuler</button>
+            </mat-card-actions>
+          </div>
+          <mat-error *ngIf="userForm.submitted && isSaveFailed">
+            Erreur en sauvegardant!: {{ errorMessage }}
+          </mat-error>
+
+        </form>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -60,6 +60,8 @@ articles.route('/')
 
       const newArticle = new Article(postedArticle);
 
+      newArticle.setIcon();
+
       return newArticle.save((error, savedArticle) => {
         if (error) {
           return res.status(error.statusCode).json(error);

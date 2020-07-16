@@ -78,6 +78,19 @@ auth.route('/signin')
           });
         }
 
+        const token = jwt.sign({ id: user.doc._id }, secret);
+
+        if (user.isAdmin()) {
+          return res.status(200).send({
+            id: user.doc._id,
+            role: user.doc.role,
+            email: user.doc.email,
+            name: user.doc.name,
+            phone: user.doc.phone,
+            accessToken: token
+          });
+        }
+
         const tasks = {
           hospital: (callback) => Hospital.get(user.getHospitalId(), callback),
           order: (callback) => Order.getInProgressByUserId(user.getId(), callback)
@@ -89,10 +102,6 @@ auth.route('/signin')
           }
 
           const { hospital, order } = results;
-
-          const token = jwt.sign({ id: user.doc._id }, secret, {
-            expiresIn: 86400 // 24 hours
-          });
 
           return res.status(200).send({
             id: user.doc._id,

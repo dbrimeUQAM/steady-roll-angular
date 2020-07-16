@@ -50,6 +50,9 @@ import { LineInputComponent } from './line-input/line-input.component';
 import { HeaderService } from './services/header/header.service';
 import { NgxMaskModule } from 'ngx-mask';
 
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MyProfileComponent } from './my-profile//my-profile.component';
+
 
 @NgModule({
   declarations: [
@@ -76,7 +79,8 @@ import { NgxMaskModule } from 'ngx-mask';
     MyOrdersComponent,
     MyInvoicesComponent,
     ContactComponent,
-    PaymentPageComponent
+    PaymentPageComponent,
+    MyProfileComponent
   ],
   imports: [
     RecaptchaModule,
@@ -94,7 +98,8 @@ import { NgxMaskModule } from 'ngx-mask';
     authInterceptorProviders,
     HeaderService,
     DatePipe,
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
   bootstrap: [AppComponent],
 })

@@ -29,6 +29,11 @@
         <mat-icon matListIcon class="nav-list-icon"> {{ item.icon }} </mat-icon>
         <span class="nav-list-label">{{item.label}}</span>
       </a>
+      <a
+         mat-list-item [routerLink]="'/my-profile'" routerLinkActive="list-item-active">
+        <mat-icon matListIcon class="nav-list-icon"> account_circle </mat-icon>
+        <span class="nav-list-label">Mon Profil</span>
+      </a>
 
     </ng-container>
 
@@ -41,39 +46,5 @@
         <span class="nav-list-label">Se déconnecter</span>
       </a>
 
-<!--
-    <ng-container *ngIf="customerRoutes">
-
-      <h2 matSubheader> {{ 'CUSTOMERS_SUB_HEADER' | translate }} </h2>
-
-      <a *ngFor="let item of customerRoutes"
-         mat-list-item
-         (click)="navigationSidenav.close()"
-         [routerLink]="[item.route]"
-         routerLinkActive="list-item-active">
-        <mat-icon matListIcon class="nav-list-icon"> {{ item.icon }} </mat-icon>
-        {{item.title}}
-      </a>
-
-    </ng-container>
-
-    <h2 matSubheader> {{ 'SALES_SUB_HEADER' | translate }} </h2>
-    <h2 matSubheader> {{ 'COLLATERAL_SUB_HEADER' | translate }} </h2>
-    <h2 matSubheader> {{ 'MARKETING_SUB_HEADER' | translate }} </h2>
-
-    <ng-container *ngIf="toolsRoutes">
-
-      <h2 matSubheader> {{ 'TOOLS_SUB_HEADER' | translate }} </h2>
-
-      <a *ngFor="let item of toolsRoutes"
-         mat-list-item
-         (click)="navigationSidenav.close()"
-         [routerLink]="[item.route]"
-         routerLinkActive="list-item-active">
-        <mat-icon matListIcon class="nav-list-icon"> {{ item.icon }} </mat-icon>
-        {{item.title}}
-      </a>
-
-    </ng-container> -->
 
   </mat-nav-list>

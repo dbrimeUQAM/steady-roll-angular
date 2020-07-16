@@ -16,6 +16,10 @@ class User extends Model {
     return this.getDocValue('active', false) === true;
   }
 
+  isAdmin() {
+    return this.getDocValue('role', '') === User.ROLES.ADMIN;
+  }
+
 }
 
 User.DATABASE_NAME = 'users';
