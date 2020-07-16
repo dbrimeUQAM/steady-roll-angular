@@ -10,69 +10,115 @@
     <br><br>
     <div align="center">
       
+
     <form [formGroup]="detailForm" class="forme" >
-    <mat-toolbar-row >
-      <mat-form-field appearance="outline" >
-        <mat-label>Nom de l'article</mat-label>
-        <input style="color: black;" matInput formControlName="name" disabled   type="text" />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Type</mat-label>
-        <input style="color: black;" matInput formControlName="articleType" disabled   type="text" />
-      </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-      <mat-form-field appearance="outline">
-        <mat-label>Description</mat-label>
-        <textarea style="color: black;" matInput formControlName="description" disabled  type="text" >
-        </textarea>
-      </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-      <mat-form-field appearance="outline">
-        <mat-label>Nom de l'hôpital</mat-label>
-        <input style="color: black;" matInput formControlName="hospitalName" disabled   type="text" />
-      </mat-form-field>
-    </mat-toolbar-row>
-    <mat-toolbar-row>
-      <mat-form-field appearance="outline">
-        <mat-label>Condition</mat-label>
-        <input style="color: black;" matInput formControlName="condition" disabled   type="text" />
-      </mat-form-field>
-      <div *ngIf="article.expirationDate">
-        <mat-form-field appearance="outline">
-          <mat-label>Date d'exipration</mat-label>
-          <input style="color: black;" matInput formControlName="expirationDate" disabled   type="texte" />
-        </mat-form-field>
+      <div>
+        <mat-toolbar-row >
+        <!-- name -->
+          <mat-form-field appearance="outline">
+            <mat-label>Nom de l'article</mat-label>
+            <input  style="color: black;" formControlName="name"  minlength="4" maxlength="100" matInput />
+          </mat-form-field>
+        <!-- type -->
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Type</mat-label>
+            <mat-select  formControlName="articleType" >
+              <mat-option value="medicament">Médicament</mat-option>
+              <mat-option value="equipement">Equipement</mat-option>
+              <mat-option value="fourniture">Fourniture</mat-option>
+            </mat-select>
+
+          </mat-form-field>
         </div>
+      </mat-toolbar-row >
+      <mat-toolbar-row>
+         <!--   description  -->
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea style="color: black;" formControlName="description" matInput></textarea>
+          </mat-form-field>
       </mat-toolbar-row>
+      <mat-toolbar-row >
+      <!-- hospital name -->
+        <mat-form-field appearance="outline">
+          <mat-label>Nom de l'hôpital</mat-label>
+          <input style="color: black;" formControlName="hospitalName" minlength="4" maxlength="100" matInput disabled />
+        </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+         <!--   condition  -->
+          <mat-form-field appearance="outline" *ngIf="article.articleType !== 'medicament' ">
+            <mat-label>Condition</mat-label>
+            <mat-select formControlName="condition" >
+              <mat-option value="nouveau">nouveau</mat-option>
+              <mat-option value="tresBonEtat">très bon état</mat-option>
+              <mat-option value="bon">bon</mat-option>
+              <mat-option value="acceptable">acceptable</mat-option>
+              <mat-option value="mauvais">mauvais</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
 
-    <mat-toolbar-row >
+        <!-- expirationDate  -->
+          <mat-form-field style="padding-bottom: 15px;" appearance="outline" *ngIf="article.articleType === 'medicament'">
+            <mat-label>Date D'expiration</mat-label>
+            <input style="color: black;" formControlName="expirationDate" matInput [matDatepicker]="picker" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <br>
+          </mat-form-field>
+    </mat-toolbar-row>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Quantité</mat-label>
-        <input style="color: black;" matInput formControlName="quantity" disabled   type="number" />
-      </mat-form-field>
+      <mat-toolbar-row>
+        <!-- quantity  -->
+          <mat-form-field appearance="outline">
+            <mat-label> Quantité </mat-label>
+            <input style="color: black;" formControlName="quantity" matInput type="number" value="1" min="1" max="900" />
+          </mat-form-field>
+         <!-- offerType  -->
+          <mat-form-field appearance="outline">
+            <mat-label>Mode d'échange</mat-label>
+            <mat-select formControlName="offerType" >
+              <mat-option value="donner">À donner</mat-option>
+              <mat-option value="vendre">À vendre</mat-option>
+            </mat-select>
 
-      <mat-form-field appearance="outline" >
-        <mat-label>Mode d'échange:</mat-label>
-        <input style="color: black;" matInput formControlName="offerType" disabled   type="text" />
-      </mat-form-field>
-     
-      <div *ngIf="article.offerType==='à vendre'">
-      <mat-form-field appearance="outline">
-        <mat-label>Prix</mat-label>
-        <input style="color: black;" matInput formControlName="price" disabled   type="number" />
-        <span matPrefix> $ &nbsp; </span>
-        <span matSuffix> .00 </span>
-      </mat-form-field>
-    </div>
-  </mat-toolbar-row>
+          </mat-form-field>
+        <!-- price  -->
+        <div *ngIf="article.offerType === 'vendre'">
+          <mat-form-field appearance="outline">
+            <mat-label> Prix </mat-label>
+            <input style="color: black;" formControlName="price"  matInput type="number" value="0" min="0" max="999" />
+            <span matPrefix> $ &nbsp; </span>
+            <span matSuffix> .00 </span>
+          </mat-form-field>
+        </div>
+        </mat-toolbar-row>
+        
+       
+       
+        <div *ngIf="!isReadOnly">
+          <mat-card-actions>
+            <button mat-raised-button class="btn" color="primary" >
+              <mat-icon class="icon-spacing" (click)="save()">save</mat-icon> Sauvegarder</button>&nbsp;
+            <button mat-raised-button [routerLink]="['/articles/all']" class="btn" color="primary"  type="button">
+              <mat-icon class="icon-spacing" >cancel</mat-icon> Annuler</button>&nbsp;
+            <button (click)="delet()" mat-raised-button class="btn" color="primary"  type="button">
+              <mat-icon class="icon-spacing" >delete</mat-icon> Supprimer</button>
+          </mat-card-actions>
+          <br><br>
+        </div>
 
-    <div class="bouton">
-      <button class="btn" mat-raised-button style="background-color: #097D6C; color: white; width: 100%;" (click)="openDialog(article.name, article.articleType)" >Ajouter au panier</button>
-    </div>
+        <div class="bouton" *ngIf="isReadOnly">
+          <button class="btn" style="background-color: #097D6C; color: white; width: 100%;" mat-raised-button
+            color="primary">Ajouter</button>
+        </div>
+      </div>
+
     </form>
+
+
     </div>
 
   </mat-sidenav-content>
