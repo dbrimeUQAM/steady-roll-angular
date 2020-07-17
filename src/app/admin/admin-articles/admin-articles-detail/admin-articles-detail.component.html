@@ -49,14 +49,15 @@
           <td class="left-field">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Quantité</mat-label>
-              <input matInput [(ngModel)]="article.quantity" #quantity="ngModel" name="quantity" required>
+              <input matInput [(ngModel)]="article.quantity" #quantity="ngModel" name="quantity" class="text-right-aligned"
+              mask="separator.0" thousandSeparator="," required>
             </mat-form-field>
           </td>
           <td>
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Prix</mat-label>
-              <input matInput [(ngModel)]="article.price" #price="ngModel" name="price"
-               required>
+              <input matInput [(ngModel)]="article.price" #price="ngModel" name="price" class="text-right-aligned"
+              mask="separator.2" thousandSeparator="," prefix="$ " required>
             </mat-form-field>
           </td>
         </tr>
@@ -82,12 +83,14 @@
             </mat-form-field>
           </td>
         </tr>
-        <tr>
-          <td class="left-field">
-            <mat-form-field class="example-full-width" appearance="outline">
+        <tr *ngIf="article.articleType === 'médicament'">
+          <td colspan="2" class="left-field">
+            <mat-form-field class="half-width" appearance="outline">
               <mat-label>Date d'expiration</mat-label>
               <input matInput [(ngModel)]="article.expirationDate" #expirationDate="ngModel" name="expirationDate"
-              mask="DD/MM/YYYY" required>
+              [matDatepicker]="picker" required>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
           </td>
         </tr>

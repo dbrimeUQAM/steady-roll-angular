@@ -1,5 +1,5 @@
 <mat-toolbar-row>
-      <mat-icon mat-list-icon>medical_services</mat-icon>&nbsp;
+      <mat-icon mat-list-icon> {{line.icon}} </mat-icon>&nbsp;
       <div>
         <div  mat-line style="color: darkseagreen;">{{line.name}}</div>
         <div mat-line> {{line.hospitalName}} </div>
@@ -28,11 +28,11 @@
             <button mat-icon-button (click)="submit()"  *ngIf="isChanged">
               <mat-icon style="color: #097D6C;;">done</mat-icon>
             </button>
-          
+
           </mat-toolbar-row>
           </mat-form-field>
           &nbsp;
-          
+
 
           <mat-form-field style="width: 15%;" appearance="outline">
             <mat-label>Sous-total</mat-label>

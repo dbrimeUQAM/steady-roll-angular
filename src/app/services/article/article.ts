@@ -11,4 +11,5 @@ export class Article {
   quantity: number;
   price: number;
   qty: number;
+  icon: string;
 }

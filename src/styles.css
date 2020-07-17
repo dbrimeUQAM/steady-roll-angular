@@ -15,3 +15,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .form-title {
   margin: 0 0 10px 0;
 }
+
+#sidenav-container {
+  top: 64px !important;
+}
+
+@media(max-width: 599px) {
+  #sidenav-container {
+    top: 56px !important;
+  }
+}

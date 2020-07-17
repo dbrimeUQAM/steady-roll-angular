@@ -133,9 +133,11 @@ users.route('/')
         if (updatedUser.password === DUMMY_PWD) {
           // Password did not change, skip password update.
           delete updatedUser.password;
+          updatedUser.passwordUpdated = false;
         } else {
           // Password changed, let's hash it.
           updatedUser.password = bcrypt.hashSync(updatedUser.password, 8);
+          updatedUser.passwordUpdated = true;
         }
 
         user.doc = _.mergeWith(user.doc, updatedUser, utils.mergeArrays);

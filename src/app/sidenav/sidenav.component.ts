@@ -13,46 +13,47 @@ export class SidenavComponent implements OnInit {
   navAdminLinks: any[];
 
   constructor(private router: Router, private tokenStorage: TokenStorageService) {
-    this.navLinks = [
-      {
-          label: 'Accueil',
-          link: '/home',
-          icon: 'home'
-      }, {
-          label: 'Ajouter un article',
-          link: '/add-article',
-          icon: 'add_circle'
-      }, {
-          label: 'Magasiner',
-          link: '/articles/all',
-          icon: 'storefront'
-      }, {
-          label: 'Médicaments',
-          link: '/articles/drugs',
-          icon: 'local_pharmacy'
-      }, {
-          label: 'Fournitures',
-          link: '/articles/supplies',
-          icon: 'healing'
-      }, {
-          label: 'Équipements',
-          link: '/articles/equipments',
-          icon: 'biotech'
-      }, {
-          label: 'Commandes',
-          link: '/bag',
-          icon: 'shopping_cart'
-      }, {
-          label: 'Factures',
-          link: '/my-invoices',
-          icon: 'attach_money'
-      }, {
-          label: 'Contactez-nous',
-          link: '/contact',
-          icon: 'support_agent'
-      }
-    ];
-
+    if (this.tokenStorage.getUser().role === 'user') {
+      this.navLinks = [
+        {
+            label: 'Accueil',
+            link: '/home',
+            icon: 'home'
+        }, {
+            label: 'Mes Articles',
+            link: '/articles/my-articles',
+            icon: 'article'
+        }, {
+            label: 'Magasiner',
+            link: '/articles/all',
+            icon: 'storefront'
+        }, {
+            label: 'Médicaments',
+            link: '/articles/drugs',
+            icon: 'local_pharmacy'
+        }, {
+            label: 'Fournitures',
+            link: '/articles/supplies',
+            icon: 'healing'
+        }, {
+            label: 'Équipements',
+            link: '/articles/equipments',
+            icon: 'biotech'
+        }, {
+            label: 'Commandes',
+            link: '/my-orders',
+            icon: 'shopping_cart'
+        }, {
+            label: 'Factures',
+            link: '/my-invoices',
+            icon: 'attach_money'
+        }, {
+            label: 'Contactez-nous',
+            link: '/contact',
+            icon: 'support_agent'
+        }
+      ];
+    }
 
     if (this.tokenStorage.getUser().role === 'admin') {
 
@@ -61,7 +62,7 @@ export class SidenavComponent implements OnInit {
             label: 'Dashboard',
             link: '/admin/admin-users',
             icon: 'settings'
-        },
+        }
       ];
 
     }

@@ -25,6 +25,7 @@ import { ContactComponent } from './contact/contact.component';
 // Admin
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { PaymentPageComponent } from './payment-page/payment-page.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 
 const routes: Routes = [
@@ -41,14 +42,16 @@ const routes: Routes = [
   { path: 'user-create', component: UserCreateComponent, data: { title: 'Nouveau Utilisateur' } },
   { path: 'user-update/:id', component: UserUpdateComponent, data: { title: 'Modifier Utilisateur' } },
   { path: 'user-details/:id', component: UserDetailsComponent, data: { title: 'Utilisateur' } },
-  { path: 'articles/all', component: ArticlesListContainerComponent, data: { title: 'Liste des Articles'} },
-  { path: 'articles/drugs', component: ArticlesListContainerComponent, data: { filter: 'medicament'} },
-  { path: 'articles/supplies', component: ArticlesListContainerComponent, data: { filter: 'fourniture'} },
-  { path: 'articles/equipments', component: ArticlesListContainerComponent, data: { filter: 'equipement'} },
+  { path: 'articles/my-articles', component: ArticlesListContainerComponent, data: { filter: 'my-articles'} },
+  { path: 'articles/all', component: ArticlesListContainerComponent, data: { title: 'Liste des Articles', filter: 'all'} },
+  { path: 'articles/drugs', component: ArticlesListContainerComponent, data: { cloudantFilter: 'médicament'} },
+  { path: 'articles/supplies', component: ArticlesListContainerComponent, data: { cloudantFilter: 'fourniture'} },
+  { path: 'articles/equipments', component: ArticlesListContainerComponent, data: { cloudantFilter: 'équipement'} },
   { path: 'my-orders', component: MyOrdersComponent },
   { path: 'my-invoices', component: MyInvoicesComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'payement', component: PaymentPageComponent },
+  { path: 'my-profile', component: MyProfileComponent },
 
   {
     path: 'admin-users',

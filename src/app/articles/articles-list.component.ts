@@ -23,6 +23,7 @@ export class ArticlesListComponent implements OnInit {
   articles: Article[] = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  cloudantFilter;
   filter;
   durationInSeconds = 5;
   hospitalName: string;
@@ -35,16 +36,29 @@ export class ArticlesListComponent implements OnInit {
               private tokenStorage: TokenStorageService,
               private headerService: HeaderService ) {
     this.filter = route.snapshot.data.filter;
+    this.cloudantFilter = route.snapshot.data.cloudantFilter;
   }
 
   ngOnInit() {
-    console.log('filter ==== ', this.filter)
 
-     this.hospitalName= this.tokenStorage.getUser().hospital.name ;
-     console.log('iciiii nom de l hopitale', this.hospitalName );
-    this.articleService.getAll(this.filter)
+    this.articleService.getAll(this.cloudantFilter)
     .subscribe((res: any) => {
       this.articles = res;
+
+      if (this.filter) {
+
+        const hospitalId = this.tokenStorage.getUser().hospital._id;
+
+        if (this.filter === 'all') {
+          this.articles = this.articles.filter(article => article.hospitalId !== hospitalId);
+        }
+
+        if (this.filter === 'my-articles') {
+          this.articles = this.articles.filter(article => article.hospitalId === hospitalId);
+        }
+
+      }
+
       this.dataSource = new MatTableDataSource(this.articles);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

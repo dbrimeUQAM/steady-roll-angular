@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   name: string;
   articleNum;
   hospitalName: string;
+  role;
 
   constructor( private router: Router,
                private tokenStorage: TokenStorageService,
@@ -29,6 +30,7 @@ export class HeaderComponent implements OnInit {
     this.name = user.name;
     this.hospitalName = user.hospital ? user.hospital.name : '';
     this.articleNum = this.tokenStorage.getCartQty();
+    this.role = user.role;
   }
 
   onClick($event) {

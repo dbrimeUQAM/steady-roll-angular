@@ -158,7 +158,7 @@ orders.route('/:userId/in-progress')
 
         const articleIds = clientOrder.getArticles().map(article => article.articleId);
 
-        return Article.fetch(articleIds, (error, articles) => {
+        return Article.getAllById(articleIds, (error, articles) => {
           if (error) {
             return res.status(error.statusCode).json(error);
           }

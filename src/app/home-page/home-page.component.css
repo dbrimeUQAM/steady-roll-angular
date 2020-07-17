@@ -2,15 +2,7 @@
   flex: 1 1 auto;
 }
 
-#sidenav-container {
-  top: 64px !important;
-}
 
-@media(max-width: 599px) {
-  #sidenav-container {
-    top: 56px !important;
-  }
-}
 
 .grid-container {
   margin: 20px;

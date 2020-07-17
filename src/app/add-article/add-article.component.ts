@@ -48,7 +48,7 @@ export class AddArticleComponent implements OnInit {
     this.article.condition='',
     this.article.expirationDate= '',
     this.article.offerType='',
-    this.article.price = 0 , 
+    this.article.price = 0 ,
     this.article.quantity = 0 ,
 
     this.articleFrom = this.formBuilder.group({
@@ -115,7 +115,7 @@ export class AddArticleComponent implements OnInit {
     if (this.articleFrom.valid) {
       this.articleService.addArticle(this.article).subscribe(data => {
         const id = data._id;
-        this.router.navigate(['/home']);
+        this.router.navigate(['/articles/my-articles']);
       }, err =>{
         console.log(err);
       });
