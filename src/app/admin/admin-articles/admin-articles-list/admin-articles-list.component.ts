@@ -15,7 +15,7 @@ export class AdminArticlesListComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   articles: Article[] = [];
-  columnsToDisplay: string[] = ['articleType', 'name', 'description', 'hospitalName', 'quantity', 'actions'];
+  columnsToDisplay: string[] = ['articleType', 'name', 'description', 'hospitalName', 'qty', 'actions'];
   dataSource: MatTableDataSource<Article>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;

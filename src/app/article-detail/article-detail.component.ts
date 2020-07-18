@@ -63,8 +63,8 @@ export class ArticleDetailComponent implements OnInit {
           offerType: [{
             value: this.article.offerType,
             disabled: this.isReadOnly}],
-          quantity: [{
-            value: this.article.quantity,
+          qty: [{
+            value: this.article.qty,
             disabled: this.isReadOnly}],
           price: [{
             value: [this.article.price ],
@@ -89,8 +89,8 @@ export class ArticleDetailComponent implements OnInit {
         this.detailForm.get('condition').valueChanges.subscribe(data => {
           this.article.condition = data ? data : '' ;
         });
-        this.detailForm.get('quantity').valueChanges.subscribe(data => {
-          this.article.quantity = data;
+        this.detailForm.get('qty').valueChanges.subscribe(data => {
+          this.article.qty = data;
         });
         this.detailForm.get('expirationDate').valueChanges.subscribe(data => {
           this.article.expirationDate =  data ? data : '';

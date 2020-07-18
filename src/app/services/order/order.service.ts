@@ -21,10 +21,18 @@ export class OrderService {
   constructor(private httpClient: HttpClient) { }
 
   getCurrentOrder(userId: string): Observable<Order> {
-    const url = `${apiUrl}/${userId}/in-progress`;
+    const url = `${apiUrl}/user/${userId}/in-progress`;
     return this.httpClient.get<Order>(url).pipe(
       tap(_ => console.log(`fetched order by userId=${userId}`)),
       catchError(this.handleError<Order>(`getCurrentOrder userId=${userId}`))
+    );
+  }
+
+  getAllByUserId(userId: string): Observable<Order[]> {
+    const url = `${apiUrl}/user/${userId}`;
+    return this.httpClient.get<Order[]>(apiUrl)
+    .pipe(
+      catchError(this.handleError('getAllByUserId', []))
     );
   }
 
