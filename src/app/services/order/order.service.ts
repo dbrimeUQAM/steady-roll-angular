@@ -30,7 +30,7 @@ export class OrderService {
 
   getAllByUserId(userId: string): Observable<Order[]> {
     const url = `${apiUrl}/user/${userId}`;
-    return this.httpClient.get<Order[]>(apiUrl)
+    return this.httpClient.get<Order[]>(url)
     .pipe(
       catchError(this.handleError('getAllByUserId', []))
     );
