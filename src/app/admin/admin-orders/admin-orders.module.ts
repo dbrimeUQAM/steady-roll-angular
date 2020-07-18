@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { HttpClientModule } from '@angular/common/http';
 
 import { AdminOrdersRoutingModule } from './admin-orders-routing.module';
 
@@ -9,12 +11,17 @@ import { AdminOrdersDetailComponent } from './admin-orders-detail/admin-orders-d
 
 import { MaterialModule } from '../../material.module';
 
+import { NgxMaskModule } from 'ngx-mask';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
-    AdminOrdersRoutingModule
+    AdminOrdersRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgxMaskModule.forRoot()
   ],
   declarations: [
     AdminOrdersDetailComponent,

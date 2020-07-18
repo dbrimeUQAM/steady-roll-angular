@@ -20,6 +20,13 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) { }
 
+  getAll(): Observable<Order[]> {
+    return this.httpClient.get<Order[]>(apiUrl)
+    .pipe(
+      catchError(this.handleError('getAll', []))
+    );
+  }
+
   getCurrentOrder(userId: string): Observable<Order> {
     const url = `${apiUrl}/user/${userId}/in-progress`;
     return this.httpClient.get<Order>(url).pipe(
@@ -30,7 +37,7 @@ export class OrderService {
 
   getAllByUserId(userId: string): Observable<Order[]> {
     const url = `${apiUrl}/user/${userId}`;
-    return this.httpClient.get<Order[]>(apiUrl)
+    return this.httpClient.get<Order[]>(url)
     .pipe(
       catchError(this.handleError('getAllByUserId', []))
     );
@@ -44,7 +51,21 @@ export class OrderService {
     );
   }
 
+  deleteOrder(id: string): Observable<Order> {
+    const url = `${apiUrl}/${id}`;
+    return this.httpClient.delete<Order>(url, httpOptions).pipe(
+      tap(_ => console.log(`deleted order id=${id}`)),
+      catchError(this.handleError<Order>('deleteOrder'))
+    );
+  }
 
+  cancelOrder(id: string): Observable<Order> {
+    const url = `${apiUrl}/${id}/cancel`;
+    return this.httpClient.put<Order>(url, httpOptions).pipe(
+      tap(_ => console.log(`cancelled order id=${id}`)),
+      catchError(this.handleError<Order>('cancelOrder'))
+    );
+  }
 
 
 
