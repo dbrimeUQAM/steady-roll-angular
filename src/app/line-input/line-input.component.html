@@ -4,7 +4,7 @@
         <div  mat-line style="color: darkseagreen;">{{line.name}}</div>
         <div mat-line> {{line.hospitalName}} </div>
         <div mat-line *ngIf="line.expirationDate"> valide jusqu'à {{line.expirationDate | date}} </div>
-        <div style="color:red;" mat-line *ngIf="line.quantity == 0">  Cet item n'est plus disponible </div>
+        <div style="color:red;" mat-line *ngIf="line.qty == 0">  Cet item n'est plus disponible </div>
       </div>
       <span class="example-spacer"></span>
 
@@ -19,12 +19,12 @@
           &nbsp;
           <mat-form-field *ngIf="!isChanged" style="width: 15%;" appearance="outline">
             <mat-label> Quantité </mat-label>
-            <input  matInput formControlName="quantity" type="number" min="1" max="{{line.quantity}}"/>
+            <input  matInput formControlName="qty" type="number" min="1" max="{{line.qty}}"/>
           </mat-form-field>
           <mat-form-field *ngIf="isChanged" style="width: 20%;" appearance="outline">
             <mat-label> Quantité </mat-label>
             <mat-toolbar-row style="height: 15px;">
-            <input  matInput formControlName="quantity" type="number" min="1" max="{{line.quantity}}"/>
+            <input  matInput formControlName="qty" type="number" min="1" max="{{line.qty}}"/>
             <button mat-icon-button (click)="submit()"  *ngIf="isChanged">
               <mat-icon style="color: #097D6C;;">done</mat-icon>
             </button>

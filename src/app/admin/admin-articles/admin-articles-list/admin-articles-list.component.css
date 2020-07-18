@@ -42,7 +42,7 @@ tr.mat-row:hover {
   width: 20% !important;
 }
 
-.mat-column-quantity {
+.mat-column-qty {
   width: 5% !important;
   text-align: right;
   padding-right: 35px;

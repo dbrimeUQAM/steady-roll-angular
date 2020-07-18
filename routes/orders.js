@@ -10,59 +10,59 @@ const Order = require('../models/Order');
 const Article = require('../models/Article');
 
 orders.route('/')
-    /* GET all orders. */
-    .get((req, res) => {
-      return Order.getAll((error, orders) => {
-        if (error) {
-          return res.status(error.statusCode).json(error);
-        }
-
-        return res.status(200).json(orders);
-      });
-    })
-    /* POST order. */
-    .post((req, res) => {
-      const postedOrder = req.body;
-
-      // More validations maybe?
-
-      if (!postedOrder) {
-        return res.status(400).json({
-          reason: `Document d'hôpital prévu dans POST body, obtenu: ${postedOrder}`,
-          statusCode: 400
-        });
+  /* GET all orders. */
+  .get((req, res) => {
+    return Order.getAll((error, orders) => {
+      if (error) {
+        return res.status(error.statusCode).json(error);
       }
 
-      const newOrder = new Order(postedOrder);
+      return res.status(200).json(orders);
+    });
+  })
+  /* POST order. */
+  .post((req, res) => {
+    const postedOrder = req.body;
 
-      return newOrder.save((error, savedOrder) => {
-        if (error) {
-          return res.status(error.statusCode).json(error);
-        }
+    // More validations maybe?
 
-        return res.status(200).json(savedOrder.doc);
+    if (!postedOrder) {
+      return res.status(400).json({
+        reason: `Document d'hôpital prévu dans POST body, obtenu: ${postedOrder}`,
+        statusCode: 400
       });
+    }
+
+    const newOrder = new Order(postedOrder);
+
+    return newOrder.save((error, savedOrder) => {
+      if (error) {
+        return res.status(error.statusCode).json(error);
+      }
+
+      return res.status(200).json(savedOrder.doc);
+    });
+
+  });
+
+orders.route('/:orderId')
+  /* GET order by id. */
+  .get((req, res) => {
+    const orderId = req.params.orderId;
+
+    return Order.get(orderId, (error, order) => {
+      if (error) {
+        return res.status(error.statusCode).json(error);
+      }
+
+      return res.status(200).json(order.doc);
 
     });
 
-orders.route('/:orderId')
-    /* GET order by id. */
-    .get((req, res) => {
-      const orderId = req.params.orderId;
-
-      return Order.get(orderId, (error, order) => {
-        if (error) {
-          return res.status(error.statusCode).json(error);
-        }
-
-        return res.status(200).json(order.doc);
-
-      });
-
-    })
-    /* PUT order by id. */
-    .put((req, res) => {
-      const orderId = req.params.orderId;
+  })
+  /* PUT order by id. */
+  .put((req, res) => {
+    const orderId = req.params.orderId;
       const updatedOrder = req.body;
 
       if (!updatedOrder) {
@@ -115,7 +115,7 @@ orders.route('/:orderId/article/:articleId')
     .post((req, res) => {
       const orderId = req.params.orderId;
       const articleId = req.params.articleId;
-      const quantity = req.body.quantity;
+      const qty = req.body.qty;
 
       const tasks = [
         Article.get(articleId, callback),
@@ -129,11 +129,11 @@ orders.route('/:orderId/article/:articleId')
 
         const { article, order } = results;
 
-        if (article.doc.quantity === 0) {
+        if (article.doc.qty === 0) {
           return res.status(500).json('Quantité epuissé');
         }
 
-        return order.addArticle(articleId, quantity, (error, order) => {
+        return order.addArticle(articleId, qty, (error, order) => {
           if (error) {
             return res.status(error.statusCode).json(error);
           }
@@ -146,7 +146,7 @@ orders.route('/:orderId/article/:articleId')
 
     });
 
-orders.route('/:userId/in-progress')
+orders.route('/user/:userId/in-progress')
     /* GET current order by userId. */
     .get((req, res) => {
       const userId = req.params.userId;
@@ -232,56 +232,100 @@ orders.route('/user/:userId/delete-articles')
 
       });
 
-      orders.route('/user/:userId/delete-article/:articleId')
-        /* delete article from order. */
-        .put((req, res) => {
-          const userId = req.params.userId;
-          const articleId = req.params.articleId;
+orders.route('/user/:userId/delete-article/:articleId')
+      /* delete article from order. */
+      .put((req, res) => {
+        const userId = req.params.userId;
+        const articleId = req.params.articleId;
 
-          return Order.getInProgressByUserId(userId, (error, order) => {
+        return Order.getInProgressByUserId(userId, (error, order) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          order.deleteArticle(articleId);
+
+          return order.save((error, savedOrder) => {
             if (error) {
               return res.status(error.statusCode).json(error);
             }
 
-            order.deleteArticle(articleId);
-
-            return order.save((error, savedOrder) => {
-              if (error) {
-                return res.status(error.statusCode).json(error);
-              }
-
-              return res.status(200).json(savedOrder.doc);
-            });
-
-
+            return res.status(200).json(savedOrder.doc);
           });
+
 
         });
 
+      });
 
+  orders.route('/user/:userId/update-article/:articleId')
+    .put((req, res) => {
+      const userId = req.params.userId;
+      const { articleId, qty } = req.body;
 
-        orders.route('/user/:userId/update-article/:articleId')
-          .put((req, res) => {
-            const userId = req.params.userId;
-            const { articleId, qty } = req.body;
+      return Order.getInProgressByUserId(userId, (error, order) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
 
-            return Order.getInProgressByUserId(userId, (error, order) => {
-              if (error) {
-                return res.status(error.statusCode).json(error);
+        order.updateArticle(articleId, qty);
+
+        return order.save((error, savedOrder) => {
+            if (error) {
+              return res.status(error.statusCode).json(error);
+            }
+
+            return res.status(200).json(savedOrder.doc);
+          });
+      });
+
+    });
+
+  orders.route('/user/:userId')
+    /* GET all orders by userId. */
+    .get((req, res) => {
+      const userId = req.params.userId;
+
+      return Order.getAllByUserId(userId, (error, orders) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        //const articleIds = clientOrder.getArticles().map(article => article.articleId);
+        const articleIds = orders.reduce((ids, curr) => {
+          return [ ...ids, ...curr.getArticles().map(article => article.articleId) ];
+        }, []);
+        const uniqueArticleIds = [ ...new Set(articleIds) ];
+
+        return Article.getAllById(uniqueArticleIds, (error, articles) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          // Filter out any undefined values
+          articles = articles.filter(item => !!item);
+
+          const updatedOrders = orders.map(order => {
+
+            let updatedArticles = order.getArticles().map(article => {
+              let articleDoc = articles.find(item => item._id === article.articleId);
+              if (articleDoc) {
+                return { ...articleDoc, ...article };
               }
-
-              order.updateArticle(articleId, qty);
-
-              return order.save((error, savedOrder) => {
-                  if (error) {
-                    return res.status(error.statusCode).json(error);
-                  }
-
-                  return res.status(200).json(savedOrder.doc);
-                });
+              return article;
             });
 
+            order.setDocValue('articles', updatedArticles);
+
+            return order.doc;
+
           });
+
+          return res.status(200).json(updatedOrders);
+
+        });
+      });
+    });
 
 module.exports = orders;
 

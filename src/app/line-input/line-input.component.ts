@@ -29,16 +29,16 @@ export class LineInputComponent implements OnInit {
   ngOnInit(): void {
     console.log('======>', this.line);
     this.myFrom = this.formBuilder.group ({
-      quantity: [{ value: this.line.qty, disabled: false}] ,
+      qty: [{ value: this.line.qty, disabled: false}] ,
       price: [{ value: this.line.price ? this.line.price : 0 , disabled: true}],
       total: [{ value: this.line.price * this.line.qty , disabled: true}]
     }) ;
 
 
-    this.myFrom.get('quantity').valueChanges.subscribe(
+    this.myFrom.get('qty').valueChanges.subscribe(
       data => {
-        if (data > this.line.quantity){
-          this.myFrom.get('quantity').setValue(this.line.quantity);
+        if (data > this.line.qty){
+          this.myFrom.get('qty').setValue(this.line.qty);
         }
         this.myFrom.get('total').setValue(data * this.line.price);
         this.isChanged = true ;

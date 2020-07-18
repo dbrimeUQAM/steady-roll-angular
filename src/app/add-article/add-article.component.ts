@@ -49,7 +49,7 @@ export class AddArticleComponent implements OnInit {
     this.article.expirationDate= '',
     this.article.offerType='',
     this.article.price = 0 ,
-    this.article.quantity = 0 ,
+    this.article.qty = 0 ,
 
     this.articleFrom = this.formBuilder.group({
       articleType: ['', Validators.required],
@@ -61,7 +61,7 @@ export class AddArticleComponent implements OnInit {
       expirationDate: new Date() ,
       condition: '',
       offerType: ['', Validators.required],
-      quantity: [1, [Validators.required, Validators.max(999)]],
+      qty: [1, [Validators.required, Validators.max(999)]],
       price: [0, [Validators.required, Validators.max(999)]],
     });
     this.articleFrom.get('name').valueChanges.subscribe(data => {
@@ -76,8 +76,8 @@ export class AddArticleComponent implements OnInit {
     this.articleFrom.get('condition').valueChanges.subscribe(data => {
       this.article.condition = data ? data : '' ;
     });
-    this.articleFrom.get('quantity').valueChanges.subscribe(data => {
-      this.article.quantity = data;
+    this.articleFrom.get('qty').valueChanges.subscribe(data => {
+      this.article.qty = data;
     });
     this.articleFrom.get('expirationDate').valueChanges.subscribe(data => {
       this.article.expirationDate =  data ? data: '';
@@ -102,7 +102,7 @@ export class AddArticleComponent implements OnInit {
     if (this.articleFrom.get('condition').invalid) {
       this.condition = true;
     }
-    if (this.articleFrom.get('quantity').invalid) {
+    if (this.articleFrom.get('qty').invalid) {
       this.qty = true;
     }
     if (this.articleFrom.get('expirationDate').invalid) {

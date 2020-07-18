@@ -78,7 +78,7 @@ Article.MODEL_SCHEMA = {
   hospitalId: '',
   condition: '',
   offerType: '', // à vendre ou à donner
-  quantity: null,
+  qty: null,
   price: null
 };
 

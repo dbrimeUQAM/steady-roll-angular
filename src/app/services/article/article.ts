@@ -8,7 +8,7 @@ export class Article {
   hospitalId: string;
   condition: string;
   offerType: string;
-  quantity: number;
+  qty: number;
   price: number;
   qty: number;
   icon: string;

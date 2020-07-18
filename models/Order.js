@@ -112,6 +112,25 @@ class Order extends Model {
     });
   }
 
+  static getAllByUserId(userId, callback) {
+
+    const options = {
+      key: userId,
+      include_docs: true
+    }
+
+    return Order.view('model', 'by-user', options, (error, data) => {
+      if (error) {
+        return callback(error);
+      }
+
+      const filtered = data.rows.map((row) => new Order(row.doc));
+
+      return callback(null, filtered);
+
+    });
+  }
+
 
 
 }

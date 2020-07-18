@@ -14,8 +14,7 @@ articles: [{
   hospitalId: string;
   condition: string;
   offerType: string;
-  quantity: number;
-  price: number;
   qty: number;
+  price: number;
   }];
 }
