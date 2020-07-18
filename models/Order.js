@@ -158,7 +158,8 @@ Order.STATUS = Object.freeze({
   PAID: 'Payée',
   IN_PREPARATION: 'En préparation',
   SHIPPED: 'Expediée',
-  DELIVERED: 'Livrée'
+  DELIVERED: 'Livrée',
+  CANCELLED: 'Annulé'
 });
 
 module.exports = Order;

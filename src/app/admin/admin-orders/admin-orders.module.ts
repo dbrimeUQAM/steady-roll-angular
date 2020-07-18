@@ -12,6 +12,7 @@ import { AdminOrdersDetailComponent } from './admin-orders-detail/admin-orders-d
 import { MaterialModule } from '../../material.module';
 
 import { NgxMaskModule } from 'ngx-mask';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { NgxMaskModule } from 'ngx-mask';
     AdminOrdersRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    MomentModule.forRoot()
   ],
   declarations: [
     AdminOrdersDetailComponent,

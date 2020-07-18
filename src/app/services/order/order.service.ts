@@ -27,6 +27,14 @@ export class OrderService {
     );
   }
 
+  getOrderById(id: string): Observable<Order> {
+    const url = `${apiUrl}/${id}`;
+    return this.httpClient.get<Order>(url).pipe(
+      tap(_ => console.log(`fetched order id=${id}`)),
+      catchError(this.handleError<Order>(`getOrderById id=${id}`))
+    );
+  }
+
   getCurrentOrder(userId: string): Observable<Order> {
     const url = `${apiUrl}/user/${userId}/in-progress`;
     return this.httpClient.get<Order>(url).pipe(

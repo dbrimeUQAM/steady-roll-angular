@@ -49,6 +49,7 @@ import { LineInputComponent } from './line-input/line-input.component';
 
 import { HeaderService } from './services/header/header.service';
 import { NgxMaskModule } from 'ngx-mask';
+import { MomentModule } from 'ngx-moment';
 
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MyProfileComponent } from './my-profile//my-profile.component';
@@ -91,7 +92,8 @@ import { MyProfileComponent } from './my-profile//my-profile.component';
     HttpClientModule,
     AppRoutingModule,
     MaterialModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    MomentModule.forRoot()
   ],
   entryComponents: [DialogElementsComponent],
   providers: [

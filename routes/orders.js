@@ -98,7 +98,47 @@ orders.route('/:orderId')
         return res.status(error.statusCode).json(error);
       }
 
-      return res.status(200).json(order.doc);
+      const tasks = {
+        hospital: (callback) => Hospital.get(order.getHospitalId(), callback),
+        user: (callback) => User.get(order.getUserId(), callback)
+      };
+
+      return parallel(tasks, (error, results) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        const { hospital, user } = results;
+
+        order.setDocValue('hospitalName', hospital.getDocValue('name', ''));
+        order.setDocValue('userName', user.getDocValue('name', ''));
+
+        const articleIds = order.getArticles().map(article => article.articleId);
+        const uniqueArticleIds = [ ...new Set(articleIds) ];
+
+        return Article.getAllById(uniqueArticleIds, (error, articles) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          // Filter out any undefined values
+          articles = articles.filter(item => !!item);
+
+          const updatedArticles = order.getArticles().map(article => {
+            let articleDoc = articles.find(item => item._id === article.articleId);
+            if (articleDoc) {
+              return { ...articleDoc, ...article };
+            }
+            return article;
+          });
+
+          order.setDocValue('articles', updatedArticles);
+
+          return res.status(200).json(order.doc);
+
+        });
+
+      });
 
     });
 
@@ -132,26 +172,28 @@ orders.route('/:orderId')
 
       });
 
-    })
-    /* DELETE order by id. */
-    .delete((req, res) => {
-      const orderId = req.params.orderId;
+  })
+  /* DELETE order by id. */
+  .delete((req, res) => {
+    const orderId = req.params.orderId;
 
-      return Order.get(orderId, (error, order) => {
+    return Order.get(orderId, (error, order) => {
+      if (error) {
+        return res.status(error.statusCode).json(error);
+      }
+
+      // TODO - update articles if not just in progress
+
+      return order.delete((error, response) => {
         if (error) {
           return res.status(error.statusCode).json(error);
         }
 
-        return order.delete((error, response) => {
-          if (error) {
-            return res.status(error.statusCode).json(error);
-          }
-
-          return res.status(200).json(response.deleted_doc._id);
-        });
-
+        return res.status(200).json(response.deleted_doc._id);
       });
+
     });
+  });
 
 orders.route('/:orderId/article/:articleId')
     /* POST article into order by id. */
@@ -378,6 +420,31 @@ orders.route('/user/:userId/delete-article/:articleId')
         });
       });
     });
+
+orders.route('/:orderId/cancel')
+  /* PUT cancel order by id. */
+  .put((req, res) => {
+    const orderId = req.params.orderId;
+
+    return Order.get(orderId, (error, order) => {
+      if (error) {
+        return res.status(error.statusCode).json(error);
+      }
+
+      order.setDocValue('status', Order.STATUS.CANCELLED);
+      // TODO - update articles if not just in progress
+
+      return order.save((error, savedOrder) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        return res.status(200).json(savedOrder.doc);
+      });
+
+    });
+
+  });
 
 module.exports = orders;
 

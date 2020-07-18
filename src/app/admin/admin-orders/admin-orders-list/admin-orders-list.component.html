@@ -9,7 +9,7 @@
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="orderDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-      <td mat-cell *matCellDef="let order"> {{order.orderDate}} </td>
+      <td mat-cell *matCellDef="let order" mask="d0/M0/0000"> {{order.orderDate | amDateFormat: 'DD-MMM-yyyy'}} </td>
     </ng-container>
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> État </th>
@@ -31,12 +31,12 @@
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let order" (click)="$event.stopPropagation()">
         <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" [routerLink]="['/admin/admin-orders/detail', order._id]">
-          <mat-icon role="img" class="mat-icon">edit</mat-icon>
+          <mat-icon role="img" class="mat-icon">search</mat-icon>
         </button>
         <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" (click)="deleteOrder(order._id)">
           <mat-icon role="img" class="mat-icon">delete</mat-icon>
         </button>
-        <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" (click)="cancelOrder(order._id)">
+        <button *ngIf="order.status !== 'Annulé'" mat-mini-fab color="primary" class="mat-mini-fab" type="button" (click)="cancelOrder(order._id)">
           <mat-icon role="img" class="mat-icon">cancel</mat-icon>
         </button>
       </td>

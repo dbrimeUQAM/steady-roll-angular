@@ -30,15 +30,15 @@ tr.mat-row:hover {
   width: 100%;
 }
 
-.mat-column-articleType {
-  width: 10% !important;
-}
-
-.mat-column-name {
+.mat-column-orderDate {
   width: 15% !important;
 }
 
-.mat-column-hospitalName {
+.mat-column-status {
+  width: 10% !important;
+}
+
+.mat-column-userName {
   width: 20% !important;
 }
 
@@ -48,7 +48,7 @@ tr.mat-row:hover {
   padding-right: 35px;
 }
 .mat-column-actions {
-  width: 15% !important;
+  width: 20% !important;
 }
 
 .grid-container {

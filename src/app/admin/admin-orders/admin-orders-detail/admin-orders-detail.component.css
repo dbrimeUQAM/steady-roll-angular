@@ -1,0 +1,103 @@
+.grid-container {
+  margin: 20px;
+}
+
+.main-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-container {
+  min-width: 150px;
+  max-width: 750px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.left-field {
+  padding-right: 20px;
+}
+
+.text-right-aligned {
+  text-align: right;
+}
+
+.mat-raised-button {
+  margin-right: 15px;
+}
+
+.date_container {
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.mat-raised-button {
+  margin: 10px;
+}
+
+.mat-mini-fab {
+  margin: 0 10px 0 0;
+}
+
+.tab1 {
+  width: 100%;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-row{
+  cursor: pointer
+}
+tr.mat-row:hover {
+  background-color:whitesmoke;
+  font-style: bold;
+  color: white;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-column-articleType {
+  width: 10% !important;
+}
+
+.mat-column-name {
+  width: 15% !important;
+}
+
+.mat-column-hospitalName {
+  width: 20% !important;
+}
+
+.mat-column-qty {
+  width: 5% !important;
+  text-align: right;
+  padding-right: 35px;
+}
+.mat-column-actions {
+  width: 15% !important;
+}
+
+.actions {
+  margin-top: 20px;
+}
