@@ -10,13 +10,13 @@
           <td class="left-field">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Hôpital</mat-label>
-              <input matInput [(ngModel)]="contact.hospitalName" #hospitalName="ngModel" name="hospitalName" disabled>
+              <input matInput [(ngModel)]="contact.hospitalName" #hospitalName="ngModel" name="hospitalName" readonly>
             </mat-form-field>
           </td>
           <td>
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Nom</mat-label>
-              <input matInput [(ngModel)]="contact.name" #name="ngModel" name="name" disabled>
+              <input matInput [(ngModel)]="contact.name" #name="ngModel" name="name" readonly>
             </mat-form-field>
           </td>
         </tr>
@@ -24,13 +24,13 @@
           <td class="left-field">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Email</mat-label>
-              <input matInput [(ngModel)]="contact.email" #email="ngModel" name="email" disabled>
+              <input matInput [(ngModel)]="contact.email" #email="ngModel" name="email" readonly>
             </mat-form-field>
           </td>
           <td>
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Téléphone</mat-label>
-              <input matInput [(ngModel)]="contact.phone" #phone="ngModel" name="phone" disabled>
+              <input matInput [(ngModel)]="contact.phone" #phone="ngModel" name="phone" readonly>
             </mat-form-field>
           </td>
         </tr>
@@ -38,7 +38,7 @@
           <td colspan="2">
             <mat-form-field class="example-full-width" appearance="outline">
               <mat-label>Message</mat-label>
-              <textarea rows="5" matInput [(ngModel)]="contact.message" #message="ngModel" name="message" disabled></textarea>
+              <textarea rows="5" matInput [(ngModel)]="contact.message" #message="ngModel" name="message" readonly></textarea>
             </mat-form-field>
           </td>
         </tr>
@@ -47,7 +47,7 @@
       <div class="text-right-aligned">
         <mat-card-actions>
           <button mat-raised-button color="primary" [routerLink]="['/admin/admin-contacts']" type="button">
-            <mat-icon class="icon-spacing">cancel</mat-icon> Fermer</button>
+            <mat-icon class="icon-spacing">arrow_back</mat-icon> Retourner</button>
           <button mat-raised-button *ngIf="contact._id" color="primary" (click)="deleteContact()" type="button">
             <mat-icon class="icon-spacing">delete</mat-icon> Supprimer</button>
         </mat-card-actions>

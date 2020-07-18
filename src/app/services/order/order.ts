@@ -1,7 +1,9 @@
 export class Order {
   _id: string;
 hospitalId: string;
+hospitalName: string;
 userId: string;
+userName: string;
 orderDate: string;
 status: string;
 articles: [{

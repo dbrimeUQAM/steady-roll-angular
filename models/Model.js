@@ -259,6 +259,10 @@ class Model {
     return this.getDocValue('hospitalId');
   }
 
+  getUserId() {
+    return this.getDocValue('userId');
+  }
+
 }
 
 module.exports = Model;

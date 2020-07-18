@@ -1,1 +1,50 @@
-<p>admin-orders-list works!</p>
+<div class="grid-container">
+  <mat-form-field style="margin-left: 4px;" color="basic">
+    <mat-label>
+      <mat-icon>search</mat-icon>
+      Recherche </mat-label>
+    <input matInput (keyup)="applyFilter($event)">
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="orderDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+      <td mat-cell *matCellDef="let order" mask="d0/M0/0000"> {{order.orderDate | amDateFormat: 'DD-MMM-yyyy'}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> État </th>
+      <td mat-cell *matCellDef="let order"> {{order.status}} </td>
+    </ng-container>
+    <ng-container matColumnDef="hospitalName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Hôpital </th>
+      <td mat-cell *matCellDef="let order"> {{order.hospitalName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
+      <td mat-cell *matCellDef="let order"> {{order.userName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="qty">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantité </th>
+      <td mat-cell *matCellDef="let order"> {{order.qty}} </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let order" (click)="$event.stopPropagation()">
+        <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" [routerLink]="['/admin/admin-orders/detail', order._id]">
+          <mat-icon role="img" class="mat-icon">search</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" class="mat-mini-fab" type="button" (click)="deleteOrder(order._id)">
+          <mat-icon role="img" class="mat-icon">delete</mat-icon>
+        </button>
+        <button *ngIf="order.status !== 'Annulé'" mat-mini-fab color="primary" class="mat-mini-fab" type="button" (click)="cancelOrder(order._id)">
+          <mat-icon role="img" class="mat-icon">cancel</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row [routerLink]="['/admin/admin-orders/detail', order._id]" *matRowDef="let order; columns: columnsToDisplay"></tr>
+  </table>
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

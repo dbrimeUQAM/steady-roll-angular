@@ -12,7 +12,9 @@
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="articleType">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-      <td mat-cell *matCellDef="let article"> {{article.articleType}} </td>
+      <td mat-cell *matCellDef="let article">
+        <mat-icon class="icon-spacing">{{article.icon}} </mat-icon>
+      </td>
     </ng-container>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>

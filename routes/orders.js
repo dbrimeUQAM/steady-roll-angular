@@ -2,12 +2,14 @@
 
 const express = require('express');
 const orders = express.Router();
-const async = require('async');
+const { parallel } = require('async');
 const utils = require('../utils');
 
 // Modèles
 const Order = require('../models/Order');
 const Article = require('../models/Article');
+const User = require('../models/User');
+const Hospital = require('../models/Hospital');
 
 orders.route('/')
   /* GET all orders. */
@@ -17,7 +19,48 @@ orders.route('/')
         return res.status(error.statusCode).json(error);
       }
 
-      return res.status(200).json(orders);
+      const hospitalIds = orders.map(order => order.hospitalId);
+      const uniqueHospitalIds = [ ...new Set(hospitalIds) ];
+
+      const userIds = orders.map(order => order.userId);
+      const uniqueUserIds = [ ...new Set(userIds) ];
+
+      const tasks = {
+        hospitals: (callback) => Hospital.fetch(uniqueHospitalIds, callback),
+        users: (callback) => User.fetch(uniqueUserIds, callback)
+      };
+
+      return parallel(tasks, (error, results) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        const { hospitals, users } = results;
+
+        const filteredHospitals = hospitals.filter(item => !!item);
+        const filteredUsers = users.filter(item => !!item);
+
+        const updatedOrders = orders.map(order => {
+          let orderToUpdate = new Order(order);
+          let user = filteredUsers.find(item => item._id === orderToUpdate.getUserId());
+
+          if (user) {
+            orderToUpdate.setDocValue('userName', user.name);
+          }
+
+          let hospital = filteredHospitals.find(item => item._id === orderToUpdate.getHospitalId());
+
+          if (hospital) {
+            orderToUpdate.setDocValue('hospitalName', hospital.name);
+          }
+
+          orderToUpdate.setDocValue('qty', orderToUpdate.getArticles().length);
+
+          return orderToUpdate.doc;
+        });
+
+        return res.status(200).json(updatedOrders);
+      });
     });
   })
   /* POST order. */
@@ -55,7 +98,47 @@ orders.route('/:orderId')
         return res.status(error.statusCode).json(error);
       }
 
-      return res.status(200).json(order.doc);
+      const tasks = {
+        hospital: (callback) => Hospital.get(order.getHospitalId(), callback),
+        user: (callback) => User.get(order.getUserId(), callback)
+      };
+
+      return parallel(tasks, (error, results) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        const { hospital, user } = results;
+
+        order.setDocValue('hospitalName', hospital.getDocValue('name', ''));
+        order.setDocValue('userName', user.getDocValue('name', ''));
+
+        const articleIds = order.getArticles().map(article => article.articleId);
+        const uniqueArticleIds = [ ...new Set(articleIds) ];
+
+        return Article.getAllById(uniqueArticleIds, (error, articles) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          // Filter out any undefined values
+          articles = articles.filter(item => !!item);
+
+          const updatedArticles = order.getArticles().map(article => {
+            let articleDoc = articles.find(item => item._id === article.articleId);
+            if (articleDoc) {
+              return { ...articleDoc, ...article };
+            }
+            return article;
+          });
+
+          order.setDocValue('articles', updatedArticles);
+
+          return res.status(200).json(order.doc);
+
+        });
+
+      });
 
     });
 
@@ -89,26 +172,28 @@ orders.route('/:orderId')
 
       });
 
-    })
-    /* DELETE order by id. */
-    .delete((req, res) => {
-      const orderId = req.params.orderId;
+  })
+  /* DELETE order by id. */
+  .delete((req, res) => {
+    const orderId = req.params.orderId;
 
-      return Order.get(orderId, (error, order) => {
+    return Order.get(orderId, (error, order) => {
+      if (error) {
+        return res.status(error.statusCode).json(error);
+      }
+
+      // TODO - update articles if not just in progress
+
+      return order.delete((error, response) => {
         if (error) {
           return res.status(error.statusCode).json(error);
         }
 
-        return order.delete((error, response) => {
-          if (error) {
-            return res.status(error.statusCode).json(error);
-          }
-
-          return res.status(200).json(response.deleted_doc._id);
-        });
-
+        return res.status(200).json(response.deleted_doc._id);
       });
+
     });
+  });
 
 orders.route('/:orderId/article/:articleId')
     /* POST article into order by id. */
@@ -122,7 +207,7 @@ orders.route('/:orderId/article/:articleId')
         Order.get(orderId, callback)
       ];
 
-      return async.parallel(tasks, (error, results) => {
+      return parallel(tasks, (error, results) => {
         if (error) {
           return res.status(error.statusCode).json(error);
         }
@@ -158,16 +243,24 @@ orders.route('/user/:userId/in-progress')
 
         const articleIds = clientOrder.getArticles().map(article => article.articleId);
 
-        return Article.getAllById(articleIds, (error, articles) => {
+        const tasks = {
+          articles: (callback) => Article.getAllById(articleIds, callback),
+          user: (callback) => User.get(clientOrder.getUserId(), callback),
+          hospital: (callback) => Hospital.get(clientOrder.getHospitalId(), callback)
+        };
+
+        return parallel(tasks, (error, results) => {
           if (error) {
             return res.status(error.statusCode).json(error);
           }
 
+          const { articles, user, hospital } = results;
+
           // Filter out any undefined values
-          articles = articles.filter(item => !!item);
+          const filteredArticles = articles.filter(item => !!item);
 
           const updatedArticles = clientOrder.getArticles().map(article => {
-            let articleDoc = articles.find(item => item._id === article.articleId);
+            let articleDoc = filteredArticles.find(item => item._id === article.articleId);
             if (articleDoc) {
               return { ...articleDoc, ...article };
             }
@@ -175,6 +268,8 @@ orders.route('/user/:userId/in-progress')
           });
 
           clientOrder.setDocValue('articles', updatedArticles);
+          clientOrder.setDocValue('userName', user.getDocValue('name', ''));
+          clientOrder.setDocValue('hospitalName', hospital.getDocValue('name', ''));
 
           return res.status(200).json(clientOrder.doc);
 
@@ -291,7 +386,6 @@ orders.route('/user/:userId/delete-article/:articleId')
           return res.status(error.statusCode).json(error);
         }
 
-        //const articleIds = clientOrder.getArticles().map(article => article.articleId);
         const articleIds = orders.reduce((ids, curr) => {
           return [ ...ids, ...curr.getArticles().map(article => article.articleId) ];
         }, []);
@@ -326,6 +420,31 @@ orders.route('/user/:userId/delete-article/:articleId')
         });
       });
     });
+
+orders.route('/:orderId/cancel')
+  /* PUT cancel order by id. */
+  .put((req, res) => {
+    const orderId = req.params.orderId;
+
+    return Order.get(orderId, (error, order) => {
+      if (error) {
+        return res.status(error.statusCode).json(error);
+      }
+
+      order.setDocValue('status', Order.STATUS.CANCELLED);
+      // TODO - update articles if not just in progress
+
+      return order.save((error, savedOrder) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        return res.status(200).json(savedOrder.doc);
+      });
+
+    });
+
+  });
 
 module.exports = orders;
 

@@ -29,16 +29,17 @@
         <mat-icon matListIcon class="nav-list-icon"> {{ item.icon }} </mat-icon>
         <span class="nav-list-label">{{item.label}}</span>
       </a>
-      <a
-         mat-list-item [routerLink]="'/my-profile'" routerLinkActive="list-item-active">
-        <mat-icon matListIcon class="nav-list-icon"> account_circle </mat-icon>
-        <span class="nav-list-label">Mon Profil</span>
-      </a>
+
 
     </ng-container>
 
     <mat-divider></mat-divider>
-
+    <a
+         mat-list-item [routerLink]="'/my-profile'" routerLinkActive="list-item-active">
+        <mat-icon matListIcon class="nav-list-icon"> account_circle </mat-icon>
+        <span class="nav-list-label">Mon Profil</span>
+      </a>
+      <mat-divider></mat-divider>
     <a
          mat-list-item
          (click)="logout()">
