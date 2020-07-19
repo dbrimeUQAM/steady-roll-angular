@@ -3,6 +3,8 @@ import { OrderService } from 'src/app/services/order/order.service';
 import { TokenStorageService } from 'src/app/services/token-storage/token-storage.service';
 import { Order } from 'src/app/services/order/order';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ArticleService } from 'src/app/services/article/article.service';
+import { Article } from 'src/app/services/article/article';
 
 @Component({
   selector: 'app-my-orders',
@@ -13,11 +15,13 @@ export class MyOrdersComponent implements OnInit {
   invoiceForm: FormGroup ;
   panelOpenState = false;
   orders: Order[]=[]
+  articles: Article[]=[]
   user: any;
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  constructor( private orderService: OrderService,private tokenStorage: TokenStorageService,
+  constructor( private articleService: ArticleService, private orderService: OrderService,
+    private tokenStorage: TokenStorageService,
     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -40,7 +44,17 @@ export class MyOrdersComponent implements OnInit {
 
      }, err => {
       console.log(err);
-    }
+    },/*  ()=> {
+      for (let item of order.articles){
+        this.articleService.getArticleById(item.articleId).subscribe((data: any) => {
+          this.articles.push(data)
+         
+        }, err => {
+          console.log(err);
+        });
+      }
+      console.log(' this.articles',this.articles)
+    } */
     );
     this.invoiceForm = this.formBuilder.group ({
       name: [{

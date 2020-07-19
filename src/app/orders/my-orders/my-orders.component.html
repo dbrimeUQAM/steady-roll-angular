@@ -13,10 +13,13 @@
                            (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
-           {{ order.userName }}
+           {{ order.userName }} 
           </mat-panel-title>
           <mat-panel-description>
             {{ order.status }}
+          </mat-panel-description>
+          <mat-panel-description>
+            {{ order.orderDate  }}
           </mat-panel-description>
         </mat-expansion-panel-header>
         
@@ -68,18 +71,21 @@
           </div>
 <br>
 
-          <div class="right">
-            <div class="left" *ngFor="let article of order.articles ">
-            <mat-toolbar-row>
-              <mat-icon mat-list-icon>medical_services</mat-icon>&nbsp;
-              <div>
-              <div  mat-line style="color: darkseagreen;">{{article.name}}</div>
-<!--               <div mat-line> {{article.hospitalName}} </div> -->
-              <div mat-line>  {{article.qty }} X {{ article.price? article.price: 0 | currency}} </div>
-            </div>
-            <span class="example-spacer"></span>
-            </mat-toolbar-row>
-            <mat-divider></mat-divider>
+          <div class="right" >
+            <div class="left" *ngFor="let article of order.articles " >
+             
+                <mat-toolbar-row *ngIf = "article ">
+                  <mat-icon mat-list-icon>medical_services</mat-icon>&nbsp;
+                  <div>
+                  <div  mat-line style="color: darkseagreen;">{{article ? article.name : ''}}</div>
+                  <div mat-line> {{article ? article.hospitalName: ''}} </div>
+                  <div mat-line>  {{article ? article.qty: '0' }} X {{ article && article.price? article.price: 0 | currency}} </div>
+                </div>
+                <span class="example-spacer"></span>
+                </mat-toolbar-row>
+                <mat-divider></mat-divider>
+              
+              
             </div>
 
          
