@@ -19,7 +19,7 @@ tr.mat-row:hover {
 }
 
 .mat-column-name {
-  width: 10% !important;
+  width: 20% !important;
 }
 
 
@@ -31,7 +31,6 @@ tr.mat-row:hover {
 .mat-column-description {
   padding-left: 10px;
   padding-right: 10px;
-  width: 45% !important;
 }
 .mat-column-type {
   padding-left: 10px;

@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { Order } from '../../../services/order/order';
 import { Article } from '../../../services/article/article';
 import { TokenStorageService } from '../../../services/token-storage/token-storage.service';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-orders-detail',
@@ -17,9 +17,12 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 })
 export class AdminOrdersDetailComponent implements OnInit {
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-  durationInSeconds = 5;
+  private configSuccess: MatSnackBarConfig = {
+    panelClass: ['style-success'],
+    duration: 4000,
+    horizontalPosition: 'center' ,
+    verticalPosition: 'top'
+  };
 
   articles: Article[] = [];
   columnsToDisplay: string[] = ['articleType', 'name', 'description', 'hospitalName', 'qty'];
@@ -31,6 +34,8 @@ export class AdminOrdersDetailComponent implements OnInit {
   isSuccessful = false;
   isSaveFailed = false;
   errorMessage = '';
+
+  statusList: string[] = ['En cours', 'Payée', 'En préparation', 'Expediée', 'Livrée', 'Annulé'];
 
   constructor(private snackBar: MatSnackBar,
               private router: Router,
@@ -73,6 +78,27 @@ export class AdminOrdersDetailComponent implements OnInit {
     this.orderService.cancelOrder(this.order._id).subscribe(data => {
       this.router.navigate(['/admin/admin-orders']);
     });
+  }
+
+  onSubmit() {
+    if (this.order) {
+      if (this.order._id) {
+        this.orderService.updateOrder(this.order._id, this.order).subscribe(data => {
+          this.isSuccessful = true;
+          this.isSaveFailed = false;
+          this.openSnackBarSuccess('Commande mis à jour!');
+          this.router.navigate(['/admin/admin-orders']);
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          this.isSaveFailed = true;
+        });
+      }
+    }
+  }
+
+  openSnackBarSuccess(message: string) {
+    this.snackBar.open(message, 'fermer', this.configSuccess);
   }
 
 }

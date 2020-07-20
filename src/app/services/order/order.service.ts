@@ -83,6 +83,14 @@ export class OrderService {
     );
   }
 
+  updateOrder(id: string, order: Order): Observable<any> {
+    const url = `${apiUrl}/${id}`;
+    return this.httpClient.put(url, order, httpOptions).pipe(
+      tap(_ => console.log(`updated order id=${id}`)),
+      catchError(this.handleError<any>('updateOrder'))
+    );
+  }
+
 
   deleteArticle(userId: string, articleId: string): Observable<Order> {
     const url = `${apiUrl}/user/${userId}/delete-article/${articleId}`;

@@ -4,7 +4,7 @@
     <div class="form-title">
       <mat-card-title>Commande</mat-card-title>
     </div>
-    <form #orderForm="ngForm">
+      <form (ngSubmit)="onSubmit()" #orderForm="ngForm">
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td class="left-field">
@@ -31,9 +31,14 @@
             </mat-form-field>
           </td>
           <td>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>État</mat-label>
-              <input matInput [(ngModel)]="order.status" #status="ngModel" name="status" readonly>
+
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>État</mat-label>
+                <mat-select [(ngModel)]="order.status" #offerType="ngModel" name="status" required>
+                  <mat-option *ngFor="let stat of statusList" [value]="stat">
+                    {{stat}}
+                  </mat-option>
+                </mat-select>
             </mat-form-field>
           </td>
         </tr>
@@ -78,6 +83,8 @@
         <mat-card-actions>
           <button mat-raised-button color="primary" [routerLink]="['/admin/admin-orders']" type="button">
             <mat-icon class="icon-spacing">arrow_back</mat-icon> Retourner</button>
+            <button mat-raised-button color="primary" [disabled]="!orderForm.form.valid">
+              <mat-icon class="icon-spacing">save</mat-icon> Sauvegarder</button>
             <button mat-raised-button *ngIf="order._id" color="primary" (click)="cancelOrder()" type="button">
               <mat-icon class="icon-spacing">cancel</mat-icon> Annuler</button>
           <button mat-raised-button *ngIf="order._id" color="primary" (click)="deleteOrder()" type="button">

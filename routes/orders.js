@@ -4,6 +4,7 @@ const express = require('express');
 const orders = express.Router();
 const { parallel } = require('async');
 const utils = require('../utils');
+const _ = require('lodash');
 
 // Modèles
 const Order = require('../models/Order');
@@ -18,6 +19,8 @@ orders.route('/')
       if (error) {
         return res.status(error.statusCode).json(error);
       }
+
+      orders = orders.filter(order => order.status !== Order.STATUS.IN_PROGRESS)
 
       const hospitalIds = orders.map(order => order.hospitalId);
       const uniqueHospitalIds = [ ...new Set(hospitalIds) ];
