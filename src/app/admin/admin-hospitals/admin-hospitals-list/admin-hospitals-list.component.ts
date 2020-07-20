@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { HospitalService } from '../../../services/hospital/hospital.service';
 import { Hospital } from '../../../services/hospital/hospital';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-hospitals-list',
@@ -12,15 +12,18 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
   styleUrls: ['./admin-hospitals-list.component.css']
 })
 export class AdminHospitalsListComponent implements OnInit {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  private configSuccess: MatSnackBarConfig = {
+    panelClass: ['style-success'],
+    duration: 4000,
+    horizontalPosition: 'center' ,
+    verticalPosition: 'top'
+  };
   hospitals: Hospital[] = [];
   columnsToDisplay: string[] = ['name', 'phone', 'city', 'province', 'actions'];
   dataSource: MatTableDataSource<Hospital>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   isLoadingResults = true;
-  durationInSeconds = 5;
 
   constructor(private snackBar: MatSnackBar,
               private hospitalService: HospitalService) { }
@@ -43,11 +46,7 @@ export class AdminHospitalsListComponent implements OnInit {
 
   deleteHospital(hospitalId: string) {
     this.hospitalService.deleteHospital(hospitalId).subscribe(data => {
-      this.snackBar.openFromComponent(PizzaPartyDeleteHospitalComponent, {
-        duration: this.durationInSeconds * 1000,
-        horizontalPosition: 'center' ,
-        verticalPosition: 'top',
-      });
+      this.openSnackBarSuccess('Supprimé');
       this.ngOnInit();
     });
   }
@@ -61,16 +60,8 @@ export class AdminHospitalsListComponent implements OnInit {
     }
   }
 
+  openSnackBarSuccess(message: string) {
+    this.snackBar.open(message, 'fermer', this.configSuccess);
+  }
+
 }
-
-@Component({
-  selector: 'app-snack-bar-activate-hospital',
-  templateUrl: '../../../snack-bar-messages/snack-bar-activated.html',
-})
-export class PizzaPartyActivateHospitalComponent {}
-
-@Component({
-  selector: 'app-snack-bar-delete-hospital',
-  templateUrl: '../../../snack-bar-messages/snack-bar-deleted.html',
-})
-export class PizzaPartyDeleteHospitalComponent {}

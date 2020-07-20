@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { Article } from '../../../services/article/article';
 import { Hospital } from '../../../services/hospital/hospital';
 import { TokenStorageService } from '../../../services/token-storage/token-storage.service';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-articles-detail',
@@ -15,9 +15,13 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 })
 export class AdminArticlesDetailComponent implements OnInit {
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-  durationInSeconds = 5;
+  constructor(private snackBar: MatSnackBar,
+              private router: Router,
+              private hospitalService: HospitalService,
+              private articleService: ArticleService,
+              private tokenStorage: TokenStorageService,
+              private route: ActivatedRoute) { }
+
 
   article: Article = new Article();
   articleTypes: string[] = ['médicament', 'fourniture', 'équipement'];
@@ -27,16 +31,14 @@ export class AdminArticlesDetailComponent implements OnInit {
   isSaveFailed = false;
   errorMessage = '';
   hospitals: Hospital[];
-
-  constructor(private snackBar: MatSnackBar,
-              private router: Router,
-              private hospitalService: HospitalService,
-              private articleService: ArticleService,
-              private tokenStorage: TokenStorageService,
-              private route: ActivatedRoute) { }
+  private configSuccess: MatSnackBarConfig = {
+    panelClass: ['style-success'],
+    duration: 4000,
+    horizontalPosition: 'center' ,
+    verticalPosition: 'top'
+  };
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.params);
 
     if (this.tokenStorage.getToken()) {
       if (this.tokenStorage.getUser().role !== 'admin') {
@@ -70,11 +72,7 @@ export class AdminArticlesDetailComponent implements OnInit {
     this.articleService.updateArticle(article._id, article).subscribe(data => {
       this.isSuccessful = true;
       this.isSaveFailed = false;
-      this.snackBar.openFromComponent(PizzaPartyComponent, {
-        duration: this.durationInSeconds * 1000,
-        horizontalPosition: 'center' ,
-        verticalPosition: 'top',
-      });
+      this.openSnackBarSuccess('Article mis à jour!');
       this.router.navigate(['/admin/admin-articles']);
     },
     err => {
@@ -95,13 +93,13 @@ export class AdminArticlesDetailComponent implements OnInit {
     });
   }
 
-  deleteArticle() {
+deleteArticle() {
     this.articleService.deleteArticle(this.article._id).subscribe(data => {
       this.router.navigate(['/admin/admin-articles']);
     });
   }
 
-  onSubmit() {
+onSubmit() {
     if (this.article) {
       if (this.article._id) {
         this.updateArticle(this.article);
@@ -112,10 +110,10 @@ export class AdminArticlesDetailComponent implements OnInit {
     }
   }
 
+openSnackBarSuccess(message: string) {
+    this.snackBar.open(message, 'fermer', this.configSuccess);
+  }
+
 }
 
-@Component({
-  selector: 'app-snack-bar-article-updated',
-  templateUrl: '../../../snack-bar-messages/snack-bar-updated.html',
-})
-export class PizzaPartyComponent {}
+

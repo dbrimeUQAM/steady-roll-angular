@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ContactService } from '../../../services/contact/contact.service';
 import { Contact } from '../../../services/contact/contact';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-contacts-list',
@@ -12,15 +12,18 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
   styleUrls: ['./admin-contacts-list.component.css']
 })
 export class AdminContactsListComponent implements OnInit {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  private configSuccess: MatSnackBarConfig = {
+    panelClass: ['style-success'],
+    duration: 4000,
+    horizontalPosition: 'center' ,
+    verticalPosition: 'top'
+  };
   contacts: Contact[] = [];
   columnsToDisplay: string[] = ['hospitalName', 'name', 'email', 'phone', 'actions'];
   dataSource: MatTableDataSource<Contact>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   isLoadingResults = true;
-  durationInSeconds = 5;
 
   constructor(private snackBar: MatSnackBar,
               private contactService: ContactService) { }
@@ -49,11 +52,7 @@ export class AdminContactsListComponent implements OnInit {
 
   deleteContact(contactId: string) {
     this.contactService.deleteContact(contactId).subscribe(data => {
-      this.snackBar.openFromComponent(PizzaPartyDeleteContactComponent, {
-        duration: this.durationInSeconds * 1000,
-        horizontalPosition: 'center' ,
-        verticalPosition: 'top',
-      });
+      this.openSnackBarSuccess('Supprimé');
       this.ngOnInit();
     });
   }
@@ -66,11 +65,10 @@ export class AdminContactsListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  openSnackBarSuccess(message: string) {
+    this.snackBar.open(message, 'fermer', this.configSuccess);
+  }
 
 }
 
-@Component({
-  selector: 'app-snack-bar-delete-contact',
-  templateUrl: '../../../snack-bar-messages/snack-bar-deleted.html',
-})
-export class PizzaPartyDeleteContactComponent {}
+

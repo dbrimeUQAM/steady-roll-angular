@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { OrderService } from '../../../services/order/order.service';
 import { Order } from '../../../services/order/order';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-orders-list',
@@ -13,15 +13,18 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 })
 export class AdminOrdersListComponent implements OnInit {
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  private configSuccess: MatSnackBarConfig = {
+    panelClass: ['style-success'],
+    duration: 4000,
+    horizontalPosition: 'center' ,
+    verticalPosition: 'top'
+  };
   orders: Order[] = [];
   columnsToDisplay: string[] = ['orderDate', 'status', 'hospitalName', 'userName', 'qty', 'actions'];
   dataSource: MatTableDataSource<Order>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   isLoadingResults = true;
-  durationInSeconds = 5;
 
   constructor(private snackBar: MatSnackBar,
               private orderService: OrderService) { }
@@ -44,22 +47,14 @@ export class AdminOrdersListComponent implements OnInit {
 
   deleteOrder(orderId: string) {
     this.orderService.deleteOrder(orderId).subscribe(data => {
-      this.snackBar.openFromComponent(PizzaPartyDeleteOrderComponent, {
-        duration: this.durationInSeconds * 1000,
-        horizontalPosition: 'center' ,
-        verticalPosition: 'top',
-      });
+      this.openSnackBarSuccess('Supprimé');
       this.ngOnInit();
     });
   }
 
   cancelOrder(orderId: string) {
     this.orderService.cancelOrder(orderId).subscribe(data => {
-      this.snackBar.openFromComponent(PizzaPartyCancelOrderComponent, {
-        duration: this.durationInSeconds * 1000,
-        horizontalPosition: 'center' ,
-        verticalPosition: 'top',
-      });
+      this.openSnackBarSuccess('Annulée');
       this.ngOnInit();
     });
   }
@@ -73,16 +68,10 @@ export class AdminOrdersListComponent implements OnInit {
     }
   }
 
+  openSnackBarSuccess(message: string) {
+    this.snackBar.open(message, 'fermer', this.configSuccess);
+  }
+
 }
 
-@Component({
-  selector: 'app-snack-bar-delete-order',
-  templateUrl: '../../../snack-bar-messages/snack-bar-deleted.html',
-})
-export class PizzaPartyDeleteOrderComponent {}
 
-@Component({
-  selector: 'app-snack-bar-cancel-order',
-  templateUrl: '../../../snack-bar-messages/snack-bar-cancelled.html',
-})
-export class PizzaPartyCancelOrderComponent {}

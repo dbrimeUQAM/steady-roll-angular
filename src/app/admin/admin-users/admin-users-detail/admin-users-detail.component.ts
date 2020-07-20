@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { User } from '../../../services/user/user';
 import { Hospital } from '../../../services/hospital/hospital';
 import { TokenStorageService } from '../../../services/token-storage/token-storage.service';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-users-detail',
@@ -15,9 +15,12 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 })
 export class AdminUsersDetailComponent implements OnInit {
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-  durationInSeconds = 5;
+  private configSuccess: MatSnackBarConfig = {
+    panelClass: ['style-success'],
+    duration: 4000,
+    horizontalPosition: 'center' ,
+    verticalPosition: 'top'
+  };
 
   user: User = new User();
   roles: string[] = ['admin', 'user'];
@@ -68,11 +71,7 @@ export class AdminUsersDetailComponent implements OnInit {
     this.userService.updateUser(user.email, user).subscribe(data => {
       this.isSuccessful = true;
       this.isSaveFailed = false;
-      this.snackBar.openFromComponent(PizzaPartyComponent, {
-        duration: this.durationInSeconds * 1000,
-        horizontalPosition: 'center' ,
-        verticalPosition: 'top',
-      });
+      this.openSnackBarSuccess('Utilisateur mis à jour!');
       this.router.navigate(['/admin/admin-users']);
     },
     err => {
@@ -110,10 +109,10 @@ export class AdminUsersDetailComponent implements OnInit {
     }
   }
 
+  openSnackBarSuccess(message: string) {
+    this.snackBar.open(message, 'fermer', this.configSuccess);
+  }
+
 }
 
-@Component({
-  selector: 'app-snack-bar-user-updated',
-  templateUrl: '../../../snack-bar-messages/snack-bar-updated.html',
-})
-export class PizzaPartyComponent {}
+

@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ArticleService } from '../../../services/article/article.service';
 import { Article } from '../../../services/article/article';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-articles-list',
@@ -12,15 +12,18 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
   styleUrls: ['./admin-articles-list.component.css']
 })
 export class AdminArticlesListComponent implements OnInit {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  private configSuccess: MatSnackBarConfig = {
+    panelClass: ['style-success'],
+    duration: 4000,
+    horizontalPosition: 'center' ,
+    verticalPosition: 'top'
+  };
   articles: Article[] = [];
   columnsToDisplay: string[] = ['articleType', 'name', 'description', 'hospitalName', 'qty', 'actions'];
   dataSource: MatTableDataSource<Article>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   isLoadingResults = true;
-  durationInSeconds = 5;
 
   constructor(private snackBar: MatSnackBar,
               private articleService: ArticleService) { }
@@ -43,11 +46,7 @@ export class AdminArticlesListComponent implements OnInit {
 
   deleteArticle(articleId: string) {
     this.articleService.deleteArticle(articleId).subscribe(data => {
-      this.snackBar.openFromComponent(PizzaPartyDeleteArticleComponent, {
-        duration: this.durationInSeconds * 1000,
-        horizontalPosition: 'center' ,
-        verticalPosition: 'top',
-      });
+      this.openSnackBarSuccess('Supprimé');
       this.ngOnInit();
     });
   }
@@ -61,10 +60,10 @@ export class AdminArticlesListComponent implements OnInit {
     }
   }
 
+  openSnackBarSuccess(message: string) {
+    this.snackBar.open(message, 'fermer', this.configSuccess);
+  }
+
 }
 
-@Component({
-  selector: 'app-snack-bar-delete-user',
-  templateUrl: '../../../snack-bar-messages/snack-bar-deleted.html',
-})
-export class PizzaPartyDeleteArticleComponent {}
+

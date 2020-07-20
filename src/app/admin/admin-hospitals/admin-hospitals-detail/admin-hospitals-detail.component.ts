@@ -4,7 +4,7 @@ import { HospitalService } from '../../../services/hospital/hospital.service';
 import { Router } from '@angular/router';
 import { Hospital } from '../../../services/hospital/hospital';
 import { TokenStorageService } from '../../../services/token-storage/token-storage.service';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-hospitals-detail',
@@ -13,9 +13,12 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 })
 export class AdminHospitalsDetailComponent implements OnInit {
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-  durationInSeconds = 5;
+  private configSuccess: MatSnackBarConfig = {
+    panelClass: ['style-success'],
+    duration: 4000,
+    horizontalPosition: 'center' ,
+    verticalPosition: 'top'
+  };
 
   hospital: Hospital = new Hospital();
   provinces: string[] = ['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'NT', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT'];
@@ -58,11 +61,7 @@ export class AdminHospitalsDetailComponent implements OnInit {
     this.hospitalService.updateHospital(hospital._id, hospital).subscribe(data => {
       this.isSuccessful = true;
       this.isSaveFailed = false;
-      this.snackBar.openFromComponent(PizzaPartyComponent, {
-        duration: this.durationInSeconds * 1000,
-        horizontalPosition: 'center' ,
-        verticalPosition: 'top',
-      });
+      this.openSnackBarSuccess('Hôpital mis à jour!');
       this.router.navigate(['/admin/admin-hospitals']);
     },
     err => {
@@ -99,11 +98,10 @@ export class AdminHospitalsDetailComponent implements OnInit {
       }
     }
   }
+  openSnackBarSuccess(message: string) {
+    this.snackBar.open(message, 'fermer', this.configSuccess);
+  }
 
 }
 
-@Component({
-  selector: 'app-snack-bar-hospital-updated',
-  templateUrl: '../../../snack-bar-messages/snack-bar-updated.html',
-})
-export class PizzaPartyComponent {}
+
