@@ -80,13 +80,13 @@
           <mat-form-field appearance="outline">
             <mat-label>Mode d'échange</mat-label>
             <mat-select formControlName="offerType" >
-              <mat-option value="donner">À donner</mat-option>
-              <mat-option value="vendre">À vendre</mat-option>
+              <mat-option value="don">don</mat-option>
+              <mat-option value="vente">vente</mat-option>
             </mat-select>
 
           </mat-form-field>
         <!-- price  -->
-        <div *ngIf="article.offerType === 'vendre'">
+        <div *ngIf="article.offerType === 'vente'">
           <mat-form-field appearance="outline">
             <mat-label> Prix </mat-label>
             <input style="color: black;" formControlName="price"  matInput type="number" value="0" min="0" max="999" />
@@ -111,8 +111,8 @@
         </div>
 
         <div class="bouton" *ngIf="isReadOnly">
-          <button class="btn" style="background-color: #097D6C; color: white; width: 100%;" mat-raised-button
-            color="primary">Ajouter</button>
+          <button class="btn" mat-raised-button type="button" (click)="openSnackBar(article._id)"
+            color="primary"><mat-icon class="icon-spacing" role="img">add_shopping_cart</mat-icon>Ajouter</button>
         </div>
       </div>
 

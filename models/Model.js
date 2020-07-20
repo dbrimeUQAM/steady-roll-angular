@@ -69,6 +69,49 @@ class Model {
     });
   }
 
+   /**
+   * Bulk update of Cloudant documents
+   *
+   * @static
+   * @param {Object[]} docs Documents to be updated
+   * @param {function} callback Executed
+   * @returns {Object[]} provided documents with updated id/rev values and any error
+   * @memberof Model
+   */
+  static bulk(docs, callback) {
+    var db = this.dbInstance();
+
+    for (let i = 0, len = docs.length; i < len; i++) {
+      let doc = docs[i];
+
+      this.updateTimeStamps(doc);
+    }
+
+    db.bulk({ docs: docs }, (error, data) => {
+      if (error) {
+        return callback(error);
+      }
+
+      // update the provided docs with ids/revision values
+      for (let i = 0, len = docs.length; i < len; i++) {
+        let doc = docs[i];
+        let response = data[i];
+
+        doc._id = response.id;
+
+        // if this update failed, add it to the document.
+        if (response.error) {
+          doc.error = new Error(response.error);
+          continue;
+        }
+
+        doc._rev = response.rev;
+      }
+
+      return callback(null, docs);
+    });
+  }
+
     /**
    * Bulk fetch of the database documents.
    * Additional query string params can be specified, include_docs is always set to true.

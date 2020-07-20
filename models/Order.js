@@ -2,6 +2,7 @@
 
 const Model = require('./Model');
 const User = require('./User');
+const Article = require('./Article');
 
 class Order extends Model {
   constructor(doc) {
@@ -50,6 +51,10 @@ class Order extends Model {
       }
 
       return this;
+  }
+
+  setStatus(status) {
+    this.setDocValue('status', status);
   }
 
   /**
@@ -129,6 +134,42 @@ class Order extends Model {
       return callback(null, filtered);
 
     });
+  }
+
+  confirm(callback) {
+    this.setStatus(Order.STATUS.IN_PREPARATION);
+
+    const articleIds = this.getArticles().map(article => article.articleId);
+    return Article.fetch(articleIds, (error, articles) => {
+      if (error) {
+        return callback(error);
+      }
+
+      // Filter out any undefined values
+      articles = articles.filter(item => !!item);
+
+      articles = articles.map(article => {
+        let orderArticle = this.getArticles().find(item => item.articleId === article._id);
+
+        if (orderArticle) {
+          article.qty -= orderArticle.qty;
+        }
+
+        return article;
+
+      });
+
+      return Article.bulk(articles, (error, updatedArticles) => {
+        if (error) {
+          return callback(error);
+        }
+
+        return this.save(callback);
+
+      });
+
+    });
+
   }
 
 

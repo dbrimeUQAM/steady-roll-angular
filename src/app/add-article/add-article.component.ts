@@ -19,7 +19,7 @@ export class AddArticleComponent implements OnInit {
 
   public articleFrom: FormGroup;
   labelPosition: string;
-  choix: string[] = ['donner', 'vendre'];
+  choix: string[] = ['don', 'vente'];
   name: boolean;
   type: boolean;
   description: boolean;

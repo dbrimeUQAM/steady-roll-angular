@@ -81,7 +81,7 @@ Article.MODEL_SCHEMA = {
   expirationDate: '',
   hospitalId: '',
   condition: '',
-  offerType: '', // à vendre ou à donner
+  offerType: '',
   qty: null,
   price: null
 };
@@ -93,8 +93,8 @@ Article.ARTICLE_TYPES = Object.freeze({
 });
 
 Article.OFFER_TYPES = Object.freeze({
-  FOR_SALE: 'à vendre',
-  TO_GIFT: 'à donner'
+  FOR_SALE: 'vente',
+  TO_GIFT: 'don'
 });
 
 Article.CONDITIONS = Object.freeze({

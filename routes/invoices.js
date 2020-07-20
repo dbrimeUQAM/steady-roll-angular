@@ -7,6 +7,7 @@ const utils = require('../utils');
 
 // Models
 const Invoice = require('../models/Invoice');
+const Order = require('../models/Order');
 
 invoices.use(middleware.isAuthenticated);
 
@@ -25,23 +26,36 @@ invoices.route('/')
     .post((req, res) => {
       const postedInvoice = req.body;
 
-      // More validations maybe?
 
       if (!postedInvoice) {
         return res.status(400).json({
-          reason: `Document d'hôpital prévu dans POST body, obtenu: ${postedInvoice}`,
+          reason: `Document de facture prévu dans POST body, obtenu: ${postedInvoice}`,
           statusCode: 400
         });
       }
 
-      const newInvoice = new Invoice(postedInvoice);
-
-      return newInvoice.save((error, savedInvoice) => {
+      return Order.get(postedInvoice.orderId, (error, order) => {
         if (error) {
           return res.status(error.statusCode).json(error);
         }
 
-        return res.status(200).json(savedInvoice.doc);
+        return order.confirm((error, savedOrder) => {
+          if (error) {
+            return res.status(error.statusCode).json(error);
+          }
+
+          const newInvoice = new Invoice(postedInvoice);
+
+          return newInvoice.save((error, savedInvoice) => {
+            if (error) {
+              return res.status(error.statusCode).json(error);
+            }
+
+            return res.status(200).json(savedInvoice.doc);
+          });
+
+        });
+
       });
 
     });

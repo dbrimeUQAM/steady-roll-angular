@@ -43,3 +43,11 @@
   display: table;
   clear: both;
 }
+
+.mat-raised-button {
+  margin: 10px;
+}
+
+.mat-mini-fab {
+  margin: 0 10px 0 0;
+}

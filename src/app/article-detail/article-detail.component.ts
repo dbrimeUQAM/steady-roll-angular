@@ -4,10 +4,12 @@ import { OrderService } from '../services/order/order.service';
 import { TokenStorageService } from '../services/token-storage/token-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Article } from '../services/article/article';
+import { HeaderService } from '../services/header/header.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogContentComponent } from '../dialog-content/dialog-content.component';
 import { DatePipe } from '@angular/common';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-article-detail',
@@ -15,15 +17,20 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./article-detail.component.css']
 })
 export class ArticleDetailComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  durationInSeconds = 5;
   article: Article ;
   public detailForm: FormGroup;
   offer: string;
   public hospitalName: string;
   public isReadOnly: boolean;
-  constructor( public dialog: MatDialog,
+  constructor( private snackBar: MatSnackBar,
+               public dialog: MatDialog,
                private route: ActivatedRoute,
                private router: Router,
                private tokenStorage: TokenStorageService,
+               private headerService: HeaderService,
                private articleService: ArticleService,
                private orderService: OrderService,
                private formBuilder: FormBuilder,
@@ -97,7 +104,7 @@ export class ArticleDetailComponent implements OnInit {
         });
         this.detailForm.get('offerType').valueChanges.subscribe(data => {
           this.article.offerType = data;
-          if (this.article.offerType === 'donner') {
+          if (this.article.offerType === 'don') {
               this.article.price = 0;
           }
         });
@@ -131,6 +138,19 @@ export class ArticleDetailComponent implements OnInit {
     this.orderService.addArticleToOrder(this.tokenStorage.getUser().id, this.article._id, 1).subscribe(data => {
       const dialog = this.dialog.open(DialogContentComponent,
         {data: {name: nom, articleType: type}});
+    });
+  }
+
+  openSnackBar(articleId: string) {
+    const user = this.tokenStorage.getUser();
+    this.orderService.addArticleToOrder(user.id, articleId, 1).subscribe(data => {
+      this.headerService.setCartQty(data.articles.length);
+      this.snackBar.open('Ajouté au panier!', 'fermer', {
+        duration: this.durationInSeconds * 1000,
+        horizontalPosition: 'center' ,
+        verticalPosition: 'top',
+        panelClass: ['style-success']
+      });
     });
   }
 
