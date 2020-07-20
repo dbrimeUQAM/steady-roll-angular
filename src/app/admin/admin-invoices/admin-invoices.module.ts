@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminInvoicesRoutingModule } from './admin-invoices-routing.module';
 
 import { AdminInvoicesListComponent } from './admin-invoices-list/admin-invoices-list.component';
-import { AdminInvoicesDetailComponent } from './admin-invoices-detail/admin-invoices-detail.component';
 
 import { MaterialModule } from '../../material.module';
 
@@ -26,7 +25,6 @@ import { MomentModule } from 'ngx-moment';
     MomentModule.forRoot()
   ],
   declarations: [
-    AdminInvoicesDetailComponent,
     AdminInvoicesListComponent
   ],
   exports: [
