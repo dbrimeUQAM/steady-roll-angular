@@ -14,15 +14,16 @@ import { Article } from 'src/app/services/article/article';
 export class MyOrdersComponent implements OnInit {
   invoiceForm: FormGroup ;
   panelOpenState = false;
-  orders: Order[]=[]
-  articles: Article[]=[]
+  orders: Order[] = [];
+  articles: Article[] = [];
   user: any;
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  constructor( private articleService: ArticleService, private orderService: OrderService,
-    private tokenStorage: TokenStorageService,
-    private formBuilder: FormBuilder) { }
+  constructor( private articleService: ArticleService,
+               private orderService: OrderService,
+               private tokenStorage: TokenStorageService,
+               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
 
@@ -35,20 +36,19 @@ export class MyOrdersComponent implements OnInit {
 
 
     this.user = this.tokenStorage.getUser() ;
-    console.log(this.user)
-    this.orderService.getAll()
+    console.log(this.user);
+    this.orderService.getAllByUserId(this.user.id)
     .subscribe((res: any) => {
-      
-      this.orders= res
-      console.log('my orders', this.orders);
+      console.log(res);
+      this.orders = res;
 
      }, err => {
       console.log(err);
-    },/*  ()=> {
+    }, /*  ()=> {
       for (let item of order.articles){
         this.articleService.getArticleById(item.articleId).subscribe((data: any) => {
           this.articles.push(data)
-         
+
         }, err => {
           console.log(err);
         });
@@ -62,11 +62,11 @@ export class MyOrdersComponent implements OnInit {
         disabled: true,
       }],
       hospitalName: [{
-        value:this.user.hospital.name ,
+        value: this.user.hospital.name ,
         disabled: true,
       }],
-      telNumber: [{
-        value: this.user.hospital.phoneNumber ,
+      phone: [{
+        value: this.user.hospital.phone ,
         disabled: true,
       }],
       id: [{
@@ -74,11 +74,11 @@ export class MyOrdersComponent implements OnInit {
         disabled: true,
       }],
       street: [{
-        value: this.user.hospital.street , 
+        value: this.user.hospital.street ,
         disabled: true,
       }],
       city: [{
-        value:this.user.hospital.city ,
+        value: this.user.hospital.city ,
         disabled: true,
       }],
       province: [{
@@ -89,7 +89,7 @@ export class MyOrdersComponent implements OnInit {
         value: this.user.hospital.postalCode,
         disabled: true,
       }],
-    })
+    });
     }
 
 }

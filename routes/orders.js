@@ -10,6 +10,7 @@ const Order = require('../models/Order');
 const Article = require('../models/Article');
 const User = require('../models/User');
 const Hospital = require('../models/Hospital');
+const { SSL_OP_NO_TLSv1_1 } = require('constants');
 
 orders.route('/')
   /* GET all orders. */
@@ -278,6 +279,7 @@ orders.route('/user/:userId/in-progress')
     });
 
 
+
 orders.route('/user/:userId/add-article')
     /* POST article to order. */
     .post((req, res) => {
@@ -447,12 +449,27 @@ orders.route('/user/:userId/delete-article/:articleId')
             });
 
             order.setDocValue('articles', updatedArticles);
+            const date = new Date(order.getDocValue('orderDate'));
+            const formattedDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+            order.setDocValue('orderDateFormatted', formattedDate);
 
             return order.doc;
 
           });
 
-          return res.status(200).json(updatedOrders);
+          const sortedOrders = updatedOrders.sort((a, b) => {
+            const aDate = a.orderDate;
+            const bDate = b.orderDate;
+
+            if (aDate < bDate) {
+              return 1;
+            } else if (aDate > bDate) {
+              return -1;
+            }
+            return 0;
+          });
+
+          return res.status(200).json(sortedOrders);
 
         });
       });

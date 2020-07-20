@@ -3,7 +3,8 @@ import { TokenStorageService } from 'src/app/services/token-storage/token-storag
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { OrderService } from 'src/app/services/order/order.service';
 import { Article } from 'src/app/services/article/article';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-my-invoices',
@@ -13,25 +14,27 @@ import {  Router } from '@angular/router';
 export class MyInvoicesComponent implements OnInit {
   invoiceForm: FormGroup ;
   articles: Article[] = [];
-  total:number = 0 ;
+  total = 0 ;
   user: any;
-  constructor(private router: Router,private orderService: OrderService, 
-    private tokenStorageService: TokenStorageService, private formBuilder: FormBuilder) { }
+  constructor(private router: Router,
+              private orderService: OrderService,
+              private tokenStorageService: TokenStorageService,
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.user = this.tokenStorageService.getUser();
-    console.log('user', this.user);
-    this.orderService.getCurrentOrder(this.tokenStorageService.getUser().id)
+    this.orderService.getOrderById(this.route.snapshot.params.id)
     .subscribe((res: any) => {
-      console.log('my order', res)
+      console.log('my order', res);
       this.articles = res.articles;
     }, err => {
       console.log(err);
     }, () => {
-      for(let article of this.articles){
-        this.total = this.total + (article.qty * article.price)
+      for (const article of this.articles){
+        this.total = this.total + (article.qty * article.price);
       }
-      //this.articleNum = this.articles.length ;
+      // this.articleNum = this.articles.length ;
     });
     this.invoiceForm = this.formBuilder.group ({
       name: [{
@@ -39,7 +42,7 @@ export class MyInvoicesComponent implements OnInit {
         disabled: true,
       }],
       hospitalName: [{
-        value:this.user.hospital.name ,
+        value: this.user.hospital.name ,
         disabled: true,
       }],
       telNumber: [{
@@ -51,11 +54,11 @@ export class MyInvoicesComponent implements OnInit {
         disabled: true,
       }],
       street: [{
-        value: this.user.hospital.street , 
+        value: this.user.hospital.street ,
         disabled: true,
       }],
       city: [{
-        value:this.user.hospital.city ,
+        value: this.user.hospital.city ,
         disabled: true,
       }],
       province: [{
@@ -66,13 +69,13 @@ export class MyInvoicesComponent implements OnInit {
         value: this.user.hospital.postalCode,
         disabled: true,
       }],
-    })
+    });
   }
-  
+
   print(){
-    this.user.order.status = 'Payée'
+    this.user.order.status = 'Payée';
     console.log('----->', this.user);
-    this.tokenStorageService.saveUser(this.user)
+    this.tokenStorageService.saveUser(this.user);
     window.print();
     this.router.navigate(['/home']);
 

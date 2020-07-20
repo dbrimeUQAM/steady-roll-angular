@@ -50,10 +50,6 @@ export class SidenavComponent implements OnInit {
               link: '/my-orders',
               icon: 'shopping_cart'
           }, {
-              label: 'Factures',
-              link: '/my-invoices',
-              icon: 'attach_money'
-          }, {
               label: 'Contactez-nous',
               link: '/contact',
               icon: 'support_agent'

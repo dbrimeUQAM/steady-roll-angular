@@ -50,7 +50,7 @@ const routes: Routes = [
   { path: 'articles/supplies', component: ArticlesListContainerComponent, data: { cloudantFilter: 'fourniture'} },
   { path: 'articles/equipments', component: ArticlesListContainerComponent, data: { cloudantFilter: 'équipement'} },
   { path: 'my-orders', component: MyOrdersComponent },
-  { path: 'my-invoices', component: MyInvoicesComponent },
+  { path: 'my-invoices/:id', component: MyInvoicesComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'payment', component: PaymentPageComponent },
   { path: 'my-profile', component: MyProfileComponent },
