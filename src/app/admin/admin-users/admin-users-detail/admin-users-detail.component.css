@@ -33,3 +33,8 @@
 .mat-raised-button {
   margin-right: 15px;
 }
+
+.actions {
+  text-align: right;
+  margin: 20px 0 20px 0;
+}

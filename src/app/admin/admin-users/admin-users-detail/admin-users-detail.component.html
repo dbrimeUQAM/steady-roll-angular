@@ -70,15 +70,15 @@
         </tr>
       </table>
 
-      <div class="text-right-aligned">
-        <mat-card-actions>
+      <div class="actions">
+
           <button mat-raised-button color="primary" [disabled]="!userForm.form.valid">
             <mat-icon class="icon-spacing">save</mat-icon> Sauvegarder</button>
           <button mat-raised-button color="primary" [routerLink]="['/admin/admin-users']" type="button">
             <mat-icon class="icon-spacing">cancel</mat-icon> Annuler</button>
           <button mat-raised-button *ngIf="user._id" color="primary" (click)="deleteUser()" type="button">
             <mat-icon class="icon-spacing">delete</mat-icon> Supprimer</button>
-        </mat-card-actions>
+
       </div>
       <mat-error *ngIf="userForm.submitted && isSaveFailed">
         Erreur en sauvegardant!: {{ errorMessage }}

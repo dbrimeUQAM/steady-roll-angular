@@ -128,9 +128,7 @@ export class PaymentPageComponent implements OnInit {
     if (this.paymentForm.valid) {
       this.invoiceService.addInvoice(this.invoice).subscribe(data => {
         this.headerService.setCartQty(0);
-        this.openSnackBarSuccess('Commande reçu!');
-        // this.ngOnInit();
-        // this.router.navigate([`/invoice-detail/${data._id}`]);
+        this.router.navigate([`/my-invoices/${this.order._id}`]);
       }, err => {
         console.log(err);
       });
