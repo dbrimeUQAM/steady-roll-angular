@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../services/order/order.service';
@@ -38,6 +38,7 @@ export class CartComponent implements OnInit {
   isSuccessful = false;
   isSaveFailed = false;
   errorMessage = '';
+  isLoaded = false;
 
   constructor(private snackBar: MatSnackBar,
               private router: Router,
@@ -56,6 +57,7 @@ export class CartComponent implements OnInit {
         this.order = res;
         this.articles = res.articles;
         this.dataSource = new MatTableDataSource(this.articles);
+        this.isLoaded = true;
       }, err => {
         console.log(err);
       });

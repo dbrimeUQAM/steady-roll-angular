@@ -38,10 +38,6 @@
   text-align: left;
 }
 
-.mat-raised-button {
-  margin-right: 15px;
-}
-
 .date_container {
   float: left;
   display: flex;
@@ -82,11 +78,11 @@ tr.mat-row:hover {
 }
 
 .mat-column-articleType {
-  width: 10% !important;
+  width: 5% !important;
 }
 
 .mat-column-name {
-  width: 12% !important;
+  width: 15% !important;
 }
 
 .mat-column-hospitalName {
@@ -94,15 +90,13 @@ tr.mat-row:hover {
 }
 
 .mat-column-price {
-
-  margin-right: 5px;
+  width: 7% !important;
 }
 .mat-column-qty {
-  margin-right: 5px;
+  width: 7% !important;
 }
 .mat-column-sub-total {
-
-  margin-right: 5px;
+  width: 7% !important;
 }
 .mat-column-actions {
   width: 15% !important;
@@ -113,11 +107,18 @@ tr.mat-row:hover {
 }
 
 .cell-spacing {
-  padding-right: 5px;
+  padding-right: 15px;
 }
 
 .empty-cart {
   text-align: center;
   width: 100%;
   margin-top: 100px;
+}
+
+.total-row {
+  font-weight: bold;
+}
+.actions-spacing {
+  margin-left: 15px;
 }

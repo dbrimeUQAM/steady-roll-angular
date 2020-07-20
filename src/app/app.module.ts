@@ -103,7 +103,7 @@ import { CartComponent } from './cart/cart.component';
     HeaderService,
     DatePipe,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-CA' }
   ],
   bootstrap: [AppComponent],
 })

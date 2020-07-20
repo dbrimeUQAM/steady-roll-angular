@@ -14,7 +14,7 @@ class Order extends Model {
    * @param {string} - articleId
    * @returns {Order}
    */
-  addArticle(articleId, qty, callback) {
+  addArticle(articleId, qty) {
     const articles = this.getArticles();
     const foundIndex = articles.findIndex(article => article.articleId === articleId);
     if (foundIndex !== -1) {

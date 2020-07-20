@@ -4,7 +4,7 @@
     <app-sidenav></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="grid-container">
+    <div *ngIf="isLoaded" class="grid-container">
       <div class="empty-cart" *ngIf="articles.length === 0">
         <div>
           <h1>Votre panier est vide.</h1>
@@ -28,7 +28,7 @@
                 <td mat-cell *matCellDef="let article">
                   <mat-icon class="icon-spacing">{{article.icon}} </mat-icon>
                 </td>
-                <td mat-footer-cell *matFooterCellDef> Total </td>
+                <td mat-footer-cell *matFooterCellDef class="total-row"> Total </td>
               </ng-container>
 
               <ng-container matColumnDef="name">
@@ -54,19 +54,19 @@
               <ng-container matColumnDef="qty">
                 <th mat-header-cell *matHeaderCellDef> Quantité </th>
                 <td mat-cell *matCellDef="let article" class="cell-spacing text-right-aligned"> {{article.qty}} </td>
-                <td mat-footer-cell *matFooterCellDef class="text-right-aligned"> {{getTotalQty()}} </td>
+                <td mat-footer-cell *matFooterCellDef class="total-row cell-spacing text-right-aligned"> {{getTotalQty()}} </td>
               </ng-container>
               <ng-container matColumnDef="sub-total">
                 <th mat-header-cell *matHeaderCellDef> Sous-total </th>
                 <td mat-cell *matCellDef="let article"  class="cell-spacing text-right-aligned"> {{(article.qty * article.price) | currency}} </td>
-                <td mat-footer-cell *matFooterCellDef class="text-right-aligned"> {{getTotalPrice() | currency}} </td>
+                <td mat-footer-cell *matFooterCellDef class="total-row cell-spacing text-right-aligned"> {{getTotalPrice() | currency}} </td>
               </ng-container>
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td mat-cell *matCellDef="let article">
-                  <mat-icon color="primary" class="icon-spacing" (click)="addQty(article._id, article.qty)">add_circle</mat-icon>
-                  <mat-icon color="primary" class="icon-spacing" (click)="removeQty(article._id, article.qty)">remove_circle</mat-icon>
-                  <mat-icon color="primary" class="icon-spacing" (click)="removeArticle(article._id)">delete</mat-icon>
+                  <mat-icon color="primary" class="actions-spacing" (click)="addQty(article._id, article.qty)">add_circle</mat-icon>
+                  <mat-icon color="primary" class="actions-spacing" (click)="removeQty(article._id, article.qty)">remove_circle</mat-icon>
+                  <mat-icon color="primary" class="actions-spacing" (click)="removeArticle(article._id)">delete</mat-icon>
                 </td>
                 <td mat-footer-cell *matFooterCellDef> </td>
               </ng-container>

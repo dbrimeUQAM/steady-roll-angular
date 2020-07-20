@@ -12,14 +12,6 @@ class Invoice extends Model {
 
 Invoice.DATABASE_NAME = 'invoices';
 Invoice.TYPE = 'invoice';
-Invoice.MODEL_SCHEMA = {
-  type: Invoice.TYPE,
-  userId: '',
-  orderId: '',
-  invoiceDate: '',
-  status: '',
-  paymentType: ''
-};
 
 Invoice.STATUS = Object.freeze({
   PAYMENT_DUE: 'En attente de paiement',
@@ -29,7 +21,19 @@ Invoice.STATUS = Object.freeze({
 Invoice.PAYMENT_TYPES = Object.freeze({
   WIRE_TRANSFER: 'Virement Bancaire',
   CHECK: 'Chéque',
-  CASH: 'Comptant'
+  CASH: 'Comptant',
+  CC: 'Carte de crédit'
 });
+
+Invoice.MODEL_SCHEMA = {
+  type: Invoice.TYPE,
+  userId: '',
+  orderId: '',
+  invoiceDate: '',
+  status: Invoice.STATUS.PAYMENT_DUE,
+  paymentType: Invoice.PAYMENT_TYPES.CC
+};
+
+
 
 module.exports = Invoice;
