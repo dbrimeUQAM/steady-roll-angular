@@ -5,7 +5,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <br>
-    <h2 class="mat-h2">&nbsp; {{ article ? article.name :'' }} ( {{ article? article.articleType: ''}} )</h2>
+    <h2 class="mat-h2">&nbsp; {{article.name}}</h2>
     <mat-divider></mat-divider>
     <br><br>
     <div align="center">
@@ -100,11 +100,11 @@
 
         <div *ngIf="!isReadOnly">
           <mat-card-actions>
-            <button mat-raised-button class="btn" color="primary" >
-              <mat-icon class="icon-spacing" (click)="save()">save</mat-icon> Sauvegarder</button>&nbsp;
-            <button mat-raised-button [routerLink]="['/articles/all']" class="btn" color="primary"  type="button">
+            <button mat-raised-button class="btn" color="primary"  (click)="save()">
+              <mat-icon class="icon-spacing">save</mat-icon> Sauvegarder</button>&nbsp;
+            <button mat-raised-button [routerLink]="['/articles/my-articles']" class="btn" color="primary"  type="button">
               <mat-icon class="icon-spacing" >cancel</mat-icon> Annuler</button>&nbsp;
-            <button (click)="delet()" mat-raised-button class="btn" color="primary"  type="button">
+            <button (click)="delete()" mat-raised-button class="btn" color="primary"  type="button">
               <mat-icon class="icon-spacing" >delete</mat-icon> Supprimer</button>
           </mat-card-actions>
           <br><br>

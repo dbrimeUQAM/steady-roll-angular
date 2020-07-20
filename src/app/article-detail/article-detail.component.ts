@@ -19,7 +19,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 export class ArticleDetailComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  durationInSeconds = 5;
+  durationInSeconds = 3;
   article: Article ;
   public detailForm: FormGroup;
   offer: string;
@@ -120,18 +120,27 @@ export class ArticleDetailComponent implements OnInit {
       // update DB
       this.articleService.updateArticle(this.article._id, this.article).subscribe(data => {
         this.article = data ;
-        console.log('update article', data);
-        window.location.reload();
+        this.snackBar.open('Article sauvegardé!', 'fermer', {
+          duration: this.durationInSeconds * 1000,
+          horizontalPosition: 'center' ,
+          verticalPosition: 'top',
+          panelClass: ['style-success']
+        });
+        this.ngOnInit();
       }) ;
   }
-  public delet(){
+  public delete(){
     // update DB
     this.articleService.deleteArticle(this.article._id).subscribe(data => {
       this.article = null ;
-      console.log('delet article', this.article);
-      window.location.reload();
-    }) ;
-    this.router.navigate(['/articles/all']);
+      this.snackBar.open('Article supprimé!', 'fermer', {
+        duration: this.durationInSeconds * 1000,
+        horizontalPosition: 'center' ,
+        verticalPosition: 'top',
+        panelClass: ['style-success']
+      });
+      this.router.navigate(['/articles/my-articles']);
+    });
   }
   // quand on click sur le bouton ajouter au panier
   openDialog(nom: string, type: string) {
