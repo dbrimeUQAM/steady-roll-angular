@@ -55,11 +55,11 @@ export class InvoiceService {
     );
   }
 
-  cancelInvoice(id: string): Observable<Invoice> {
-    const url = `${apiUrl}/${id}/cancel`;
+  setPaid(id: string): Observable<Invoice> {
+    const url = `${apiUrl}/${id}/paid`;
     return this.httpClient.put<Invoice>(url, httpOptions).pipe(
-      tap(_ => console.log(`cancelled invoice id=${id}`)),
-      catchError(this.handleError<Invoice>('cancelInvoice'))
+      tap(_ => console.log(`paid invoice id=${id}`)),
+      catchError(this.handleError<Invoice>('setPaid'))
     );
   }
 

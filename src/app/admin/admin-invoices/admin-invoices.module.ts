@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { HttpClientModule } from '@angular/common/http';
 
 import { AdminInvoicesRoutingModule } from './admin-invoices-routing.module';
 
@@ -9,12 +11,19 @@ import { AdminInvoicesDetailComponent } from './admin-invoices-detail/admin-invo
 
 import { MaterialModule } from '../../material.module';
 
+import { NgxMaskModule } from 'ngx-mask';
+import { MomentModule } from 'ngx-moment';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
-    AdminInvoicesRoutingModule
+    AdminInvoicesRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgxMaskModule.forRoot(),
+    MomentModule.forRoot()
   ],
   declarations: [
     AdminInvoicesDetailComponent,

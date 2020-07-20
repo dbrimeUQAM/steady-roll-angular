@@ -306,6 +306,10 @@ class Model {
     return this.getDocValue('userId');
   }
 
+  getOrderId() {
+    return this.getDocValue('orderId');
+  }
+
 }
 
 module.exports = Model;

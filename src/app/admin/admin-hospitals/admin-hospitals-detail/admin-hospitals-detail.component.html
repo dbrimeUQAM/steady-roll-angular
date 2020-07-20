@@ -60,15 +60,15 @@
         </tr>
       </table>
 
-      <div class="text-right-aligned">
-        <mat-card-actions>
+      <div class="actions">
+
           <button mat-raised-button color="primary" [disabled]="!hospitalForm.form.valid">
             <mat-icon class="icon-spacing">save</mat-icon> Sauvegarder</button>
           <button mat-raised-button color="primary" [routerLink]="['/admin/admin-hospitals']" type="button">
             <mat-icon class="icon-spacing">cancel</mat-icon> Annuler</button>
           <button *ngIf="hospital._id" mat-raised-button color="primary" (click)="deleteHospital()" type="button">
             <mat-icon class="icon-spacing">delete</mat-icon> Supprimer</button>
-        </mat-card-actions>
+
       </div>
       <mat-error *ngIf="hospitalForm.submitted && isSaveFailed">
         Erreur en sauvegardant!: {{ errorMessage }}

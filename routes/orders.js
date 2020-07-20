@@ -10,7 +10,6 @@ const Order = require('../models/Order');
 const Article = require('../models/Article');
 const User = require('../models/User');
 const Hospital = require('../models/Hospital');
-const { SSL_OP_NO_TLSv1_1 } = require('constants');
 
 orders.route('/')
   /* GET all orders. */

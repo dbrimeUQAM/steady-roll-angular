@@ -9,6 +9,7 @@ export class Invoice {
   code: string;
   number: string;
   date: string;
+  total: number;
 }
 
 

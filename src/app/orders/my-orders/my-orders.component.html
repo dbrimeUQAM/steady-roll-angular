@@ -87,7 +87,7 @@
 
 
           </div>
-          <div class="bouton">
+          <div class="bouton" *ngIf="order.status !== 'Annulé'">
           <button class="btn" mat-raised-button type="button" [routerLink]="['/my-invoices', order._id]"
             color="primary"><mat-icon class="icon-spacing" role="img">attach_money</mat-icon>Afficher facture</button>
           </div>
