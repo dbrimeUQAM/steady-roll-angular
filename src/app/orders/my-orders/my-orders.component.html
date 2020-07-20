@@ -4,6 +4,96 @@
     <app-sidenav></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <p>my-orders works!</p>
+    <br><br>
+    <div *ngFor="let order of orders">
+      <div *ngIf="order.userName === user.name" >
+    <mat-accordion>
+    
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+           {{ order.userName }} 
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ order.status }}
+          </mat-panel-description>
+          <mat-panel-description>
+            {{ order.orderDate  }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <div align="center" >
+          <form [formGroup]="invoiceForm" class="form">
+          <mat-toolbar-row>
+            <mat-form-field appearance="outline"  >
+              <mat-label>Nom </mat-label>
+              <input style="color: black;" matInput formControlName="name" disabled   type="text" />
+            </mat-form-field> 
+            <mat-form-field appearance="outline">
+              <mat-label>Nom de l'hospitale</mat-label>
+              <input style="color: black;" matInput formControlName="hospitalName" disabled   type="text" />
+            </mat-form-field>
+          </mat-toolbar-row>
+          <mat-toolbar-row>
+           
+            <mat-form-field appearance="outline">
+              <mat-label>Adresse courriel</mat-label>
+              <input style="color: black;" matInput formControlName="id" disabled  type="text" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Numéro de téléphone</mat-label>
+              <input style="color: black;" matInput formControlName="telNumber" disabled  type="text" />
+            </mat-form-field>
+          </mat-toolbar-row>
+        <mat-toolbar-row>
+            <mat-form-field appearance="outline">
+              <mat-label>Adress</mat-label>
+              <input style="color: black;" matInput formControlName="street" disabled  type="text" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Ville</mat-label>
+              <input style="color: black;" matInput formControlName="city" disabled   type="text" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Province</mat-label>
+              <input style="color: black;" matInput formControlName="province" disabled   type="text" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Code Postal</mat-label>
+              <input style="color: black;" matInput formControlName="postalCode" disabled   type="text" />
+            </mat-form-field>
+      
+          </mat-toolbar-row>
+          <mat-divider></mat-divider>
+          
+          </form>
+          </div>
+<br>
+
+          <div class="right" >
+            <div class="left" *ngFor="let article of order.articles " >
+             
+                <mat-toolbar-row *ngIf = "article ">
+                  <mat-icon mat-list-icon>medical_services</mat-icon>&nbsp;
+                  <div>
+                  <div  mat-line style="color: darkseagreen;">{{article ? article.name : ''}}</div>
+                  <div mat-line> {{article ? article.hospitalName: ''}} </div>
+                  <div mat-line>  {{article ? article.qty: '0' }} X {{ article && article.price? article.price: 0 | currency}} </div>
+                </div>
+                <span class="example-spacer"></span>
+                </mat-toolbar-row>
+                <mat-divider></mat-divider>
+              
+              
+            </div>
+
+         
+          </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

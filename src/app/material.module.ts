@@ -27,6 +27,10 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { MatCarouselModule } from '@ngmodule/material-carousel';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatStepperModule} from '@angular/material/stepper';
+
+
 
 
 
@@ -83,7 +87,9 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
     MatDatepickerModule,
     MatNativeDateModule,
     MatBadgeModule,
-    MatCarouselModule
+    MatCarouselModule,
+    MatExpansionModule,
+    MatStepperModule
   ]
 })
 

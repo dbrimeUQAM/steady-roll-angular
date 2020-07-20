@@ -14,11 +14,13 @@ export class MyInvoicesComponent implements OnInit {
   invoiceForm: FormGroup ;
   articles: Article[] = [];
   total:number = 0 ;
-  constructor(private router: Router,private orderService: OrderService, private tokenStorageService: TokenStorageService, private formBuilder: FormBuilder) { }
+  user: any;
+  constructor(private router: Router,private orderService: OrderService, 
+    private tokenStorageService: TokenStorageService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    const user = this.tokenStorageService.getUser();
-    console.log('user', user);
+    this.user = this.tokenStorageService.getUser();
+    console.log('user', this.user);
     this.orderService.getCurrentOrder(this.tokenStorageService.getUser().id)
     .subscribe((res: any) => {
       console.log('my order', res)
@@ -33,43 +35,44 @@ export class MyInvoicesComponent implements OnInit {
     });
     this.invoiceForm = this.formBuilder.group ({
       name: [{
-        value: user.name ,
+        value: this.user.name ,
         disabled: true,
       }],
       hospitalName: [{
-        value:user.hospital.name ,
+        value:this.user.hospital.name ,
         disabled: true,
       }],
       telNumber: [{
-        value: user.hospital.phoneNumber ,
+        value: this.user.hospital.phoneNumber ,
         disabled: true,
       }],
       id: [{
-        value: user.id,
+        value: this.user.id,
         disabled: true,
       }],
       street: [{
-        value: user.hospital.street , 
+        value: this.user.hospital.street , 
         disabled: true,
       }],
       city: [{
-        value:user.hospital.city ,
+        value:this.user.hospital.city ,
         disabled: true,
       }],
       province: [{
-        value: user.hospital.province ,
+        value: this.user.hospital.province ,
         disabled: true,
       }],
       postalCode: [{
-        value: user.hospital.postalCode,
+        value: this.user.hospital.postalCode,
         disabled: true,
       }],
     })
   }
   
   print(){
-   // const user = this.tokenStorageService.getUser();
-    //user.status = '' ;
+    this.user.order.status = 'Payée'
+    console.log('----->', this.user);
+    this.tokenStorageService.saveUser(this.user)
     window.print();
     this.router.navigate(['/home']);
 

@@ -22,3 +22,39 @@
     top: 56px !important;
   }
 }
+.img{
+  width: 30%;
+ border-bottom: 3mm;
+}
+.carte{
+  padding-left: 5mm;
+  padding-top: 2mm;
+  padding-bottom: 5mm;
+}
+.form {
+  width: 90%;
+}
+.mat-form-field {
+  margin: 4px;
+  margin-top: 10px;
+  width: 100%;
+}
+.mat-toolbar-row{
+  margin-bottom: 15px;
+}
+
+.left{
+  position: relative;
+  width: 95%;
+  margin-left: 10px;
+  margin-right: 10px;
+
+}
+.right{
+  border: 1px solid rgb(192, 185, 185);
+  border-radius: 1%;
+  position: relative; 
+  left: 10%;
+  right:10%;
+  width: 80%;
+}
