@@ -31,14 +31,18 @@ articles.route('/')
           if (error) {
             return res.status(error.statusCode).json(error);
           }
-          articles = articles.map(article => {
-            let hospital = hospitals.find(hospital => hospital._id === article.hospitalId);
+          const filteredHospitals = hospitals.filter(item => !!item);
 
-            article.hospitalName = hospital.name;
+          articles = articles.map(article => {
+            let hospital = filteredHospitals.find(hospital => hospital._id === article.hospitalId);
+
+            if (hospital) {
+              article.hospitalName = hospital.name;
+            }
 
             return article;
 
-          })
+          });
 
           return res.status(200).json(articles);
 
