@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Contact } from '../services/contact/contact';
 import { User } from '../services/user/user';
 import { TokenStorageService } from '../services/token-storage/token-storage.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact',
@@ -13,13 +14,17 @@ import { TokenStorageService } from '../services/token-storage/token-storage.ser
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  durationInSeconds = 3;
 
   contact: Contact;
   user: User;
   public contactForm: FormGroup;
   message: boolean;
 
-  constructor(private router: Router,
+  constructor(private snackBar: MatSnackBar,
+              private router: Router,
               private formBuilder: FormBuilder,
               private contactService: ContactService,
               private userService: UserService,
@@ -62,6 +67,12 @@ export class ContactComponent implements OnInit {
       this.contact.hospitalId = this.tokenStorage.getUser().hospital._id;
       this.contact.read = false;
       this.contactService.addContact(this.contact).subscribe(data => {
+        this.snackBar.open('Message envoyé. Merci!', 'fermer', {
+          duration: this.durationInSeconds * 1000,
+          horizontalPosition: 'center' ,
+          verticalPosition: 'top',
+          panelClass: ['style-success']
+        });
         this.router.navigate(['/home']);
       });
     }

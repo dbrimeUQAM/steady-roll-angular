@@ -77,7 +77,6 @@ export class MyInvoicesComponent implements OnInit {
     console.log('----->', this.user);
     this.tokenStorageService.saveUser(this.user);
     window.print();
-    this.router.navigate(['/home']);
 
   }
 }

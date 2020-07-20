@@ -22,11 +22,8 @@
   padding: 10px;
  }
  .bouton {
-  width: 40%;
-  align-items: center;
-  margin-left: 20%;
-  margin-right: 20%;
-  padding-bottom: 5%;
+  text-align: center;
+  margin: 20px;
   }
 
  .example-spacer {
@@ -38,3 +35,11 @@
   display: table;
   clear: both;
 }
+
+.text-center {
+  text-align: center;
+ }
+
+ .icon-spacing {
+   margin-right: 10px;
+ }
