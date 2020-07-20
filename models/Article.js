@@ -13,6 +13,10 @@ class Article extends Model {
     return this.getDocValue('articleType');
   }
 
+  getQty() {
+    return this.getDocValue('qty', 0);
+  }
+
   setIcon() {
     console.log(this.getArticleType());
     switch (this.getArticleType()) {

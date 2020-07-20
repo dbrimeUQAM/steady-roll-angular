@@ -25,12 +25,14 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.inputSideNav.open();
-    const user = this.tokenStorage.getUser();
-    this.name = user.name;
-    this.hospitalName = user.hospital ? user.hospital.name : '';
-    this.articleNum = this.tokenStorage.getCartQty();
-    this.role = user.role;
+    if (this.tokenStorage.getToken()) {
+      this.inputSideNav.open();
+      const user = this.tokenStorage.getUser();
+      this.name = user.name;
+      this.hospitalName = user.hospital ? user.hospital.name : '';
+      this.articleNum = this.tokenStorage.getCartQty();
+      this.role = user.role;
+    }
   }
 
   onClick($event) {

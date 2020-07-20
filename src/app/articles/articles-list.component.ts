@@ -72,10 +72,11 @@ export class ArticlesListComponent implements OnInit {
     const user = this.tokenStorage.getUser();
     this.orderService.addArticleToOrder(user.id, articleId, 1).subscribe(data => {
       this.headerService.setCartQty(data.articles.length);
-      this.snackBar.openFromComponent(PizzaPartyComponent, {
+      this.snackBar.open('Ajouté au panier!', 'fermer', {
         duration: this.durationInSeconds * 1000,
         horizontalPosition: 'center' ,
         verticalPosition: 'top',
+        panelClass: ['style-success']
       });
     });
   }
@@ -89,9 +90,3 @@ export class ArticlesListComponent implements OnInit {
     }
   }
 }
-
-@Component({
-  selector: 'app-snack-bar-add-to-cart',
-  templateUrl: 'snack-bar-add-to-cart.html',
-})
-export class PizzaPartyComponent {}

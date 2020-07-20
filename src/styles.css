@@ -25,3 +25,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     top: 56px !important;
   }
 }
+
+.style-success {
+  color: whitesmoke;
+  background-color: blueviolet;
+}
+.style-success .mat-simple-snackbar-action  {
+  color: wheat;
+}
+.style-error {
+  color: whitesmoke;
+  background-color: red;
+}
+.style-error .mat-simple-snackbar-action {
+  color: white;
+}
+
+.text-right-aligned {
+  text-align: right;
+}
+
+.text-left-aligned {
+  text-align: left;
+}

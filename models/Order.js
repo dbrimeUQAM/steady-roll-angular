@@ -53,20 +53,20 @@ class Order extends Model {
   }
 
   /**
-     * Ajoute un article à la commande
-     * @param {string} - articleId
-     * @returns {Order}
-     */
-    updateArticle(articleId, qty, callback) {
-      const articles = this.getArticles();
-      const foundIndex = articles.findIndex(article => article.articleId === articleId);
-      if (foundIndex !== -1) {
-        articles[foundIndex].qty = qty;
-      }
-
-      return this;
-
+   * Ajoute un article à la commande
+   * @param {string} - articleId
+   * @returns {Order}
+   */
+  updateArticle(articleId, qty) {
+    const articles = this.getArticles();
+    const foundIndex = articles.findIndex(article => article.articleId === articleId);
+    if (foundIndex !== -1) {
+      articles[foundIndex].qty = qty;
     }
+
+    return this;
+
+  }
 
   getArticles() {
     return this.getDocValue('articles', []);

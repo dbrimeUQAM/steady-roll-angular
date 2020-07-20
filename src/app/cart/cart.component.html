@@ -1,0 +1,98 @@
+<app-header [inputSideNav]="sideNav"></app-header>
+<mat-sidenav-container id="sidenav-container" fullscreen>
+  <mat-sidenav #sideNav mode="side">
+    <app-sidenav></app-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="grid-container">
+      <div class="empty-cart" *ngIf="articles.length === 0">
+        <div>
+          <h1>Votre panier est vide.</h1>
+        </div>
+        <div>
+          <button mat-raised-button color="primary" [routerLink]="['/articles/all']" type="button">
+            <mat-icon class="icon-spacing">storefront</mat-icon> Magasiner</button>
+        </div>
+      </div>
+      <div class="card card-container" *ngIf="articles.length > 0">
+
+        <div class="form-title">
+          <mat-card-title>Panier</mat-card-title>
+        </div>
+        <form #orderForm="ngForm">
+          <!-- Articles -->
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+              <ng-container matColumnDef="articleType">
+                <th mat-header-cell *matHeaderCellDef> Type </th>
+                <td mat-cell *matCellDef="let article">
+                  <mat-icon class="icon-spacing">{{article.icon}} </mat-icon>
+                </td>
+                <td mat-footer-cell *matFooterCellDef> Total </td>
+              </ng-container>
+
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nom </th>
+                <td mat-cell *matCellDef="let article" class="cell-spacing"> {{article.name}} </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+              </ng-container>
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let article" class="cell-spacing"> {{article.description}} </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+              </ng-container>
+              <ng-container matColumnDef="hospitalName">
+                <th mat-header-cell *matHeaderCellDef> Hôpital </th>
+                <td mat-cell *matCellDef="let article" class="cell-spacing"> {{article.hospitalName}} </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+              </ng-container>
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> Prix </th>
+                <td mat-cell *matCellDef="let article"  class="cell-spacing text-right-aligned"> {{article.price | currency}} </td>
+                <td mat-footer-cell *matFooterCellDef> </td>
+              </ng-container>
+              <ng-container matColumnDef="qty">
+                <th mat-header-cell *matHeaderCellDef> Quantité </th>
+                <td mat-cell *matCellDef="let article" class="cell-spacing text-right-aligned"> {{article.qty}} </td>
+                <td mat-footer-cell *matFooterCellDef class="text-right-aligned"> {{getTotalQty()}} </td>
+              </ng-container>
+              <ng-container matColumnDef="sub-total">
+                <th mat-header-cell *matHeaderCellDef> Sous-total </th>
+                <td mat-cell *matCellDef="let article"  class="cell-spacing text-right-aligned"> {{(article.qty * article.price) | currency}} </td>
+                <td mat-footer-cell *matFooterCellDef class="text-right-aligned"> {{getTotalPrice() | currency}} </td>
+              </ng-container>
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let article">
+                  <mat-icon color="primary" class="icon-spacing" (click)="addQty(article._id, article.qty)">add_circle</mat-icon>
+                  <mat-icon color="primary" class="icon-spacing" (click)="removeQty(article._id, article.qty)">remove_circle</mat-icon>
+                  <mat-icon color="primary" class="icon-spacing" (click)="removeArticle(article._id)">delete</mat-icon>
+                </td>
+                <td mat-footer-cell *matFooterCellDef> </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+              <tr mat-row *matRowDef="let article; columns: columnsToDisplay"></tr>
+              <tr mat-footer-row *matFooterRowDef="columnsToDisplay"></tr>
+            </table>
+            </div>
+
+          <div class="actions text-right-aligned">
+            <mat-card-actions>
+              <button mat-raised-button *ngIf="order._id" color="primary" [routerLink]="'/payment'" type="button">
+                <mat-icon class="icon-spacing">attach_money</mat-icon> Passer à la caisse</button>
+                <button mat-raised-button *ngIf="order._id" color="primary" (click)="cancelOrder()" type="button">
+                  <mat-icon class="icon-spacing">remove_shopping_cart</mat-icon> Annuler</button>
+
+            </mat-card-actions>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+

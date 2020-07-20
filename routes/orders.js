@@ -376,6 +376,43 @@ orders.route('/user/:userId/delete-article/:articleId')
 
     });
 
+  orders.route('/user/:userId/update-article-qty/:articleId')
+    .put((req, res) => {
+      const userId = req.params.userId;
+      const articleId = req.params.articleId;
+      const { qty } = req.body;
+
+      const tasks = {
+        order: (callback) => Order.getInProgressByUserId(userId, callback),
+        article: (callback) => Article.get(articleId, callback)
+      };
+
+      return parallel(tasks, (error, results) => {
+        if (error) {
+          return res.status(error.statusCode).json(error);
+        }
+
+        const { order, article } = results;
+
+        if (qty > article.getQty()){
+          return res.status(200).json({
+            error: 'Il n\'y a plus de stock disponible'
+          });
+        }
+
+        order.updateArticle(articleId, qty);
+
+        return order.save((error, savedOrder) => {
+            if (error) {
+              return res.status(error.statusCode).json(error);
+            }
+
+            return res.status(200).json(savedOrder.doc);
+          });
+      });
+
+    });
+
   orders.route('/user/:userId')
     /* GET all orders by userId. */
     .get((req, res) => {

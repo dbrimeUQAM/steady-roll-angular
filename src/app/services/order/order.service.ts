@@ -75,8 +75,6 @@ export class OrderService {
     );
   }
 
-
-
   deleteAllArticles(userId: string): Observable<Order> {
     const url = `${apiUrl}/user/${userId}/delete-articles`;
     return this.httpClient.put(url, httpOptions).pipe(
@@ -89,18 +87,24 @@ export class OrderService {
   deleteArticle(userId: string, articleId: string): Observable<Order> {
     const url = `${apiUrl}/user/${userId}/delete-article/${articleId}`;
     return this.httpClient.put(url, httpOptions).pipe(
-      tap(_ => console.log(`updated order for user=Iid=${userId}`)),
-      catchError(this.handleError<any>('updateArticle'))
+      tap(_ => console.log(`deleted article for userId=${userId}`)),
+      catchError(this.handleError<any>('deleteArticle'))
     );
   }
 
-  updateArticleById(userId: string, articleId: string, qty :number): Observable<any> {
-    console.log("qtyyyyyy:",qty);
-
+  updateArticleById(userId: string, articleId: string, qty: number): Observable<any> {
     const url = `${apiUrl}/user/${userId}/update-article/${articleId}`;
     return this.httpClient.put(url, { articleId, qty }, httpOptions).pipe(
       tap(_ => console.log(`updated article id=${articleId}`)),
       catchError(this.handleError<any>('updateArticle'))
+    );
+  }
+
+  updateArticleQtyById(userId: string, articleId: string, qty: number): Observable<any> {
+    const url = `${apiUrl}/user/${userId}/update-article-qty/${articleId}`;
+    return this.httpClient.put(url, { qty }, httpOptions).pipe(
+      tap(_ => console.log(`updated article qty for id=${articleId}`)),
+      catchError(this.handleError<any>('updateArticleQtyById'))
     );
   }
 
