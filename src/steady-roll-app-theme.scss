@@ -23,3 +23,25 @@ $steady-roll-app-theme: mat-light-theme($steady-roll-app-primary, $steady-roll-a
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($steady-roll-app-theme);
+
+@mixin snackbar($theme) {
+  $primary: mat-color(map-get($theme, primary));
+  $primary-text: mat-color(map-get($theme, primary), default-contrast);
+  $warn: mat-color(map-get($theme, warn));
+  $warn-text: mat-color(map-get($theme, warn), default-contrast);
+
+  .style-success {
+    color: $primary-text;
+    background-color: $primary;
+  }
+  .style-success .mat-simple-snackbar-action  {
+    color: $primary-text;
+  }
+  .style-error {
+    color: $warn-text;
+    background-color: $warn;
+  }
+  .style-error .mat-simple-snackbar-action {
+    color: $warn-text;
+  }
+}

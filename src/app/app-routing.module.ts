@@ -21,6 +21,7 @@ import { MyOrdersComponent } from './orders/my-orders/my-orders.component';
 import { MyInvoicesComponent } from './invoices/my-invoices/my-invoices.component';
 
 import { ContactComponent } from './contact/contact.component';
+import { CartComponent } from './cart/cart.component';
 
 // Admin
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'admin', component: AdminHomeComponent },
   { path: 'bag', component: BagPageComponent },
+  { path: 'cart', component: CartComponent },
   { path: 'add-article', component: AddArticleComponent },
   { path: 'article-detail/:id', component: ArticleDetailComponent, data: { title: 'Article'} },
   { path: 'register', component: RegisterComponent },
@@ -50,7 +52,7 @@ const routes: Routes = [
   { path: 'my-orders', component: MyOrdersComponent },
   { path: 'my-invoices', component: MyInvoicesComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'payement', component: PaymentPageComponent },
+  { path: 'payment', component: PaymentPageComponent },
   { path: 'my-profile', component: MyProfileComponent },
 
   {

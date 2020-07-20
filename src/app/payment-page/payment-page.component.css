@@ -2,12 +2,15 @@
   flex: 1 1 auto;
 }
 
+.grid-container {
+  margin: 20px;
+}
 
 #sidenav-container {
   top: 64px !important;
 }
 .sommaire{
-  
+
   border: 1px solid black;
   padding: 6px;
   margin: 4px;
@@ -45,4 +48,8 @@
 }
 .mat-toolbar-row{
   margin-bottom: 15px;
+}
+
+.actions {
+  margin-top: 20px;
 }

@@ -53,6 +53,7 @@ import { MomentModule } from 'ngx-moment';
 
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MyProfileComponent } from './my-profile//my-profile.component';
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { MyProfileComponent } from './my-profile//my-profile.component';
     MyInvoicesComponent,
     ContactComponent,
     PaymentPageComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    CartComponent
   ],
   imports: [
     RecaptchaModule,

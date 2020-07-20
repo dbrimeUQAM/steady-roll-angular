@@ -9,7 +9,7 @@ import { invalid } from '@angular/compiler/src/render3/view/util';
   styleUrls: ['./payment-page.component.css']
 })
 export class PaymentPageComponent implements OnInit {
-  payementForm: FormGroup ;
+  paymentForm: FormGroup ;
   isMasterCard: boolean = false ;
   isVisa: boolean = false ;
   name: boolean = false;
@@ -20,18 +20,18 @@ export class PaymentPageComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-    this.payementForm = this.formBuilder.group ({
+    this.paymentForm = this.formBuilder.group ({
       name: ['', Validators.required],
       number: ['', Validators.required],
       code: ['', Validators.required],
       date: ['', Validators.required],
     })
-    this.payementForm.get('name').valueChanges.subscribe(
+    this.paymentForm.get('name').valueChanges.subscribe(
       data => {
         console.log('name', data)
       }
     )
-    this.payementForm.get('number').valueChanges.subscribe(
+    this.paymentForm.get('number').valueChanges.subscribe(
       data => {
         console.log('nuber changed', data)
         if(data.substr(0, 1) === '5' ){
@@ -48,29 +48,34 @@ export class PaymentPageComponent implements OnInit {
     )
   }
 submit(){
-  if(this.payementForm.get('name').invalid){
+  if(this.paymentForm.get('name').invalid){
     console.log('nom non valide')
     this.name = true ;
   }else{
     this.name = false;
   }
-  if(this.payementForm.get('number').invalid){
+  if(this.paymentForm.get('number').invalid){
     this.number = true ;
   }
-  if(this.payementForm.get('date').invalid){
+  if(this.paymentForm.get('date').invalid){
     this.date = true ;
   }
-  if(this.payementForm.get('code').invalid){
+  if(this.paymentForm.get('code').invalid){
     this.code = true ;
   }
-  if (this.payementForm.valid){
+  if (this.paymentForm.valid){
     this.router.navigate(['/my-invoices']);
-    console.log('valid')
+    console.log('valid');
 
   }else{
-    console.log('invalid')
+    console.log('invalid');
   }
 }
+
+placeOrder() {
+  console.log('place order');
+}
+
 }
 export class RadioOverviewExample {
 
