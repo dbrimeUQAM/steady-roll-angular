@@ -51,10 +51,15 @@ class Article extends Model {
         if (error) {
           return callback(error);
         }
-        articles = articles.map(article => {
-          let hospital = hospitals.find(hospital => hospital._id === article.hospitalId);
 
-          article.hospitalName = hospital.name;
+        const filteredHospitals = hospitals.filter(item => !!item);
+
+        articles = articles.map(article => {
+          let hospital = filteredHospitals.find(hospital => hospital._id === article.hospitalId);
+
+          if (hospital) {
+            article.hospitalName = hospital.name;
+          }
 
           return article;
 
